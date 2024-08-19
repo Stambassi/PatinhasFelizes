@@ -1,7 +1,7 @@
 
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10811726&assignment_repo_type=AssignmentRepo)
 ## Patinhas Felizes
- O projeto a é uma aplicação feita para promover a conexão entre possíveis adotantes com ONGs e abrigos que prestam o serviço de adoção e ajudar essas entidades a cadastrar animais abandonados e fornecer essas ferramentas para as pessoas. 
+ O projeto é uma aplicação feita para promover a conexão entre possíveis adotantes com ONGs e abrigos que prestam o serviço de adoção e ajudar essas entidades a cadastrar animais abandonados e fornecer essas ferramentas para as pessoas. 
 
 ## Alunos integrantes da equipe
 
