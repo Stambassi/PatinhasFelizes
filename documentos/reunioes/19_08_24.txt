@@ -3,18 +3,38 @@
     - Definir dias/horas das reuniões semanais.
 
         : Segunda-feira (PRESENCIAL), após a aula de manhã.
-        :
+        : Quinta-feira (ONLINE), 19 horas
 
     - Definir horas semanais de trabalho.
 
-    - Calcular total de horas (horas x número de semanas x 4 integrantes) (habilidades individuais).
+        : 6 horas até 30/09(Entrega da Hackathon) (6 semanas)
+        : 4 horas até 28/11(Sprint 4 TI 2)
 
+    - Calcular total de horas (horas x número de semanas x 4 integrantes) (habilidades individuais).
+    144 horas até 30/09 + 144 horas até 28/11
+        - Habilidades:
+            * Augusto
+            * Ana
+            * Lucas
+            * João Pedro
     - Planejar entregas de cada semana (de trás para frente).
+
+        : 9/08 - Terminar a documentação [Sprint 1 + apresentação + Fluxo de páginas] (22/08) & Terminar os exercícios de TI & Desing das telas
+        : 26/08 - CRUD de cada um ( Usuário, Animal, ONG e Formulário )
+        : 02/09 - Tela de Login & Tela edição ONG ....... A decidir 
+        : 09/09 - ....... A decidir 
+        : 16/09 - ....... A decidir 
+        : 23/09 - Integração & Debuggar & Risk Management
+        : 30/09 - ENTREGA DO HACKATHON
+        ========== FIM HACKATHON
+        
 
     - Dividir a liderança das Sprints.
         - Objetivo de cada reunião.
         - Estabelecimento das entregas.
         - Cobrança de prazo.
+
+        : Decidimos não estabeler uma liderança para o projeto, visto que o grupo não é extenso e não há clara distinção de habilidade e/ou experiência entre os integrantes.
 
     - Fazer uma linha do tempo com as etapas de desenvolvimento.
         - Fazer uma linha do tempo de Sistemas Inteligentes também para planejar a entrega.
