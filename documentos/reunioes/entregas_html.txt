@@ -1,0 +1,22 @@
+- Ana
+ . Perfil da ONG
+ . Requerimentos da ONG
+ . Atividades da ONG
+
+- Lucas
+ . Login de usu
+ . Cadastro de usu
+ . Login de ONG
+ . Cadastro de ONG
+ . Perfil de usuario
+
+- Joao
+ . Tela principal (animais)
+ . Detalhes dos animais
+ . Match
+
+- Augusto
+ . Cadastro de formulário
+ . Cadastro de animais
+ . Cadastro de animal abandonado
+ 
