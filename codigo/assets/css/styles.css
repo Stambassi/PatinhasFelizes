@@ -1,0 +1,12 @@
+:root{
+    --cor_primaria:#53815A; /* versao mais escura -> #21472f */ 
+    --cor_secundaria: #FFF;
+    --grey: #B0B0B0;
+}
+header{
+    margin: 0px;
+    width: 100%;
+    overflow: hidden;
+    height: 5rem;
+    background-color: var(--cor_primaria);
+}
