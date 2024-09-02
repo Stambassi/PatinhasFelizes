@@ -13,6 +13,10 @@
     --grey: #B0B0B0;
 }
 
+body{
+    position:relative;
+    min-height: 200vh;
+}
 /* Estilo da navbar */
 
 header{
@@ -49,8 +53,8 @@ header{
 }
 
 .home-btn img {
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
 }
 
 a.active-page{
