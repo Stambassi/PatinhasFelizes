@@ -1,12 +1,83 @@
+/* Configurações gerais de toda a página */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Declaração de variáveis */
+
 :root{
     --cor_primaria:#53815A; /* versao mais escura -> #21472f */ 
     --cor_secundaria: #FFF;
     --grey: #B0B0B0;
 }
+
+/* Estilo da navbar */
+
 header{
     margin: 0px;
     width: 100%;
     overflow: hidden;
     height: 5rem;
     background-color: var(--cor_primaria);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.pages {
+    display: flex;
+    align-items: center;
+}
+
+.pages a {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    text-align: 10px;
+}
+
+.pages span {
+    margin: 0 15px;
+}
+
+.home-btn {
+    display: flex;
+    gap: 10px;
+}
+
+.home-btn img {
+    height: 30px;
+    width: 30px;
+}
+
+a.active-page{
+    color:var(--cor_secundaria);
+}
+
+a.inactive-page{
+    color:var(--grey);
+}
+
+a.inactive-page:hover{
+    color:var(--cor_secundaria);
+}
+
+span.divider{
+    color:var(--grey);
+}
+
+/* Estilo footer */
+
+footer{
+    margin: 0px;
+    width: 100%;
+    overflow: hidden;
+    height: 25vh;
+    background-color: var(--cor_primaria);
+    display: flex;
+    position:absolute;    
+    bottom: 0;
 }
