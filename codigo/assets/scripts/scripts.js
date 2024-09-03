@@ -5,7 +5,7 @@
 function carregarLoginPopup (htmlElement)
 {
 //Fazer chamada do template
-  fetch('../../pages/login-template.html')
+  fetch('../../pages/login/login-template.html')
     .then(response => response.text())
     .then(data => {
       htmlElement.insertAdjacentHTML('beforeend', data);
