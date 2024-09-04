@@ -19,4 +19,5 @@
  . Cadastro de formulário
  . Cadastro de animais
  . Cadastro de animal abandonado
+ . Edição de animal
  
