@@ -73,15 +73,63 @@ span.divider{
     color:var(--grey);
 }
 
-/* Estilo footer */
+/* ----------------------- Estilo footer ----------------------- */
 
 footer{
     margin: 0px;
     width: 100%;
     overflow: hidden;
-    height: 25vh;
+    height: 40vh;
     background-color: var(--cor_primaria);
-    display: flex;
     position:absolute;    
     bottom: 0;
 }
+
+div#footer-itens{
+    margin-top:10px;
+    width: 100%;
+    height: 30vh;
+    background-color: var(--cor_primaria);
+    display: flex;
+}
+div.contatos{
+    width: 30%;
+    margin-right: 6%;
+}
+
+div.contatos > p {
+    margin-bottom: 1%;
+}
+div.sobre-nos{
+    width: 50%;
+    margin-right: 6%;
+}
+div.acesso-rapido{
+    width: 30%;
+    margin-right: 6%;
+}
+
+div.acesso-rapido > a{
+    margin-bottom:1%;
+    display: block;
+    text-decoration: none;
+    color:black;
+    font-size: medium;
+}
+div#footer-itens > * h5{
+    font-size:x-large;
+    font-weight: bold;
+}
+div.acesso-rapido > a:hover{
+    text-decoration: none;
+    color:var(--grey);
+}
+p#footer-cp{
+    width: 100%;
+    margin-bottom: 0%;
+    display:block;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ----------------------- End Estilo footer ----------------------- */
