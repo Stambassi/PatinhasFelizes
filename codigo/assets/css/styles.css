@@ -12,6 +12,7 @@
     --cor_primaria:#53815A; /* versao mais escura -> #21472f */ 
     --cor_secundaria: #FFF;
     --grey: #B0B0B0;
+    --dark_green: #21472f;
 }
 
 body{
@@ -134,6 +135,107 @@ p#footer-cp{
 }
 
 /* ----------------------- End Estilo footer ----------------------- */
+
+/* ----------------------- Estilo CRUD animal ----------------------- */
+
+div#crud-form{
+  position:relative;
+  width: 50%;
+  margin:2% 25%;
+  outline: 1px solid black;
+  min-height: 70vh;
+  border-radius: 10px;
+}
+
+div#animal-progresso{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+}
+div#animal-progresso > div{
+  width: 50%;
+  margin:0%;
+  outline: 1px solid black;
+  padding: 2px;
+  text-align: center;
+}
+div#Cadastro-geral{
+    border-top-left-radius: 10px;
+    background-color: var(--cor_primaria);
+}
+
+div#Cadastro-especifico{
+  border-top-right-radius: 10px;
+}
+
+div#animal-info{
+  margin:1%;
+  padding: 1%;
+}
+
+div#animal-foto{
+  min-height: 50vh;
+  width: 28%;
+  float:left;
+  margin-bottom: 1px;
+}
+
+img#img-place{
+  max-width: 100%;
+  border-radius: 10px;
+  display:inline-block;
+  float:left;
+}
+
+div#animal-form{
+  float:right;
+  margin-left:0.5%;
+  max-width:73%;
+  min-width:70%;
+  min-height:100%;
+}
+
+div#animal-form > * label.crud-question {
+  display: block;
+  margin:1% 0%;
+}
+
+button.btn-small{
+  background-color:var(--cor_primaria);
+  padding:1px;
+  border-radius:10px;
+  border:none;
+  width: 15vh;
+}
+
+button.btn-small:hover{
+  background-color:var(--dark_green);
+}
+
+button#btn-animal-voltar{
+  position: absolute;
+  left:2%;
+  bottom:3%;
+}
+
+button#btn-animal-passar{
+  position: absolute;
+  right:2%;
+  bottom:3%;
+}
+
+button#load_animal_photo{
+  background-color:var(--cor_primaria);
+  padding:1px;
+  border-radius:10px;
+  border:none;
+  width: 30vh;
+
+}
+
+/* ----------------------- End Estilo CRUD animal ----------------------- */
 
 
 /* ----------------------- Estilo Login ----------------------- */

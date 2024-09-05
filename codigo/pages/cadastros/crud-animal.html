@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b0dc0539e0.js" crossorigin="anonymous"></script>
+    <!-- FOLHA DE ESTILO -->
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Patinhas Felizes</title>
+<body>
+    <header class="container-fluid">
+        <div class="home-btn">
+            <img src="../../assets/img/logo.jpg" alt="Logo Patinhas Felizes">
+            <a><i class="fa-solid fa-2xl fa-house"></i></a>
+        </div>
+
+        <div class="pages">
+            <a class="active-page" href="#">Titulo1</a>
+            <span class="divider">|</span>
+            <a class="inactive-page" href="#">Titulo2</a>
+            <span class="divider">|</span>
+            <a class="inactive-page" href="#">Titulo3</a>
+        </div>
+
+        <div class="user-profile">
+            <a><i class="fa-solid fa-2xl fa-circle-user"></i></a>
+        </div>
+
+    </header>
+    <main>
+        <div id="crud-form">
+            <div id="animal-progresso" >
+                <div id="Cadastro-geral">
+                    1 Cadastro Geral
+                </div>
+                <div id="Cadastro-especifico">
+                    2 Cadastro Específico
+                </div>
+            </div>
+            <div id="animal-info" >
+                <div id="animal-foto">
+                    <img id="img-place" src="../../assets/img/logo.jpg" alt="animal_foto">
+                    Envie a foto de um animal:
+                    <button id="load_animal_photo">Carregar Arquivo</button>
+                </div>
+                <div id="animal-form">
+                     
+                    <form id="animal-form-1">
+                        <label for="a_name" class="crud-question">Qual o nome do animal?</label>
+                        <input type="text" for="a_name">
+                        
+                        <label for="a_genero" class="crud-question">Qual o genêro do animal?</label>
+                        <input type="radio" id="masc" name="a_genero" value="masc">
+                        <label for="masc">Masculino</label>
+                        <input type="radio" id="fem" name="a_genero" value="fem">
+                        <label for="fem">Feminino</label>
+
+                        <label for="a_especie" class="crud-question">Qual a espécie do animal?</label>
+                        <input type="radio" id="cachorro" name="a_especie" value="cachorro">
+                        <label for="cachorro">Cachorro</label>
+                        <input type="radio" id="gato" name="a_especie" value="gato">
+                        <label for="gato">Gato</label>
+                        <input type="radio" id="roedores" name="a_especie" value="roedores">
+                        <label for="roedores">Roedores</label>
+                        <input type="radio" id="outros" name="a_especie" value="outros">
+                        <label for="outros">Outros</label>
+
+
+                        <label for="a_data" class="crud-question">Qual a data de nascimento do animal?</label>
+                        <input type="date" id="a_data" name="a_data" placeholder="dd-mm-yyyy"> 
+                        
+                    </form>
+                    <!---->
+                    
+                    <!-- 
+                    <form id="animal-form-2">
+                        <label for="a_vacina">Quais vacinas (animal_name) tem? </label>
+                        <span>(deixar em branco caso nenhuma)</span>
+                        <input type="checkbox" id="vacina1" name="a_vacina" value="leishmanionse">
+                        <label for="vacina1">Leishmaniose</label>
+                        <input type="checkbox" id="vacina2" name="a_vacina" value="raiva">
+                        <label for="vacina2">Raiva</label>
+                        <input type="checkbox" id="vacina3" name="a_vacina" value="..">
+                        <label for="vacina3">Vacina 3</label>
+                        <input type="checkbox" id="vacina4" name="a_vacina" value="...">
+                        <label for="vacina4">Vacina 4</label>
+
+                        <label for="a_raca">Qual a raça do/a (animal_name) ?</label>
+                        <span>(deixar em branco caso não aparente)</span>
+                        <input type="text" for="a_raca">
+
+                        <label for="a_raca">Escreva uma pequena história do/a (animal_name)</label>
+                        <textarea form="animal-form-2"> </textarea>
+
+                    </form>
+                    -->
+                    <button id="btn-animal-voltar" class="btn-small">Voltar</button>  <!-- Só aparece no ultimo painel-->
+                    <button id="btn-animal-passar" class="btn-small">Próximo</button> <!-- Vira finalizar -->
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container-fluid" id="footer-itens">
+            <div class="sobre-nos">
+                <h5>Sobre nós</h5>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate voluptas vel officiis, sapiente
+                    voluptatum impedit. Ipsam voluptate magnam assumenda voluptatibus!</p>
+                <!-- Atualizar BIO -->
+            </div>
+            <div class="acesso-rapido">
+                <h5>Acesso rápido</h5>
+                <a href="">Achei um animal abandonado</a> <!-- Colocar LINKS -->
+                <a href="">Cadastro de usuário</a> <!-- Colocar LINKS -->
+                <a href="">Adote um animal</a> <!-- Colocar LINKS -->
+                <a href="">Cadastro de instituições</a> <!-- Colocar LINKS -->
+            </div>
+            <div class="contatos">
+                <h5>Contatos</h5>
+                <p>patinhas@gmail.com</p> <!-- Atualizar Contatos -->
+                <p>asduarte@sga.pucminas.br</p>
+                <p>patinhas@gmail.com</p>
+                <p>patinhas@gmail.com</p>
+                <a><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <p id="footer-cp">&copy Patinhas felizes 2024 | Termos de serviço | Política de privacidade</p>
+    </footer>
+</body>
+
+</html>
