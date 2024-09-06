@@ -73,27 +73,30 @@ function carregarLoginPopupEventos ()
 /* Definir comportamento para mostrar o pop-up de login */
 
 
-let loginBtnMostrar = document.querySelector("#btnMostrarLogin")
-
-
-loginBtnMostrar.addEventListener('click', () => {
-//Definir dados locais
-  let loginModal = document.querySelector('.login-modal');
-  let loginContainer = document.querySelector('.login-container');
-//Testar se ja existe o loginModal na pagina
-  if( loginModal )
-  {
-    loginModal.classList.remove('login-hide');
-    loginModal.classList.add('login-show');
-    loginContainer.classList.remove('pop-up-bottom');
-    loginContainer.classList.add('pop-up-top');
-  }
-  else
-  { 
-    let loginMain = document.querySelector('main');
-    carregarLoginPopup(loginMain);
-  }
-});
+function loginOnload ()
+{
+  let loginBtnMostrar = document.querySelector("#btnMostrarLogin");
+  
+  
+  loginBtnMostrar.addEventListener('click', () => {
+  //Definir dados locais
+    let loginModal = document.querySelector('.login-modal');
+    let loginContainer = document.querySelector('.login-container');
+  //Testar se ja existe o loginModal na pagina
+    if( loginModal )
+    {
+      loginModal.classList.remove('login-hide');
+      loginModal.classList.add('login-show');
+      loginContainer.classList.remove('pop-up-bottom');
+      loginContainer.classList.add('pop-up-top');
+    }
+    else
+    { 
+      let loginMain = document.querySelector('main');
+      carregarLoginPopup(loginMain);
+    }
+  });
+}
 
 function carregarCadastroPopup (htmlElement)
 {
@@ -119,6 +122,64 @@ function carregarCadastroPopup (htmlElement)
       }
     })
     .catch(error => console.error("Erro ao carregar o pop-up de cadastro: ", error));
+}
+
+function carregarCadastroPopupEventos ()
+{
+//Definir dados auxiliares
+  let main = document.querySelector('main');
+//Definir dados locais
+  let loginCloseImg = document.querySelector('.login-close-window');
+  let cadastroBtnLogin = document.querySelector('#cadastro-btn-login');
+//Definir evento para fechar o pop-up
+  loginCloseImg.addEventListener('click', () => fecharLoginPopup());
+//Definir evento para passar de pagina
+  cadastroEventoPassarPaginas();
+//Definir evento para voltar 'a tela de login
+  cadastroBtnLogin.addEventListener('click', () => carregarLoginPopup(main));
+}
+
+
+function cadastroEventoPassarPaginas()
+{
+//Definir dados locais
+  let objUsuario = {
+    nome: "",
+    email: "",
+    senha: "",
+    cpf: "",
+    data_de_nascimento: "",
+    telefone: "",
+    tags: {
+      atencao: 0,
+      passeio: 0,
+      carinho: 0,
+      extrovertido: 0,
+      animacao: 0,
+    }
+  };
+  let pagina = parseInt( document.querySelector('.login-input').id );
+  let cadastroSubmit = document.querySelector('#cadastro-submit');
+//Atualizar o conteudo da pagina
+  cadastroPaginas(++pagina);
+//Definir evento de passar a pagina
+  cadastroSubmit.addEventListener('click', () => {  
+  //Testar se 'pagina' passou do limite
+    if ( pagina >= 4 )
+    {
+      console.log("Cadastro concluído!");
+      console.log(objUsuario);
+    }
+    else if ( !cadastroInputsPreenchidos(pagina) )
+    {
+      mostrarErro("É obrigatório o preenchimento de todos os campos!");
+    } 
+    else
+    {
+      objUsuario = cadastroPreencherObj(pagina, objUsuario);
+      cadastroPaginas(++pagina);
+    }
+  });
 }
 
 function cadastroPaginas(pagina)
@@ -161,49 +222,18 @@ function cadastroPaginas(pagina)
   }
   else if (pagina === 3)
   {  
+  //Definir dados locais
+    let loginInput = document.querySelector('.login-input');
   //Esvaziar inputs
-    input_1.value = "";
-    input_2.value = "";
-    input_3.value = "";
+    loginInput.innerHTML = ""; 
   //Substituir dados
-    input_1.placeholder = "";
-    input_2.placeholder = "";
-    input_3.placeholder = "";
+    fetch('../../pages/cadastro/cadastro-template-tags.html');
     cadastroSubmit.innerHTML = "Cadastrar";
   }
   else if (pagina === 4)
   {
     console.log("Cadastro concluido com sucesso!");
   }
-}
-
-function cadastroInputsPreenchidos(pagina)
-{
-//Definir dados locais
-  let resp = false;
-//Testar pagina
-  if (pagina === 1 || pagina === 2)
-  {
-  //Definir dados locais
-    let input_1 = document.querySelector('#cadastro-input-field-1').value;
-    let input_2 = document.querySelector('#cadastro-input-field-2').value;
-    let input_3 = document.querySelector('#cadastro-input-field-3').value;
-  //Testar se entradas estao preenchidas
-    if (input_1.length === 0 || input_2.length === 0 || input_3.length === 0)
-      resp = false;
-    else
-      resp = true;
-  }
-  else if (pagina === 3)
-  {
-    resp = true;
-  } 
-  return resp;
-}
-
-function cadastroInputsCorretos(pagina)
-{
-  return true;
 }
 
 function cadastroPreencherObj(pagina, objUsuario)
@@ -235,71 +265,30 @@ function cadastroPreencherObj(pagina, objUsuario)
   return objUsuario;
 }
 
-function cadastroProximo (pagina, objUsuario)
+function cadastroInputsPreenchidos(pagina)
 {
-//Testar se as entradas estao corretas
-  if ( cadastroInputsCorretos(pagina) )
+//Definir dados locais
+  let resp = false;
+//Testar pagina
+  if (pagina === 1 || pagina === 2)
   {
-  //Atualizar o objeto do usuario
-    objUsuario = cadastroPreencherObj(pagina, objUsuario);
-  }
-//Retornar
-  return objUsuario;
-}
-
-function cadastroEventoPassarPaginas()
-{
-//Definir dados locais
-  let objUsuario = {
-    nome: "",
-    email: "",
-    senha: "",
-    cpf: "",
-    data_de_nascimento: "",
-    telefone: "",
-    tags: {
-      atencao: 0,
-      passeio: 0,
-      carinho: 0,
-      extrovertido: 0,
-      animacao: 0,
-    }
-  };
-  let pagina = parseInt( document.querySelector('.login-input').id );
-  let cadastroSubmit = document.querySelector('#cadastro-submit');
-//Atualizar o conteudo da pagina
-  cadastroPaginas(++pagina);
-//Definir evento de passar a pagina
-  cadastroSubmit.addEventListener('click', () => {  
-  //Testar se 'pagina' passou do limite
-    if ( pagina >= 4 )
-    {
-      console.log("Cadastro concluído!");
-      console.log(objUsuario);
-    }
-    else if ( !cadastroInputsPreenchidos(pagina) )
-    {
-      mostrarErro("É obrigatório o preenchimento de todos os campos!");
-    } 
+  //Definir dados locais
+    let input_1 = document.querySelector('#cadastro-input-field-1').value;
+    let input_2 = document.querySelector('#cadastro-input-field-2').value;
+    let input_3 = document.querySelector('#cadastro-input-field-3').value;
+  //Testar se entradas estao preenchidas
+    if (input_1.length === 0 || input_2.length === 0 || input_3.length === 0)
+      resp = false;
     else
-    {
-      objUsuario = cadastroProximo(pagina, objUsuario);
-      cadastroPaginas(++pagina);
-    }
-  });
+      resp = true;
+  }
+  else if (pagina === 3)
+  {
+    resp = true;
+  } 
+  return resp;
 }
 
-function carregarCadastroPopupEventos ()
-{
-//Definir dados auxiliares
-  let main = document.querySelector('main');
-//Definir dados locais
-  let loginCloseImg = document.querySelector('.login-close-window');
-  let cadastroBtnLogin = document.querySelector('#cadastro-btn-login');
-//Definir evento para fechar o pop-up
-  loginCloseImg.addEventListener('click', () => fecharLoginPopup());
-//Definir evento para passar de pagina
-  cadastroEventoPassarPaginas();
-//Definir evento para voltar 'a tela de login
-  cadastroBtnLogin.addEventListener('click', () => carregarLoginPopup(main));
-}
+
+
+
