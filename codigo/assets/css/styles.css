@@ -143,7 +143,7 @@ div#crud-form{
   width: 50%;
   margin:2% 25%;
   outline: 1px solid black;
-  min-height: 70vh;
+  min-height: 60vh;
   border-radius: 10px;
 }
 
@@ -192,14 +192,18 @@ img#img-place{
 div#animal-form{
   float:right;
   margin-left:0.5%;
-  max-width:73%;
-  min-width:70%;
-  min-height:100%;
+  height:100%;
+  width: 65%;
 }
 
 div#animal-form > * label.crud-question {
   display: block;
-  margin:1% 0%;
+  margin:2% 0%;
+}
+div#animal-form > * input.text-input {
+  border-radius:10px;
+  height:30px;
+  width: 75%;
 }
 
 button.btn-small{

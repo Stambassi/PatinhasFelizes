@@ -1,3 +1,8 @@
+/* Definir comportamento ao clicar em outros no cadastro do animal */
+
+let especieAnimal = document.querySelectorAll()
+
+
 /**
  * carregarLoginPopup - Funcao para ler o template do pop-up de login
  * @param htmlElement - Elemento pai do pop-up de login a ser inserido
@@ -72,3 +77,5 @@ loginBtnMostrar.addEventListener('click', () => {
     carregarLoginPopup(loginMain);
   }
 });
+
+
