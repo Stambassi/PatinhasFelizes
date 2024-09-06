@@ -430,7 +430,7 @@ button#load_animal_photo{
   background-color: var(--cor_primaria);
 }
 
-#btnMostrar
+#btnMostrarLogin
 {
   border: none;
   padding: 10px;
@@ -607,9 +607,14 @@ button#load_animal_photo{
   row-gap: 10px;
 }
 
-.login-cadastro a
+.login-strong
 {
-  text-decoration: none;
+  color: rgb(0, 51, 255);
+}
+
+.login-strong:hover
+{
+  cursor: pointer;
 }
 
 /* ----------------------- END Estilo Login ----------------------- */
