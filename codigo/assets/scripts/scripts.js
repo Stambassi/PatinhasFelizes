@@ -1,7 +1,7 @@
-/* Definir comportamento ao clicar em outros no cadastro do animal */
-
-let especieAnimal = document.querySelectorAll()
-
+function mostrarErro (mensagem)
+{
+  console.log(mensagem);
+}
 
 /**
  * carregarLoginPopup - Funcao para ler o template do pop-up de login
@@ -13,8 +13,22 @@ function carregarLoginPopup (htmlElement)
   fetch('../../pages/login/login-template.html')
     .then(response => response.text())
     .then(data => {
-      htmlElement.insertAdjacentHTML('beforeend', data);
-      carregarLoginPopupEventos();
+    //Testar se outro pop-up esta ativo
+      let modal = document.querySelector('.modal');
+      if ( modal )
+      {
+      //Remover o container existente
+        modal.remove();
+      //Adicionar o novo modal de cadastro
+        htmlElement.insertAdjacentHTML('beforeend', data);
+        carregarLoginPopupEventos();
+      }
+      else
+      {
+      //Adicionar o novo modal de cadastro
+        htmlElement.insertAdjacentHTML('beforeend', data);
+        carregarLoginPopupEventos();        
+      }
     })
     .catch(error => console.error("Erro ao carregar o pop-up de login: ", error));
 }
@@ -36,7 +50,7 @@ function fecharLoginPopup ()
 //Definir evento para esperar a animacao
   loginModal.addEventListener('animationend', function fimAnimacao() {
     loginModal.removeEventListener('animationend', fimAnimacao);
-    loginModal.classList.add('login-hide'); 
+    loginModal.remove();
   }, { once: true });  
 }
 
@@ -48,8 +62,11 @@ function carregarLoginPopupEventos ()
 {
 //Definir dados locais
   let loginCloseImg = document.querySelector('.login-close-window');
+  let loginBtnCadastro = document.querySelector('#login-btn-cadastro');
+  let loginMain = document.querySelector('main');
 //Definir eventos
   loginCloseImg.addEventListener('click', () => fecharLoginPopup())
+  loginBtnCadastro.addEventListener('click', () => carregarCadastroPopup(loginMain));
 }
 
 
@@ -78,4 +95,6 @@ loginBtnMostrar.addEventListener('click', () => {
   }
 });
 
+/* Definir comportamento ao clicar em outros no cadastro do animal */
 
+let especieAnimal = document.querySelectorAll()
