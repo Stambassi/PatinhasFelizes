@@ -8,217 +8,229 @@
 
 /* Declaração de variáveis */
 
-:root{
-    --cor_primaria:#53815A; /* versao mais escura -> #21472f */ 
-    --cor_secundaria: #FFF;
-    --grey: #B0B0B0;
-    --dark_green: #21472f;
+:root {
+  --cor_primaria: #53815A;
+  /* versao mais escura -> #21472f */
+  --cor_secundaria: #FFF;
+  --grey: #B0B0B0;
+  --dark_green: #21472f;
 }
 
-body{
-    position:relative;
-    min-height: 200vh;
+body {
+  position: relative;
+  min-height: 200vh;
 }
+
 /* Estilo da navbar */
 
-header{
-    margin: 0px;
-    width: 100%;
-    overflow: hidden;
-    height: 5rem;
-    background-color: var(--cor_primaria);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
+header {
+  margin: 0px;
+  width: 100%;
+  overflow: hidden;
+  height: 5rem;
+  background-color: var(--cor_primaria);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
 }
 
 .pages {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .pages a {
-    font-size: 20px;
-    color: white;
-    text-decoration: none;
-    text-align: 10px;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  text-align: 10px;
 }
 
 .pages span {
-    margin: 0 15px;
+  margin: 0 15px;
 }
 
 .home-btn {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .home-btn img {
-    height: 50px;
-    width: 50px;
+  height: 50px;
+  width: 50px;
 }
 
-a.active-page{
-    color:var(--cor_secundaria);
+a.active-page {
+  color: var(--cor_secundaria);
 }
 
-a.inactive-page{
-    color:var(--grey);
+a.inactive-page {
+  color: var(--grey);
 }
 
-a.inactive-page:hover{
-    color:var(--cor_secundaria);
+a.inactive-page:hover {
+  color: var(--cor_secundaria);
 }
 
-span.divider{
-    color:var(--grey);
+span.divider {
+  color: var(--grey);
 }
 
 /* ----------------------- Estilo footer ----------------------- */
 
-footer{
-    margin: 0px;
-    width: 100%;
-    overflow: hidden;
-    height: 40vh;
-    background-color: var(--cor_primaria);
-    position:absolute;    
-    bottom: 0;
+footer {
+  margin: 0px;
+  width: 100%;
+  overflow: hidden;
+  height: 40vh;
+  background-color: var(--cor_primaria);
+  position: absolute;
+  bottom: 0;
 }
 
-div#footer-itens{
-    margin-top:10px;
-    width: 100%;
-    height: 30vh;
-    background-color: var(--cor_primaria);
-    display: flex;
-}
-div.contatos{
-    width: 30%;
-    margin-right: 6%;
+div#footer-itens {
+  margin-top: 10px;
+  width: 100%;
+  height: 30vh;
+  background-color: var(--cor_primaria);
+  display: flex;
 }
 
-div.contatos > p {
-    margin-bottom: 1%;
-}
-div.sobre-nos{
-    width: 50%;
-    margin-right: 6%;
-}
-div.acesso-rapido{
-    width: 30%;
-    margin-right: 6%;
+div.contatos {
+  width: 30%;
+  margin-right: 6%;
 }
 
-div.acesso-rapido > a{
-    margin-bottom:1%;
-    display: block;
-    text-decoration: none;
-    color:black;
-    font-size: medium;
+div.contatos>p {
+  margin-bottom: 1%;
 }
-div#footer-itens > * h5{
-    font-size:x-large;
-    font-weight: bold;
+
+div.sobre-nos {
+  width: 50%;
+  margin-right: 6%;
 }
-div.acesso-rapido > a:hover{
-    text-decoration: none;
-    color:var(--grey);
+
+div.acesso-rapido {
+  width: 30%;
+  margin-right: 6%;
 }
-p#footer-cp{
-    width: 100%;
-    margin-bottom: 0%;
-    display:block;
-    text-align: center;
-    font-weight: bold;
+
+div.acesso-rapido>a {
+  margin-bottom: 1%;
+  display: block;
+  text-decoration: none;
+  color: black;
+  font-size: medium;
+}
+
+div#footer-itens>* h5 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+div.acesso-rapido>a:hover {
+  text-decoration: none;
+  color: var(--grey);
+}
+
+p#footer-cp {
+  width: 100%;
+  margin-bottom: 0%;
+  display: block;
+  text-align: center;
+  font-weight: bold;
 }
 
 /* ----------------------- End Estilo footer ----------------------- */
 
 /* ----------------------- Estilo CRUD animal ----------------------- */
 
-div#crud-form{
-  position:relative;
+div#crud-form {
+  position: relative;
   width: 50%;
-  margin:2% 25%;
+  margin: 2% 25%;
   outline: 1px solid black;
   min-height: 60vh;
   border-radius: 10px;
 }
 
-div#animal-progresso{
+div#animal-progresso {
   display: flex;
   width: 100%;
   justify-content: space-evenly;
   align-items: center;
   border-radius: 10px;
 }
-div#animal-progresso > div{
+
+div#animal-progresso>div {
   width: 50%;
-  margin:0%;
+  margin: 0%;
   outline: 1px solid black;
   padding: 2px;
   text-align: center;
 }
-div#Cadastro-geral{
-    border-top-left-radius: 10px;
-    background-color: var(--cor_primaria);
+
+div#Cadastro-geral {
+  border-top-left-radius: 10px;
+  background-color: var(--cor_primaria);
 }
 
-div#Cadastro-especifico{
+div#Cadastro-especifico {
   border-top-right-radius: 10px;
 }
 
-div#animal-info{
-  margin:1%;
+div#animal-info {
+  margin: 1%;
   padding: 1%;
 }
 
-div#animal-foto{
+div#animal-foto {
   min-height: 50vh;
   width: 28%;
-  float:left;
+  float: left;
   margin-bottom: 1px;
-  margin-top:2%;
-  margin-left:1%;
+  margin-top: 2%;
+  margin-left: 1%;
 }
 
-img#img-place{
+img#img-place {
   max-width: 100%;
   border-radius: 10px;
-  display:inline-block;
-  float:left;
+  display: inline-block;
+  float: left;
 }
 
-div#animal-form{
-  float:right;
-  margin-left:0.5%;
-  height:100%;
+div#animal-form {
+  float: right;
+  margin-left: 0.5%;
+  height: 100%;
   width: 65%;
 }
 
-div#animal-form > * label.crud-question {
+div#animal-form>* label.crud-question {
   display: block;
-  margin:2% 0%;
+  margin: 2% 0%;
 }
 
-div#animal-form > * label.crud-question.page2 {
+div#animal-form>* label.crud-question.page2 {
   display: block;
-  margin:0%;
+  margin: 0%;
 }
-div#animal-form > * input.text-input {
-  border-radius:10px;
-  height:30px;
+
+div#animal-form >* input.text-input {
+  border-radius: 10px;
+  height: 30px;
   width: 75%;
-  padding:2px;
+  padding: 2px;
   box-sizing: border-box;
   border: 2px solid #ccc;
 }
-div#animal-form > * textarea {
-  border-radius:10px;
+
+div#animal-form>* textarea {
+  border-radius: 10px;
   min-height: 15vh;
-  height:40%;
+  height: 40%;
   width: 75%;
   padding: 2px;
   box-sizing: border-box;
@@ -227,41 +239,41 @@ div#animal-form > * textarea {
 
 }
 
-span.small_text_span{
+span.small_text_span {
   margin-bottom: 4px;
-  font-size:x-small;
+  font-size: x-small;
   display: block;
 }
 
-button.btn-small{
-  background-color:var(--cor_primaria);
-  padding:1px;
-  border-radius:10px;
-  border:none;
+button.btn-small {
+  background-color: var(--cor_primaria);
+  padding: 1px;
+  border-radius: 10px;
+  border: none;
   width: 15vh;
 }
 
-button.btn-small:hover{
-  background-color:var(--dark_green);
+button.btn-small:hover {
+  background-color: var(--dark_green);
 }
 
-button#btn-animal-voltar{
+button#btn-animal-voltar {
   position: absolute;
-  left:2%;
-  bottom:3%;
+  left: 2%;
+  bottom: 3%;
 }
 
-button#btn-animal-passar{
+button#btn-animal-passar {
   position: absolute;
-  right:2%;
-  bottom:3%;
+  right: 2%;
+  bottom: 3%;
 }
 
-button#load_animal_photo{
-  background-color:var(--cor_primaria);
-  padding:1px;
-  border-radius:10px;
-  border:none;
+button#load_animal_photo {
+  background-color: var(--cor_primaria);
+  padding: 1px;
+  border-radius: 10px;
+  border: none;
   width: 30vh;
 
 }
@@ -269,279 +281,151 @@ button#load_animal_photo{
 /* ----------------------- End Estilo CRUD animal ----------------------- */
 
 
-/* ----------------------- Início Estilo Login ----------------------- */
+/* ----------------------- Início Estilo CRUD formulário ----------------------- */
 
-#login-body {
-    background-color: var(--cor_primaria);
-  }
-  
-  #btnMostrar
-  {
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-  }
-  
-  .pop-up-top
-  {
-    position: relative;
-    top: -1000px;
-    animation: drop-top 0.5s ease forwards;
-  }
-  
-  .pop-up-bottom
-  {
-    position: relative;
-    top: 0;
-    animation: drop-bottom 0.5s ease forwards;
-  }
-  
-  @keyframes drop-top
-  {
-    0% {}
-    70% { transform: translateY(1050px) }
-    100% { transform: translateY(1000px) }
-  }
-  
-  @keyframes drop-bottom
-  {
-    0% {}
-    70% { transform: translateY(-50px) }
-    100% { transform: translateY(1000px) }
-  }
-  
-  .login-show
-  {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .login-hide
-  {
-    visibility: hidden;
-    opacity: 0;
-  }
-  
-  .login-modal
-  {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    z-index: 1000; 
-    background: rgba(0, 0, 0, 0.3);
-  }
-  
-  .login-container
-  {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 400px;
-    height: 500px;
-    padding: 15px 50px 0 50px;
-    background-color: white;
-    border-style: solid;
-    border-width: 1px;;
-    border-color: var(--grey);
-    border-radius: 30px;
-    box-shadow: 0px 0px 1px 1px var(--grey);
-    z-index: 1001;
-  }
-  
-  .login-close-window
-  {
-    position: absolute;
-    top: 2%;
-    left: 91%;
-    width: 35px;
-    height: 35px;
-  }
-  
-  .login-close-window:hover
-  {
-    cursor: pointer;
-  }
-  
-  .login-titulo
-  {
-    text-align: center;
-    margin: 0 0 25px 0;
-  }
-  
-  .login-titulo h1
-  {
-    font-weight: 500;
-    font-size: 28px;
-    margin-bottom: 15px;
-  }
-  
-  .login-titulo h2
-  {
-    font-weight: 400;
-    font-size: 20px;
-    margin-bottom: 5px;
-  }
-  
-  .login-input-field
-  {
-    width: 97%;
-    height: 60px;
-    font-size: 17px;
-    padding-left: 15px;
-    margin-bottom: 15px;
-    border-style: solid;
-    border-width: 1px;;
-    border-color: var(--grey);
-    border-radius: 10px;
-    outline: none;
-    transition: .3s;
-  }
-  
-  ::placeholder
-  {
-    font-weight: 500;
-    color: black;
-  }
-  
-  .login-input-field:hover
-  {
-    width: 99%;
-    box-shadow: 0px 1px 2px 2px var(--grey);
-  }
-  
-  .login-button
-  {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .login-button-submit
-  {
-    margin-top: 5px;
-    width: 30%;
-    height: 50px;
-    background-color: var(--cor_primaria);
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-size: 17px;
-  }
-  
-  .login-button-submit:hover
-  {
-    width: 31%;
-    background-color: #507f58;
-    font-size: 18px;
-    box-shadow: 0px 1px 2px 2px var(--grey);
-    cursor: pointer;
-  }
-  
-  .login-cadastro
-  {
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 10px;
-  }
-  
-  .login-cadastro a
-  {
-    text-decoration: none;
-  }
+div#adocao-titulo {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: var(--cor_primaria);
+  outline: 1px solid black;
+  text-align: center;
+  padding: 2px;
+  font-weight: bold;
+  font-size:large;
+}
+
+div#adocao-form {
+  padding: 1%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div#adocao-form > form {
+  margin: 1% 1%
+}
+
+div#adocao-form > form {
+  margin: 1% 1%
+}
+div#adocao-form >* label.crud-question{
+  font-size:medium;
+  display: block;
+}
+div#adocao-form >* label{
+  font-size: smaller;
+}
+div#adocao-form >* input.text-input {
+  border-radius: 10px;
+  height: 30px;
+  width: 75%;
+  padding: 2px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+
+div.radio-input{
+  display: inline-flex;
+}
+
+
+/* ----------------------- End Estilo CRUD formulário ----------------------- */
+
+
+
+/* ----------------------- Início Estilo Login ----------------------- */
 
 #login-body {
   background-color: var(--cor_primaria);
 }
 
-#btnMostrarLogin
-{
+#btnMostrar {
   border: none;
   padding: 10px;
   border-radius: 10px;
 }
 
-.pop-up-top
-{
+.pop-up-top {
   position: relative;
   top: -1000px;
   animation: drop-top 0.5s ease forwards;
 }
 
-.pop-up-bottom
-{
+.pop-up-bottom {
   position: relative;
   top: 0;
   animation: drop-bottom 0.5s ease forwards;
 }
 
-@keyframes drop-top
-{
+@keyframes drop-top {
   0% {}
-  70% { transform: translateY(1050px) }
-  100% { transform: translateY(1000px) }
+
+  70% {
+    transform: translateY(1050px)
+  }
+
+  100% {
+    transform: translateY(1000px)
+  }
 }
 
-@keyframes drop-bottom
-{
+@keyframes drop-bottom {
   0% {}
-  70% { transform: translateY(-50px) }
-  100% { transform: translateY(1000px) }
+
+  70% {
+    transform: translateY(-50px)
+  }
+
+  100% {
+    transform: translateY(1000px)
+  }
 }
 
-.login-show
-{
+.login-show {
   visibility: visible;
   opacity: 1;
 }
 
-.login-hide
-{
+.login-hide {
   visibility: hidden;
   opacity: 0;
 }
 
-.login-modal
-{
-  position: fixed; 
+.login-modal {
+  position: fixed;
   top: 0;
   left: 0;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  z-index: 1000; 
+  z-index: 1000;
   background: rgba(0, 0, 0, 0.3);
 }
 
-.login-container
-{
+.login-container {
   position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
   width: 400px;
-  height: 530px;
+  height: 500px;
   padding: 15px 50px 0 50px;
   background-color: white;
   border-style: solid;
-  border-width: 1px;;
+  border-width: 1px;
+  ;
   border-color: var(--grey);
   border-radius: 30px;
   box-shadow: 0px 0px 1px 1px var(--grey);
   z-index: 1001;
 }
 
-.login-close-window
-{
+.login-close-window {
   position: absolute;
   top: 2%;
   left: 91%;
@@ -549,74 +433,58 @@ button#load_animal_photo{
   height: 35px;
 }
 
-.login-close-window:hover
-{
+.login-close-window:hover {
   cursor: pointer;
 }
 
-.login-titulo
-{
+.login-titulo {
   text-align: center;
   margin: 0 0 25px 0;
 }
 
-.login-titulo h1
-{
+.login-titulo h1 {
   font-weight: 500;
   font-size: 28px;
   margin-bottom: 15px;
 }
 
-.login-titulo h2
-{
+.login-titulo h2 {
   font-weight: 400;
   font-size: 20px;
   margin-bottom: 5px;
 }
 
-.login-input-field
-{
+.login-input-field {
   width: 97%;
   height: 60px;
   font-size: 17px;
   padding-left: 15px;
   margin-bottom: 15px;
   border-style: solid;
-  border-width: 1px;;
+  border-width: 1px;
+  ;
   border-color: var(--grey);
   border-radius: 10px;
   outline: none;
   transition: .3s;
 }
 
-::placeholder
-{
+::placeholder {
   font-weight: 500;
   color: black;
 }
 
-.login-input
-{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-input-field:hover
-{
+.login-input-field:hover {
   width: 99%;
   box-shadow: 0px 1px 2px 2px var(--grey);
 }
 
-.login-button
-{
+.login-button {
   display: flex;
   justify-content: center;
 }
 
-.login-button-submit
-{
+.login-button-submit {
   margin-top: 5px;
   width: 30%;
   height: 50px;
@@ -627,8 +495,7 @@ button#load_animal_photo{
   font-size: 17px;
 }
 
-.login-button-submit:hover
-{
+.login-button-submit:hover {
   width: 31%;
   background-color: #507f58;
   font-size: 18px;
@@ -636,8 +503,7 @@ button#load_animal_photo{
   cursor: pointer;
 }
 
-.login-cadastro
-{
+.login-cadastro {
   margin: 20px;
   display: flex;
   justify-content: center;
@@ -646,13 +512,196 @@ button#load_animal_photo{
   row-gap: 10px;
 }
 
-.login-strong
-{
+.login-cadastro a {
+  text-decoration: none;
+}
+
+#login-body {
+  background-color: var(--cor_primaria);
+}
+
+#btnMostrarLogin {
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.pop-up-top {
+  position: relative;
+  top: -1000px;
+  animation: drop-top 0.5s ease forwards;
+}
+
+.pop-up-bottom {
+  position: relative;
+  top: 0;
+  animation: drop-bottom 0.5s ease forwards;
+}
+
+@keyframes drop-top {
+  0% {}
+
+  70% {
+    transform: translateY(1050px)
+  }
+
+  100% {
+    transform: translateY(1000px)
+  }
+}
+
+@keyframes drop-bottom {
+  0% {}
+
+  70% {
+    transform: translateY(-50px)
+  }
+
+  100% {
+    transform: translateY(1000px)
+  }
+}
+
+.login-show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.login-hide {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.login-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.login-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 400px;
+  height: 530px;
+  padding: 15px 50px 0 50px;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  ;
+  border-color: var(--grey);
+  border-radius: 30px;
+  box-shadow: 0px 0px 1px 1px var(--grey);
+  z-index: 1001;
+}
+
+.login-close-window {
+  position: absolute;
+  top: 2%;
+  left: 91%;
+  width: 35px;
+  height: 35px;
+}
+
+.login-close-window:hover {
+  cursor: pointer;
+}
+
+.login-titulo {
+  text-align: center;
+  margin: 0 0 25px 0;
+}
+
+.login-titulo h1 {
+  font-weight: 500;
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.login-titulo h2 {
+  font-weight: 400;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.login-input-field {
+  width: 97%;
+  height: 60px;
+  font-size: 17px;
+  padding-left: 15px;
+  margin-bottom: 15px;
+  border-style: solid;
+  border-width: 1px;
+  ;
+  border-color: var(--grey);
+  border-radius: 10px;
+  outline: none;
+  transition: .3s;
+}
+
+::placeholder {
+  font-weight: 500;
+  color: black;
+}
+
+.login-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-input-field:hover {
+  width: 99%;
+  box-shadow: 0px 1px 2px 2px var(--grey);
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+}
+
+.login-button-submit {
+  margin-top: 5px;
+  width: 30%;
+  height: 50px;
+  background-color: var(--cor_primaria);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 17px;
+}
+
+.login-button-submit:hover {
+  width: 31%;
+  background-color: #507f58;
+  font-size: 18px;
+  box-shadow: 0px 1px 2px 2px var(--grey);
+  cursor: pointer;
+}
+
+.login-cadastro {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+}
+
+.login-strong {
   color: rgb(0, 51, 255);
 }
 
-.login-strong:hover
-{
+.login-strong:hover {
   cursor: pointer;
 }
 
@@ -660,17 +709,15 @@ button#load_animal_photo{
 
 /* -------------------- Inicio Estilo Cadastro -------------------- */
 
-.cadastro-div-item
-{
+.cadastro-div-item {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center; 
-  width: 80%; 
+  align-items: center;
+  width: 80%;
 }
 
-.cadastro-radio-items
-{
+.cadastro-radio-items {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -679,8 +726,7 @@ button#load_animal_photo{
   margin: 10px 0;
 }
 
-.cadastro-titulo
-{
+.cadastro-titulo {
   font-weight: 400;
   font-size: 18px;
   margin: 5px 0 10px 0;
