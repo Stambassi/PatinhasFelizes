@@ -1,278 +1,269 @@
+/* ---------------- Algumas funções padrões para auxiliar -------------------- */
 
+async function carregarHtml (url)
+{
+//Definir dados locais
+  let element = "";
+//Tentar fazer a chamada
+  try
+  {
+    const res = await fetch(url); 
+    const data = await res.text() 
+    return data;
+  }
+  catch (error) 
+  {
+    console.error('Erro ao buscar:', error);
+    throw error;
+  }
+}
 
+function adicionarPopup (data, htmlElement, carregarEventos)
+{
+//Testar se outro pop-up esta ativo
+  let modal = document.querySelector('.modal');
+  if (modal) {
+    //Remover o container existente
+    modal.remove();
+  //Adicionar o novo modal
+    htmlElement.insertAdjacentHTML('beforeend', data);
+    carregarEventos();
+  }
+  else
+  {
+  //Adicionar o novo modal
+    htmlElement.insertAdjacentHTML('beforeend', data);
+    carregarEventos();        
+  }
+}
+
+function fecharPopup ()
+{
+//Definir dados locais
+  let modal = document.querySelector('.lc-modal');
+  let container = document.querySelector('.lc-container');
+//Trocar classes de animacoes do login-container
+  container.classList.remove('pop-up-top');
+  container.classList.add('pop-up-bottom');
+//Definir a saida do pop-up de login
+  modal.classList.remove('login-show');
+//Definir evento para esperar a animacao
+  modal.addEventListener('animationend', function fimAnimacao() {
+    modal.removeEventListener('animationend', fimAnimacao);
+    modal.remove();
+  }, { once: true });  
+}
 
 /* ------------------------ Definir comportamento para mostrar o pop-up de LOGIN (INICIO) ------------------------ */
 
 
-
-let loginBtnMostrar = document.querySelector("#btnMostrar")
-
-/**
- * carregarLoginPopup - Funcao para ler o template do pop-up de login
- * @param htmlElement - Elemento pai do pop-up de login a ser inserido
- */
-function carregarLoginPopup(htmlElement) {
-  //Fazer chamada do template
-  fetch('../../pages/login/login-template.html')
-    .then(response => response.text())
-    .then(data => {
-      adicionarLoginPopup(data, htmlElement);
-    })
-    .catch(error => console.error("Erro ao carregar o pop-up de login: ", error));
+function loginOnload ()
+{
+  let loginBtnMostrar = document.querySelector("#btnMostrarLogin");
+  loginBtnMostrar.addEventListener('click', () => loginUsuario());
 }
 
-/**
- * adicionarLoginPopup - Funcao para adicionar o HTML do pop-up de login
- * @param data - Conteudo do pop-up a ser adicionado
- * @param htmlElement - Elemento pai do pop-up de login a ser inserido
- */
-function adicionarLoginPopup(data, htmlElement) {
-  //Testar se outro pop-up esta ativo
-  let modal = document.querySelector('.modal');
-  if (modal) {
-    //Remover o container existente
-    modal.remove();
-    //Adicionar o novo modal de cadastro
-    htmlElement.insertAdjacentHTML('beforeend', data);
-    carregarLoginPopupEventos();
-  }
-  else {
-    //Adicionar o novo modal de cadastro
-    htmlElement.insertAdjacentHTML('beforeend', data);
-    carregarLoginPopupEventos();
-  }
+async function loginUsuario ()
+{
+//Definir dados locais
+  let main = document.querySelector('main');
+  let container;
+//Recuperar html
+  container = await carregarHtml('../../pages/loginUsuario/login-template.html');
+//Adicionar html
+  adicionarPopup(container, main, loginUsuarioEventos);
 }
 
-/**
- * carregarLoginPopupEventos - Funcao para definir os eventos dos botoes do pop-up de login
- */
-function carregarLoginPopupEventos() {
-  //Definir dados locais
-  let loginCloseImg = document.querySelector('.login-close-window');
-  let loginBtnCadastro = document.querySelector('#login-btn-cadastro');
-  let loginMain = document.querySelector('main');
-  //Definir eventos
-  loginCloseImg.addEventListener('click', () => fecharLoginPopup())
-  loginBtnCadastro.addEventListener('click', () => carregarCadastroPopup(loginMain));
+function loginUsuarioEventos ()
+{
+//Definir dados locais
+  let main = document.querySelector('main');
+  let closeWindow = document.querySelector('.login-close-window');
+  let cadastroUser = document.querySelector('#login-btn-cadastro');
+  let loginONG = document.querySelector('#login-btn-instituicao');
+//Definir eventos
+  closeWindow.addEventListener('click', () => fecharPopup());
+  controlarSenha();
+  cadastroUser.addEventListener('click', async () => await cadastroUsuario());
+  loginONG.addEventListener('click', async () => await loginInstituicao()); 
 }
-
-/**
- * fecharLoginPopup - Funcao para definir a visibilidade do pop-up de login para 'none'
- */
-function fecharLoginPopup() {
-  //Definir dados locais
-  let loginModal = document.querySelector('.login-modal');
-  let loginContainer = document.querySelector('.login-container');
-  //Trocar classes de animacoes do login-container
-  loginContainer.classList.remove('pop-up-top');
-  loginContainer.classList.add('pop-up-bottom');
-  //Definir a saida do pop-up de login
-  loginModal.classList.remove('login-show');
-  //Definir evento para esperar a animacao
-  loginModal.addEventListener('animationend', function fimAnimacao() {
-    loginModal.removeEventListener('animationend', fimAnimacao);
-    loginModal.remove();
-  }, { once: true });
-}
-
-
 
 /* ------------------------ Definir comportamento para mostrar o pop-up de LOGIN (FIM) ------------------------ */
+
+
+function controlarSenha()
+{
+//Definir dados locais
+  let passwordImg = document.querySelector('.password-img');
+  if (passwordImg != null)
+  {
+    let controleSenha = 0;
+  //Definir evento
+    passwordImg.addEventListener('click', () => {
+      controleSenha = inverterSenha(passwordImg, controleSenha);
+    });
+  }
+}
+
+function inverterSenha (passwordImg, controle)
+{
+//Definir dados locais
+  let senhaInput = document.querySelector('.password');
+//Testar se esta escondido
+  if (controle === 1)
+  {
+    senhaInput.type = 'password';
+    passwordImg.src = "../../assets/img/hidden.png";
+    controle--;
+  }
+  else
+  {
+    senhaInput.type = 'text';
+    passwordImg.src = "../../assets/img/eye.png";
+    controle++;
+  }
+//Retornar
+  return controle;
+}
+
+function limitarNome (inputField)
+{
+//Testar input
+  if (inputField.placeholder == "Nome completo" || inputField.placeholder == "Nome da instituição")
+  {
+  //Definir dados locais
+    let str = inputField.value;
+    let result = "";
+    const letterPattern = /^[A-Za-zÀ-ÖØ-Ýà-öø-ÿ\s]*$/;
+  //Testar tamanho
+    if (str.length > 0)
+    {
+    //Definir dados locais
+      let c = str.charAt( str.length - 1 );
+    //Testar se o caractere e' valido
+      if (!letterPattern.test(inputField.value))
+      {
+        inputField.value = "";
+      }
+    }
+  }
+}
+
+
+
 
 /* --------------------- Definir comportamento para mostrar o pop-up de CADASTRO (INICIO) ------------------------ */
 
 
-
-/**
- * carregarCadastroPopup - Funcao para ler o template do pop-up de cadastro
- * @param htmlElement - Elemento pai do pop-up de cadastro a ser inserido
- */
-function carregarCadastroPopup(htmlElement) {
-  //Fazer chamada do template
-  fetch('../../pages/cadastro/cadastro-template.html')
-    .then(response => response.text())
-    .then(data => {
-      adicionarCadastroPopup(data, htmlElement);
-    })
-    .catch(error => console.error("Erro ao carregar o pop-up de cadastro: ", error));
-}
-
-/**
- * adicionarCadastroPopup - Funcao para adicionar o HTML do pop-up de cadastro
- * @param data - Conteudo do pop-up a ser adicionado
- * @param htmlElement - Elemento pai do pop-up de cadastro a ser inserido
- */
-function adicionarCadastroPopup(data, htmlElement) {
-  //Testar se outro pop-up esta ativo
-  let modal = document.querySelector('.modal');
-  if (modal) {
-    //Remover o container existente
-    modal.remove();
-    //Adicionar o novo modal de cadastro
-    htmlElement.insertAdjacentHTML('beforeend', data);
-    carregarCadastroPopupEventos();
-  }
-  else {
-    //Adicionar o novo modal de cadastro
-    htmlElement.insertAdjacentHTML('beforeend', data);
-    carregarCadastroPopupEventos();
-  }
-}
-
-/**
- * carregarCadastroPopupEventos - Funcao para definir os eventos dos botoes do pop-up de cadastro
- */
-function carregarCadastroPopupEventos() {
-  //Definir dados auxiliares
+async function cadastroUsuario ()
+{
+//Definir dados locais
   let main = document.querySelector('main');
-  //Definir dados locais
-  let loginCloseImg = document.querySelector('.login-close-window');
-  let cadastroBtnLogin = document.querySelector('#cadastro-btn-login');
-  //Definir evento para fechar o pop-up
-  loginCloseImg.addEventListener('click', () => fecharLoginPopup());
-  //Definir evento para passar de pagina
-  cadastroEventoPassarPaginas();
-  //Definir evento para voltar 'a tela de login
-  cadastroBtnLogin.addEventListener('click', () => carregarLoginPopup(main));
+  let pagina = 1;
+  let container;
+//Recuperar html
+  container = await carregarHtml(`../../pages/cadastroUsuario/cadastro-template-${pagina}.html`);
+//Adicionar html
+  adicionarPopup(container, main, cadastroUsuarioEventos);
 }
 
+function cadastroUsuarioEventos ()
+{
+//Definir dados locais
+  let pagina = parseInt( document.querySelector('.login-input').id );
+  let closeWindow = document.querySelector('.login-close-window');
+  let inputNome = document.querySelector('#cadastro-input-field-1');
+  let loginUser = document.querySelector('#cadastro-btn-login');
+//Definir eventos
+  closeWindow.addEventListener('click', () => fecharPopup());
+  controlarSenha();
+  cadastroUsuarioPassarPagina();
+  loginUser.addEventListener('click', async () => await loginUsuario()); 
+  if (pagina === 1)
+    inputNome.addEventListener('input', () => limitarNome(inputNome));
+}
+
+let objUsuario = { nome: "", email: "", senha: "", cpf: "", data_de_nascimento: "", telefone: "", tags: { atencao: 0, passeio: 0, carinho: 0, extrovertido: 0, animacao: 0 } };
+
 /**
- * cadastroEventoPassarPaginas - Funcao para definir o comportamento da passagem de paginas
+ * cadastroUsuarioPassarPagina - Funcao para definir o comportamento da passagem de paginas
  */
-function cadastroEventoPassarPaginas() {
-  //Definir dados locais
-  let controle = false;
-  let objUsuario = { nome: "", email: "", senha: "", cpf: "", data_de_nascimento: "", telefone: "", tags: { atencao: 0, passeio: 0, carinho: 0, extrovertido: 0, animacao: 0 } };
-  let pagina = parseInt(document.querySelector('.login-input').id);
+async function cadastroUsuarioPassarPagina()
+{
+//Definir dados locais
+  let pagina = parseInt( document.querySelector('.login-input').id );
   let cadastroSubmit = document.querySelector('#cadastro-submit');
-  //Atualizar o conteudo da pagina
-  pagina++;
-  cadastroPaginas(pagina);
-  //Definir evento de passar a pagina
-  cadastroSubmit.addEventListener('click', () => {
-    //Testar se a pagina esta preenchida
-    if (!cadastroInputsPreenchidos(pagina)) {
+//Definir evento de passar a pagina
+  cadastroSubmit.addEventListener('click', async () => {  
+  //Testar se a pagina esta preenchida
+    if ( !cadastroInputsPreenchidos(pagina) )
+    {
       mostrarErro("É obrigatório o preenchimento de todos os campos!");
     }
-    else {
-      //Atribuir dados e mostrar proxima pagina
-      objUsuario = cadastroPreencherObj(pagina, objUsuario);
-      cadastroPaginas(++pagina);
-      //Testar se e' pagina final
-      if (pagina === 4)
+    else
+    {
+    //Atribuir dados e mostrar proxima pagina
+      cadastroUsuarioPreencher(pagina);
+      pagina++;
+      if (pagina < 4)
+        cadastroUsuarioPagina(pagina);
+      else
+      {
+        fecharPopup();
         postUsuario(objUsuario);
+      }
     }
   });
 }
 
 /**
- * cadastroPaginas - Funcao para controlar o conteudo a ser mostrado no pop-up de cadastro
+ * cadastroUsuarioPagina - Funcao para controlar o conteudo a ser mostrado no pop-up de cadastro
  * @param pagina - Pagina a ser mostrada
  */
-function cadastroPaginas(pagina) {
-  //Testar paginas
-  switch (pagina) {
-    case 1: cadastroPagina_1(); break;
-    case 2: cadastroPagina_2(); break;
-    case 3: cadastroPagina_3(); break;
+async function cadastroUsuarioPagina(pagina)
+{
+//Definir dados locais
+  let main = document.querySelector('main');
+//Recuperar html
+  container = await carregarHtml(`../../pages/cadastroUsuario/cadastro-template-${pagina}.html`);
+//Adicionar html
+  adicionarPopup(container, main, cadastroUsuarioEventos);
+//Definir mascaras da pagina 2
+  if (pagina === 2)
+  {
+    $('#cadastro-input-field-1').mask('000.000.000-00');
+    $('#cadastro-input-field-2').mask('00/00/0000');
+    $('#cadastro-input-field-3').mask('(00) 00000-0000');
+  }
+//Definir estilo do container da pagina 3
+  else if (pagina == 3)
+  {
+    let lc_container = document.querySelector('.lc-container');
+    lc_container.style.width = 'auto';
+    lc_container.style.height = '730px';
+    lc_container.style.margin = '10px 0 0 0';
+    lc_container.style.padding = '20px 40px 0px 40px';
   }
 }
 
 /**
- * cadastroPagina_1 - Funcao para mostrar o conteudo especifico da primeira pagina do pop-up de cadastro
- */
-function cadastroPagina_1() {
-  //Definir dados locais
-  let input_1 = document.querySelector('#cadastro-input-field-1');
-  let input_2 = document.querySelector('#cadastro-input-field-2');
-  let input_3 = document.querySelector('#cadastro-input-field-3');
-  let cadastroSubmit = document.querySelector('#cadastro-submit');
-  //Esvaziar inputs
-  input_1.value = "";
-  input_2.value = "";
-  input_3.value = "";
-  //Substituir placeholders
-  input_1.placeholder = "Nome completo";
-  input_2.placeholder = "Email";
-  input_3.placeholder = "Senha";
-  //Substituir botao
-  cadastroSubmit.innerHTML = "Próximo";
-}
-
-/**
- * cadastroPagina_2 - Funcao para mostrar o conteudo especifico da segunda pagina do pop-up de cadastro
- */
-function cadastroPagina_2() {
-  //Definir dados locais
-  let input_1 = document.querySelector('#cadastro-input-field-1');
-  let input_2 = document.querySelector('#cadastro-input-field-2');
-  let input_3 = document.querySelector('#cadastro-input-field-3');
-  let cadastroSubmit = document.querySelector('#cadastro-submit');
-  //Esvaziar inputs
-  input_1.value = "";
-  input_2.value = "";
-  input_3.value = "";
-  //Substituir placeholders
-  input_1.placeholder = "CPF";
-  input_2.placeholder = "Data de nascimento";
-  input_3.placeholder = "Telefone";
-  input_3.type = "text";
-  //Definir mascaras
-  $('#cadastro-input-field-1').mask('000.000.000-00');
-  $('#cadastro-input-field-2').mask('00/00/0000');
-  $('#cadastro-input-field-3').mask('(00) 00000-0000');
-  cadastroSubmit.innerHTML = "Próximo";
-}
-
-/**
- * cadastroPagina_3 - Funcao para mostrar o conteudo especifico da terceira pagina do pop-up de cadastro
- */
-function cadastroPagina_3() {
-  //Definir dados locais
-  let loginContainer = document.querySelector('.login-container');
-  let cadastroSubmit = document.querySelector('#cadastro-submit');
-  let loginInput = document.querySelector('.login-input');
-  let loginButtonSubmit = document.querySelector('.login-button-submit');
-  //Esvaziar inputs
-  loginInput.innerHTML = "";
-  //Substituir dados
-  fetch('../../pages/cadastro/cadastro-template-tags.html')
-    .then(response => response.text())
-    .then(data => {
-      loginInput.insertAdjacentHTML('beforeend', data);
-    });
-  cadastroSubmit.innerHTML = "Cadastrar";
-  //Alterar tamanho
-  loginContainer.style.width = 'auto';
-  loginContainer.style.height = '720px';
-  loginContainer.style.padding = '20px 40px 0px 40px';
-  loginButtonSubmit.style.margin = '10px 0 0 0';
-}
-
-/**
- * cadastroPreencherObj - Funcao para controlar o preenchimento do objeto Usuário de acordo com a pagina do pop-up de cadastro
+ * cadastroUsuarioPreencher - Funcao para controlar o preenchimento do objeto Usuário de acordo com a pagina do pop-up de cadastro
  * @param pagina - Pagina a ter seus dados lidos
- * @param objUsuario - Objeto Usuário a ser preenchido
- * @return objUsuario - Objeto Usuário resultante
  */
-function cadastroPreencherObj(pagina, objUsuario) {
-  //Testar pagina
-  switch (pagina) {
-    case 1: objUsuario = cadastroPreencher_1(objUsuario); break;
-    case 2: objUsuario = cadastroPreencher_2(objUsuario); break;
-    case 3: objUsuario = cadastroPreencher_3(objUsuario); break;
+function cadastroUsuarioPreencher(pagina)
+{
+//Testar pagina
+  switch(pagina)
+  {
+    case 1: cadastroUsuarioPreencher_1(); break;
+    case 2: cadastroUsuarioPreencher_2(); break;
+    case 3: cadastroUsuarioPreencher_3(); break;
   }
-  //Retornar
-  return objUsuario;
 }
 
-/**
- * cadastroPreencher_1 - Funcao para preencher o objeto Usuário com as informacoes da primeira pagina do pop-up de cadastro
- * @param objUsuario - Objeto Usuário a ser preenchido
- * @return objUsuario - Objeto Usuário resultante
- */
-function cadastroPreencher_1(objUsuario) {
-  //Definir dados locais
+function cadastroUsuarioPreencher_1 ()
+{
+//Definir dados locais
   let input_1 = document.querySelector('#cadastro-input-field-1').value;
   let input_2 = document.querySelector('#cadastro-input-field-2').value;
   let input_3 = document.querySelector('#cadastro-input-field-3').value;
@@ -280,35 +271,23 @@ function cadastroPreencher_1(objUsuario) {
   objUsuario.nome = input_1;
   objUsuario.email = input_2;
   objUsuario.senha = input_3;
-  //Retornar
-  return objUsuario;
 }
 
-/**
- * cadastroPreencher_2 - Funcao para preencher o objeto Usuário com as informacoes da segunda pagina do pop-up de cadastro
- * @param objUsuario - Objeto Usuário a ser preenchido
- * @return objUsuario - Objeto Usuário resultante
- */
-function cadastroPreencher_2(objUsuario) {
-  //Definir dados locais
+function cadastroUsuarioPreencher_2 ()
+{
+//Definir dados locais
   let input_1 = document.querySelector('#cadastro-input-field-1').value;
   let input_2 = document.querySelector('#cadastro-input-field-2').value;
   let input_3 = document.querySelector('#cadastro-input-field-3').value;
   //Substituir no objeto
   objUsuario.cpf = input_1;
   objUsuario.data_de_nascimento = input_2;
-  objUsuario.telefone = input_3;
-  //Retornar
-  return objUsuario;
+  objUsuario.telefone = input_3;  
 }
 
-/**
- * cadastroPreencher_3 - Funcao para preencher o objeto Usuário com as informacoes da terceira pagina do pop-up de cadastro
- * @param objUsuario - Objeto Usuário a ser preenchido
- * @return objUsuario - Objeto Usuário resultante
- */
-function cadastroPreencher_3(objUsuario) {
-  //Definir dados locais
+function cadastroUsuarioPreencher_3 ()
+{
+//Definir dados locais
   let arrRadioInput = [];
   let tags = [];
   let x = 0, y = 0;
@@ -330,8 +309,6 @@ function cadastroPreencher_3(objUsuario) {
   objUsuario.tags.carinho = tags[2];
   objUsuario.tags.extrovertido = tags[3];
   objUsuario.tags.animacao = tags[4];
-  //Retornar
-  return objUsuario;
 }
 
 /**
@@ -440,72 +417,221 @@ function postUsuario(objUsuario) {
   console.log(objUsuario);
 }
 
-/* --------------------- Definir Funcoes para uso do geral nos cadastros (INICIO) ------------------------ */
 
-function getRadio(radioName) {
-  let x = document.getElementsByName(radioName);
-  let value;
+/* --------------------- Definir comportamento para mostrar o pop-up de LOGIN da INSTITUICAO (INICIO) ------------------------ */
 
-  x.forEach(element => {
-    if (element.checked == true) {
-      value = element.value;
-    }
-  });
-  return value;
+
+async function loginInstituicao ()
+{
+//Definir dados locais
+  let main = document.querySelector('main');
+  let container;
+//Recuperar container da pagina
+  container = await carregarHtml(`../../pages/loginInstituicao/login-template.html`);
+//Atualizar o html da pagina
+  adicionarPopup(container, main, loginInstituicaoEventos);
 }
 
-function getRadioText(radioName, outrosOptionId, checkOption) {
-  let x = document.getElementsByName(radioName);
-  let outros = document.getElementById(outrosOptionId).value;
-  let value;
+async function loginInstituicaoEventos ()
+{
+//Definir dados locais
+  let closeWindow = document.querySelector('.login-close-window');
+  let cadastroONG = document.querySelector('#cadastro-instituicao');
+  let loginUser = document.querySelector('#login-usuario');
+//Definir máscara do input de CNPJ
+  $('.login-input-field[placeholder="CNPJ"]').mask('00.000.000/0000-00');
+//Definir eventos
+  closeWindow.addEventListener('click', () => fecharPopup())
+  controlarSenha();
+  cadastroONG.addEventListener('click', async () => await cadastroInstituicao());
+  loginUser.addEventListener('click', async () => await loginUsuario());  
+}
 
-  x.forEach(element => {
-    if (element.checked == true) {
-      if (element.value === checkOption) {
-        value = outros;
-      } else {
-        value = element.value;
+async function cadastroInstituicao ()
+{
+//Definir dados locais
+  let pagina = 1;  
+//Atualizar pagina
+  await atualizarCadastroInstituicao (pagina);
+}
+
+async function atualizarCadastroInstituicao (pagina)
+{
+//Definir dados locais
+  let main = document.querySelector('main');
+  let container;
+//Recuperar container da pagina
+  container = await carregarHtml(`../../pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+//Atualizar o html da pagina
+  adicionarPopup(container, main, cadastroInstituicaoEventos);
+}
+
+async function cadastroInstituicaoEventos ()
+{
+//Definir dados locais
+  let pagina = parseInt( document.querySelector('.login-input').id );
+  let closeWindow = document.querySelector('.login-close-window');
+  let inputNome = document.querySelector('#cadastro-input-field-1');
+  let loginONG = document.querySelector('#cadastro-btn-login');
+//Definir eventos
+  closeWindow.addEventListener('click', () => fecharPopup());
+  controlarSenha();
+  cadastroInstituicaoPassarPagina();
+  loginONG.addEventListener('click', async () => await loginInstituicao()); 
+  if (pagina === 1)
+    inputNome.addEventListener('input', () => limitarNome(inputNome));
+}
+
+function cadastroInstituicaoPassarPagina ()
+{
+//Definir dados locais
+  let pagina = parseInt( document.querySelector('.login-input').id );
+  let cadastroSubmit = document.querySelector('#cadastro-submit');
+//Definir evento de passar a pagina
+  cadastroSubmit.addEventListener('click', async () => {  
+  //Testar se a pagina esta preenchida
+    if ( !cadastroInputsPreenchidos(pagina) )
+    {
+      mostrarErro("É obrigatório o preenchimento de todos os campos!");
+    }
+    else
+    {
+    //Atribuir dados e mostrar proxima pagina
+      cadastroInstituicaoPreencher(pagina);
+      pagina++;
+      if (pagina < 4)
+        cadastroInstituicaoPagina(pagina);
+      else
+      {
+        fecharPopup();
+        postUsuario(objONG);
       }
     }
   });
-
-  return value;
 }
 
-function getBoolRadio(radioName) {
-  let x = document.getElementsByName(radioName);
-  let value;
-
-  x.forEach(element => {
-    if (element.checked == true) {
-      if (element.value === "true") {
-        value = true;
-      } else {
-        value = false;
-      }
-    }
-  });
-  return value;
-}
-
-function haveNullValue(data){
-  let resp = false;
-  for(var key in data){
-    if(data[key] === "" || data[key] === null){
-      console.log(key);
-      resp = true;
-    }
+async function cadastroInstituicaoPagina (pagina)
+{
+//Definir dados locais
+  let main = document.querySelector('main');
+  let container;
+  let lc_container = document.querySelector('.lc-container');
+//Recuperar html
+  container = await carregarHtml(`../../pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+//Adicionar html
+  adicionarPopup(container, main, cadastroInstituicaoEventos);
+//Definir estilos
+  if (pagina === 2)
+  {
+    $('#cadastro-input-field-1').mask('00000-000');
+    lc_container.style.height = '800px';
   }
-  return resp;
 }
 
-/* --------------------- Definir Funcoes para uso do geral nos cadastros (FIM) ------------------------ */
+let objONG = { nome: "", email: "", senha: "", telefone: "", foto_perfil: "", cnpj: "", descricao: "", endereco: { rua: "", numero: "", bairro: "", cidade: "", estado: "" } };
+
+function cadastroInstituicaoPreencher (pagina)
+{
+  switch (pagina)
+  {
+    case 1: cadastroInstituicaoPreencher_1(); break;
+    case 2: cadastroInstituicaoPreencher_2(); break;
+    case 3: cadastroInstituicaoPreencher_3(); break;
+  }
+}
+
+function cadastroInstituicaoPreencher_1()
+{
+//Definir dados locais
+  let input_1 = document.querySelector('#cadastro-input-field-1').value;
+  let input_2 = document.querySelector('#cadastro-input-field-2').value;
+  let input_3 = document.querySelector('#cadastro-input-field-3').value;
+//Substituir no objeto
+  objONG.nome = input_1;
+  objONG.email = input_2;
+  objONG.senha = input_3;
+}
+
+function cadastroInstituicaoPreencher_2()
+{
+//Definir dados locais
+  let input_1 = document.querySelector('#cadastro-input-field-1').value;
+  let input_2 = document.querySelector('#cadastro-input-field-2').value;
+  let input_3 = document.querySelector('#cadastro-input-field-3').value;
+  // let input_4 = document.querySelector('#cadastro-input-field-3').value; //IMAGEM
+//Substituir no objeto
+  objONG.cnpj = input_1;
+  objONG.telefone = input_2;
+  objONG.descricao = input_3; 
+}
+
+function cadastroInstituicaoPreencher_3()
+{
+  // objONG.endereco.rua = ;
+  // objONG.endereco.numero = ;
+  // objONG.endereco.bairro = ;
+  // objONG.endereco.cidade = ;
+  // objONG.endereco.estado = ;
+}
+
+// /**
+//  * cadastroUsuarioPreencher - Funcao para controlar o preenchimento do objeto Usuário de acordo com a pagina do pop-up de cadastro
+//  * @param pagina - Pagina a ter seus dados lidos
+//  */
+// function cadastroUsuarioPreencher(pagina)
+// {
+// //Testar pagina
+//   switch(pagina)
+//   {
+//     case 1: cadastroUsuarioPreencher_1(); break;
+//     case 2: cadastroUsuarioPreencher_2(); break;
+//     case 3: cadastroUsuarioPreencher_3(); break;
+//   }
+// }
+
+// function cadastroUsuarioPreencher_1 ()
+// {
+// //Definir dados locais
+//   let input_1 = document.querySelector('#cadastro-input-field-1').value;
+//   let input_2 = document.querySelector('#cadastro-input-field-2').value;
+//   let input_3 = document.querySelector('#cadastro-input-field-3').value;
+// //Substituir no objeto
+//   objUsuario.nome = input_1;
+//   objUsuario.email = input_2;
+//   objUsuario.senha = input_3;
+// }
+
+// function cadastroUsuarioPreencher_2 ()
+// {
+// //Definir dados locais
+//   let input_1 = document.querySelector('#cadastro-input-field-1').value;
+//   let input_2 = document.querySelector('#cadastro-input-field-2').value;
+//   let input_3 = document.querySelector('#cadastro-input-field-3').value;
+// //Substituir no objeto
+//   objUsuario.cpf = input_1;
+//   objUsuario.data_de_nascimento = input_2;
+//   objUsuario.telefone = input_3;  
+// }
+
+/* --------------------- Definir comportamento para mostrar o pop-up de LOGIN da Instituicao (FIM) ------------------------ */
 
 
 /* --------------------- Definir comportamento do CADASTRO DE ANIMAL (INICIO) ------------------------ */
 
+function getAnimalGenero(){
+  let genero_form = document.getElementsByName('a_genero');
+  let genero_value;
+  
+  genero_form.forEach(element => {
+    if(element.checked == true){
+      genero_value = element.value;
+    }
+  });
 
-function getAnimalCastrado() {
+  return genero_value;
+}
+
+function getAnimalCastrado(){
   let castrado_form = document.getElementsByName('a_castrado');
   let castrado_value;
 
