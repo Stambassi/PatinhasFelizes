@@ -269,7 +269,7 @@ button#load_animal_photo{
 /* ----------------------- End Estilo CRUD animal ----------------------- */
 
 
-/* ----------------------- Estilo Login ----------------------- */
+/* ----------------------- Início Estilo Login ----------------------- */
 
 #login-body {
     background-color: var(--cor_primaria);
@@ -529,7 +529,7 @@ button#load_animal_photo{
   justify-content: center;
   flex-direction: column;
   width: 400px;
-  height: 500px;
+  height: 530px;
   padding: 15px 50px 0 50px;
   background-color: white;
   border-style: solid;
@@ -595,6 +595,14 @@ button#load_animal_photo{
   color: black;
 }
 
+.login-input
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .login-input-field:hover
 {
   width: 99%;
@@ -649,3 +657,31 @@ button#load_animal_photo{
 }
 
 /* ----------------------- END Estilo Login ----------------------- */
+
+/* -------------------- Inicio Estilo Cadastro -------------------- */
+
+.cadastro-div-item
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; 
+  width: 80%; 
+}
+
+.cadastro-radio-items
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.cadastro-titulo
+{
+  font-weight: 400;
+  font-size: 18px;
+  margin: 5px 0 10px 0;
+}
