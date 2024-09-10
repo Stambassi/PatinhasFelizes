@@ -180,6 +180,8 @@ div#animal-foto{
   width: 28%;
   float:left;
   margin-bottom: 1px;
+  margin-top:2%;
+  margin-left:1%;
 }
 
 img#img-place{
@@ -200,10 +202,35 @@ div#animal-form > * label.crud-question {
   display: block;
   margin:2% 0%;
 }
+
+div#animal-form > * label.crud-question.page2 {
+  display: block;
+  margin:0%;
+}
 div#animal-form > * input.text-input {
   border-radius:10px;
   height:30px;
   width: 75%;
+  padding:2px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+div#animal-form > * textarea {
+  border-radius:10px;
+  min-height: 15vh;
+  height:40%;
+  width: 75%;
+  padding: 2px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  resize: none;
+
+}
+
+span.small_text_span{
+  margin-bottom: 4px;
+  font-size:x-small;
+  display: block;
 }
 
 button.btn-small{

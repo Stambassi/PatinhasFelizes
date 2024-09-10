@@ -49,15 +49,14 @@
                     <button id="load_animal_photo">Carregar Arquivo</button>
                 </div>
                 <div id="animal-form">
-                     
                     <form id="animal-form-1">
                         <label for="a_name" class="crud-question">Qual o nome do animal?</label>
-                        <input type="text" for="a_name" class="text-input">
+                        <input type="text" for="a_name" id="a_name" class="text-input">
                         
                         <label for="a_genero" class="crud-question">Qual o genêro do animal?</label>
-                        <input type="radio" id="masc" name="a_genero" value="masc">
+                        <input type="radio" id="masc" name="a_genero" value="M">
                         <label for="masc">Masculino</label>
-                        <input type="radio" id="fem" name="a_genero" value="fem">
+                        <input type="radio" id="fem" name="a_genero" value="F">
                         <label for="fem">Feminino</label>
 
                         <label for="a_especie" class="crud-question">Qual a espécie do animal?</label>
@@ -78,10 +77,9 @@
                     </form>
                     <!---->
                     
-                    <!-- 
-                    <form id="animal-form-2">
-                        <label for="a_vacina">Quais vacinas (animal_name) tem? </label>
-                        <span>(deixar em branco caso nenhuma)</span>
+                    <form id="animal-form-2" style="display:none">
+                        <label for="a_vacina" class="crud-question page2">Quais vacinas <span class="animal_name">animal</span> tem? </label>
+                        <span  class="small_text_span">(deixar em branco caso nenhuma)</span>
                         <input type="checkbox" id="vacina1" name="a_vacina" value="leishmanionse">
                         <label for="vacina1">Leishmaniose</label>
                         <input type="checkbox" id="vacina2" name="a_vacina" value="raiva">
@@ -91,17 +89,23 @@
                         <input type="checkbox" id="vacina4" name="a_vacina" value="...">
                         <label for="vacina4">Vacina 4</label>
 
-                        <label for="a_raca">Qual a raça do/a (animal_name) ?</label>
-                        <span>(deixar em branco caso não aparente)</span>
-                        <input type="text" for="a_raca">
+                        <label for="a_raca" class="crud-question page2 ">Qual a raça d<span class="animal_artigo">o</span> <span class="animal_name">animal</span> ?</label>
+                        <span class="small_text_span">(deixar em branco caso não aparente)</span>
+                        <input type="text" class="text-input" id="a_raca" for="a_raca">
 
-                        <label for="a_raca">Escreva uma pequena história do/a (animal_name)</label>
-                        <textarea form="animal-form-2"> </textarea>
+                        <label for="a_castrado" class="crud-question page2"><span class="animal_artigo text-uppercase"></span> <span class="animal_name"></span> é castrado?</label>
+                        <input type="radio" id="true" name="a_castrado" value="true">
+                        <label for="true">Sim</label>
+                        <input type="radio" id="false" name="a_castrado" value="false">
+                        <label for="false">Não</label>
+
+                        <label for="a_bio" class="crud-question page2">Escreva uma pequena história sobre <span class="animal_artigo"></span> <span class="animal_name">animal</span></label>
+                        <textarea form="animal-form-2" id="a_bio"></textarea>
 
                     </form>
-                    -->
-                    <button id="btn-animal-voltar" class="btn-small">Voltar</button>  <!-- Só aparece no ultimo painel-->
-                    <button id="btn-animal-passar" class="btn-small">Próximo</button> <!-- Vira finalizar -->
+                    
+                    <button id="btn-animal-voltar" class="btn-small" onclick="changePageAnimal('Pagina1')" style="display:none">Voltar</button>  
+                    <button id="btn-animal-passar" class="btn-small" onclick="changePageAnimal('Pagina2')">Próximo</button> 
                 </div>
             </div>
         </div>
