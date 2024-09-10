@@ -16,8 +16,8 @@
  . Match
 
 - Augusto
- . Cadastro de formulário
- . Cadastro de animais
+ . Cadastro de formulário 
+ . Cadastro de animais (feito)
  . Cadastro de animal abandonado
  . Edição de animal
  
