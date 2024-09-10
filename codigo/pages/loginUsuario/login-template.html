@@ -1,5 +1,5 @@
-<div class="login-modal login-show modal">
-  <div class="login-container pop-up-top">
+<div class="lc-modal login-show modal">
+  <div class="lc-container pop-up-top">
     <img src="../../assets/img/close-window.svg" alt="close-window" class="login-close-window">
 
     <div class="login-titulo">
@@ -8,9 +8,12 @@
     </div>
 
     <div class="login-input">
-        <input type="text" class="login-input-field" placeholder="Email" autocomplete="off" required>
+        <input type="text" class="login-input-field" placeholder="Email" autocomplete="off">
 
-        <input type="password" class="login-input-field" placeholder="Senha" autocomplete="off" minlength="8" required>
+        <div class="login-password-div">
+          <input type="password" class="login-input-field password" placeholder="Senha" autocomplete="off" minlength="8">
+          <img src="../../assets/img/hidden.png" alt="hide/show password" class="password-img">
+        </div>
     </div>
 
     <div class="login-button">
