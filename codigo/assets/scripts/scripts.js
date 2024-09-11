@@ -79,7 +79,7 @@ function loginUsuarioEventos ()
 {
 //Definir dados locais
   let main = document.querySelector('main');
-  let closeWindow = document.querySelector('.login-close-window');
+  let closeWindow = document.querySelector('.lc-close-window');
   let cadastroUser = document.querySelector('#login-btn-cadastro');
   let loginONG = document.querySelector('#login-btn-instituicao');
 //Definir eventos
@@ -171,8 +171,8 @@ async function cadastroUsuario ()
 function cadastroUsuarioEventos ()
 {
 //Definir dados locais
-  let pagina = parseInt( document.querySelector('.login-input').id );
-  let closeWindow = document.querySelector('.login-close-window');
+  let pagina = parseInt( document.querySelector('.lc-input').id );
+  let closeWindow = document.querySelector('.lc-close-window');
   let inputNome = document.querySelector('#cadastro-input-field-1');
   let loginUser = document.querySelector('#cadastro-btn-login');
 //Definir eventos
@@ -192,7 +192,7 @@ let objUsuario = { nome: "", email: "", senha: "", cpf: "", data_de_nascimento: 
 async function cadastroUsuarioPassarPagina()
 {
 //Definir dados locais
-  let pagina = parseInt( document.querySelector('.login-input').id );
+  let pagina = parseInt( document.querySelector('.lc-input').id );
   let cadastroSubmit = document.querySelector('#cadastro-submit');
 //Definir evento de passar a pagina
   cadastroSubmit.addEventListener('click', async () => {  
@@ -449,11 +449,11 @@ async function loginInstituicao ()
 async function loginInstituicaoEventos ()
 {
 //Definir dados locais
-  let closeWindow = document.querySelector('.login-close-window');
+  let closeWindow = document.querySelector('.lc-close-window');
   let cadastroONG = document.querySelector('#cadastro-instituicao');
   let loginUser = document.querySelector('#login-usuario');
 //Definir máscara do input de CNPJ
-  $('.login-input-field[placeholder="CNPJ"]').mask('00.000.000/0000-00');
+  $('.lc-input-field[placeholder="CNPJ"]').mask('00.000.000/0000-00');
 //Definir eventos
   closeWindow.addEventListener('click', () => fecharPopup())
   controlarSenha();
@@ -483,8 +483,8 @@ async function atualizarCadastroInstituicao (pagina)
 async function cadastroInstituicaoEventos ()
 {
 //Definir dados locais
-  let pagina = parseInt( document.querySelector('.login-input').id );
-  let closeWindow = document.querySelector('.login-close-window');
+  let pagina = parseInt( document.querySelector('.lc-input').id );
+  let closeWindow = document.querySelector('.lc-close-window');
   let inputNome = document.querySelector('#cadastro-input-field-1');
   let loginONG = document.querySelector('#cadastro-btn-login');
 //Definir eventos
@@ -499,7 +499,7 @@ async function cadastroInstituicaoEventos ()
 function cadastroInstituicaoPassarPagina ()
 {
 //Definir dados locais
-  let pagina = parseInt( document.querySelector('.login-input').id );
+  let pagina = parseInt( document.querySelector('.lc-input').id );
   let cadastroSubmit = document.querySelector('#cadastro-submit');
 //Definir evento de passar a pagina
   cadastroSubmit.addEventListener('click', async () => {  
