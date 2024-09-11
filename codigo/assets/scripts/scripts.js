@@ -615,37 +615,65 @@ function cadastroInstituicaoPreencher_3()
 
 /* --------------------- Definir comportamento para mostrar o pop-up de LOGIN da Instituicao (FIM) ------------------------ */
 
+/* --------------------- Definir funcoes gerais CADASTRO (INICIO) ------------------------ */
 
-/* --------------------- Definir comportamento do CADASTRO DE ANIMAL (INICIO) ------------------------ */
-
-function getAnimalGenero(){
-  let genero_form = document.getElementsByName('a_genero');
-  let genero_value;
-  
-  genero_form.forEach(element => {
-    if(element.checked == true){
-      genero_value = element.value;
+function getRadio(radioName) {
+  let x = document.getElementsByName(radioName);
+  let value;
+  x.forEach(element => {
+    if (element.checked == true) {
+      value = element.value;
     }
   });
-
-  return genero_value;
+  return value;
 }
 
-function getAnimalCastrado(){
-  let castrado_form = document.getElementsByName('a_castrado');
-  let castrado_value;
+function getRadioText(radioName, outrosOptionId, checkOption) {
+  let x = document.getElementsByName(radioName);
+  let outros = document.getElementById(outrosOptionId).value;
+  let value;
 
-  castrado_form.forEach(element => {
+  x.forEach(element => {
     if (element.checked == true) {
-      if (element.value === "true") {
-        castrado_value = true;
+      if (element.value === checkOption) {
+        value = outros;
       } else {
-        castrado_value = false;
+        value = element.value;
       }
     }
   });
-  return castrado_value;
+  return value;
 }
+
+function getBoolRadio(radioName) {
+  let x = document.getElementsByName(radioName);
+  let value;
+  x.forEach(element => {
+    if (element.checked == true) {
+      if (element.value === "true") {
+        value = true;
+      } else {
+        value = false;
+      }
+    }
+  });
+  return value;
+}
+
+function haveNullValue(data){
+  let resp = false;
+  for(var key in data){
+    if(data[key] === "" || data[key] === null){
+      console.log(key);
+      resp = true;
+    }
+  }
+  return resp;
+}
+
+/* --------------------- Definir funcoes gerais CADASTRO (FIM) ------------------------ */
+
+/* --------------------- Definir comportamento do CADASTRO DE ANIMAL (INICIO) ------------------------ */
 
 
 function getAnimalVacina() {
@@ -701,7 +729,7 @@ function changePageAnimal(page) {
       for (let i = 0; i < nome_holder.length; i++) {
         nome_holder[i].innerText = name;
       }
-      console.log(artigo_holder);
+      //console.log(artigo_holder);
 
       for (let i = 0; i < artigo_holder.length; i++) {
         if (genero_value == 'F') {
@@ -855,3 +883,71 @@ function submitFormulario() {
   console.log(data);
 }
 /* --------------------- Definir comportamento do CADASTRO DE FORMULARIO (FIM) ------------------------ */
+
+
+/* --------------------- Definir comportamento do CADASTRO DE ANIMAL ABANDONADO (INICIO) ------------------------ */
+let abEspecieForm = document.querySelectorAll('input[name=ab_especie]');
+abEspecieForm.forEach(element => {
+  element.addEventListener("click", () => {
+    let div = document.getElementById("outros_value_ab_especie");
+    if (element.checked) {
+      console.log(element.value);
+      if (element.value == "outros") {
+        div.style.display = "inline-block"
+        div.style.visibility = "visible";
+        div.style.opacity = "1";
+
+      } else {
+        div.style.visibility = "hidden";
+        div.style.opacity = "0";
+
+      }
+    }
+  });
+});
+
+let abLarForm = document.querySelectorAll('input[name=ab_lar]');
+abLarForm.forEach(element => {
+  element.addEventListener("click", () => {
+    let div = document.getElementById("ab_tempo");
+    if (element.checked) {
+      if (element.value == "true") {
+        div.style.display = "inline-block"
+        div.style.visibility = "visible";
+        div.style.opacity = "1";
+      } else {
+        div.style.visibility = "hidden";
+        div.style.opacity = "0";
+
+      }
+    }
+  });
+});
+
+function submitFormAB(){
+  let especie = getRadioText('ab_especie','outros_value_ab_especie','outros');
+  let qnt = getRadio('ab_quantidade');
+  let condicao = document.getElementById("ab_condicoes").value;
+  let lar = getRadioText('ab_lar','ab_tempo',"true");
+  let local = document.getElementById("ab_local").value; 
+
+  let data = {
+    Especie: especie,
+    Quantidade: qnt,
+    Condicao: condicao,
+    Lar: lar,
+    Local: local
+  }
+  if(haveNullValue(data)){
+    alert("erro");
+  } else {
+    saveABdata(data);
+  }
+}
+
+function saveABdata(data){
+  console.log(data);
+}
+
+
+/* --------------------- Definir comportamento do CADASTRO DE ANIMAL ABANDONADO (FIM) ------------------------ */
