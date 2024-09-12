@@ -142,6 +142,11 @@ p#footer-cp {
   font-weight: bold;
 }
 
+.footerPaginaGrande {
+  position:relative;
+}
+
+
 /* ----------------------- End Estilo footer ----------------------- */
 
 /* ----------------------- Estilo CRUD animal ----------------------- */
@@ -1163,3 +1168,245 @@ button#load_ab_photo:hover {
 .IG-ONG:hover{
     color: #ffffff;
 }
+
+/* ----------------------- Estilo Tela Inicial ----------------------- */
+
+#telaInicial-Introducao {
+  background-color: rgb(246, 246, 246);
+  border: black 1px solid;
+  max-width: 80%;
+  margin: 5% auto;
+  padding: 10px 20px;
+  border-radius: 50px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#telaInicial-Introducao button {
+  background-color: var(--cor_primaria);
+  color: white;
+  width: 90px;
+  transition: background-color 0.3s ease, color 0.3s ease; 
+  height: 30px;
+  border-radius: 50px;
+}
+
+#telaInicial-Introducao h3 {
+  display: inline;
+}
+
+#telaInicial-Introducao button:hover {
+  background-color: white;
+  color: black;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#telaInicial-Container {
+  margin: 100px auto;
+  max-width: 80%;
+}
+
+#telaInicial-Conteudo {
+  background-color: rgb(246, 246, 246);
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  border: black 1px solid;
+}
+
+.telaInicial-Card {
+  background-color: white;
+  border-radius: 1rem;
+  width: min(300px, 100%);
+  height: 400px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+}
+
+.telaInicial-Card img {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  width: 100%;
+  height: 80%;
+}
+
+.telaInicial-Card p {
+  margin: 10px 10px;
+  font-size: 0.625rem;
+  color: rgb(249, 168, 112);
+  line-height: 13px;
+  text-transform: uppercase;
+}
+
+.telaInicial-Card-Informacoes {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.telaInicial-Card-Informacoes p{
+  font-size: 1.125rem;
+  color: #696969;
+}
+
+.telaInicial-Card-Informacoes button{
+  font-weight: 400;
+  display: block;
+  text-align: center;
+  border-radius: 1rem;
+  background-color: var(--cor_primaria);
+  color: #fff;
+  font-size: 1rem;
+  padding: 3px;
+}
+
+.telaInicial-Card-InfPet {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#telaInicial-BarraFiltros {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(246, 246, 246);
+  border-radius: 50px;
+  padding: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+}
+
+.telaInicial-Filtro {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
+}
+
+.telaInicial-Filtro label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+#telaInicial-BuscarFiltros {
+  background-color: var(--cor_primaria);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  border: black 1px solid;
+}
+
+#telaInicial-BuscarFiltros:hover {
+  background-color: white;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ----------------------- END Estilo Tela Inicial ----------------------- */
+
+/* ----------------------- Estilo Pop Up Descrição Animais ----------------------- */
+
+.telaInicial-PopUp-Modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 3%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.telaInicial-PopUpDescricao {
+  background-color: rgb(246, 246, 246);
+  margin: 0 auto;
+  max-width: 75%;
+  display: flex;
+  height: 600px;
+  border-radius: 50px;
+  padding: 5% 5%;
+  gap: 30px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+}
+
+.telaInicial-PopUpDescricao img {
+  border-radius: 1rem;
+  height: 100%;
+  max-width: 55%;
+}
+
+.telaInicial-PopUpInformacoes {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.telaInicial-PopUpInformacoes h3 {
+  border-bottom: black solid 1px;
+}
+
+.telaInicial-PopUpInformacoesPrincipais {
+  display: flex;
+  flex-direction: column;
+}
+
+.telaInicial-PopUpInformacoesPrincipais-Titulo {
+  display: flex;
+  gap: 10px;
+}
+
+.telaInicial-PopUpInformacoesPrincipais-Subtitulo {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.telaInicial-PopUpInformacoesPrincipais-Subtitulo  p{
+  margin: 0;
+  padding-right: 10px;
+  border-right: rgb(107 114 128) solid 1px;
+  color: rgb(107 114 128);
+}
+
+.telaInicial-PopUpInformacoesHistoria {
+  font-size: 15px;
+}
+
+.telaInicial-PopUpInformacoesVacinas ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style-type: square;
+  gap: 15px;
+  font-size: 15px;
+}
+
+.telaInicial-PopUpInformacoesVacinas li {
+  margin: 0 10px;
+}
+
+.telaInicial-PopUpInformacoes button {
+  font-weight: 400;
+  display: block;
+  text-align: center;
+  border-radius: 1rem;
+  background-color: var(--cor_primaria);
+  color: #fff;
+  font-size: 1rem;
+  padding: 3px;
+}
+
+.telaInicial-PopUp-ModalFechar {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* ----------------------- END Estilo Pop Up Descrição Animais ----------------------- */
