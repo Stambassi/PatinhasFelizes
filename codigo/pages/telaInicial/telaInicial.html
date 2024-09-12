@@ -12,7 +12,7 @@
     <title>Patinhas Felizes</title>
 </head>
 
-<body>
+<body onload="carregarDescricaoAnimalPopupEventos()">
     <header class="container-fluid">
         <div class="home-btn">
             <img src="../../assets/img/logo.jpg" alt="Logo Patinhas Felizes">
@@ -89,7 +89,7 @@
                         <i class="fa-solid fa-2xl fa-mars"></i>
                         <h5>Chico</h5>
                         </div>
-                        <button class="telaInicial-openModalBtn">Saiba Mais</button>
+                        <button class="telaInicial-abrirModalBtn">Saiba Mais</button>
                     </div>
                 </div>
                 <div class="telaInicial-Card">
@@ -100,7 +100,7 @@
                         <i class="fa-solid fa-2xl fa-venus"></i>
                         <h5>Amora</h5>
                         </div>
-                        <button class="telaInicial-openModalBtn"> Saiba Mais</button>
+                        <button class="telaInicial-abrirModalBtn"> Saiba Mais</button>
                     </div>
                 </div>
                 <div class="telaInicial-Card">
@@ -111,7 +111,7 @@
                         <i class="fa-solid fa-2xl fa-mars"></i>
                         <h5>Juca</h5>
                         </div>
-                        <button class="telaInicial-openModalBtn">Saiba Mais</button>
+                        <button class="telaInicial-abrirModalBtn">Saiba Mais</button>
                     </div>
                 </div>
                 <div class="telaInicial-Card">
@@ -122,7 +122,7 @@
                         <i class="fa-solid fa-2xl fa-venus"></i>
                         <h5>Antonella</h5>
                         </div>
-                        <button class="telaInicial-openModalBtn">Saiba Mais</button>
+                        <button class="telaInicial-abrirModalBtn">Saiba Mais</button>
                     </div>
                 </div>
                 <div class="telaInicial-Card">
@@ -133,7 +133,7 @@
                         <i class="fa-solid fa-2xl fa-venus"></i>
                         <h5>Billy</h5>
                         </div>
-                        <button class="telaInicial-openModalBtn">Saiba Mais</button>
+                        <button class="telaInicial-abrirModalBtn">Saiba Mais</button>
                     </div>
                 </div>
                 <div class="telaInicial-Card">
@@ -144,8 +144,51 @@
                         <i class="fa-solid fa-2xl fa-mars"></i>
                         <h5>Bartolomeu</h5>
                         </div>
-                        <button class="telaInicial-openModalBtn">Saiba Mais</button>
+                        <button class="telaInicial-abrirModalBtn">Saiba Mais</button>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="telaInicial-PopUp-Modal">
+            <div class="telaInicial-PopUpDescricao">
+                <img src="https://s3.amazonaws.com/petz-cdm-stg/bf2e0cd9-0fc0-4453-98e6-405a0472421b.jpeg" alt="">
+                <div class="telaInicial-PopUpInformacoes">
+                    <div class="telaInicial-PopUpInformacoesPrincipais">
+                        <div class="telaInicial-PopUp-ModalFechar">
+                            <div class="telaInicial-PopUpInformacoesPrincipais-Titulo">
+                                <h3>Bartolomeu</h3>
+                                <i class="fa-solid fa-1xl fa-mars"></i>
+                            </div>
+                            <i class="fa-solid fa-x telaInicial-fecharModalBtn"></i>
+                        </div>
+                        <div class="telaInicial-PopUpInformacoesPrincipais-Subtitulo">
+                            <p>Gato</p>
+                            <p>Siames</p>
+                            <p>Macho</p>
+                            <p>Pequeno</p>
+                            <p>2 anos</p>
+                            <p>Castrado</p>
+                        </div>
+                    </div>
+                    <h5>A História de Bartolomeu</h5>
+                    <p class="telaInicial-PopUpInformacoesHistoria">
+                        Bartolomeu é um pequeno gatinho que, apesar de ter enfrentado o abandono,
+                        carrega em seu coração uma força e uma ternura inabaláveis. Com pelagem
+                        macia e olhos brilhantes, ele é o companheiro perfeito para quem busca
+                        um amigo leal e carinhoso. Bartolomeu só deseja um lar acolhedor onde
+                        possa oferecer e receber amor, enquanto compartilha momentos de alegria
+                        e aconchego.
+                    </p>
+                    <div class="telaInicial-PopUpInformacoesVacinas">
+                        <h5>Vacinas</h5>
+                        <ul>
+                            <li>FIV</li>
+                            <li>FeLV</li>
+                            <li>V4</li>
+                            <li>V5</li>
+                        </ul>
+                    </div>
+                    <button>Adotar!</button>
                 </div>
             </div>
         </div>
@@ -175,7 +218,8 @@
             </div>
         </div>
         <p id="footer-cp">&copy Patinhas felizes 2024 | Termos de serviço | Política de privacidade</p>
-    </footer>     
+    </footer>
+    <script src="../../assets/scripts/scripts.js"></script>     
 </body>
 
 </html>

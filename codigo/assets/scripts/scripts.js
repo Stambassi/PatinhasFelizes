@@ -72,3 +72,42 @@ loginBtnMostrar.addEventListener('click', () => {
     carregarLoginPopup(loginMain);
   }
 });
+
+
+/**
+ * carregarDescricaoAnimalPopupEventos - Funcao para definir os eventos dos botoes do pop-up de descricao animal
+ */
+
+function carregarDescricaoAnimalPopupEventos () {
+//Definir dados locais
+  let btAbrirModalEl = document.querySelectorAll(".telaInicial-abrirModalBtn");
+  let btFecharModalEl = document.querySelector(".telaInicial-fecharModalBtn");
+//Chamar funcao para abrir pop-up da descricao do animal
+  for (let i = 0; i < btAbrirModalEl.length; i++) {
+    btAbrirModalEl[i].addEventListener('click', () => abrirDescricaoAnimalPopup())
+  }
+//Chamar funcao para fechar pop-up da descricao do animal
+  btFecharModalEl.addEventListener('click', () => fecharDescricaoAnimalPopup())
+}
+
+/**
+ * abrirDescricaoAnimalPopup - Funcao para definir a visibilidade do pop-up de descricao do animal para 'block'
+ */
+
+function abrirDescricaoAnimalPopup() {
+//Definir dados locais
+  let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
+//Mudar o display para block
+  descricaoModalEl.style.display = "block";
+}
+
+/**
+ * fecharDescricaoAnimalPopup - Funcao para definir a visibilidade do pop-up de descricao do animal para 'none'
+ */
+
+function fecharDescricaoAnimalPopup() {
+  //Definir dados locais
+  let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
+//Mudar o display para none
+  descricaoModalEl.style.display = "none";
+}
