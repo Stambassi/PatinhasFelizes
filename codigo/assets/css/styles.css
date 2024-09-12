@@ -294,7 +294,161 @@ div#adocao-titulo {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: var(--cor_primaria);
+  outline: 1px solid black;
+  text-align: center;
+  padding: 2px;
+  font-weight: bold;
+  font-size:large;
+  color:white
 }
+div#adocao-form {
+  padding: 1%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div#adocao-form > form {
+  margin: 1% 1%
+}
+
+div#adocao-form > form {
+  margin: 1% 1%
+}
+div#adocao-form >* label.crud-question{
+  font-size:medium;
+  display: block;
+}
+div#adocao-form >* label{
+  font-size: smaller;
+}
+div#adocao-form >* input.text-input {
+  border-radius: 10px;
+  height: 30px;
+  height: 25px;
+  width: 75%;
+  padding: 2px;
+  padding: 5px;
+  font-size: small;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+div.radio-input{
+  display: inline-flex;
+}
+
+
+/* ----------------------- End Estilo CRUD formulário ----------------------- */
+
+/* ----------------------- Início Estilo CRUD Animal Abandonado(ab) ----------------------- */
+div#crud-form-ab {
+  position: relative;
+  width: 60%;
+  margin: 2% 20%;
+  outline: 1px solid black;
+  min-height: 60vh;
+  border-radius: 10px;
+}
+
+div#ab-titulo {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: var(--cor_primaria);
+  outline: 1px solid black;
+  text-align: center;
+  padding: 2px;
+  font-weight: bold;
+  font-size:large;
+  color:white;
+}
+
+div#ab-grid {
+  padding: 3%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 3;
+  gap:15% 5%;
+}
+
+div#ab-grid >* label.crud-question{
+  font-size:medium;
+  display: block;
+  text-align: center;
+  margin-bottom: 2px;
+}
+div#ab-grid >* label,input{
+  font-size: smaller;
+}
+div.ab-radio{
+  text-align: center;
+  margin:auto;
+}
+
+input.small-input{
+  max-width: 22%;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.1s;
+  margin: 0%;
+  border-radius: 10px;
+  height: 25px;
+  padding: 5px;
+  font-size: small;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+
+input.medium-input{
+  max-width: 30%;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.1s;
+  margin: 0%;
+  border-radius: 10px;
+  height: 25px;
+  padding: 5px;
+  font-size: small;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+div#ab-grid >* input.text-input {
+  border-radius: 10px;
+  height: 25px;
+  width: 90%;
+  margin:auto;
+  display: block;
+  padding: 5px;
+  font-size: small;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+
+
+button#load_ab_photo {
+  background-color: var(--cor_primaria);
+  padding: 1px;
+  border-radius: 10px;
+  border: none;
+  width: 35vh;
+  height: 4.5vh;
+  margin:auto;
+  display:block;
+}
+
+button#load_ab_photo:hover {
+  background-color: var(--dark_green);
+  color:white;
+  width: 36vh;
+  height: 5.5vh;
+  transition: width 0.25s;
+  transition: height 0.25s;
+  position:absolute;
+  left:61%;
+
+}
+/* ----------------------- End Estilo CRUD Animal Abandonado ----------------------- */
 
 /* ---------------------------------------- Início Estilo Login ------------------------------------- */
 
