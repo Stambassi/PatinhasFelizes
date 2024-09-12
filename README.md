@@ -1,4 +1,4 @@
-## Patinhas Felizes
+## Patinhas Felizes 🐾
  O projeto é uma aplicação feita para promover a conexão entre possíveis adotantes com ONGs e abrigos que prestam o serviço de adoção e ajudar essas entidades a cadastrar animais abandonados e fornecer essas ferramentas para as pessoas. 
 
 ## Alunos integrantes da equipe
