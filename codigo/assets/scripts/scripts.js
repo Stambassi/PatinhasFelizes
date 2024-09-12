@@ -106,13 +106,13 @@ function inverterSenha (passwordImg, controle)
   if (controle === 1)
   {
     senhaInput.type = 'password';
-    passwordImg.src = "../../assets/img/hidden.png";
+    passwordImg.src = "./assets/img/hidden.png";
     controle--;
   }
   else
   {
     senhaInput.type = 'text';
-    passwordImg.src = "../../assets/img/eye.png";
+    passwordImg.src = "./assets/img/eye.png";
     controle++;
   }
 //Retornar
@@ -165,7 +165,7 @@ async function loginUsuario ()
   let main = document.querySelector('main');
   let container;
 //Recuperar html
-  container = await carregarHtml('../../pages/loginUsuario/login-template.html');
+  container = await carregarHtml('../codigo/pages/loginUsuario/login-template.html');
 //Adicionar html
   adicionarPopup(container, main, loginUsuarioEventos);
 }
@@ -202,7 +202,7 @@ async function cadastroUsuario ()
   let pagina = 1;
   let container;
 //Recuperar html
-  container = await carregarHtml(`../../pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`../codigo/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroUsuarioEventos);
 }
@@ -272,7 +272,7 @@ async function cadastroUsuarioPagina(pagina)
 //Definir dados locais
   let main = document.querySelector('main');
 //Recuperar html
-  container = await carregarHtml(`../../pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`../codigo/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroUsuarioEventos);
 //Definir estilos e particularidades
@@ -490,7 +490,7 @@ async function loginInstituicao ()
   let main = document.querySelector('main');
   let container;
 //Recuperar container da pagina
-  container = await carregarHtml(`../../pages/loginInstituicao/login-template.html`);
+  container = await carregarHtml(`../codigo/pages/loginInstituicao/login-template.html`);
 //Atualizar o html da pagina
   adicionarPopup(container, main, loginInstituicaoEventos);
 }
@@ -531,7 +531,7 @@ async function cadastroInstituicao ()
   let pagina = 1;  
   let container;
 //Recuperar html
-  container = await carregarHtml(`../../pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`../codigo/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Atualizar o html da pagina
   adicionarPopup(container, main, cadastroInstituicaoEventos); 
 }
@@ -603,7 +603,7 @@ async function cadastroInstituicaoPagina (pagina)
   let container;
   let lc_container = document.querySelector('.lc-container');
 //Recuperar html
-  container = await carregarHtml(`../../pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`../codigo/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroInstituicaoEventos);
 //Definir estilos
