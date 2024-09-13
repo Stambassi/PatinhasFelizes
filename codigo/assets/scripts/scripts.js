@@ -569,7 +569,6 @@ function cadastroInstituicaoPassarPagina ()
 {
 //Definir dados locais
   let pagina = parseInt( document.querySelector('.lc-input').id );
-  console.log(pagina);
   let cadastroSubmit = document.querySelector('#cadastro-submit');
 //Definir evento de passar a pagina
   cadastroSubmit.addEventListener('click', async () => {  
