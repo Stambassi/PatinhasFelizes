@@ -81,7 +81,7 @@ function fecharPopup ()
 function controlarSenha()
 {
 //Definir dados locais
-  let passwordImg = document.querySelector('.password-img');
+  let passwordImg = document.querySelector('.password-controle');
   if (passwordImg != null)
   {
     let controleSenha = 0;
@@ -106,13 +106,13 @@ function inverterSenha (passwordImg, controle)
   if (controle === 1)
   {
     senhaInput.type = 'password';
-    passwordImg.src = "./assets/img/hidden.png";
+    passwordImg.src = "../../assets/img/hidden.png";
     controle--;
   }
   else
   {
     senhaInput.type = 'text';
-    passwordImg.src = "./assets/img/eye.png";
+    passwordImg.src = "../../assets/img/eye.png";
     controle++;
   }
 //Retornar
@@ -153,7 +153,9 @@ function limitarNome (inputField)
 function loginOnload ()
 {
   let loginBtnMostrar = document.querySelector("#btnMostrarLogin");
+  let btnPerfil = document.querySelector('#btnPerfil');
   loginBtnMostrar.addEventListener('click', () => loginUsuario());
+  btnPerfil.addEventListener('click', () => perfilUsuario());
 }
 
 /**
@@ -762,6 +764,357 @@ function cadastroInstituicaoPreenchido_3 ()
 }
 
 /* --------------------- Definir comportamento para mostrar o pop-up de LOGIN da Instituicao (FIM) ------------------------ */
+
+/* ---------------------- Definir comportamento para mostrar a tela de PERFIL de USUÁRIO (INÍCIO) ----------------------------- */
+
+
+async function perfilUsuario ()
+{
+//Redirecionar pagina
+  // window.location.href = 'pages/perfilUsuario/perfil-usuario.html';
+//Definir dados locais
+  let pagina = 1;
+//Definir eventos da pagina de perfil
+  perfilUsuarioEventos(pagina);
+}
+
+function perfilUsuarioEventos (pagina)
+{
+//Definir dados locais
+  let perfil = document.querySelector('#perfil-usuario-perfil');
+  let adocao = document.querySelector('#perfil-usuario-adocao');
+  let abandonado = document.querySelector('#perfil-usuario-abandonado');
+//Definir eventos
+  if (pagina === 1)
+    conteudoPerfilUsuario(1);
+  perfil.addEventListener('click', () => {
+    if (pagina !== 1)
+    { atualizarPerfilUsuario(1); pagina = 1;  }
+  });
+  adocao.addEventListener('click', () => {
+    if (pagina !== 2)
+    { atualizarPerfilUsuario(2); pagina = 2;  }
+  });
+  abandonado.addEventListener('click', () => {
+    if (pagina !== 3)
+    { atualizarPerfilUsuario(3); pagina = 3;  }
+  });
+}
+
+function atualizarPerfilUsuario (pagina)
+{
+//Testar pagina
+  switch (pagina)
+  {
+    case 1: atualizarPerfilUsuario_1 (); break;
+    case 2: atualizarPerfilUsuario_2 (); break;
+    case 3: atualizarPerfilUsuario_3 (); break;
+  }
+}
+
+function atualizarPerfilUsuario_1 ()
+{
+//Definir dados locais
+  let perfil = document.querySelector('#perfil-usuario-perfil');
+  let adocao = document.querySelector('#perfil-usuario-adocao');
+  let abandonado = document.querySelector('#perfil-usuario-abandonado'); 
+//Atualizar o cabecalho
+  perfil.classList.remove('perfil-usuario-titulo-escondido'); 
+  adocao.classList.remove('perfil-usuario-titulo-visible'); 
+  abandonado.classList.remove('perfil-usuario-titulo-visible');
+  perfil.classList.add('perfil-usuario-titulo-visible'); 
+  adocao.classList.add('perfil-usuario-titulo-escondido'); 
+  abandonado.classList.add('perfil-usuario-titulo-escondido');
+//Atualizar o conteudo
+  conteudoPerfilUsuario(1);
+}
+
+function atualizarPerfilUsuario_2 ()
+{
+//Definir dados locais
+  let perfil = document.querySelector('#perfil-usuario-perfil');
+  let adocao = document.querySelector('#perfil-usuario-adocao');
+  let abandonado = document.querySelector('#perfil-usuario-abandonado'); 
+//Atualizar o cabecalho
+  perfil.classList.remove('perfil-usuario-titulo-visible'); 
+  adocao.classList.remove('perfil-usuario-titulo-escondido'); 
+  abandonado.classList.remove('perfil-usuario-titulo-visible');
+  perfil.classList.add('perfil-usuario-titulo-escondido'); 
+  adocao.classList.add('perfil-usuario-titulo-visible'); 
+  abandonado.classList.add('perfil-usuario-titulo-escondido');
+//Atualizar o conteudo
+  conteudoPerfilUsuario(2);
+}
+
+function atualizarPerfilUsuario_3 ()
+{
+//Definir dados locais
+  let perfil = document.querySelector('#perfil-usuario-perfil');
+  let adocao = document.querySelector('#perfil-usuario-adocao');
+  let abandonado = document.querySelector('#perfil-usuario-abandonado'); 
+//Atualizar o cabecalho
+  perfil.classList.remove('perfil-usuario-titulo-visible'); 
+  adocao.classList.remove('perfil-usuario-titulo-visible'); 
+  abandonado.classList.remove('perfil-usuario-titulo-escondido');
+  perfil.classList.add('perfil-usuario-titulo-escondido'); 
+  adocao.classList.add('perfil-usuario-titulo-escondido'); 
+  abandonado.classList.add('perfil-usuario-titulo-visible');
+//Atualizar o conteudo
+  conteudoPerfilUsuario(3);
+}
+
+let testeUsuario = { nome: "Lucas Carneiro Nassau Malta", email: "lucascarneiromalta@outlook.com", senha: "123456789", cpf: "169.494.196-51", data_de_nascimento: "06/09/2005", telefone: "(31) 99756-0386", tags: { atencao: 4, passeio: 1, carinho: 2, extrovertido: 5, animacao: 3 } };
+
+async function conteudoPerfilUsuario (pagina)
+{
+//Definir dados locais
+  let container = document.querySelector('#perfil-usuario-content');
+  let contentAtual = document.querySelector('.perfil-usuario-controle');
+  let contentNovo;
+  let usuario = testeUsuario;
+//Recuperar novo conteudo
+  contentNovo = await carregarHtml(`./perfil-usuario-${pagina}.html`);
+//Remover o conteudo atual
+  contentAtual.remove();
+//Adicionar novo conteudo
+  container.insertAdjacentHTML('beforeend', contentNovo);
+//Preencher novo conteudo com os dados do usuario
+  inserirPerfilUsuario (usuario, pagina);
+//Definir eventos
+  perfilUsuarioNovosEventos(pagina);
+}
+
+function inserirPerfilUsuario (usuario, pagina)
+{
+//Testar pagina
+  switch (pagina)
+  {
+    case 1: inserirPerfilUsuario_1 (usuario); break;
+    case 2: inserirPerfilUsuario_2 (usuario); break;
+    case 3: inserirPerfilUsuario_3 (usuario); break;
+  }
+}
+
+function inserirPerfilUsuario_1 (usuario)
+{
+//Definir dados locais
+  let nome = document.querySelector('#usuario-nome');
+  let email = document.querySelector('#usuario-email');
+  let senha = document.querySelector('#usuario-senha');
+  let cpf = document.querySelector('#usuario-cpf');
+  let dt_nascimento = document.querySelector('#usuario-data-de-nascimento');
+  let telefone = document.querySelector('#usuario-telefone');
+  let tag1 = document.querySelector(`#perfil-usuario-radio-1-${usuario.tags.atencao}`);
+  let tag2 = document.querySelector(`#perfil-usuario-radio-2-${usuario.tags.passeio}`);
+  let tag3 = document.querySelector(`#perfil-usuario-radio-3-${usuario.tags.carinho}`);
+  let tag4 = document.querySelector(`#perfil-usuario-radio-4-${usuario.tags.extrovertido}`);
+  let tag5 = document.querySelector(`#perfil-usuario-radio-5-${usuario.tags.animacao}`);
+//Preencher senha
+  let senhaEscondida = "";
+  for (let i = 0; i < usuario.senha.length; i++)
+    senhaEscondida += '*';
+//Substituir valores
+  nome.innerText = usuario.nome;
+  email.innerText = usuario.email;
+  senha.innerText = senhaEscondida;
+  cpf.innerText = usuario.cpf;
+  dt_nascimento.innerText = usuario.data_de_nascimento;
+  telefone.innerText = usuario.telefone;
+  tag1.checked = true;
+  tag2.checked = true;
+  tag3.checked = true;
+  tag4.checked = true;
+  tag5.checked = true;
+}
+
+function inserirPerfilUsuario_2 (usuario)
+{
+  let imagem1 = document.querySelector('#perfil-usuario-2-row-1 .perfil-usuario-2-status img');
+  let text1 = document.querySelector('#perfil-usuario-2-row-1 .perfil-usuario-2-status p');
+  let imagem2 = document.querySelector('#perfil-usuario-2-row-2 .perfil-usuario-2-status img');
+  let text2 = document.querySelector('#perfil-usuario-2-row-2 .perfil-usuario-2-status p');
+  let imagem3 = document.querySelector('#perfil-usuario-2-row-3 .perfil-usuario-2-status img');
+  let text3 = document.querySelector('#perfil-usuario-2-row-3 .perfil-usuario-2-status p');
+  imagem1.src = "../../assets/img/waiting.png";
+  text1.innerText = "Aguardando resposta";
+  imagem2.src = "../../assets/img/failure.png";
+  text2.innerText = "Pedido negado";
+  imagem3.src = "../../assets/img/success.png";
+  text3.innerText = "Pedido aceito!";
+}
+
+function inserirPerfilUsuario_3 (usuario)
+{
+  let imagem1 = document.querySelector('#perfil-usuario-3-row-1 .perfil-usuario-3-status img');
+  let text1 = document.querySelector('#perfil-usuario-3-row-1 .perfil-usuario-3-status p');
+  let imagem2 = document.querySelector('#perfil-usuario-3-row-2 .perfil-usuario-3-status img');
+  let text2 = document.querySelector('#perfil-usuario-3-row-2 .perfil-usuario-3-status p');
+  let imagem3 = document.querySelector('#perfil-usuario-3-row-3 .perfil-usuario-3-status img');
+  let text3 = document.querySelector('#perfil-usuario-3-row-3 .perfil-usuario-3-status p');
+  imagem1.src = "../../assets/img/waiting.png";
+  text1.innerText = "Aguardando resposta";
+  imagem2.src = "../../assets/img/failure.png";
+  text2.innerText = "Pedido negado";
+  imagem3.src = "../../assets/img/success.png";
+  text3.innerText = "Pedido aceito!";
+}
+
+function perfilUsuarioNovosEventos (pagina)
+{
+  switch (pagina)
+  {
+    case 1: perfilUsuarioNovosEventos_1 (); break;
+    case 2: perfilUsuarioNovosEventos_2 (); break;
+    case 3: perfilUsuarioNovosEventos_3 (); break;
+  }
+}
+
+function perfilUsuarioNovosEventos_1 ()
+{
+//Definir dados locais
+  let editar = document.querySelector('#perfil-editar');
+  let usuario  = testeUsuario;
+//Definir eventos
+  editar.addEventListener('click', () => editarUsuario(usuario));
+}
+
+function editarUsuario (usuario)
+{
+//Atualizar campos da pagina de perfil
+  substituirPerfilUsuario(usuario);
+//Definir dados locais
+  let botaoConfirmar = document.querySelector('#perfil-confirmar');
+  let botaoDescartar = document.querySelector('#perfil-descartar');
+//Definir eventos de edição
+  botaoConfirmar.addEventListener('click', () => {
+    let usuario = preencherPerfilUsuario();
+    testeUsuario = usuario;
+    perfilUsuarioResetarBotoes();
+    conteudoPerfilUsuario(1);
+  });
+  botaoDescartar.addEventListener('click', () => {
+    perfilUsuarioResetarBotoes();    
+    conteudoPerfilUsuario(1);
+  });
+}
+
+function substituirPerfilUsuario (usuario)
+{
+//Definir dados locais
+  let nome = document.querySelector('#usuario-nome');
+  let email = document.querySelector('#usuario-email');
+  let senha = document.querySelector('#usuario-senha');
+  let cpf = document.querySelector('#usuario-cpf');
+  let dt_nascimento = document.querySelector('#usuario-data-de-nascimento');
+  let telefone = document.querySelector('#usuario-telefone');
+  let divBotoes = document.querySelector('#perfil-usuario-botoes');
+  let botaoEditar = document.querySelector('#perfil-editar');
+//Substituir span por input
+  nome.innerHTML = `<input type="text" class="perfil-usuario-input" value="${usuario.nome}">`;
+  email.innerHTML = `<input type="text" class="perfil-usuario-input" value="${usuario.email}">`;
+  senha.innerHTML = `<input type="password" class="perfil-usuario-input password" value="${usuario.senha}">
+  <img src="../../assets/img/hidden.png" class="password-controle">`;
+  cpf.innerHTML = `<input type="text" class="perfil-usuario-input" value="${usuario.cpf}">`;
+  dt_nascimento.innerHTML = `<input type="text" class="perfil-usuario-input" value="${usuario.data_de_nascimento}">`;
+  telefone.innerHTML = `<input type="text" class="perfil-usuario-input" value="${usuario.telefone}">`;
+//Definir máscaras
+  $('#usuario-cpf .perfil-usuario-input').mask('000.000.000-00');
+  $('#usuario-data-de-nascimento .perfil-usuario-input').mask('00/00/0000');
+  $('#usuario-telefone .perfil-usuario-input').mask('(00) 00000-0000');
+//Definir o comportamento da senha
+  controlarSenha();
+//Permitir escolher as tags
+  for (let i = 1; i <= 5; i++)
+  {
+    for (let j = 1; j <= 5; j++)
+    {
+      document.querySelector(`#perfil-usuario-radio-${i}-${j}`).disabled = false;
+    }
+  }
+//Trocar botões
+  botaoEditar.remove();
+  let botaoDescartar = `<img src="../../assets/img/discard.png" alt="botao-descartar" class="perfil-usuario-editar-btn" id="perfil-descartar">`;
+  let botaoConfirmar = `<img src="../../assets/img/confirm.png" alt="botao-confirmar" class="perfil-usuario-editar-btn" id="perfil-confirmar">`;
+  divBotoes.insertAdjacentHTML('beforeend', botaoDescartar);
+  divBotoes.insertAdjacentHTML('beforeend', botaoConfirmar);
+}
+
+function preencherPerfilUsuario ()
+{
+//Definir dados locais
+  let usuario = { nome: "", email: "", senha: "", cpf: "", data_de_nascimento: "", telefone: "", tags: { atencao: 0, passeio: 0, carinho: 0, extrovertido: 0, animacao: 0 } };
+//Encontrar novos dados de usuario
+  usuario = preencherPerfilUsuarioDados(usuario);
+//Encontrar novas tags de usuario
+  usuario = preencherPerfilUsuarioTags(usuario);
+//Retornar
+  return usuario;
+}
+
+function preencherPerfilUsuarioDados (usuario)
+{
+//Definir dados locais
+  let nome = document.querySelector('#usuario-nome .perfil-usuario-input');
+  let email = document.querySelector('#usuario-email .perfil-usuario-input');
+  let senha = document.querySelector('#usuario-senha .perfil-usuario-input');
+  let cpf = document.querySelector('#usuario-cpf .perfil-usuario-input');
+  let dt_nascimento = document.querySelector('#usuario-data-de-nascimento .perfil-usuario-input');
+  let telefone = document.querySelector('#usuario-telefone .perfil-usuario-input');
+//Preencher usuario
+  usuario.nome = nome.value;
+  usuario.email = email.value;
+  usuario.senha = senha.value;
+  usuario.cpf = cpf.value;
+  usuario.data_de_nascimento = dt_nascimento.value;
+  usuario.telefone = telefone.value;
+//Retornar
+  return usuario;
+}
+
+function preencherPerfilUsuarioTags (usuario)
+{
+//Definir dados locais
+  let tags = [];
+//Encontrar nova tag
+  for (let i = 1; i <= 5; i++)
+  {
+  //Definir dados locais
+    let j = 1; 
+    let controle = true;
+  //Encontrar valor
+    while (j <= 5 && controle)
+    { 
+      controle = ! document.querySelector(`#perfil-usuario-radio-${i}-${j}`).checked;  
+      j++;  
+    }
+  //Guardar valor
+    tags[i - 1] = j - 1;
+  }
+//Preencher usuario
+  usuario.tags.atencao = tags[0];
+  usuario.tags.passeio = tags[1];
+  usuario.tags.carinho = tags[2];
+  usuario.tags.extrovertido = tags[3];
+  usuario.tags.animacao = tags[4];
+//Retornar
+  return usuario;
+}
+
+function perfilUsuarioResetarBotoes ()
+{
+//Definir dados locais
+  let divBotoes = document.querySelector('#perfil-usuario-botoes');
+  let botaoConfirmar = document.querySelector('#perfil-confirmar');
+  let botaoDescartar = document.querySelector('#perfil-descartar');
+//Remover botoes
+  botaoConfirmar.remove();
+  botaoDescartar.remove();
+//Adicionar novo botão
+  let botaoEditar = `<img src="../../assets/img/editar.png" alt="botao-editar" class="perfil-usuario-editar-btn" id="perfil-editar">`;
+  divBotoes.insertAdjacentHTML('beforeend', botaoEditar);
+}
+
+/* ---------------------- Definir comportamento para mostrar a tela de PERFIL de USUÁRIO (FIM) ----------------------------- */
 
 
 /* ------------------------------- Definir comportamento do CADASTRO DE ANIMAL (INICIO) ----------------------------------- */
