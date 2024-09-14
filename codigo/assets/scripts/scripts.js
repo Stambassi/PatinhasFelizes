@@ -767,7 +767,9 @@ function cadastroInstituicaoPreenchido_3 ()
 
 /* ---------------------- Definir comportamento para mostrar a tela de PERFIL de USUÁRIO (INÍCIO) ----------------------------- */
 
-
+/**
+ * perfilUsuario - Função para redirecionar o usuário à sua tela de perfil
+ */
 async function perfilUsuario ()
 {
 //Redirecionar pagina
@@ -778,6 +780,10 @@ async function perfilUsuario ()
   perfilUsuarioEventos(pagina);
 }
 
+/**
+ * perfilUsuarioEventos - Função para definir os eventos da pagina de perfil do usuário
+ * @param pagina - Página atual da tela de perfil do usuario
+ */
 function perfilUsuarioEventos (pagina)
 {
 //Definir dados locais
@@ -801,6 +807,10 @@ function perfilUsuarioEventos (pagina)
   });
 }
 
+/**
+ * atualizarPerfilUsuario - Funcao para controlar a atualizacao do cabecalho da tela de perfil do usuario
+ * @param pagina - Pagina atual da tela de perfil do usuario
+ */
 function atualizarPerfilUsuario (pagina)
 {
 //Testar pagina
@@ -812,6 +822,9 @@ function atualizarPerfilUsuario (pagina)
   }
 }
 
+/**
+ * atualizarPerfilUsuario_1 - Funcao para exibir o cabecalho da primeira pagina da tela de perfil do usuario
+ */
 function atualizarPerfilUsuario_1 ()
 {
 //Definir dados locais
@@ -829,6 +842,9 @@ function atualizarPerfilUsuario_1 ()
   conteudoPerfilUsuario(1);
 }
 
+/**
+ * atualizarPerfilUsuario_2 - Funcao para exibir o cabecalho da segunda pagina da tela de perfil do usuario
+ */
 function atualizarPerfilUsuario_2 ()
 {
 //Definir dados locais
@@ -846,6 +862,9 @@ function atualizarPerfilUsuario_2 ()
   conteudoPerfilUsuario(2);
 }
 
+/**
+ * atualizarPerfilUsuario_3 - Funcao para exibir o cabecalho da terceira pagina da tela de perfil do usuario
+ */
 function atualizarPerfilUsuario_3 ()
 {
 //Definir dados locais
@@ -865,6 +884,10 @@ function atualizarPerfilUsuario_3 ()
 
 let testeUsuario = { nome: "Lucas Carneiro Nassau Malta", email: "lucascarneiromalta@outlook.com", senha: "123456789", cpf: "169.494.196-51", data_de_nascimento: "06/09/2005", telefone: "(31) 99756-0386", tags: { atencao: 4, passeio: 1, carinho: 2, extrovertido: 5, animacao: 3 } };
 
+/**
+ * conteudoPerfilUsuario - Funcao para inserir o conteudo da pagina de perfil do usuario
+ * @param pagina - Pagina atual da tela de perfil do usuario
+ */
 async function conteudoPerfilUsuario (pagina)
 {
 //Definir dados locais
@@ -884,6 +907,10 @@ async function conteudoPerfilUsuario (pagina)
   perfilUsuarioNovosEventos(pagina);
 }
 
+/**
+ * inserirPerfilUsuario - Funcao para inserir os dados do usuario na tela de perfil do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario
+ */
 function inserirPerfilUsuario (usuario, pagina)
 {
 //Testar pagina
@@ -895,6 +922,10 @@ function inserirPerfilUsuario (usuario, pagina)
   }
 }
 
+/**
+ * inserirPerfilUsuario_1 - Funcao para inserir os dados da primeira pagina da tela de perfil do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario
+ */
 function inserirPerfilUsuario_1 (usuario)
 {
 //Definir dados locais
@@ -927,6 +958,10 @@ function inserirPerfilUsuario_1 (usuario)
   tag5.checked = true;
 }
 
+/**
+ * inserirPerfilUsuario_2 - Funcao para inserir os dados da segunda pagina da tela de perfil do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario
+ */
 function inserirPerfilUsuario_2 (usuario)
 {
   let imagem1 = document.querySelector('#perfil-usuario-2-row-1 .perfil-usuario-2-status img');
@@ -943,6 +978,10 @@ function inserirPerfilUsuario_2 (usuario)
   text3.innerText = "Pedido aceito!";
 }
 
+/**
+ * inserirPerfilUsuario_3 - Funcao para inserir os dados da terceira pagina da tela de perfil do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario
+ */
 function inserirPerfilUsuario_3 (usuario)
 {
   let imagem1 = document.querySelector('#perfil-usuario-3-row-1 .perfil-usuario-3-status img');
@@ -959,6 +998,10 @@ function inserirPerfilUsuario_3 (usuario)
   text3.innerText = "Pedido aceito!";
 }
 
+/**
+ * perfilUsuarioNovosEventos - Funcao para controlar a definicao de eventos de cada pagina da tela de perfil do usuario
+ * @param pagina - Pagina atual da tela de perfil do usuario
+ */
 function perfilUsuarioNovosEventos (pagina)
 {
   switch (pagina)
@@ -969,6 +1012,9 @@ function perfilUsuarioNovosEventos (pagina)
   }
 }
 
+/**
+ * perfilUsuarioNovosEventos_1 - Funcao para definir os eventos da primeira pagina da tela de perfil do usuario
+ */
 function perfilUsuarioNovosEventos_1 ()
 {
 //Definir dados locais
@@ -978,6 +1024,10 @@ function perfilUsuarioNovosEventos_1 ()
   editar.addEventListener('click', () => editarUsuario(usuario));
 }
 
+/**
+ * editarUsuario - Funcao para controlar a acao de editar o usuario na tela de perfil
+ * @param usuario - Objeto contendo as informacoes do usuario a ser editado
+ */
 function editarUsuario (usuario)
 {
 //Atualizar campos da pagina de perfil
@@ -998,6 +1048,9 @@ function editarUsuario (usuario)
   });
 }
 
+/**
+ * substituirPerfilUsuario - Funcao para permitir a edicao/entrada de dados na tela de perfil do usuario
+ */
 function substituirPerfilUsuario (usuario)
 {
 //Definir dados locais
@@ -1039,6 +1092,10 @@ function substituirPerfilUsuario (usuario)
   divBotoes.insertAdjacentHTML('beforeend', botaoConfirmar);
 }
 
+/**
+ * preencherPerfilUsuario - Funcao para controlar o preenchimento do novo objeto Usuario apos a edicao
+ * @return usuario - Objeto contendo as informacoes resultantes do usuario editado
+ */
 function preencherPerfilUsuario ()
 {
 //Definir dados locais
@@ -1051,6 +1108,11 @@ function preencherPerfilUsuario ()
   return usuario;
 }
 
+/**
+ * preencherPerfilUsuarioDados - Funcao para preencher os dados pessoais do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario a ser editado
+ * @return usuario - Objeto resultante contendo as informações do usuario editado
+ */
 function preencherPerfilUsuarioDados (usuario)
 {
 //Definir dados locais
@@ -1071,6 +1133,11 @@ function preencherPerfilUsuarioDados (usuario)
   return usuario;
 }
 
+/**
+ * preencherPerfilUsuarioTags - Funcao para preencher os dados de preferencia/personalidade do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario a ser editado
+ * @return usuario - Objeto resultante contendo as informacoes do usuario editado
+ */
 function preencherPerfilUsuarioTags (usuario)
 {
 //Definir dados locais
@@ -1100,6 +1167,9 @@ function preencherPerfilUsuarioTags (usuario)
   return usuario;
 }
 
+/**
+ * perfilUsuarioResetarBotoes - Funcao para retirar os botoes de edicao (confirmar/descartar) e recolocar o botao de edicao
+ */
 function perfilUsuarioResetarBotoes ()
 {
 //Definir dados locais
