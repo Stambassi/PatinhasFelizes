@@ -3,6 +3,139 @@ function postUsuario (objUsuario)
   console.log(objUsuario);
 }
 
+async function getAnimal ()
+{
+//Definir dados locais
+  let animal = {
+    id_ong: 0,
+    id_animal: 0, 
+    nome: "Thor",
+    especie: "Cachorro",
+    raca: "Vira-lata",
+    genero: 'M',
+    castrado: true,
+    foto_animal: ["", "", ""],
+    dt_nascimento: "10/02/2022",
+    historia: "História blablablabla",
+    vacina: {
+      v8: true,
+      antirrábica: false, 
+      leishmaniose: false 
+    }
+  };
+//Retornar
+  return animal;
+}
+
+async function getOng ()
+{
+//Definir dados locais
+  let ong = {
+    id: 1,
+    nome: "Nome da ONG",
+    email: "",
+    senha: "",
+    telefones: ["telefone 1", "telefone 2"],
+    foto_perfil: "",
+    cnpj: "",
+    descricao: "",
+    endereco: [ {
+        rua: "",
+        numero: 1,
+        bairro: "",
+        cidade: "",
+        estado: ""
+    }, {} ],  
+  };
+//Retornar
+  return ong;
+}
+
+async function getUsuarioPerfil ()
+{
+//Definir dados locais
+  let usuario = { 
+    id: 1,
+    nome: "Lucas Carneiro Nassau Malta", 
+    email: "lucascarneiromalta@outlook.com", 
+    senha: "123456789", 
+    cpf: "169.494.196-51", 
+    data_de_nascimento: "06/09/2005", 
+    telefone: "(31) 99756-0386", 
+    tags: { atencao: 4, passeio: 1, carinho: 2, extrovertido: 5, animacao: 3 } ,
+    form_adocao: [
+      {
+        moradia: "Apartamento",
+        experiencia: true,
+        viagem: "Familiares",
+        disponibilidade: "2 horas ou mais",
+        visitas_ong: true,
+        consentimento: true,
+        adotante: 1,
+        comentarios: "Gostei muito desse animal",
+        data: "16/08/2024",
+        id_form: 1,
+        id_animal: 2,
+        id_ong: 3,
+        status: 0      
+      },
+      {
+        moradia: "Apartamento",
+        experiencia: true,
+        viagem: "Familiares",
+        disponibilidade: "2 horas ou mais",
+        visitas_ong: true,
+        consentimento: true,
+        adotante: 1,
+        comentarios: "Fofíssimo",
+        data: "10/08/2024",
+        id_form: 2,
+        id_animal: 4,
+        id_ong: 3,
+        status: 1
+      }
+    ],
+    form_abandonado: [
+      {
+        imagem: "",
+        especie: "Cachorro",
+        quantidade: 3,
+        endereco: {
+          rua: "Rua Stella Hanriot",
+          numero: 515,
+          bairro: "Buritis",
+          cidade: "Belo Horizonte",
+          estado: "MG"
+        },
+        condicao: "Eles estavam em uma caixa de papelão",
+        lar_temporario: 0,
+        foto_abandonado: "",
+        id_form: 1,
+        status: 0
+      },
+      {
+        imagem: "",
+        especie: "Gato",
+        quantidade: 1,
+        endereco: {
+          rua: "Rua Stella Hanriot",
+          numero: 515,
+          bairro: "Buritis",
+          cidade: "Belo Horizonte",
+          estado: "MG"
+        },
+        condicao: "Ele estava preso em uma árvore",
+        lar_temporario: 0,
+        foto_abandonado: "",
+        id_form: 2,
+        status: 1
+      }
+    ]
+  };
+//Retornar
+  return usuario;
+}
+
 
 /* ------------------------------ Funções de auxílio para LOGIN/CADASTRO (INICIO) ------------------------------------ */
 
@@ -882,8 +1015,6 @@ function atualizarPerfilUsuario_3 ()
   conteudoPerfilUsuario(3);
 }
 
-let testeUsuario = { nome: "Lucas Carneiro Nassau Malta", email: "lucascarneiromalta@outlook.com", senha: "123456789", cpf: "169.494.196-51", data_de_nascimento: "06/09/2005", telefone: "(31) 99756-0386", tags: { atencao: 4, passeio: 1, carinho: 2, extrovertido: 5, animacao: 3 } };
-
 /**
  * conteudoPerfilUsuario - Funcao para inserir o conteudo da pagina de perfil do usuario
  * @param pagina - Pagina atual da tela de perfil do usuario
@@ -894,7 +1025,7 @@ async function conteudoPerfilUsuario (pagina)
   let container = document.querySelector('#perfil-usuario-content');
   let contentAtual = document.querySelector('.perfil-usuario-controle');
   let contentNovo;
-  let usuario = testeUsuario;
+  let usuario = await getUsuarioPerfil();
 //Recuperar novo conteudo
   contentNovo = await carregarHtml(`./perfil-usuario-${pagina}.html`);
 //Remover o conteudo atual
@@ -904,7 +1035,7 @@ async function conteudoPerfilUsuario (pagina)
 //Preencher novo conteudo com os dados do usuario
   inserirPerfilUsuario (usuario, pagina);
 //Definir eventos
-  perfilUsuarioNovosEventos(pagina);
+  await perfilUsuarioNovosEventos(pagina);
 }
 
 /**
@@ -962,64 +1093,123 @@ function inserirPerfilUsuario_1 (usuario)
  * inserirPerfilUsuario_2 - Funcao para inserir os dados da segunda pagina da tela de perfil do usuario
  * @param usuario - Objeto contendo as informacoes do usuario
  */
-function inserirPerfilUsuario_2 (usuario)
+async function inserirPerfilUsuario_2 (usuario)
 {
-  let imagem1 = document.querySelector('#perfil-usuario-2-row-1 .perfil-usuario-2-status img');
-  let text1 = document.querySelector('#perfil-usuario-2-row-1 .perfil-usuario-2-status p');
-  let imagem2 = document.querySelector('#perfil-usuario-2-row-2 .perfil-usuario-2-status img');
-  let text2 = document.querySelector('#perfil-usuario-2-row-2 .perfil-usuario-2-status p');
-  let imagem3 = document.querySelector('#perfil-usuario-2-row-3 .perfil-usuario-2-status img');
-  let text3 = document.querySelector('#perfil-usuario-2-row-3 .perfil-usuario-2-status p');
-  imagem1.src = "../../assets/img/waiting.png";
-  text1.innerText = "Aguardando resposta";
-  imagem2.src = "../../assets/img/failure.png";
-  text2.innerText = "Pedido negado";
-  imagem3.src = "../../assets/img/success.png";
-  text3.innerText = "Pedido aceito!";
+//Definir dados locais
+  let container = document.querySelector('#perfil-usuario-content-2');
+  let adocao = usuario.form_adocao;
+  let str = ""
+//Definir preenchimento de dados
+  for (let i = 0; i < adocao.length; i++)
+  {
+  //Definir dados locais
+    let form = adocao[i];
+    let animal = await getAnimal(); // COMPLETAR <------------
+    let ong = await getOng( form.id_ong ); // COMPLETAR <------------
+    let status = form.status;
+    let imgStatus = "";
+    let msg = "";
+  //Testar status
+    if (status === 0)
+    { imgStatus = "../../assets/img/failure.png"; msg = "Pedido negado";  }
+    else if (status === 1)
+    { imgStatus = "../../assets/img/success.png"; msg = "Pedido aceito";  }
+    else if (status == 2)
+    { imgStatus = "../../assets/img/waiting.png"; msg = "Aguardando resposta";  }
+  //Definir nova linha
+    str += `
+      <div class="perfil-usuario-2-row" id="perfil-usuario-2-row-${form.id_form}">
+        <div class="perfil-usuario-2-imagem">
+          <img src="${animal.imagem[0]}" alt="imagem-animal">
+        </div>
+        <div class="perfil-usuario-2-informacoes">
+          <p>Animal desejado: <span id="perfil-usuario-2-informacoes-animal">${animal.nome}</span></p>
+          <p>Pedido realizado para: <span id="perfil-usuario-2-informacoes-instituicao">${ong.nome}</span></p>
+          <p>Data do pedido: <span id="perfil-usuario-2-informacoes-data">${form.data}</span></p>
+        </div>
+        <div class="perfil-usuario-2-status">
+          <img src="${imgStatus}" alt="imagem-status">
+          <p>${msg}</p>
+        </div>
+      </div>
+    `;
+  }
+//Atribuir novo conteudo
+  container.innerHTML = str;
 }
 
 /**
  * inserirPerfilUsuario_3 - Funcao para inserir os dados da terceira pagina da tela de perfil do usuario
  * @param usuario - Objeto contendo as informacoes do usuario
  */
-function inserirPerfilUsuario_3 (usuario)
+async function inserirPerfilUsuario_3 (usuario)
 {
-  let imagem1 = document.querySelector('#perfil-usuario-3-row-1 .perfil-usuario-3-status img');
-  let text1 = document.querySelector('#perfil-usuario-3-row-1 .perfil-usuario-3-status p');
-  let imagem2 = document.querySelector('#perfil-usuario-3-row-2 .perfil-usuario-3-status img');
-  let text2 = document.querySelector('#perfil-usuario-3-row-2 .perfil-usuario-3-status p');
-  let imagem3 = document.querySelector('#perfil-usuario-3-row-3 .perfil-usuario-3-status img');
-  let text3 = document.querySelector('#perfil-usuario-3-row-3 .perfil-usuario-3-status p');
-  imagem1.src = "../../assets/img/waiting.png";
-  text1.innerText = "Aguardando resposta";
-  imagem2.src = "../../assets/img/failure.png";
-  text2.innerText = "Pedido negado";
-  imagem3.src = "../../assets/img/success.png";
-  text3.innerText = "Pedido aceito!";
+
+//Definir dados locais
+let container = document.querySelector('#perfil-usuario-content-3');
+let abandonado = usuario.form_abandonado;
+let str = ""
+//Definir preenchimento de dados
+for (let i = 0; i < abandonado.length; i++)
+{
+//Definir dados locais
+  let form = abandonado[i];
+  let animal = await getAnimal(); // COMPLETAR <------------
+  let ong = await getOng( form.id_ong ); // COMPLETAR <------------
+  let status = form.status;
+  let imgStatus = "";
+  let msg = "";
+//Testar status
+  if (status === 0)
+  { imgStatus = "../../assets/img/failure.png"; msg = "Pedido negado";  }
+  else if (status === 1)
+  { imgStatus = "../../assets/img/success.png"; msg = "Pedido aceito";  }
+  else if (status == 2)
+  { imgStatus = "../../assets/img/waiting.png"; msg = "Aguardando resposta";  }
+//Definir nova linha
+  str += `
+    <div class="perfil-usuario-3-row"  id="perfil-usuario-3-row-1">
+      <div class="perfil-usuario-3-imagem">
+        <img src="${form.imagem[0]}" alt="imagem-animal">
+      </div>
+      <div class="perfil-usuario-3-informacoes">
+        <p>Animais encontrados: <span id="perfil-usuario-2-informacoes-animal">${form.quantidade}</span></p>
+        <p>Local encontrado: <span id="perfil-usuario-2-informacoes-local">${form.endereco.rua}</span></p>
+        <p>Data do pedido: <span id="perfil-usuario-2-informacoes-contato">${form.data}</span></p>
+      </div>
+      <div class="perfil-usuario-3-status">
+        <img src="${imgStatus}" alt="imagem-status">
+        <p>${msg}</p>
+      </div>
+    </div>
+  `;
+}
+//Atribuir novo conteudo
+container.innerHTML = str;
 }
 
 /**
  * perfilUsuarioNovosEventos - Funcao para controlar a definicao de eventos de cada pagina da tela de perfil do usuario
  * @param pagina - Pagina atual da tela de perfil do usuario
  */
-function perfilUsuarioNovosEventos (pagina)
+async function perfilUsuarioNovosEventos (pagina)
 {
   switch (pagina)
   {
-    case 1: perfilUsuarioNovosEventos_1 (); break;
-    case 2: perfilUsuarioNovosEventos_2 (); break;
-    case 3: perfilUsuarioNovosEventos_3 (); break;
+    case 1: await perfilUsuarioNovosEventos_1 (); break;
+    // case 2: await perfilUsuarioNovosEventos_2 (); break;
+    // case 3: await perfilUsuarioNovosEventos_3 (); break;
   }
 }
 
 /**
  * perfilUsuarioNovosEventos_1 - Funcao para definir os eventos da primeira pagina da tela de perfil do usuario
  */
-function perfilUsuarioNovosEventos_1 ()
+async function perfilUsuarioNovosEventos_1 ()
 {
 //Definir dados locais
   let editar = document.querySelector('#perfil-editar');
-  let usuario  = testeUsuario;
+  let usuario  = await getUsuarioPerfil();
 //Definir eventos
   editar.addEventListener('click', () => editarUsuario(usuario));
 }
@@ -1038,7 +1228,7 @@ function editarUsuario (usuario)
 //Definir eventos de edição
   botaoConfirmar.addEventListener('click', () => {
     let usuario = preencherPerfilUsuario();
-    testeUsuario = usuario;
+    postUsuario(usuario);
     perfilUsuarioResetarBotoes();
     conteudoPerfilUsuario(1);
   });
