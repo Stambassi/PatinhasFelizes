@@ -1685,7 +1685,7 @@ async function readJSONServer(url) {
 async function readJSONServerId(url, id) {
 //Definir dados locais
   let obj = {};
-  url += `/${id}`
+  url += `${id}`
   try {
 //Acesso aos dados da url
     const response = await fetch(url);
@@ -1696,7 +1696,7 @@ async function readJSONServerId(url, id) {
     console.error("Error", error);
   }
 //Retorno obj
-  return obj;
+  return obj[0];
 }
 
  /**
@@ -1774,32 +1774,48 @@ function carregarDescricaoAnimalPopupEventos () {
 
 async function abrirDescricaoAnimalPopup(event) {
 //Definir dados locais
-  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais";
+  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais?id_animal=";
+  let apiUrlJsonVacinas = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/vacinas";
   let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
 
   let idEvent = event.target.id;
-  let animal = {};
-  let strHTML = "";
-  let srcSexoAnimal = ""; 
-  let strSexoAnimal = ""; 
-  let strCastradoAnimal = "";
+  let animal = {}, vacinas = {};
+  let strHTML = "", srcGeneroAnimal = "", strGeneroAnimal = "", strCastradoAnimal = "", strPorteAnimal = "", strVacinasAnimal = "";
 
 //Acesso ao dado do id no JSON Server
   animal = await readJSONServerId(apiUrlJsonAnimais, idEvent);
+  vacinas = await readJSONServer(apiUrlJsonVacinas);
 
-//Controle icone do sexo do animal
-  if(animal.sexo == 'F') {
-    srcSexoAnimal = "venus"; 
-    strSexoAnimal = "Fêmea";
+//Controle caracteristicas animal
+  if(animal.genero == 'F') {
+    srcGeneroAnimal = "venus"; 
+    strGeneroAnimal = "Fêmea";
   } else {
-    srcSexoAnimal = "mars"; 
-    strSexoAnimal = "Macho";
+    srcGeneroAnimal = "mars"; 
+    strGeneroAnimal = "Macho";
   }
 
   if(animal.castrado) {
     strCastradoAnimal = "Castrado"; 
   } else {
     strCastradoAnimal = "Não Castrado"; 
+  }
+
+  if(animal.porte == 'P') {
+    strPorteAnimal = "Pequeno";
+  } else {
+    if(animal.porte == 'M') {
+      strPorteAnimal = "Médio";
+    } else {
+      strPorteAnimal = "Grande";
+    }
+  }
+
+  strVacinasAnimal = "";
+  for(let y = 0; y < vacinas.length; y++) {
+    if(animal.id_animal == vacinas[y].id_animal) {
+      strVacinasAnimal += `<li>${vacinas[y].nome}</li>`;
+    }
   }
 
 //Mudanca strHTML 
@@ -1810,15 +1826,15 @@ async function abrirDescricaoAnimalPopup(event) {
                         <div class="telaInicial-PopUp-ModalFechar">
                             <div class="telaInicial-PopUpInformacoesPrincipais-Titulo">
                                 <h3>${animal.nome}</h3>
-                                <i class="fa-solid fa-1xl fa-${srcSexoAnimal}"></i>
+                                <i class="fa-solid fa-1xl fa-${srcGeneroAnimal}"></i>
                             </div>
                             <i class="fa-solid fa-x telaInicial-fecharModalBtn"></i>
                         </div>
                         <div class="telaInicial-PopUpInformacoesPrincipais-Subtitulo">
                             <p>${animal.especie}</p>
                             <p>${animal.raca}</p>
-                            <p>${strSexoAnimal}</p>
-                            <p>${animal.porte}</p>
+                            <p>${strGeneroAnimal}</p>
+                            <p>${strPorteAnimal}</p>
                             <p>${animal.idade}</p>
                             <p>${strCastradoAnimal}</p>
                         </div>
@@ -1830,10 +1846,7 @@ async function abrirDescricaoAnimalPopup(event) {
                     <div class="telaInicial-PopUpInformacoesVacinas">
                         <h5>Vacinas</h5>
                         <ul>
-                            <li>FIV</li>
-                            <li>FeLV</li>
-                            <li>V4</li>
-                            <li>V5</li>
+                            ${strVacinasAnimal};
                         </ul>
                     </div>
                     <button>Adotar!</button>
