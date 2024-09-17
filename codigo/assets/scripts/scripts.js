@@ -1707,33 +1707,42 @@ async function carregarAnimais() {
 
 //Definir dados locais
   let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais";
+  let apiUrlJsonOngs = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/ongs";
   let divConteudoAnimais = document.querySelector("#telaInicial-Conteudo");
-  let animais = {};
-  let strHTML = "";
-  let strSexoAnimal = "" 
+  let animais = {}, ongs = {};
+  let strHTML = "", strGeneroAnimal = "", strNomeOng = "", strCidadeOng = ""; 
 
 //Acesso aos dados do JSON Server
   animais = await readJSONServer(apiUrlJsonAnimais);
+  ongs = await readJSONServer(apiUrlJsonOngs);
 
 //Gravacao dos cards na String strHTML
   for(let x = 0; x < animais.length; x++) {
 
 //Controle icone do sexo do animal
-    if(animais[x].sexo == 'F') {
-      strSexoAnimal = "venus"; 
+    if(animais[x].genero == 'F') {
+      strGeneroAnimal = "venus"; 
     } else {
-      strSexoAnimal = "mars"; 
+      strGeneroAnimal = "mars"; 
     }
 
+    for(let y = 0; y < ongs.length; y++) {
+      if(animais[x].id_ong == ongs[y].id_ong) {
+          strNomeOng = ongs[y].nome;
+          strCidadeOng = ongs[y].cidade;
+      }
+    }
+ 
     strHTML += `<div class="telaInicial-Card">
                     <img src="${animais[x].imagem}" alt="">
-                    <p>ONG ASS SOCIAL PROTEÇÃO ANIMAIS ANJOS PATAS</p>
+                    <p>${strNomeOng}</p>
+                    <p>${strCidadeOng}</p>
                     <div class="telaInicial-Card-Informacoes">
                         <div class="telaInicial-Card-InfPet">
-                        <i class="fa-solid fa-2xl fa-${strSexoAnimal}"></i>
+                        <i class="fa-solid fa-2xl fa-${strGeneroAnimal}"></i>
                         <h5>${animais[x].nome}</h5>
                         </div>
-                        <button id="${animais[x].id}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
+                        <button id="${animais[x].id_animal}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
                     </div>
                 </div>`
   }
