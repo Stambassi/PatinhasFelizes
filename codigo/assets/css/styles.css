@@ -8,334 +8,464 @@
 
 /* Declaração de variáveis */
 
-:root{
-    --cor_primaria:#53815A; /* versao mais escura -> #21472f */ 
-    --cor_secundaria: #FFF;
-    --grey: #B0B0B0;
+:root {
+  --cor_primaria: #53815A;
+  /* versao mais escura -> #21472f */
+  --cor_secundaria: #FFF;
+  --grey: #B0B0B0;
+  --dark_green: #21472f;
 }
 
-body{
-    position:relative;
-    min-height: 200vh;
-    background-color: url(https://st3.depositphotos.com/4398873/12574/v/450/depositphotos_125748470-stock-illustration-cute-pet-paws.jpg);
+body {
+  position: relative;
+  min-height: 200vh;
 }
+
 /* Estilo da navbar */
 
-header{
-    margin: 0px;
-    width: 100%;
-    overflow: hidden;
-    height: 5rem;
-    background-color: var(--cor_primaria);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
+header {
+  margin: 0px;
+  width: 100%;
+  overflow: hidden;
+  height: 5rem;
+  background-color: var(--cor_primaria);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
 }
 
 .pages {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .pages a {
-    font-size: 20px;
-    color: white;
-    text-decoration: none;
-    text-align: 10px;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  /* text-align: 10px; */
 }
 
 .pages span {
-    margin: 0 15px;
+  margin: 0 15px;
 }
 
 .home-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .home-btn img {
-    height: 50px;
-    width: 50px;
+  height: 50px;
+  width: 50px;
 }
 
-a.active-page{
-    color:var(--cor_secundaria);
+a.active-page {
+  color: var(--cor_secundaria);
 }
 
-a.inactive-page{
-    color:var(--grey);
+a.inactive-page {
+  color: var(--grey);
 }
 
-a.inactive-page:hover{
-    color:var(--cor_secundaria);
+a.inactive-page:hover {
+  color: var(--cor_secundaria);
 }
 
-span.divider{
-    color:var(--grey);
+span.divider {
+  color: var(--grey);
 }
 
 /* ----------------------- Estilo footer ----------------------- */
 
-footer{
-    margin: 0px;
-    width: 100%;
-    overflow: hidden;
-    height: 40vh;
-    background-color: var(--cor_primaria);
-    position:absolute;    
-    bottom: 0;
+footer {
+  margin: 0px;
+  width: 100%;
+  overflow: hidden;
+  height: 40vh;
+  background-color: var(--cor_primaria);
+  position: absolute;
+  bottom: 0;
 }
 
-div#footer-itens{
-    margin-top:10px;
-    width: 100%;
-    height: 30vh;
-    background-color: var(--cor_primaria);
-    display: flex;
-}
-div.contatos{
-    width: 30%;
-    margin-right: 6%;
+div#footer-itens {
+  margin-top: 10px;
+  width: 100%;
+  height: 30vh;
+  background-color: var(--cor_primaria);
+  display: flex;
 }
 
-div.contatos > p {
-    margin-bottom: 1%;
-}
-div.sobre-nos{
-    width: 50%;
-    margin-right: 6%;
-}
-div.acesso-rapido{
-    width: 30%;
-    margin-right: 6%;
+div.contatos {
+  width: 30%;
+  margin-right: 6%;
 }
 
-div.acesso-rapido > a{
-    margin-bottom:1%;
-    display: block;
-    text-decoration: none;
-    color:black;
-    font-size: medium;
+div.contatos>p {
+  margin-bottom: 1%;
 }
-div#footer-itens > * h5{
-    font-size:x-large;
-    font-weight: bold;
+
+div.sobre-nos {
+  width: 50%;
+  margin-right: 6%;
 }
-div.acesso-rapido > a:hover{
-    text-decoration: none;
-    color:var(--grey);
+
+div.acesso-rapido {
+  width: 30%;
+  margin-right: 6%;
 }
-p#footer-cp{
-    width: 100%;
-    margin-bottom: 0%;
-    display:block;
-    text-align: center;
-    font-weight: bold;
+
+div.acesso-rapido>a {
+  margin-bottom: 1%;
+  display: block;
+  text-decoration: none;
+  color: black;
+  font-size: medium;
+}
+
+div#footer-itens>* h5 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+div.acesso-rapido>a:hover {
+  text-decoration: none;
+  color: var(--grey);
+}
+
+p#footer-cp {
+  width: 100%;
+  margin-bottom: 0%;
+  display: block;
+  text-align: center;
+  font-weight: bold;
 }
 
 .footerPaginaGrande {
   position:relative;
 }
 
+
 /* ----------------------- End Estilo footer ----------------------- */
 
+/* ----------------------- Estilo CRUD animal ----------------------- */
 
-/* ----------------------- Estilo Login ----------------------- */
+div#crud-form {
+  position: relative;
+  width: 50%;
+  margin: 2% 25%;
+  outline: 1px solid black;
+  min-height: 60vh;
+  border-radius: 10px;
+}
 
-#login-body {
-    background-color: var(--cor_primaria);
-  }
-  
-  #btnMostrar
-  {
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-  }
-  
-  .pop-up-top
-  {
-    position: relative;
-    top: -1000px;
-    animation: drop-top 0.5s ease forwards;
-  }
-  
-  .pop-up-bottom
-  {
-    position: relative;
-    top: 0;
-    animation: drop-bottom 0.5s ease forwards;
-  }
-  
-  @keyframes drop-top
-  {
-    0% {}
-    70% { transform: translateY(1050px) }
-    100% { transform: translateY(1000px) }
-  }
-  
-  @keyframes drop-bottom
-  {
-    0% {}
-    70% { transform: translateY(-50px) }
-    100% { transform: translateY(1000px) }
-  }
-  
-  .login-show
-  {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .login-hide
-  {
-    visibility: hidden;
-    opacity: 0;
-  }
-  
-  .login-modal
-  {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    z-index: 1000; 
-    background: rgba(0, 0, 0, 0.3);
-  }
-  
-  .login-container
-  {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 400px;
-    height: 500px;
-    padding: 15px 50px 0 50px;
-    background-color: white;
-    border-style: solid;
-    border-width: 1px;;
-    border-color: var(--grey);
-    border-radius: 30px;
-    box-shadow: 0px 0px 1px 1px var(--grey);
-    z-index: 1001;
-  }
-  
-  .login-close-window
-  {
-    position: absolute;
-    top: 2%;
-    left: 91%;
-    width: 35px;
-    height: 35px;
-  }
-  
-  .login-close-window:hover
-  {
-    cursor: pointer;
-  }
-  
-  .login-titulo
-  {
-    text-align: center;
-    margin: 0 0 25px 0;
-  }
-  
-  .login-titulo h1
-  {
-    font-weight: 500;
-    font-size: 28px;
-    margin-bottom: 15px;
-  }
-  
-  .login-titulo h2
-  {
-    font-weight: 400;
-    font-size: 20px;
-    margin-bottom: 5px;
-  }
-  
-  .login-input-field
-  {
-    width: 97%;
-    height: 60px;
-    font-size: 17px;
-    padding-left: 15px;
-    margin-bottom: 15px;
-    border-style: solid;
-    border-width: 1px;;
-    border-color: var(--grey);
-    border-radius: 10px;
-    outline: none;
-    transition: .3s;
-  }
-  
-  ::placeholder
-  {
-    font-weight: 500;
-    color: black;
-  }
-  
-  .login-input-field:hover
-  {
-    width: 99%;
-    box-shadow: 0px 1px 2px 2px var(--grey);
-  }
-  
-  .login-button
-  {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .login-button-submit
-  {
-    margin-top: 5px;
-    width: 30%;
-    height: 50px;
-    background-color: var(--cor_primaria);
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-size: 17px;
-  }
-  
-  .login-button-submit:hover
-  {
-    width: 31%;
-    background-color: #507f58;
-    font-size: 18px;
-    box-shadow: 0px 1px 2px 2px var(--grey);
-    cursor: pointer;
-  }
-  
-  .login-cadastro
-  {
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 10px;
-  }
-  
-  .login-cadastro a
-  {
-    text-decoration: none;
-  }
+div#animal-progresso {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+}
 
-#login-body {
+div#animal-progresso>div {
+  width: 50%;
+  margin: 0%;
+  outline: 1px solid black;
+  padding: 2px;
+  text-align: center;
+}
+
+div#Cadastro-geral {
+  border-top-left-radius: 10px;
   background-color: var(--cor_primaria);
 }
 
-#btnMostrar
+div#Cadastro-especifico {
+  border-top-right-radius: 10px;
+}
+
+div#animal-info {
+  margin: 1%;
+  padding: 1%;
+}
+
+div#animal-foto {
+  min-height: 50vh;
+  width: 28%;
+  float: left;
+  margin-bottom: 1px;
+  margin-top: 2%;
+  margin-left: 1%;
+}
+
+img#img-place {
+  max-width: 100%;
+  border-radius: 10px;
+  display: inline-block;
+  float: left;
+}
+
+div#animal-form {
+  float: right;
+  margin-left: 0.5%;
+  height: 100%;
+  width: 65%;
+}
+
+div#animal-form>* label.crud-question {
+  display: block;
+  margin: 2% 0%;
+}
+
+div#animal-form>* label.crud-question.page2 {
+  display: block;
+  margin: 0%;
+}
+
+div#animal-form >* input.text-input {
+  border-radius: 10px;
+  height: 30px;
+  width: 75%;
+  padding: 2px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+
+div#animal-form>* textarea {
+  border-radius: 10px;
+  min-height: 15vh;
+  height: 40%;
+  width: 75%;
+  padding: 2px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  resize: none;
+
+}
+
+span.small_text_span {
+  margin-bottom: 4px;
+  font-size: x-small;
+  display: block;
+}
+
+button.btn-small {
+  background-color: var(--cor_primaria);
+  padding: 1px;
+  border-radius: 10px;
+  border: none;
+  transition: height 0.1s;
+  transition: width 0.1s;
+  width: 15vh;
+  height: 4.5vh;
+}
+
+button.btn-small:hover {
+  background-color: var(--dark_green);
+  color:white;
+  width: 17vh;
+  height: 5vh;
+}
+
+button#btn-animal-voltar {
+  position: absolute;
+  left: 2%;
+  bottom: 3%;
+}
+
+button#btn-animal-passar {
+  position: absolute;
+  right: 2%;
+  bottom: 3%;
+}
+
+button#load_animal_photo {
+  background-color: var(--cor_primaria);
+  padding: 1px;
+  border-radius: 10px;
+  border: none;
+  width: 30vh;
+
+}
+
+/* -------------------------------------- End Estilo CRUD animal ------------------------------------ */
+
+
+/* ----------------------------------- Início Estilo CRUD formulário -------------------------------------- */
+
+div#adocao-titulo {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: var(--cor_primaria);
+  outline: 1px solid black;
+  text-align: center;
+  padding: 2px;
+  font-weight: bold;
+  font-size:large;
+  color:white
+}
+div#adocao-form {
+  padding: 1%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div#adocao-form > form {
+  margin: 1% 1%
+}
+
+div#adocao-form > form {
+  margin: 1% 1%
+}
+div#adocao-form >* label.crud-question{
+  font-size:medium;
+  display: block;
+}
+div#adocao-form >* label{
+  font-size: smaller;
+}
+div#adocao-form >* input.text-input {
+  border-radius: 10px;
+  height: 30px;
+  height: 25px;
+  width: 75%;
+  padding: 2px;
+  padding: 5px;
+  font-size: small;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+div.radio-input{
+  display: inline-flex;
+}
+
+
+/* ----------------------- End Estilo CRUD formulário ----------------------- */
+
+/* ----------------------- Início Estilo CRUD Animal Abandonado(ab) ----------------------- */
+div#crud-form-ab {
+  position: relative;
+  width: 60%;
+  margin: 2% 20%;
+  outline: 1px solid black;
+  min-height: 60vh;
+  border-radius: 10px;
+}
+
+div#ab-titulo {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: var(--cor_primaria);
+  outline: 1px solid black;
+  text-align: center;
+  padding: 2px;
+  font-weight: bold;
+  font-size:large;
+  color:white;
+}
+
+div#ab-grid {
+  padding: 3%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 3;
+  gap:15% 5%;
+}
+
+div#ab-grid >* label.crud-question{
+  font-size:medium;
+  display: block;
+  text-align: center;
+  margin-bottom: 2px;
+}
+div#ab-grid >* label,input{
+  font-size: smaller;
+}
+div.ab-radio{
+  text-align: center;
+  margin:auto;
+}
+
+input.small-input{
+  max-width: 22%;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.1s;
+  margin: 0%;
+  border-radius: 10px;
+  height: 25px;
+  padding: 5px;
+  font-size: small;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+
+input.medium-input{
+  max-width: 30%;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.1s;
+  margin: 0%;
+  border-radius: 10px;
+  height: 25px;
+  padding: 5px;
+  font-size: small;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+div#ab-grid >* input.text-input {
+  border-radius: 10px;
+  height: 25px;
+  width: 90%;
+  margin:auto;
+  display: block;
+  padding: 5px;
+  font-size: small;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+
+
+button#load_ab_photo {
+  background-color: var(--cor_primaria);
+  padding: 1px;
+  border-radius: 10px;
+  border: none;
+  width: 35vh;
+  height: 4.5vh;
+  margin:auto;
+  display:block;
+}
+
+button#load_ab_photo:hover {
+  background-color: var(--dark_green);
+  color:white;
+  width: 36vh;
+  height: 5.5vh;
+  transition: width 0.25s;
+  transition: height 0.25s;
+  position:absolute;
+  left:61%;
+
+}
+/* ----------------------- End Estilo CRUD Animal Abandonado ----------------------- */
+
+/* ---------------------------------------- Início Estilo Login ------------------------------------- */
+
+#login-body
 {
+  background-color: var(--cor_primaria);
+  position: relative;
+}
+
+.btnMostrar
+{
+  display: block;
   border: none;
   padding: 10px;
   border-radius: 10px;
@@ -381,7 +511,7 @@ p#footer-cp{
   opacity: 0;
 }
 
-.login-modal
+.lc-modal
 {
   position: fixed; 
   top: 0;
@@ -391,29 +521,28 @@ p#footer-cp{
   align-items: center;
   width: 100%;
   height: 100%;
-  z-index: 1000; 
-  background: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;  
 }
 
-.login-container
+.lc-container
 {
-  position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
   width: 400px;
-  height: 500px;
-  padding: 15px 50px 0 50px;
+  height: fit-content;
+  padding: 40px 50px 20px;
   background-color: white;
   border-style: solid;
   border-width: 1px;;
   border-color: var(--grey);
   border-radius: 30px;
   box-shadow: 0px 0px 1px 1px var(--grey);
-  z-index: 1001;
+  z-index: 2;
 }
 
-.login-close-window
+.lc-close-window
 {
   position: absolute;
   top: 2%;
@@ -422,32 +551,40 @@ p#footer-cp{
   height: 35px;
 }
 
-.login-close-window:hover
+.lc-close-window:hover
 {
   cursor: pointer;
 }
 
-.login-titulo
+.lc-titulo
 {
   text-align: center;
   margin: 0 0 25px 0;
 }
 
-.login-titulo h1
+.lc-titulo h1
 {
   font-weight: 500;
   font-size: 28px;
   margin-bottom: 15px;
 }
 
-.login-titulo h2
+.lc-titulo h2
 {
   font-weight: 400;
   font-size: 20px;
   margin-bottom: 5px;
 }
 
-.login-input-field
+.lc-input
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.lc-input-field
 {
   width: 97%;
   height: 60px;
@@ -462,37 +599,56 @@ p#footer-cp{
   transition: .3s;
 }
 
-::placeholder
-{
-  font-weight: 500;
-  color: black;
-}
-
-.login-input-field:hover
+.lc-input-field:hover
 {
   width: 99%;
   box-shadow: 0px 1px 2px 2px var(--grey);
 }
 
-.login-button
+::placeholder
+{
+  color: black;
+}
+
+.lc-password-div
+{
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.password-img
+{
+  position: absolute;
+  width: 7%;
+  top: 24%;
+  left: 90%;
+}
+
+.password-img:hover
+{
+  cursor: pointer;
+}
+
+.lc-button
 {
   display: flex;
   justify-content: center;
+  margin: 15px 0;
 }
 
-.login-button-submit
+.lc-button-submit
 {
-  margin-top: 5px;
   width: 30%;
   height: 50px;
   background-color: var(--cor_primaria);
+  color: white;
+  font-size: 17px;;
   border: none;
   border-radius: 10px;
-  color: white;
-  font-size: 17px;
 }
 
-.login-button-submit:hover
+.lc-button-submit:hover
 {
   width: 31%;
   background-color: #507f58;
@@ -501,7 +657,7 @@ p#footer-cp{
   cursor: pointer;
 }
 
-.login-cadastro
+.lc-mensagem-embaixo
 {
   margin: 20px;
   display: flex;
@@ -511,13 +667,939 @@ p#footer-cp{
   row-gap: 10px;
 }
 
-.login-cadastro a
+.lc-strong
 {
-  text-decoration: none;
+  color: rgb(0, 51, 255);
+}
+
+.lc-strong:hover
+{
+  cursor: pointer;
 }
 
 /* ----------------------- END Estilo Login ----------------------- */
 
+/* -------------------- Inicio Estilo Cadastro -------------------- */
+
+.cadastro-div-item
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; 
+  width: 80%; 
+}
+
+.cadastro-radio-items
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.cadastro-radio-items input
+{
+  padding: 50px;
+}
+
+.cadastro-titulo
+{
+  font-weight: 400;
+  font-size: 18px;
+  margin: 5px 0 10px 0;
+}
+
+/* Inicio Estilo Cadastro Instituicao */
+
+.cadastro-instituicao-grid
+{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+}
+
+.cadastro-instituicao-grid-1
+{
+  grid-area: 1 / 1 / 2 / 4;
+}
+
+.cadastro-instituicao-grid-2
+{
+  grid-area: 2 / 1 / 2 / 2;
+}
+
+.cadastro-instituicao-grid-3
+{
+  grid-area: 2 / 2 / 3 / 4;
+}
+
+.lc-input-field-grid
+{
+  width: 97%; 
+  height: 60px;
+  font-size: 17px;
+  padding-left: 15px;
+  margin-bottom: 15px;
+  border-style: solid;
+  border-width: 1px;;
+  border-color: var(--grey);
+  border-radius: 10px;
+  outline: none;
+  transition: .3s;
+}
+
+#cadastro-instituicao-select
+{
+  width: 87%; 
+  height: 60px;
+  font-size: 17px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.522);
+  text-align: center;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;;
+  border-color: var(--grey);
+  border-radius: 10px;
+  outline: none;
+  transition: .3s;
+}
+
+.lc-input-field-grid:hover
+{
+  width: 99%;
+  box-shadow: 0px 1px 2px 2px var(--grey);
+}
+
+.cadastro-instituicao-grid #cadastro-input-field-2, .cadastro-instituicao-grid #cadastro-input-field-5
+{
+  width: 75%;
+}
+
+.cadastro-instituicao-grid #cadastro-input-field-3, .cadastro-instituicao-grid #cadastro-input-field-6
+{
+  width: 95%;
+}
+
+#cadastro-instituicao-descricao
+{
+  width: 97%;
+  padding: 15px 0 0 15px;
+  margin-bottom: 15px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--grey);
+  border-radius: 10px;
+  outline: none;
+  transition: .3s;
+}
+
+/* --------------------------- Perfil do usuário (INÍCIO) -------------------------------- */
+
+/* Estilos gerais da pagina de perfil do usuário */
+
+.perfil-usuario-hidden
+{
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+}
+
+.perfil-usuario-visible
+{
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+}
+
+#perfil-usuario-modal
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 80vh;
+  padding: 60px 60px;
+}
+
+#perfil-usuario-container
+{
+  width: 70%;
+  min-height: 70vh;
+  /* padding: 50px 30px; */
+  /* border: solid;
+  border-width: 2px; */
+  border-radius: 20px;
+  border-color: var(--grey);
+  box-shadow: 0 1px 15px 1px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-rows: 1fr 7fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#perfil-usuario-perfil
+{  
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border-top-left-radius: 17px;
+}
+
+#perfil-usuario-adocao
+{
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#perfil-usuario-abandonado
+{
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  border-top-right-radius: 17px;
+}
+
+#perfil-usuario-content
+{
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.perfil-usuario-titulo
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.perfil-usuario-titulo:hover
+{
+  cursor: pointer;
+}
+
+.perfil-usuario-titulo h4
+{
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.perfil-usuario-titulo-ativo
+{
+  background-color: white; 
+}
+
+.perfil-usuario-titulo-ativo:hover
+{
+  background-color: rgb(237, 237, 237); 
+}
+
+.perfil-usuario-titulo-escondido
+{
+  background-color: #d5d5d5; 
+  box-shadow: 0 1px 15px 1px rgba(0, 0, 0, 0.1);
+}
+
+.perfil-usuario-titulo-escondido:hover
+{
+  background-color: #c5c5c5;
+}
+
+#perfil-usuario-content
+{
+  display: flex;
+  justify-content: center;
+}
+
+/* Estilos da pagina "Perfil" */
+
+#perfil-usuario-content-1
+{
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  position: relative;
+}
+
+#perfil-usuario-botoes
+{
+  position: absolute;
+  top: 3%;
+  left: 90%;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.perfil-usuario-editar-btn
+{
+  width: 30px;
+  margin: 7px;
+}
+
+.perfil-usuario-editar-btn:hover
+{
+  cursor: pointer;
+}
+
+.perfil-usuario-input
+{
+  margin-left: 10px;
+  padding: 10px;
+  border: solid;
+  border-color: #d5d5d5;
+  border-width: 2px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+#usuario-nome input
+{
+  width: 79%;
+}
+
+#usuario-email input
+{
+  width: 80%;
+}
+
+#usuario-senha input
+{
+  width: 79%;
+}
+
+#usuario-senha 
+{
+  position: relative;
+}
+
+#usuario-senha img
+{
+  width: 19px;
+  position: absolute;
+  top: 10%;
+  left: 86%;
+}
+
+#usuario-senha img:hover
+{
+  cursor: pointer;
+}
+
+#usuario-cpf input
+{
+  width: 85%;
+}
+
+#usuario-data-de-nascimento input
+{
+  width: 45%;
+}
+
+#usuario-telefone input
+{
+  width: 73%;
+}
+
+.perfil-usuario-1-titulo
+{
+  font-size: 20px;
+  font-weight: 750px;
+}
+
+#perfil-usuario-nome
+{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 30px;
+}
+
+.perfil-usuario-atributos
+{
+  margin: 40px 0;
+  width: 100%;
+}
+
+#perfil-usuario-tags
+{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 30px;
+}
+
+.perfil-usuario-tags-row
+{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
+.perfil-usuario-tags-div-radio
+{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.perfil-usuario-tags-radio-button
+{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.perfil-usuario-tags-radio-button input
+{
+  cursor: pointer;
+}
+
+
+.perfil-usuario-tags-titulo
+{
+  font-weight: 400;
+  font-size: 15px;
+  margin: 0;
+}
+
+#perfil-usuario-imagem
+{
+  grid-column-start: 3;
+  grid-column-end: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilos da pagina "Requisições de adoção */
+
+#perfil-usuario-content-2
+{
+  display: flex;
+  flex-direction: column;
+  width: 100%;;
+  padding: 30px 50px;
+}
+
+.perfil-usuario-2-row
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  margin: 15px 0;
+  background-color: #ededed;
+  border-radius: 20px;
+}
+
+.perfil-usuario-2-row:hover
+{
+  cursor: pointer;
+  width: 101%;
+  box-shadow: 0px 1px 2px 2px var(--grey);
+}
+
+.perfil-usuario-2-imagem
+{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.perfil-usuario-2-informacoes
+{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px 0;
+}
+
+.perfil-usuario-2-informacoes p
+{
+  margin: 5px;
+  padding: 0;
+}
+
+.perfil-usuario-2-status
+{
+  grid-column-start: 3;
+  grid-column-end: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.perfil-usuario-2-status img
+{
+  width: 80px;
+  margin: 10px 0;
+}
+
+/* Estilos da página "Animais abandonados */
+
+#perfil-usuario-content-3
+{
+  display: flex;
+  flex-direction: column;
+  width: 100%;;
+  padding: 30px 50px;
+}
+
+.perfil-usuario-3-row
+{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
+  margin: 15px 0;
+  background-color: #ededed;
+  border-radius: 20px;
+}
+
+.perfil-usuario-3-row:hover
+{
+  cursor: pointer;
+  width: 101%;
+  box-shadow: 0px 1px 2px 2px var(--grey);
+}
+
+.perfil-usuario-3-imagem
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.perfil-usuario-3-informacoes
+{
+  display: flex;
+  flex-direction: column;
+}
+
+.perfil-usuario-3-informacoes
+{
+  padding: 20px 0;
+}
+
+.perfil-usuario-3-informacoes p
+{
+  margin: 5px;
+  padding: 0;
+}
+
+.perfil-usuario-3-status
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.perfil-usuario-3-status img
+{
+  width: 80px;
+  margin: 10px 0;
+}
+
+/* --------------------------- Perfil do usuário (FIM) -------------------------------- */
+
+/* ------------------- Atividades ONG ------------------- */
+
+.search-bar {
+    display: flex;
+    justify-content:space-evenly;
+    margin-bottom: 30px;
+}
+
+.search-bar input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #fffcf7;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+}
+
+.search-bar button {
+    background-color: #9ec6a3;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    margin-left: -210px;
+    cursor: pointer;
+}
+
+.animal-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+    position: absolute;
+    left: calc(25vh - 36px);
+    border-radius: 10px;
+    background-color:rgb(255, 255, 255);
+    border: 1px rgb(255, 255, 255) solid;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+.animal-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.animal-card {
+    background-color: #5b975e;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.img-add-animal {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    block-size: 100px;
+    border-radius: 30px;
+    justify-content:center;
+    background-color:#b9d7b2;
+    cursor: pointer;
+    margin: 5%;
+    border: none;
+}
+
+.img-add-animal:hover{
+    background-color: #84b27a;
+}
+
+.animal-card img {
+    width: 100%;
+    height: auto;
+    background-color: #FAF5EA;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.animal-card:hover {
+    background-color:#FFE382;
+    transition: background 0.5s;
+}
+
+.animal-card .animal-name {
+    font-size: 16px;
+    color: white;
+}
+
+.container {
+    width: 80%;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.edit-icon {
+    margin-top: 15px;
+    display: inline-flex;
+    width: 35px;
+    padding: 10px;
+    margin-bottom: 0%;
+    border-radius: 300px;
+    background-color: #7dca79;
+}
+
+.edit-icon:hover {
+    background-color:#307b3f;
+    transition: background 0.15s;
+}
+
+.delete-icon {
+    display: inline-flex;
+    width: 35px;
+    padding: 10px;
+    border-radius: 300px;
+    background-color: #ff4120;
+}
+
+.delete-icon:hover {
+    background-color:#be1d01;
+    transition: background 0.15s;
+}
+
+/* ------------------- Solicitações ONG ------------------- */
+
+.title{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.container-Solic{
+    padding: 10px;
+    text-align: center;
+    width: 90%;
+    position: absolute;
+    margin-top:40px;
+    left: calc(15vh - 36px);
+    background-color:rgb(255, 255, 255);
+    border: 1px rgb(255, 255, 255) solid;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-conteudo{
+    padding: 60px;
+    margin:20px;
+    background-color: #f6f6f6;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+}
+
+.Image-Solic img{
+    height: 130px;
+    width: 130px;
+    background-color: #ffebc5;
+    border-radius: 300px;
+    display:flex;
+}
+
+.text-solic {
+    text-align:left;
+    position: flex;
+}
+
+.formulario-text{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.teste-form{
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 10px;
+}
+
+.teste-form:hover{
+    color: #6a50f8;
+}
+
+.text-solic{
+    width: 100%;
+}
+
+.Aceitar-button{
+    background-color: #53815A;
+    padding: 10px;
+    margin-bottom: 30px;
+    width: 300px;
+    border-radius: 20px;
+    border: none;
+}
+
+.Aceitar-button:hover{
+    background-color: #39633f;
+    transition: background 0.5s;
+}
+
+.Recusar-button{
+    background-color: #FF2121;
+    width: 300px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+}
+
+.Recusar-button:hover{
+    background-color: #cf0909;
+    transition: background 0.5s;
+}
+
+.title-2{
+    justify-content: flex-end;
+    text-align: center;
+}
+
+.big-container{
+    background-color: #6a50f8;
+}
+
+.second-container-solicitacao{
+    padding: 10px;
+    text-align: center;
+    width: 90%;
+    position: absolute;
+    margin-top:40px;
+    left: calc(15vh - 36px);
+    background-color:rgb(255, 255, 255);
+    border: 1px rgb(255, 255, 255) solid;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: block;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* ------------------- Perfil ONG ------------------- */
+
+.container-Perfil-ONG {
+    margin: 50px;
+    width: 90%;
+    height: 100%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content-Perfil-ONG {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.profile-card {
+    background-color: #81c784;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+    height: 550px;
+    position: relative;
+}
+
+.profile-card img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+.edit-icon-ong {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: #f9e396;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.edit-icon-ong:hover {
+    background-color: #ffd53f;
+    transition: background 0.15s;
+}
+
+.Logo-ONG{
+    width: 180px;
+    height: 180px;
+    background-color: #fff8dd;
+    border-radius: 50%;
+    margin-left: 33%;
+    display: flex;
+    padding: 0%;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-ong{
+    text-align: left;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+.profile-card h2, .profile-card p {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.description {
+    width: 55%;
+}
+.description h2, .description p {
+    margin: 0 0 10px 0;
+}
+
+.google-map {
+    padding-bottom: 50%;
+    position: relative; 
+}
+  
+.google-map iframe {
+    height: 290px;
+    width: 60%;
+    left: 0;
+    top: 10%;
+    position: absolute;
+}
+
+.facebook-ONG{
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 10px 20px;
+}
+
+.facebook-ONG:hover{
+    color: #ffffff;
+}
+
+.IG-ONG{
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 10px 20px;
+}
+
+.IG-ONG:hover{
+    color: #ffffff;
+}
 
 /* ----------------------- Estilo Tela Inicial ----------------------- */
 
