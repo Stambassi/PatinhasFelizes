@@ -1700,6 +1700,41 @@ async function readJSONServerId(url, id) {
 }
 
  /**
+ * carregarFiltroCidades - Funcao para carregar os filtros de cidade do JSON Server e exibi-los na tela inicial.
+ */ 
+
+async function carregarFiltroCidades() {
+  let filtroCidadeEl = document.querySelector("#telaInicial-FiltroCidade");
+  let apiUrlJsonOngs = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/ongs";
+  let ongs = {}, cidades = [];
+  let strHTML = "", stringValueCidade = "";
+  let controle = true;
+  let nCidades = 0;
+
+  ongs = await readJSONServer(apiUrlJsonOngs);
+
+  strHTML = `<option value="U">Todas</option>`;
+  for(let x = 0; x < ongs.length; x++) {
+
+    controle = true;
+    for(let y = 0; y < cidades.length; y++) {
+      if(ongs[x].cidade == cidades[y]) {
+        controle = false;
+      }
+    }
+
+    if(controle) {
+      cidades[nCidades] = ongs[x].cidade;
+      strHTML += `<option value="${cidades[nCidades]}">${cidades[nCidades]}</option>`
+      nCidades++;
+    }
+
+  }
+
+  filtroCidadeEl.innerHTML = strHTML;
+}
+
+ /**
  * carregarAnimais - Funcao para carregar os animais do JSON Server e exibi-los na tela inicial.
  */ 
 
@@ -1711,6 +1746,13 @@ async function carregarAnimais() {
   let divConteudoAnimais = document.querySelector("#telaInicial-Conteudo");
   let animais = {}, ongs = {};
   let strHTML = "", strGeneroAnimal = "", strNomeOng = "", strCidadeOng = ""; 
+
+  let filtroCidadeEl = document.querySelector("#telaInicial-FiltroCidade");
+  let filtroGeneroEl = document.querySelector("#telaInicial-FiltroGenero");
+  let filtroPorteEl = document.querySelector("#telaInicial-FiltroPorte");
+  let filtroEspecieEl = document.querySelector("#telaInicial-FiltroEspecie");
+
+  let booleanFiltroGenero, booleanFiltroPorte, booleanFiltroEspecie, booleanFiltroCidade; 
 
 //Acesso aos dados do JSON Server
   animais = await readJSONServer(apiUrlJsonAnimais);
@@ -1732,19 +1774,29 @@ async function carregarAnimais() {
           strCidadeOng = ongs[y].cidade;
       }
     }
+
+//Controle filtro de exibicao animais
+    booleanFiltroCidade = filtroCidadeEl.value === 'U' || filtroCidadeEl.value === strCidadeOng;
+    booleanFiltroGenero = filtroGeneroEl.value === 'U' || filtroGeneroEl.value === animais[x].genero;
+    booleanFiltroPorte = filtroPorteEl.value === 'U' || filtroPorteEl.value === animais[x].porte;
+    booleanFiltroEspecie = filtroEspecieEl.value === 'U' || filtroEspecieEl.value === animais[x].especie;
+
+    if(booleanFiltroEspecie && booleanFiltroGenero && booleanFiltroPorte && booleanFiltroCidade) {
  
-    strHTML += `<div class="telaInicial-Card">
-                    <img src="${animais[x].imagem}" alt="">
-                    <p>${strNomeOng}</p>
-                    <p>${strCidadeOng}</p>
-                    <div class="telaInicial-Card-Informacoes">
-                        <div class="telaInicial-Card-InfPet">
-                        <i class="fa-solid fa-2xl fa-${strGeneroAnimal}"></i>
-                        <h5>${animais[x].nome}</h5>
-                        </div>
-                        <button id="${animais[x].id_animal}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
-                    </div>
-                </div>`
+      strHTML += `<div class="telaInicial-Card">
+                      <img src="${animais[x].imagem}" alt="">
+                      <p>${strNomeOng}</p>
+                      <p>${strCidadeOng}</p>
+                      <div class="telaInicial-Card-Informacoes">
+                          <div class="telaInicial-Card-InfPet">
+                          <i class="fa-solid fa-2xl fa-${strGeneroAnimal}"></i>
+                          <h5>${animais[x].nome}</h5>
+                          </div>
+                          <button id="${animais[x].id_animal}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
+                      </div>
+                  </div>`
+    }
+
   }
 
 //Insercao da String strHTML na tela inicial
