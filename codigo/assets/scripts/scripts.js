@@ -1699,6 +1699,23 @@ async function readJSONServerId(url, id) {
   return obj[0];
 }
 
+async function readJSONServerId2(url, id) {
+  //Definir dados locais
+    let obj = {};
+    url += `${id}`
+    try {
+  //Acesso aos dados da url
+      const response = await fetch(url);
+  //Gravacao na variavel obj
+      obj = await response.json();
+      console.log ("Sucesso", obj);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  //Retorno obj
+    return obj;
+  }
+
  /**
  * carregarFiltroCidades - Funcao para carregar os filtros de cidade do JSON Server e exibi-los na tela inicial.
  */ 
@@ -1916,15 +1933,109 @@ async function abrirDescricaoAnimalPopup(event) {
   btFecharModalEl.addEventListener('click', () => fecharDescricaoAnimalPopup())
 }
   
-  /**
-   * fecharDescricaoAnimalPopup - Funcao para definir a visibilidade do pop-up de descricao do animal para 'none'
-   */
-  
-  function fecharDescricaoAnimalPopup() {
-  //Definir dados locais
-    let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
-  //Mudar o display para none
-    descricaoModalEl.style.display = "none";
-  }
+/**
+ * fecharDescricaoAnimalPopup - Funcao para definir a visibilidade do pop-up de descricao do animal para 'none'
+ */
+
+function fecharDescricaoAnimalPopup() {
+//Definir dados locais
+  let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
+//Mudar o display para none
+  descricaoModalEl.style.display = "none";
+}
 
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS TELA INICIAL (FIM) ------------------ */
+
+/* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (INICIO) ------------ */
+
+let contadorAnimalCompatibilidade = 0;
+let contadorImagemAnimalCompatibilidade = 0;
+
+async function carregarDadosCompatibilidade() {
+    await carregarAnimaisCompatibilidade();
+    contadorAnimalCompatibilidade++;
+    contadorImagemAnimalCompatibilidade = 0;
+}
+
+function testeContadorImagemAnimalCompatibilidade(tamanhoMax) {
+
+  if(contadorImagemAnimalCompatibilidade >= tamanhoMax) {
+    contadorImagemAnimalCompatibilidade = 0;
+  } else {
+    if(contadorImagemAnimalCompatibilidade < 0) {
+      contadorImagemAnimalCompatibilidade = tamanhoMax-1;
+    }
+  }
+
+}
+
+async function proximaImagemCompatibilidade(event) {
+  
+  let apiUrlJsonImagensAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal?id_animal=";
+  let imagensAnimal = {};
+
+  let btEvent = event.target.id;
+  let imgAnimalEl = document.querySelector(".compatibilidade-EscolhasImagemCarousel"); 
+  let animalId = imgAnimalEl.id; 
+
+  imagensAnimal = await readJSONServerId2(apiUrlJsonImagensAnimal, animalId);
+
+  if(btEvent == "compatibilidade-EscolhasCarouselImagemBtnD") {
+    contadorImagemAnimalCompatibilidade++;
+    testeContadorImagemAnimalCompatibilidade(imagensAnimal.length);
+    imgAnimalEl.src = imagensAnimal[contadorImagemAnimalCompatibilidade].imagem;
+  } else {
+    if(btEvent == "compatibilidade-EscolhasCarouselImagemBtnE") {
+      contadorImagemAnimalCompatibilidade--;
+      testeContadorImagemAnimalCompatibilidade(imagensAnimal.length);
+      imgAnimalEl.src = imagensAnimal[contadorImagemAnimalCompatibilidade].imagem;
+    }
+  }
+}
+
+
+async function carregarAnimaisCompatibilidade() {
+
+
+  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais";
+  let apiUrlJsonImagensAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal";
+  let divContainerEscolhasEl = document.querySelector("#compatibilidade-ContainerEscolhas");
+  let animais = {}, imagensAnimal = {};
+  let strHTML = "", strImagemAnimal = "";
+  let resultado = false;
+  let y = 0;
+
+  animais = await readJSONServer(apiUrlJsonAnimais);
+  imagensAnimal = await readJSONServer(apiUrlJsonImagensAnimal);
+
+  if(contadorAnimalCompatibilidade == animais.length) {
+    contadorAnimalCompatibilidade = 0;
+  }
+
+  while(y < imagensAnimal.length && !resultado) {
+    if(animais[contadorAnimalCompatibilidade].id_animal == imagensAnimal[y].id_animal) {
+      resultado = true;
+      strImagemAnimal = imagensAnimal[y].imagem;
+    }
+    y++;
+  }
+
+  strHTML = `<div id="compatibilidade-EscolhasCarouselImagemContainer">
+                <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnE" class="compatibilidade-EscolhasCarouselImagemBtn">&#8249;</button>
+                <img id="${animais[contadorAnimalCompatibilidade].id_animal}" class="compatibilidade-EscolhasImagemCarousel" src="${strImagemAnimal}" alt="">
+                <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnD" class="compatibilidade-EscolhasCarouselImagemBtn">&#8250;</button>
+            </div>
+            <div id="compatibilidade-EscolhasInfAnimal">
+                <h2>${animais[contadorAnimalCompatibilidade].nome}</h2>
+                <p>${animais[contadorAnimalCompatibilidade].descricao}</p>
+            </div>
+            <div id="compatibilidade-EscolhasBotoes">
+                <button id="compatibilidade-EscolhasAdotarBtn" onclick="carregarDadosCompatibilidade()">✔</button>
+                <button id="compatibilidade-EscolhasProximoBtn" onclick="carregarDadosCompatibilidade()">X</button>
+            </div>`
+
+  divContainerEscolhasEl.innerHTML = strHTML;
+
+} 
+
+/* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */

@@ -12,7 +12,7 @@
     <title>Patinhas Felizes</title>
 </head>
 
-<body>
+<body onload="carregarDadosCompatibilidade()">
     <header class="container-fluid">
         <div class="home-btn">
             <img src="../../assets/img/logo.jpg" alt="Logo Patinhas Felizes">
@@ -35,17 +35,17 @@
     <main>
         <div id="compatibilidade-ContainerEscolhas">
             <div id="compatibilidade-EscolhasCarouselImagemContainer">
-                <button id="compatibilidade-EscolhasCarouselImagemBtnE" class="compatibilidade-EscolhasCarouselImagemBtn">&#8249;</button>
-                <img src="https://s3.amazonaws.com/petz-cdm-stg/d79afafb-6071-4c53-a2da-328b6155aa9a.jpeg" alt="">
-                <button id="compatibilidade-EscolhasCarouselImagemBtnD" class="compatibilidade-EscolhasCarouselImagemBtn">&#8250;</button>
+                <button id="compatibilidade-EscolhasCarouselImagemBtnE" class="compatibilidade-EscolhasCarouselImagemBtn" onclick="proximaImagemCompatibilidade(event)">&#8249;</button>
+                <img class="compatibilidade-EscolhasImagemCarousel" src="https://s3.amazonaws.com/petz-cdm-stg/d79afafb-6071-4c53-a2da-328b6155aa9a.jpeg" alt="">
+                <button id="compatibilidade-EscolhasCarouselImagemBtnD" class="compatibilidade-EscolhasCarouselImagemBtn" onclick="proximaImagemCompatibilidade(event)">&#8250;</button>
             </div>
             <div id="compatibilidade-EscolhasInfAnimal">
                 <h2>Billy</h2>
                 <p>Linda, carinhosa e companheira! O que mais você precisa?</p>
             </div>
             <div id="compatibilidade-EscolhasBotoes">
-                <button id="compatibilidade-EscolhasAdotarBtn">X</button>
-                <button id="compatibilidade-EscolhasProximoBtn">✔</button>
+                <button id="compatibilidade-EscolhasAdotarBtn" onclick="carregarDadosCompatibilidade()">✔</button>
+                <button id="compatibilidade-EscolhasProximoBtn" onclick="carregarDadosCompatibilidade()">X</button>
             </div>
         </div>
     </main>
