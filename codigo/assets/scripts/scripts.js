@@ -2004,7 +2004,7 @@ async function carregarAnimaisCompatibilidade() {
 
   strHTML = `<div id="compatibilidade-EscolhasCarouselImagemContainer">
                 <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnE" class="compatibilidade-EscolhasCarouselImagemBtn">&#8249;</button>
-                <img id="${animais[contadorAnimalCompatibilidade].id_animal}" class="compatibilidade-EscolhasImagemCarousel" src="${strImagemAnimal}" alt="">
+                <img id="${animais[contadorAnimalCompatibilidade].id_animal}" class="compatibilidade-EscolhasImagemCarousel" onclick="abrirDescricaoAnimalPopup(event)" src="${strImagemAnimal}" alt="">
                 <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnD" class="compatibilidade-EscolhasCarouselImagemBtn">&#8250;</button>
             </div>
             <div id="compatibilidade-EscolhasInfAnimal">
@@ -2022,7 +2022,37 @@ async function carregarAnimaisCompatibilidade() {
 
 async function confirmarCompatibilidade() {
 
+  let apiUrlJsonTagsAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/etiquetas?id_animal=";
+  let apiUrlJsonTagsUsuario = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/etiquetas?id_usuario=";
+  let tagsAnimal = {}, tagsUsuario = {};
+  let distanciaPontos = 0.0, valorMaximo = 0.0, porcentagemCompatibilidade = 0.0;
+ 
+  let imgAnimalEl = document.querySelector(".compatibilidade-EscolhasImagemCarousel"); 
+  let animalId = imgAnimalEl.id; 
 
+  tagsAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, animalId);
+  tagsAnimal = tagsAnimal[0];
+  tagsUsuario = await readJSONServerId(apiUrlJsonTagsUsuario, 1);
+  tagsUsuario = tagsUsuario[0];
+
+  distanciaPontos = Math.sqrt( Math.pow((tagsAnimal.atencao - tagsUsuario.atencao), 2) + 
+  Math.pow((tagsAnimal.passeio - tagsUsuario.passeio), 2) + 
+  Math.pow((tagsAnimal.carinho - tagsUsuario.carinho), 2) +
+  Math.pow((tagsAnimal.extrovertido - tagsUsuario.extrovertido), 2) +
+  Math.pow((tagsAnimal.animacao - tagsUsuario.animacao), 2));         
+  
+  valorMaximo = Math.sqrt(80);
+
+  porcentagemCompatibilidade = ((distanciaPontos * 100)/valorMaximo);
+  porcentagemCompatibilidade = 100 - porcentagemCompatibilidade;
+
+  alert(porcentagemCompatibilidade);
+
+  if(porcentagemCompatibilidade >= 70) {
+    alert("MATCH!!!");
+  } else {
+    carregarDadosCompatibilidade();
+  }
 
 }
 
