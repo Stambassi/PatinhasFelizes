@@ -1696,26 +1696,8 @@ async function readJSONServerId(url, id) {
     console.error("Error", error);
   }
 //Retorno obj
-  return obj[0];
+  return obj;
 }
-
-async function readJSONServerId2(url, id) {
-  //Definir dados locais
-    let obj = {};
-    url += `${id}`
-    try {
-  //Acesso aos dados da url
-      const response = await fetch(url);
-  //Gravacao na variavel obj
-      obj = await response.json();
-      console.log ("Sucesso", obj);
-    } catch (error) {
-      console.error("Error", error);
-    }
-  //Retorno obj
-    return obj;
-  }
-
  /**
  * carregarFiltroCidades - Funcao para carregar os filtros de cidade do JSON Server e exibi-los na tela inicial.
  */ 
@@ -1844,16 +1826,18 @@ function carregarDescricaoAnimalPopupEventos () {
 async function abrirDescricaoAnimalPopup(event) {
 //Definir dados locais
   let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais?id_animal=";
-  let apiUrlJsonVacinas = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/vacinas";
+  let apiUrlJsonVacinas = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/vacinas?id_animal=";
   let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
 
   let idEvent = event.target.id;
-  let animal = {}, vacinas = {};
+  let animal = {}, vacinas = {}, animais = {};
   let strHTML = "", srcGeneroAnimal = "", strGeneroAnimal = "", strCastradoAnimal = "", strPorteAnimal = "", strVacinasAnimal = "";
 
 //Acesso ao dado do id no JSON Server
-  animal = await readJSONServerId(apiUrlJsonAnimais, idEvent);
-  vacinas = await readJSONServer(apiUrlJsonVacinas);
+  animais = await readJSONServerId(apiUrlJsonAnimais, idEvent);
+  vacinas = await readJSONServerId(apiUrlJsonVacinas, idEvent);
+
+  animal = animais[0];
 
 //Controle caracteristicas animal
   if(animal.genero == 'F') {
@@ -1882,9 +1866,7 @@ async function abrirDescricaoAnimalPopup(event) {
 
   strVacinasAnimal = "";
   for(let y = 0; y < vacinas.length; y++) {
-    if(animal.id_animal == vacinas[y].id_animal) {
       strVacinasAnimal += `<li>${vacinas[y].nome}</li>`;
-    }
   }
 
 //Mudanca strHTML 
@@ -1978,7 +1960,7 @@ async function proximaImagemCompatibilidade(event) {
   let imgAnimalEl = document.querySelector(".compatibilidade-EscolhasImagemCarousel"); 
   let animalId = imgAnimalEl.id; 
 
-  imagensAnimal = await readJSONServerId2(apiUrlJsonImagensAnimal, animalId);
+  imagensAnimal = await readJSONServerId(apiUrlJsonImagensAnimal, animalId);
 
   if(btEvent == "compatibilidade-EscolhasCarouselImagemBtnD") {
     contadorImagemAnimalCompatibilidade++;
@@ -2030,12 +2012,18 @@ async function carregarAnimaisCompatibilidade() {
                 <p>${animais[contadorAnimalCompatibilidade].descricao}</p>
             </div>
             <div id="compatibilidade-EscolhasBotoes">
-                <button id="compatibilidade-EscolhasAdotarBtn" onclick="carregarDadosCompatibilidade()">✔</button>
+                <button id="compatibilidade-EscolhasAdotarBtn" onclick="confirmarCompatibilidade()">✔</button>
                 <button id="compatibilidade-EscolhasProximoBtn" onclick="carregarDadosCompatibilidade()">X</button>
             </div>`
 
   divContainerEscolhasEl.innerHTML = strHTML;
 
 } 
+
+async function confirmarCompatibilidade() {
+
+
+
+}
 
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */
