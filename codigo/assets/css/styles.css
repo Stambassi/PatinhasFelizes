@@ -61,6 +61,11 @@ header {
   width: 50px;
 }
 
+.home-btn a {
+  text-decoration: none;
+  color: black;
+}
+
 a.active-page {
   color: var(--cor_secundaria);
 }
@@ -1622,14 +1627,22 @@ button#load_ab_photo:hover {
   border-radius: 50px;
 }
 
+#telaInicial-Introducao a {
+  text-decoration: none;
+  color: white;
+}
+
 #telaInicial-Introducao h3 {
   display: inline;
 }
 
 #telaInicial-Introducao button:hover {
   background-color: white;
-  color: black;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#telaInicial-Introducao a:hover {
+  color: black;
 }
 
 #telaInicial-Container {
@@ -1845,7 +1858,7 @@ button#load_ab_photo:hover {
 
 /* ----------------------- Estilo Exibicao de Animais Compatibilidade ----------------------- */
 
-#compatibilidade-ContainerEscolhas {
+.compatibilidade-ContainerEscolhas {
   background-color: rgb(246, 246, 246);
   margin: 50px auto;
   max-width: 40%;
@@ -1884,7 +1897,7 @@ button#load_ab_photo:hover {
   left: -3px;
 }
 
-#compatibilidade-ContainerEscolhas img {
+.compatibilidade-ContainerEscolhas img {
   width: 85%;
   height: 75%;
   border-radius: 5px;
@@ -1941,7 +1954,7 @@ button#load_ab_photo:hover {
 
 /* ----------------------- Estilo Exibicao de Animais Compatibilidade ----------------------- */
 
-#compatibilidade-ContainerEscolhas {
+.compatibilidade-ContainerEscolhas {
   background-color: rgb(246, 246, 246);
   margin: 50px auto;
   max-width: 40%;
@@ -1980,7 +1993,7 @@ button#load_ab_photo:hover {
   left: -3px;
 }
 
-#compatibilidade-ContainerEscolhas img {
+.compatibilidade-ContainerEscolhas img {
   width: 85%;
   height: 75%;
   border-radius: 5px;
@@ -2031,6 +2044,49 @@ button#load_ab_photo:hover {
 
 #compatibilidade-EscolhasProximoBtn {
   background-color: #ff4d4d;
+}
+
+.compatibilidade-ContainerEscolhas .compatiilidade-imagemPerfilMatch {
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  border: 5px solid #4CAF50;
+}
+
+.compatibilidade-ContainerEscolhas h1 {
+  font-family:fantasy;
+}
+
+#compatibilidade-ContainerImagemPefilMatch {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+#compatibilidade-MatchBotoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#compatibilidade-MatchBotoes button {
+  padding: 15px;
+  border-radius: 5px;
+}
+
+#compatibilidade-MatchBotoes button:hover {
+  padding: 20px;
+}
+
+.compatibilidade-PopUp-Modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 2%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 
 /* ----------------------- END Estilo Exibicao de Animais Compatibili ----------------------- */

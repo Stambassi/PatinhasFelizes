@@ -1981,7 +1981,7 @@ async function carregarAnimaisCompatibilidade() {
 
   let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais";
   let apiUrlJsonImagensAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal";
-  let divContainerEscolhasEl = document.querySelector("#compatibilidade-ContainerEscolhas");
+  let divContainerEscolhasEl = document.querySelector(".compatibilidade-ContainerEscolhas");
   let animais = {}, imagensAnimal = {};
   let strHTML = "", strImagemAnimal = "";
   let resultado = false;
@@ -2002,7 +2002,8 @@ async function carregarAnimaisCompatibilidade() {
     y++;
   }
 
-  strHTML = `<div id="compatibilidade-EscolhasCarouselImagemContainer">
+  strHTML = `<h2>Encontre seu Parceiro Ideal!</h2>
+            <div id="compatibilidade-EscolhasCarouselImagemContainer">
                 <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnE" class="compatibilidade-EscolhasCarouselImagemBtn">&#8249;</button>
                 <img id="${animais[contadorAnimalCompatibilidade].id_animal}" class="compatibilidade-EscolhasImagemCarousel" onclick="abrirDescricaoAnimalPopup(event)" src="${strImagemAnimal}" alt="">
                 <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnD" class="compatibilidade-EscolhasCarouselImagemBtn">&#8250;</button>
@@ -2012,8 +2013,8 @@ async function carregarAnimaisCompatibilidade() {
                 <p>${animais[contadorAnimalCompatibilidade].descricao}</p>
             </div>
             <div id="compatibilidade-EscolhasBotoes">
-                <button id="compatibilidade-EscolhasAdotarBtn" onclick="confirmarCompatibilidade()">✔</button>
                 <button id="compatibilidade-EscolhasProximoBtn" onclick="carregarDadosCompatibilidade()">X</button>
+                <button id="compatibilidade-EscolhasAdotarBtn" onclick="confirmarCompatibilidade()">✔</button>
             </div>`
 
   divContainerEscolhasEl.innerHTML = strHTML;
@@ -2046,14 +2047,46 @@ async function confirmarCompatibilidade() {
   porcentagemCompatibilidade = ((distanciaPontos * 100)/valorMaximo);
   porcentagemCompatibilidade = 100 - porcentagemCompatibilidade;
 
-  alert(porcentagemCompatibilidade);
-
   if(porcentagemCompatibilidade >= 70) {
-    alert("MATCH!!!");
+    await abrirModalMatch(animalId);
   } else {
     carregarDadosCompatibilidade();
   }
 
+}
+
+async function abrirModalMatch(idAnimal) {
+
+  let divModalMatchEl = document.querySelector(".compatibilidade-PopUp-Modal");
+  let imgAnimalEl = document.querySelector(".compatibilidade-perfilAnimal");
+  let imgUsuarioEl = document.querySelector(".compatibilidade-perfilUsuario");
+
+  let apiUrlJsonTagsAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal?id_animal=";
+  let imagensAnimal = {};
+  let resultado = false;
+  let strImagemAnimal = "";
+  let y = 0;
+
+  imagensAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, idAnimal);
+
+  while(y < imagensAnimal.length && !resultado) {
+    if(idAnimal == imagensAnimal[y].id_animal) {
+      resultado = true;
+      strImagemAnimal = imagensAnimal[y].imagem;
+    }
+    y++;
+  }
+
+  divModalMatchEl.style.display = "block";
+  imgAnimalEl.src = strImagemAnimal;
+  imgAnimalEl.id = idAnimal;
+  imgUsuarioEl.src = "https://thumbs.dreamstime.com/b/%C3%ADcone-de-usu%C3%A1rio-m%C3%ADdia-social-vetor-imagem-perfil-do-avatar-padr%C3%A3o-retrato-182347582.jpg";
+
+}
+
+function fecharModalMatch() {
+  let divModalMatchEl = document.querySelector(".compatibilidade-PopUp-Modal");
+  divModalMatchEl.style.display = "none";
 }
 
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */

@@ -16,7 +16,7 @@
     <header class="container-fluid">
         <div class="home-btn">
             <img src="../../assets/img/logo.jpg" alt="Logo Patinhas Felizes">
-            <a><i class="fa-solid fa-2x fa-house"></i></a>
+            <a href="../telaInicial/telaInicial.html"><i class="fa-solid fa-2x fa-house"></i></a>
         </div>
 
         <div class="pages">
@@ -33,7 +33,8 @@
 
     </header>
     <main>
-        <div id="compatibilidade-ContainerEscolhas">
+        <div class="compatibilidade-ContainerEscolhas">
+            <h2>Encontre seu Parceiro Ideal!</h2>
             <div id="compatibilidade-EscolhasCarouselImagemContainer">
                 <button id="compatibilidade-EscolhasCarouselImagemBtnE" class="compatibilidade-EscolhasCarouselImagemBtn" onclick="proximaImagemCompatibilidade(event)">&#8249;</button>
                 <img class="compatibilidade-EscolhasImagemCarousel" onclick="abrirDescricaoAnimalPopup(event)" src="https://s3.amazonaws.com/petz-cdm-stg/d79afafb-6071-4c53-a2da-328b6155aa9a.jpeg" alt="">
@@ -44,10 +45,25 @@
                 <p>Linda, carinhosa e companheira! O que mais você precisa?</p>
             </div>
             <div id="compatibilidade-EscolhasBotoes">
-                <button id="compatibilidade-EscolhasAdotarBtn" onclick="confirmarCompatibilidade()">✔</button>
                 <button id="compatibilidade-EscolhasProximoBtn" onclick="carregarDadosCompatibilidade()">X</button>
+                <button id="compatibilidade-EscolhasAdotarBtn" onclick="confirmarCompatibilidade()">✔</button>
             </div>
         </div>
+
+        <div class="compatibilidade-PopUp-Modal">
+            <div class="compatibilidade-ContainerEscolhas">
+                <h1>Deu Match!</h1>
+                <div id="compatibilidade-ContainerImagemPefilMatch">
+                    <img class="compatiilidade-imagemPerfilMatch compatibilidade-perfilAnimal" onclick="abrirDescricaoAnimalPopup(event)" src="https://s3.amazonaws.com/petz-cdm-stg/d79afafb-6071-4c53-a2da-328b6155aa9a.jpeg" alt="">
+                    <img class="compatiilidade-imagemPerfilMatch compatibilidade-perfilUsuario" src="https://s3.amazonaws.com/petz-cdm-stg/d79afafb-6071-4c53-a2da-328b6155aa9a.jpeg" alt="">
+                </div>
+                <div id="compatibilidade-MatchBotoes">
+                    <button id="compatibilidade-EscolhasAdotarBtn">Adotar!</button>
+                    <button id="compatibilidade-EscolhasProximoBtn" onclick="fecharModalMatch()">Continuar Proucurando</button>
+                </div>
+            </div>
+        </div>
+
         <div class="telaInicial-PopUp-Modal"></div>
     </main>
     <footer class="footerPaginaGrande">
