@@ -2090,3 +2090,95 @@ function fecharModalMatch() {
 }
 
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */
+/*---------------------- Tela de Pefil ONG (Inicio) ------------------*/
+// Função que cria um objeto inicial da ONG no localStorage
+
+function AC_iniciarDados() {
+    const ong = {
+        nome: "Patinhas Felizes",
+        email: "contato@patinhasfelizes.org",
+        telefone: "(31) 98765-4321",
+        sobreNos: "Somos uma ONG dedicada ao resgate e cuidado de animais abandonados, buscando lares para eles.",
+        endereco: "Rua Fulano, Bairro Ciclano, Belo Horizonte, MG",
+        dataCriacao: "01/01/2020",
+        facebook: "https://www.facebook.com/ong-exemplo",
+        instagram: "https://www.instagram.com/ong-exemplo"
+    };
+
+    // Armazenando o objeto no localStorage
+    localStorage.setItem('ong', JSON.stringify(ong));
+}
+
+// Função que exibe os dados da ONG na página
+function AC_mostrarDados() {
+    const ong = JSON.parse(localStorage.getItem('ong'));
+
+    if (!ong) {
+        AC_iniciarDados();  // Inicializa os dados se não houver nenhum no localStorage
+        return AC_mostrarDados();
+    }
+
+    // Preenchendo os campos HTML com as informações da ONG
+    document.getElementById('ong-nome').innerText = ong.nome;
+    document.getElementById('ong-email').innerText = ong.email;
+    document.getElementById('ong-telefone').innerText = ong.telefone;
+    document.getElementById('ong-sobre-nos').innerText = ong.sobreNos;
+    document.getElementById('ong-endereco').innerText = ong.endereco;
+    document.getElementById('ong-data-criacao').innerText = ong.dataCriacao; // Exibindo data de criação
+}
+
+// Função que habilita a edição dos dados diretamente na página
+function AC_editarDados() {
+    const ong = JSON.parse(localStorage.getItem('ong'));
+
+    // Substituindo os elementos de exibição pelos campos de input
+    document.getElementById('ong-nome').innerHTML = `<input type="text" id="input-nome" value="${ong.nome}" />`;
+    document.getElementById('ong-email').innerHTML = `<input type="text" id="input-email" value="${ong.email}" />`;
+    document.getElementById('ong-telefone').innerHTML = `<input type="text" id="input-telefone" value="${ong.telefone}" />`;
+    document.getElementById('ong-sobre-nos').innerHTML = `<textarea id="input-sobre-nos">${ong.sobreNos}</textarea>`;
+    document.getElementById('ong-endereco').innerHTML = `<input type="text" id="input-endereco" value="${ong.endereco}" />`;
+    document.getElementById('ong-data-criacao').innerHTML = `<input type="text" id="input-data-criacao" value="${ong.dataCriacao}" />`;
+
+    // Adicionando o botão "OK" para salvar as alterações
+    document.getElementById('edit-ok-btn').style.display = 'block';
+}
+
+// Função que salva os dados editados e atualiza no localStorage
+function AC_salvarDados() {
+    const nome = document.getElementById('input-nome').value;
+    const email = document.getElementById('input-email').value;
+    const telefone = document.getElementById('input-telefone').value;
+    const sobreNos = document.getElementById('input-sobre-nos').value;
+    const endereco = document.getElementById('input-endereco').value;
+    const dataCriacao = document.getElementById('input-data-criacao').value;
+
+    // Atualizando o objeto ONG com os novos valores
+    const ongAtualizada = {
+        nome,
+        email,
+        telefone,
+        sobreNos,
+        endereco,
+        dataCriacao
+    };
+
+    // Salvando a nova versão no localStorage
+    localStorage.setItem('ong', JSON.stringify(ongAtualizada));
+
+    // Atualizando os campos na página
+    AC_mostrarDados();
+
+    // Ocultando o botão "OK"
+    document.getElementById('edit-ok-btn').style.display = 'none';
+}
+
+// Adicionando um listener ao botão de edição
+document.querySelector('.edit-icon-ong').addEventListener('click', AC_editarDados);
+
+// Adicionando listener ao botão "OK"
+document.getElementById('edit-ok-btn').addEventListener('click', AC_salvarDados);
+
+// Inicializando os dados ao carregar a página
+document.addEventListener('DOMContentLoaded', AC_mostrarDados);
+
+/*---------------------- Tela de Pefil ONG (Fim) ------------------*/
