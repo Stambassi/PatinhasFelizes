@@ -530,7 +530,7 @@ button#load_ab_photo:hover {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 400px;
+  width: 35%;
   height: fit-content;
   padding: 40px 50px 20px;
   background-color: white;

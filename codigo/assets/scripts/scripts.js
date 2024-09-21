@@ -38,7 +38,8 @@ async function carregarHtml (url)
 function adicionarPopup (data, htmlElement, carregarEventos)
 {
 //Testar se outro pop-up esta ativo
-  let modal = document.querySelector('.modal');
+
+  let modal = document.querySelector('.modal-controle');
   if ( modal )
   {
   //Remover o container existente
@@ -154,6 +155,7 @@ function loginOnload ()
 {
   let loginBtnMostrar = document.querySelector("#btnMostrarLogin");
   let btnPerfil = document.querySelector('#btnPerfil');
+  console.log(loginBtnMostrar);
   loginBtnMostrar.addEventListener('click', () => loginUsuario());
   btnPerfil.addEventListener('click', () => perfilUsuario());
 }
@@ -164,10 +166,11 @@ function loginOnload ()
 async function loginUsuario ()
 {
 //Definir dados locais
-  let main = document.querySelector('main');
+  let main = document.querySelector('body');
   let container;
 //Recuperar html
-  container = await carregarHtml('../codigo/pages/loginUsuario/login-template.html');
+  container = await carregarHtml('../../../../pages/loginUsuario/login-template.html');
+  //console.log(container)
 //Adicionar html
   adicionarPopup(container, main, loginUsuarioEventos);
 }
@@ -204,8 +207,9 @@ async function cadastroUsuario ()
   let pagina = 1;
   let container;
 //Recuperar html
-  container = await carregarHtml(`../codigo/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`../../../../pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
+  console.log(container);
   adicionarPopup(container, main, cadastroUsuarioEventos);
 }
 
@@ -216,6 +220,7 @@ function cadastroUsuarioEventos ()
 {
 //Definir dados locais
   let pagina = parseInt( document.querySelector('.lc-input').id );
+  console.log(pagina)
   let closeWindow = document.querySelector('.lc-close-window');
   let inputNome = document.querySelector('#cadastro-input-field-1');
   let loginUser = document.querySelector('#cadastro-btn-login');
@@ -274,7 +279,7 @@ async function cadastroUsuarioPagina(pagina)
 //Definir dados locais
   let main = document.querySelector('main');
 //Recuperar html
-  container = await carregarHtml(`../codigo/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`../../../pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroUsuarioEventos);
 //Definir estilos e particularidades
@@ -492,7 +497,7 @@ async function loginInstituicao ()
   let main = document.querySelector('main');
   let container;
 //Recuperar container da pagina
-  container = await carregarHtml(`../codigo/pages/loginInstituicao/login-template.html`);
+  container = await carregarHtml(`../../../../pages/loginInstituicao/login-template.html`);
 //Atualizar o html da pagina
   adicionarPopup(container, main, loginInstituicaoEventos);
 }
@@ -533,7 +538,7 @@ async function cadastroInstituicao ()
   let pagina = 1;  
   let container;
 //Recuperar html
-  container = await carregarHtml(`../codigo/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`../../../../pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Atualizar o html da pagina
   adicionarPopup(container, main, cadastroInstituicaoEventos); 
 }
@@ -604,7 +609,7 @@ async function cadastroInstituicaoPagina (pagina)
   let container;
   let lc_container = document.querySelector('.lc-container');
 //Recuperar html
-  container = await carregarHtml(`../codigo/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`../../../../pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroInstituicaoEventos);
 //Definir estilos
