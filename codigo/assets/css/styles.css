@@ -61,6 +61,11 @@ header {
   width: 50px;
 }
 
+.home-btn a {
+  text-decoration: none;
+  color: black;
+}
+
 a.active-page {
   color: var(--cor_secundaria);
 }
@@ -1133,6 +1138,8 @@ button#load_ab_photo:hover {
   grid-column-start: 2;
   grid-column-end: 3;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   padding: 15px 0;
 }
@@ -1276,12 +1283,6 @@ button#load_ab_photo:hover {
     align-items: center;
 }
 
-.animal-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-}
-
 .animal-card {
     background-color: #5b975e;
     border-radius: 8px;
@@ -1369,18 +1370,19 @@ button#load_ab_photo:hover {
 .title{
     margin-top: 30px;
     text-align: center;
+    margin-bottom: 40px;
 }
 
 .container-Solic{
     padding: 10px;
     text-align: center;
     width: 90%;
-    position: absolute;
     margin-top:40px;
-    left: calc(15vh - 36px);
+    margin: auto;
     background-color:rgb(255, 255, 255);
     border: 1px rgb(255, 255, 255) solid;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1444,7 +1446,7 @@ button#load_ab_photo:hover {
 }
 
 .Recusar-button{
-    background-color: #FF2121;
+    background-color: #ff3d3d;
     width: 300px;
     padding: 10px;
     border-radius: 20px;
@@ -1459,27 +1461,94 @@ button#load_ab_photo:hover {
 .title-2{
     justify-content: flex-end;
     text-align: center;
-}
-
-.big-container{
-    background-color: #6a50f8;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .second-container-solicitacao{
     padding: 10px;
     text-align: center;
     width: 90%;
-    position: absolute;
     margin-top:40px;
-    left: calc(15vh - 36px);
+    margin-bottom: 10%;
     background-color:rgb(255, 255, 255);
     border: 1px rgb(255, 255, 255) solid;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    display: block;
-    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction:column;
     align-items: center;
+
 }
 
+.doacoes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.adocoes-card{
+    background-color: #f6f6f6;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.foto-nome-doacoes-container{
+    height: 130px;
+    width: 130px;
+    background-color: #ffebc5;
+    border-radius: 300px;
+    display:flex;
+    align-items: center;
+    margin: 10px;   
+    padding: auto;
+}
+
+.top-container-adocao{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap : 40px;
+    align-items:center;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.botoes-doacao{
+    display: flex;
+    justify-content: space-around;
+}
+
+.Aceitar-button-doacao{
+    background-color: #307b3f;
+    width: 45%;
+    border-radius: 20px;
+    border: none;
+    height: 40px;
+}
+
+.Aceitar-button-doacao:hover{
+    background-color: #39633f;
+    transition: background 0.5s;
+}
+
+.Recusar-button-doacao{
+    background-color: #ff3d3d;
+    width: 45%;
+    border-radius: 20px;
+    border: none;
+    height: 40px;
+}
+
+.Recusar-button-doacao:hover{
+    background-color: #cf0909;
+    transition: background 0.5s;
+}
+
+
+.botoes-doacao{
+    margin-top: 5px;
+    align-items: center;
+}
 
 /* ------------------- Perfil ONG ------------------- */
 
@@ -1599,6 +1668,64 @@ button#load_ab_photo:hover {
     color: #ffffff;
 }
 
+/* Estilo para os inputs de texto */
+input[type="text"], input[type="email"], input[type="tel"] {
+    width: 50%;   
+    padding: 3px;        
+    font-size: 15px;      
+    font-family: Arial, sans-serif; 
+    border: 2px solid #ccc; 
+    border-radius: 5px;   
+    background-color: #f9f9f9; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);  
+    transition: border-color 0.3s ease-in-out; 
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus {
+    border-color: #007BFF;  
+    outline: none;     
+}
+
+#input-sobre-nos {
+    width: 90%;     
+    height: 90px;       
+    padding: 10px;        
+    font-size: 15px;       
+    font-family: Arial, sans-serif;  
+    border: 2px solid #ccc; 
+    border-radius: 5px;    
+    background-color: #f9f9f9; 
+    resize: none;         
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+    transition: border-color 0.3s ease-in-out; 
+}
+
+#input-sobre-nos:focus {
+    border-color: #007BFF;  
+    outline: none;        
+}
+
+
+#edit-ok-btn {
+    background-color:#39633f; 
+    color: white;
+    border: none;
+    padding: 10px 20px; 
+    text-align: center; 
+    margin-left: 80%;
+    text-decoration: none; 
+    display:flex; 
+    font-size: 16px; 
+    cursor: pointer; 
+    border-radius: 300px; 
+    transition: background-color 0.3s; 
+    right: 10px;             
+    top: 0%;        
+}
+
+#edit-ok-btn:hover {
+    background-color: #45a049; 
+}
 /* ----------------------- Estilo Tela Inicial ----------------------- */
 
 #telaInicial-Introducao {
@@ -1620,14 +1747,22 @@ button#load_ab_photo:hover {
   border-radius: 50px;
 }
 
+#telaInicial-Introducao a {
+  text-decoration: none;
+  color: white;
+}
+
 #telaInicial-Introducao h3 {
   display: inline;
 }
 
 #telaInicial-Introducao button:hover {
   background-color: white;
-  color: black;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#telaInicial-Introducao a:hover {
+  color: black;
 }
 
 #telaInicial-Container {
@@ -1649,7 +1784,7 @@ button#load_ab_photo:hover {
   background-color: white;
   border-radius: 1rem;
   width: min(300px, 100%);
-  height: 400px;
+  height: 425px;
   padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
 }
@@ -1658,7 +1793,7 @@ button#load_ab_photo:hover {
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   width: 100%;
-  height: 80%;
+  height: 75%;
 }
 
 .telaInicial-Card p {
@@ -1745,7 +1880,7 @@ button#load_ab_photo:hover {
   display: none;
   position: fixed;
   z-index: 1;
-  top: 3%;
+  top: 2%;
   left: 0;
   width: 100%;
   height: 100%;
@@ -1812,7 +1947,7 @@ button#load_ab_photo:hover {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   list-style-type: square;
   gap: 15px;
   font-size: 15px;
@@ -1840,3 +1975,238 @@ button#load_ab_photo:hover {
 
 
 /* ----------------------- END Estilo Pop Up Descrição Animais ----------------------- */
+
+/* ----------------------- Estilo Exibicao de Animais Compatibilidade ----------------------- */
+
+.compatibilidade-ContainerEscolhas {
+  background-color: rgb(246, 246, 246);
+  margin: 50px auto;
+  max-width: 40%;
+  display: flex;
+  border-radius: 50px;
+  padding: 3% 3%;
+  gap: 30px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+  align-items: center;
+  flex-direction: column;
+}
+
+#compatibilidade-EscolhasCarouselImagemContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.compatibilidade-EscolhasCarouselImagemBtn {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+#compatibilidade-EscolhasCarouselImagemBtnD {
+  right: -3px;
+}
+
+#compatibilidade-EscolhasCarouselImagemBtnE {
+  left: -3px;
+}
+
+.compatibilidade-ContainerEscolhas img {
+  width: 85%;
+  height: 75%;
+  border-radius: 5px;
+}
+
+#compatibilidade-EscolhasInfAnimal {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  max-width: 80%;
+  flex-wrap: wrap;
+}
+
+#compatibilidade-EscolhasInfAnimal h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#compatibilidade-EscolhasInfAnimal p {
+  font-size: 18px;
+  color: #555;
+  margin: 0;
+}
+
+#compatibilidade-EscolhasBotoes {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+#compatibilidade-EscolhasBotoes button {
+  padding: 20px 25px;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  border: none;
+}
+
+#compatibilidade-EscolhasBotoes button:hover {
+  border: 1px solid black;
+}
+
+#compatibilidade-EscolhasAdotarBtn {
+  background-color: #4CAF50;
+}
+
+#compatibilidade-EscolhasProximoBtn {
+  background-color: #ff4d4d;
+}
+
+/* ----------------------- END Estilo Exibicao de Animais Compatibilidade ----------------------- */
+
+/* ----------------------- Estilo Exibicao de Animais Compatibilidade ----------------------- */
+
+.compatibilidade-ContainerEscolhas {
+  background-color: rgb(246, 246, 246);
+  margin: 50px auto;
+  max-width: 40%;
+  display: flex;
+  border-radius: 50px;
+  padding: 3% 3%;
+  gap: 30px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+  align-items: center;
+  flex-direction: column;
+}
+
+#compatibilidade-EscolhasCarouselImagemContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.compatibilidade-EscolhasCarouselImagemBtn {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+#compatibilidade-EscolhasCarouselImagemBtnD {
+  right: -3px;
+}
+
+#compatibilidade-EscolhasCarouselImagemBtnE {
+  left: -3px;
+}
+
+.compatibilidade-ContainerEscolhas img {
+  width: 85%;
+  height: 75%;
+  border-radius: 5px;
+}
+
+#compatibilidade-EscolhasInfAnimal {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  max-width: 80%;
+  flex-wrap: wrap;
+}
+
+#compatibilidade-EscolhasInfAnimal h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#compatibilidade-EscolhasInfAnimal p {
+  font-size: 18px;
+  color: #555;
+  margin: 0;
+}
+
+#compatibilidade-EscolhasBotoes {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+#compatibilidade-EscolhasBotoes button {
+  padding: 20px 25px;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  border: none;
+}
+
+#compatibilidade-EscolhasBotoes button:hover {
+  border: 1px solid black;
+}
+
+#compatibilidade-EscolhasAdotarBtn {
+  background-color: #4CAF50;
+}
+
+#compatibilidade-EscolhasProximoBtn {
+  background-color: #ff4d4d;
+}
+
+.compatibilidade-ContainerEscolhas .compatiilidade-imagemPerfilMatch {
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  border: 5px solid #4CAF50;
+}
+
+.compatibilidade-ContainerEscolhas h1 {
+  font-family:fantasy;
+}
+
+#compatibilidade-ContainerImagemPefilMatch {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+#compatibilidade-MatchBotoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#compatibilidade-MatchBotoes button {
+  padding: 15px;
+  border-radius: 5px;
+}
+
+#compatibilidade-MatchBotoes button:hover {
+  padding: 20px;
+}
+
+.compatibilidade-PopUp-Modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 2%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+/* ----------------------- END Estilo Exibicao de Animais Compatibili ----------------------- */

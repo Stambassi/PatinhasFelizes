@@ -20,7 +20,7 @@
     
 </head>
 
-<body onload="loginOnload(); carregarAnimais();">
+<body onload="loginOnLoad();carregarAnimais(),carregarFiltrosCidades();">
     <header class="container-fluid">
         <div class="home-btn">
             <img src="../../assets/img/logo.jpg" alt="Logo Patinhas Felizes">
@@ -44,49 +44,48 @@
     </header>
     <main>
         <div id="telaInicial-Introducao">
-            <h3 class="inline">Encontre o seu parceiro conosco! Escolha um pet disponível abaixo ou encontre uma patinha
-                compatível com você! </h3>
-            <button>Vamos lá!</button>
+            <h3 class="inline">Encontre o seu parceiro conosco! Escolha um pet disponível abaixo ou encontre uma patinha compatível com você! </h3>
+            <button >Vamos lá!</button>
         </div>
 
         <div id="telaInicial-BarraFiltros">
             <div class="telaInicial-Filtro">
-                <label for="Destinos">ONG</label>
-                <select id="Destinos">
-                    <option value="" disabled selected>Selecionar</option>
+                <label for="telaInicial-FiltroCidade">Cidades</label>
+                <select id="telaInicial-FiltroCidade">
+                    <option value="U">Todas</option>
                     <option value="Opção1">Opção 1</option>
                     <option value="Opção2">Opção 2</option>
                     <option value="Opção3">Opção 3</option>
                 </select>
             </div>
             <div class="telaInicial-Filtro">
-                <label for="checkin">Porte</label>
-                <select id="checkin">
-                    <option value="" disabled selected>Selecionar</option>
-                    <option value="Opção1">Opção 1</option>
-                    <option value="Opção2">Opção 2</option>
-                    <option value="Opção3">Opção 3</option>
+                <label for="telaInicial-FiltroEspecie">Especie</label>
+                <select id="telaInicial-FiltroEspecie">
+                    <option value="U">Todas</option>
+                    <option value="Cachorro">Cachorro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Coelho">Coelho</option>
+                    <option value="Roedor">Roedor</option>
                 </select>
             </div>
             <div class="telaInicial-Filtro">
-                <label for="checkout">Gênero</label>
-                <select id="checkout">
-                    <option value="" disabled selected>Selecionar</option>
-                    <option value="Opção1">Opção 1</option>
-                    <option value="Opção2">Opção 2</option>
-                    <option value="Opção3">Opção 3</option>
+                <label for="telaInicial-FiltroPorte">Porte</label>
+                <select id="telaInicial-FiltroPorte">
+                    <option value="U">Todos</option>
+                    <option value="P">Pequeno</option>
+                    <option value="M">Médio</option>
+                    <option value="G">Grande</option>
                 </select>
             </div>
             <div class="telaInicial-Filtro">
-                <label for="hospedes">Cidade</label>
-                <select id="hospedes">
-                    <option value="" disabled selected>Selecionar</option>
-                    <option value="Opção1">Opção 1</option>
-                    <option value="Opção2">Opção 2</option>
-                    <option value="Opção3">Opção 3</option>
+                <label for="telaInicial-FiltroGenero">Gênero</label>
+                <select id="telaInicial-FiltroGenero">
+                    <option value="U">Todos</option>
+                    <option value="M">Macho</option>
+                    <option value="F">Fêmea</option>
                 </select>
             </div>
-            <button id="telaInicial-BuscarFiltros">🔍</button>
+            <button id="telaInicial-BuscarFiltros" onclick="carregarAnimais()">🔍</button>
         </div>
 
         <div id="telaInicial-Container">
