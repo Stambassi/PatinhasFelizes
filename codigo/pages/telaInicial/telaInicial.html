@@ -20,7 +20,7 @@
     
 </head>
 
-<body onload="loginOnLoad();carregarAnimais(),carregarFiltrosCidades();">
+<body onload="carregarAnimais(),loginOnload(),carregarFiltrosCidades();">
     <header class="container-fluid">
         <div class="home-btn">
             <img src="../../assets/img/logo.jpg" alt="Logo Patinhas Felizes">
@@ -30,9 +30,9 @@
         <div class="pages">
             <a class="active-page" href="../telaInicial/telaInicial.html">Adotar</a>
             <span class="divider">|</span>
-            <a class="inactive-page" href="../cadastros/crud-animal-abd.html">Encontrei um animal abandonado</a>
+            <a class="inactive-page" onclick="carregarFormularioAnimalAbandonado()">Encontrei um animal abandonado</a>
             <span class="divider">|</span>
-            <a class="inactive-page" href="#">Match</a>
+            <a class="inactive-page" onclick="carregarPaginaCompatibilidade()">Match</a>
         </div>
 
         <div class="user-profile">

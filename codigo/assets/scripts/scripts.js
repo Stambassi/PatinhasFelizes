@@ -276,6 +276,49 @@ function limitarNome (inputField)
     }
   }
 }
+/**
+ * testarCredenciais - Pegar os dados na base da dados e testar se o login é valido
+ * Depois disso, colocar o id do usuario logado na sessionStorage 
+ * (ao inves de usar session Storage, pode implementar no localStorage)
+ * 
+ * !!!! Funcao nao implementada !!!!
+ */
+sessionStorage.setItem("usuario_login",-1); // caso -1, usuario nao logado
+async function testarCredenciais() {
+  sessionStorage.setItem("usuario_login",0);
+  fecharPopup();
+}
+
+/**
+ * testarCredenciaisOng - Pegar os dados na base da dados e testar se o login é valido
+ * Depois disso,colocar o id da ong logado na sessionStorage 
+ * 
+ * !!!! Funcao nao implementada !!!!
+ */
+sessionStorage.setItem("ong_login",-1); // caso -1, usuario nao logado
+ // caso -1, usuario nao logado
+async function testarCredenciaisOng() {
+  sessionStorage.setItem("ong_login",0);  
+  fecharPopup();
+  window.location.href = '../atividadesONG/AtividadesONG.html'
+}
+
+/**
+ * usuarioLogado - Funcao para testar se o usuario esta logado ou nao
+ * @returns True caso esteja, Falso caso nao
+ */
+function usuarioLogado(){
+  let usuario_login_id = sessionStorage.getItem("usuario_login");
+  return usuario_login_id >= 0;
+}
+/**
+ * ongLogado - Funcao para testar se a ong esta logado ou nao
+ * @returns True caso esteja, Falso caso nao
+ */
+function ongLogado(){
+  let ong_login_id = sessionStorage.getItem("ong_login");
+  return ong_login_id >= 0;
+}
 
 /* ------------------------------ Funções de auxílio para LOGIN/CADASTRO (FIM) ------------------------------------ */
 
@@ -317,11 +360,14 @@ function loginUsuarioEventos ()
   let closeWindow = document.querySelector('.lc-close-window');
   let cadastroUser = document.querySelector('#login-btn-cadastro');
   let loginONG = document.querySelector('#login-btn-instituicao');
+  let login = document.querySelector('#login-submit');
+
 //Definir eventos
   closeWindow.addEventListener('click', () => fecharPopup());
   controlarSenha();
   cadastroUser.addEventListener('click', async () => await cadastroUsuario());
   loginONG.addEventListener('click', async () => await loginInstituicao()); 
+  login.addEventListener('click', async() => await testarCredenciais());
 }
 
 /* ------------------------ Definir comportamento para mostrar o pop-up de LOGIN de USUÁRIO (FIM) ------------------------ */
@@ -644,6 +690,7 @@ async function loginInstituicaoEventos ()
   let closeWindow = document.querySelector('.lc-close-window');
   let cadastroONG = document.querySelector('#cadastro-instituicao');
   let loginUser = document.querySelector('#login-usuario');
+  let login = document.querySelector('#login-submit');
 //Definir máscara do input de CNPJ
   $('.lc-input-field[placeholder="CNPJ"]').mask('00.000.000/0000-00');
 //Definir eventos
@@ -651,6 +698,8 @@ async function loginInstituicaoEventos ()
   controlarSenha();
   cadastroONG.addEventListener('click', async () => await cadastroInstituicao());
   loginUser.addEventListener('click', async () => await loginUsuario());  
+  login.addEventListener('click', async() => await testarCredenciaisOng());
+
 }
 
 
@@ -911,7 +960,7 @@ function cadastroInstituicaoPreenchido_3 ()
 async function perfilUsuario ()
 {
 //Redirecionar pagina
-  // window.location.href = 'pages/perfilUsuario/perfil-usuario.html';
+  window.location.href = '../perfilUsuario/perfil-usuario.html';
 //Definir dados locais
   let pagina = 1;
 //Definir eventos da pagina de perfil
@@ -1381,6 +1430,61 @@ function perfilUsuarioResetarBotoes ()
 
 /* ---------------------- Definir comportamento para mostrar a tela de PERFIL de USUÁRIO (FIM) ----------------------------- */
 
+/* ------------------------------- Definir funcoes gerais para os cadastros (INICIO) ----------------------------------- */
+
+function getRadio(radioName) {
+  let x = document.getElementsByName(radioName);
+  let value;
+  x.forEach(element => {
+    if (element.checked == true) {
+      value = element.value;
+    }
+  });
+  return value;
+}
+function getBoolRadio(radioName) {
+  let x = document.getElementsByName(radioName);
+  let value;
+  x.forEach(element => {
+    if (element.checked == true) {
+      if (element.value === "true") {
+        value = true;
+      } else {
+        value = false;
+      }
+    }
+  });
+  return value;
+}
+function getRadioText(radioName, outrosOptionId, checkOption) {
+  let x = document.getElementsByName(radioName);
+  let outros = document.getElementById(outrosOptionId).value;
+  let value;
+
+  x.forEach(element => {
+    if (element.checked == true) {
+      if (element.value === checkOption) {
+        value = outros;
+      } else {
+        value = element.value;
+      }
+    }
+  });
+  return value;
+}
+
+
+function haveNullValue(data){
+  let resp = false;
+  for(var key in data){
+    if(data[key] === "" || data[key] === null){
+      console.log(key);
+      resp = true;
+    }
+  }
+  return resp;
+}
+/* ------------------------------- Definir funcoes gerais para os cadastros (FIM) ----------------------------------- */
 
 /* ------------------------------- Definir comportamento do CADASTRO DE ANIMAL (INICIO) ----------------------------------- */
 
@@ -1552,7 +1656,7 @@ expForm.forEach(element => {
   element.addEventListener("click", () => {
     let div = document.getElementById("sim_exp");
     if (element.checked) {
-      if (element.value == "S") {
+      if (element.value == "true") {
         div.style.display = "block"
       } else {
         div.style.display = "none"
@@ -1565,6 +1669,7 @@ expForm.forEach(element => {
 
 function saveFormularioData(data){
   console.log(data);
+  perfilUsuario();
 }
 function submitFormulario() {
   let residencia = getRadioText('f_residencia', 'outros_value_residencia',"outros");
@@ -1650,12 +1755,13 @@ function submitFormAB(){
   if(haveNullValue(data)){
     alert("erro");
   } else {
-    saveABdata(data);
+    saveAnimalAbandonadoData(data);
   }
 }
 
-function saveABdata(data){
+function saveAnimalAbandonadoData(data){
   console.log(data);
+  perfilUsuario();
 }
 
 
@@ -1745,8 +1851,9 @@ async function carregarFiltroCidades() {
 async function carregarAnimais() {
 
 //Definir dados locais
-  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais";
-  let apiUrlJsonOngs = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/ongs";
+  let jsonUrl = "https://411e04ee-f1d3-4392-9194-c7d7df0f42a3-00-2pb2bewwebnm3.riker.replit.dev";
+  let apiUrlJsonAnimais = `${jsonUrl}/animais`;
+  let apiUrlJsonOngs = `${jsonUrl}/ongs`;
   let divConteudoAnimais = document.querySelector("#telaInicial-Conteudo");
   let animais = {}, ongs = {};
   let strHTML = "", strGeneroAnimal = "", strNomeOng = "", strCidadeOng = ""; 
@@ -1761,7 +1868,6 @@ async function carregarAnimais() {
 //Acesso aos dados do JSON Server
   animais = await readJSONServer(apiUrlJsonAnimais);
   ongs = await readJSONServer(apiUrlJsonOngs);
-
 //Gravacao dos cards na String strHTML
   for(let x = 0; x < animais.length; x++) {
 
@@ -1786,7 +1892,6 @@ async function carregarAnimais() {
     booleanFiltroEspecie = filtroEspecieEl.value === 'U' || filtroEspecieEl.value === animais[x].especie;
 
     if(booleanFiltroEspecie && booleanFiltroGenero && booleanFiltroPorte && booleanFiltroCidade) {
- 
       strHTML += `<div class="telaInicial-Card">
                       <img src="${animais[x].imagem}" alt="">
                       <p>${strNomeOng}</p>
@@ -1830,8 +1935,9 @@ function carregarDescricaoAnimalPopupEventos () {
 
 async function abrirDescricaoAnimalPopup(event) {
 //Definir dados locais
-  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais?id_animal=";
-  let apiUrlJsonVacinas = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/vacinas?id_animal=";
+  let jsonUrl = "https://411e04ee-f1d3-4392-9194-c7d7df0f42a3-00-2pb2bewwebnm3.riker.replit.dev";
+  let apiUrlJsonAnimais = `${jsonUrl}/animais?id_animal=`;
+  let apiUrlJsonVacinas = `${jsonUrl}/vacinas?id_animal=`;
   let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
 
   let idEvent = event.target.id;
@@ -1905,11 +2011,12 @@ async function abrirDescricaoAnimalPopup(event) {
                             ${strVacinasAnimal};
                         </ul>
                     </div>
-                    <button>Adotar!</button>
+                    <button onclick="carregarPaginaAdocao(${animal.id_animal})">Adotar!</button>
                 </div>
             </div>`
 
 //Mudar o innerHTML da div descricao do animal de acordo com o id
+  console.log(strHTML);
   descricaoModalEl.innerHTML = strHTML;
 
 //Mudar o display para block
@@ -1931,6 +2038,51 @@ function fecharDescricaoAnimalPopup() {
   descricaoModalEl.style.display = "none";
 }
 
+
+async function carregarPaginaAdocao(id){
+    if(!usuarioLogado()){
+      fecharDescricaoAnimalPopup();
+      loginUsuario();
+      testarLoginAcabou('crud-form',id);
+    } 
+}
+
+async function carregarFormularioAnimalAbandonado(){
+  if(!usuarioLogado()){
+    loginUsuario();
+    testarLoginAcabou('crud-animal-ab',0);
+  } 
+}
+
+async function carregarPaginaCompatibilidade(){
+  if(!usuarioLogado()){
+    loginUsuario();
+    testarLoginAcabou('compatibilidade',0);
+  } 
+}
+
+
+function testarLoginAcabou(pagina,animal_id){
+  const repeticao = setInterval(function () {testarLoginAcabou(pagina,animal_id)} ,1000);
+  if(usuarioLogado()){
+    clearInterval(repeticao);
+    switch (pagina) {
+      case 'crud-form':
+        window.location.href = `../cadastros/crud-form.html?id=${animal_id}`
+        break;
+      case 'crud-animal-ab':
+        window.location.href = "../cadastros/crud-animal-abd.html"
+        break;
+      case 'compatibilidade':
+        window.location.href = "../compatibilidade/compatibilidade.html"
+        break;
+      default:
+        break;
+    }
+  }
+  
+    
+}
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS TELA INICIAL (FIM) ------------------ */
 
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (INICIO) ------------ */
