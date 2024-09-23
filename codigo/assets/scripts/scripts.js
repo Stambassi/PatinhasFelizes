@@ -3,6 +3,139 @@ function postUsuario (objUsuario)
   console.log(objUsuario);
 }
 
+async function getAnimal ()
+{
+//Definir dados locais
+  let animal = {
+    id_ong: 0,
+    id_animal: 0, 
+    nome: "Thor",
+    especie: "Cachorro",
+    raca: "Vira-lata",
+    genero: 'M',
+    castrado: true,
+    foto_animal: ["", "", ""],
+    dt_nascimento: "10/02/2022",
+    historia: "História blablablabla",
+    vacina: {
+      v8: true,
+      antirrábica: false, 
+      leishmaniose: false 
+    }
+  };
+//Retornar
+  return animal;
+}
+
+async function getOng ()
+{
+//Definir dados locais
+  let ong = {
+    id: 1,
+    nome: "Nome da ONG",
+    email: "",
+    senha: "",
+    telefones: ["telefone 1", "telefone 2"],
+    foto_perfil: "",
+    cnpj: "",
+    descricao: "",
+    endereco: [ {
+        rua: "",
+        numero: 1,
+        bairro: "",
+        cidade: "",
+        estado: ""
+    }, {} ],  
+  };
+//Retornar
+  return ong;
+}
+
+async function getUsuarioPerfil ()
+{
+//Definir dados locais
+  let usuario = { 
+    id: 1,
+    nome: "Lucas Carneiro Nassau Malta", 
+    email: "lucascarneiromalta@outlook.com", 
+    senha: "123456789", 
+    cpf: "169.494.196-51", 
+    data_de_nascimento: "06/09/2005", 
+    telefone: "(31) 99756-0386", 
+    tags: { atencao: 4, passeio: 1, carinho: 2, extrovertido: 5, animacao: 3 } ,
+    form_adocao: [
+      {
+        moradia: "Apartamento",
+        experiencia: true,
+        viagem: "Familiares",
+        disponibilidade: "2 horas ou mais",
+        visitas_ong: true,
+        consentimento: true,
+        adotante: 1,
+        comentarios: "Gostei muito desse animal",
+        data: "16/08/2024",
+        id_form: 1,
+        id_animal: 2,
+        id_ong: 3,
+        status: 0      
+      },
+      {
+        moradia: "Apartamento",
+        experiencia: true,
+        viagem: "Familiares",
+        disponibilidade: "2 horas ou mais",
+        visitas_ong: true,
+        consentimento: true,
+        adotante: 1,
+        comentarios: "Fofíssimo",
+        data: "10/08/2024",
+        id_form: 2,
+        id_animal: 4,
+        id_ong: 3,
+        status: 1
+      }
+    ],
+    form_abandonado: [
+      {
+        imagem: "",
+        especie: "Cachorro",
+        quantidade: 3,
+        endereco: {
+          rua: "Rua Stella Hanriot",
+          numero: 515,
+          bairro: "Buritis",
+          cidade: "Belo Horizonte",
+          estado: "MG"
+        },
+        condicao: "Eles estavam em uma caixa de papelão",
+        lar_temporario: 0,
+        foto_abandonado: "",
+        id_form: 1,
+        status: 0
+      },
+      {
+        imagem: "",
+        especie: "Gato",
+        quantidade: 1,
+        endereco: {
+          rua: "Rua Stella Hanriot",
+          numero: 515,
+          bairro: "Buritis",
+          cidade: "Belo Horizonte",
+          estado: "MG"
+        },
+        condicao: "Ele estava preso em uma árvore",
+        lar_temporario: 0,
+        foto_abandonado: "",
+        id_form: 2,
+        status: 1
+      }
+    ]
+  };
+//Retornar
+  return usuario;
+}
+
 
 /* ------------------------------ Funções de auxílio para LOGIN/CADASTRO (INICIO) ------------------------------------ */
 
@@ -38,7 +171,8 @@ async function carregarHtml (url)
 function adicionarPopup (data, htmlElement, carregarEventos)
 {
 //Testar se outro pop-up esta ativo
-  let modal = document.querySelector('.modal');
+
+  let modal = document.querySelector('.modal-controle');
   if ( modal )
   {
   //Remover o container existente
@@ -142,6 +276,49 @@ function limitarNome (inputField)
     }
   }
 }
+/**
+ * testarCredenciais - Pegar os dados na base da dados e testar se o login é valido
+ * Depois disso, colocar o id do usuario logado na sessionStorage 
+ * (ao inves de usar session Storage, pode implementar no localStorage)
+ * 
+ * !!!! Funcao nao implementada !!!!
+ */
+sessionStorage.setItem("usuario_login",-1); // caso -1, usuario nao logado
+async function testarCredenciais() {
+  sessionStorage.setItem("usuario_login",0);
+  fecharPopup();
+}
+
+/**
+ * testarCredenciaisOng - Pegar os dados na base da dados e testar se o login é valido
+ * Depois disso,colocar o id da ong logado na sessionStorage 
+ * 
+ * !!!! Funcao nao implementada !!!!
+ */
+sessionStorage.setItem("ong_login",-1); // caso -1, usuario nao logado
+ // caso -1, usuario nao logado
+async function testarCredenciaisOng() {
+  sessionStorage.setItem("ong_login",0);  
+  fecharPopup();
+  window.location.href = '../atividadesONG/AtividadesONG.html'
+}
+
+/**
+ * usuarioLogado - Funcao para testar se o usuario esta logado ou nao
+ * @returns True caso esteja, Falso caso nao
+ */
+function usuarioLogado(){
+  let usuario_login_id = sessionStorage.getItem("usuario_login");
+  return usuario_login_id >= 0;
+}
+/**
+ * ongLogado - Funcao para testar se a ong esta logado ou nao
+ * @returns True caso esteja, Falso caso nao
+ */
+function ongLogado(){
+  let ong_login_id = sessionStorage.getItem("ong_login");
+  return ong_login_id >= 0;
+}
 
 /* ------------------------------ Funções de auxílio para LOGIN/CADASTRO (FIM) ------------------------------------ */
 
@@ -154,6 +331,7 @@ function loginOnload ()
 {
   let loginBtnMostrar = document.querySelector("#btnMostrarLogin");
   let btnPerfil = document.querySelector('#btnPerfil');
+  console.log(loginBtnMostrar);
   loginBtnMostrar.addEventListener('click', () => loginUsuario());
   btnPerfil.addEventListener('click', () => perfilUsuario());
 }
@@ -164,10 +342,11 @@ function loginOnload ()
 async function loginUsuario ()
 {
 //Definir dados locais
-  let main = document.querySelector('main');
+  let main = document.querySelector('body');
   let container;
 //Recuperar html
-  container = await carregarHtml('../codigo/pages/loginUsuario/login-template.html');
+  container = await carregarHtml('../../../../pages/loginUsuario/login-template.html');
+  //console.log(container)
 //Adicionar html
   adicionarPopup(container, main, loginUsuarioEventos);
 }
@@ -181,11 +360,14 @@ function loginUsuarioEventos ()
   let closeWindow = document.querySelector('.lc-close-window');
   let cadastroUser = document.querySelector('#login-btn-cadastro');
   let loginONG = document.querySelector('#login-btn-instituicao');
+  let login = document.querySelector('#login-submit');
+
 //Definir eventos
   closeWindow.addEventListener('click', () => fecharPopup());
   controlarSenha();
   cadastroUser.addEventListener('click', async () => await cadastroUsuario());
   loginONG.addEventListener('click', async () => await loginInstituicao()); 
+  login.addEventListener('click', async() => await testarCredenciais());
 }
 
 /* ------------------------ Definir comportamento para mostrar o pop-up de LOGIN de USUÁRIO (FIM) ------------------------ */
@@ -204,8 +386,9 @@ async function cadastroUsuario ()
   let pagina = 1;
   let container;
 //Recuperar html
-  container = await carregarHtml(`../codigo/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`../../../../pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
+  console.log(container);
   adicionarPopup(container, main, cadastroUsuarioEventos);
 }
 
@@ -216,6 +399,7 @@ function cadastroUsuarioEventos ()
 {
 //Definir dados locais
   let pagina = parseInt( document.querySelector('.lc-input').id );
+  console.log(pagina)
   let closeWindow = document.querySelector('.lc-close-window');
   let inputNome = document.querySelector('#cadastro-input-field-1');
   let loginUser = document.querySelector('#cadastro-btn-login');
@@ -274,7 +458,7 @@ async function cadastroUsuarioPagina(pagina)
 //Definir dados locais
   let main = document.querySelector('main');
 //Recuperar html
-  container = await carregarHtml(`../codigo/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`../../../pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroUsuarioEventos);
 //Definir estilos e particularidades
@@ -492,7 +676,7 @@ async function loginInstituicao ()
   let main = document.querySelector('main');
   let container;
 //Recuperar container da pagina
-  container = await carregarHtml(`../codigo/pages/loginInstituicao/login-template.html`);
+  container = await carregarHtml(`../../../../pages/loginInstituicao/login-template.html`);
 //Atualizar o html da pagina
   adicionarPopup(container, main, loginInstituicaoEventos);
 }
@@ -506,6 +690,7 @@ async function loginInstituicaoEventos ()
   let closeWindow = document.querySelector('.lc-close-window');
   let cadastroONG = document.querySelector('#cadastro-instituicao');
   let loginUser = document.querySelector('#login-usuario');
+  let login = document.querySelector('#login-submit');
 //Definir máscara do input de CNPJ
   $('.lc-input-field[placeholder="CNPJ"]').mask('00.000.000/0000-00');
 //Definir eventos
@@ -513,6 +698,8 @@ async function loginInstituicaoEventos ()
   controlarSenha();
   cadastroONG.addEventListener('click', async () => await cadastroInstituicao());
   loginUser.addEventListener('click', async () => await loginUsuario());  
+  login.addEventListener('click', async() => await testarCredenciaisOng());
+
 }
 
 
@@ -533,7 +720,7 @@ async function cadastroInstituicao ()
   let pagina = 1;  
   let container;
 //Recuperar html
-  container = await carregarHtml(`../codigo/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`../../../../pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Atualizar o html da pagina
   adicionarPopup(container, main, cadastroInstituicaoEventos); 
 }
@@ -604,7 +791,7 @@ async function cadastroInstituicaoPagina (pagina)
   let container;
   let lc_container = document.querySelector('.lc-container');
 //Recuperar html
-  container = await carregarHtml(`../codigo/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`../../../../pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroInstituicaoEventos);
 //Definir estilos
@@ -767,17 +954,23 @@ function cadastroInstituicaoPreenchido_3 ()
 
 /* ---------------------- Definir comportamento para mostrar a tela de PERFIL de USUÁRIO (INÍCIO) ----------------------------- */
 
-
+/**
+ * perfilUsuario - Função para redirecionar o usuário à sua tela de perfil
+ */
 async function perfilUsuario ()
 {
 //Redirecionar pagina
-  // window.location.href = 'pages/perfilUsuario/perfil-usuario.html';
+  window.location.href = '../perfilUsuario/perfil-usuario.html';
 //Definir dados locais
   let pagina = 1;
 //Definir eventos da pagina de perfil
   perfilUsuarioEventos(pagina);
 }
 
+/**
+ * perfilUsuarioEventos - Função para definir os eventos da pagina de perfil do usuário
+ * @param pagina - Página atual da tela de perfil do usuario
+ */
 function perfilUsuarioEventos (pagina)
 {
 //Definir dados locais
@@ -801,6 +994,10 @@ function perfilUsuarioEventos (pagina)
   });
 }
 
+/**
+ * atualizarPerfilUsuario - Funcao para controlar a atualizacao do cabecalho da tela de perfil do usuario
+ * @param pagina - Pagina atual da tela de perfil do usuario
+ */
 function atualizarPerfilUsuario (pagina)
 {
 //Testar pagina
@@ -812,6 +1009,9 @@ function atualizarPerfilUsuario (pagina)
   }
 }
 
+/**
+ * atualizarPerfilUsuario_1 - Funcao para exibir o cabecalho da primeira pagina da tela de perfil do usuario
+ */
 function atualizarPerfilUsuario_1 ()
 {
 //Definir dados locais
@@ -829,6 +1029,9 @@ function atualizarPerfilUsuario_1 ()
   conteudoPerfilUsuario(1);
 }
 
+/**
+ * atualizarPerfilUsuario_2 - Funcao para exibir o cabecalho da segunda pagina da tela de perfil do usuario
+ */
 function atualizarPerfilUsuario_2 ()
 {
 //Definir dados locais
@@ -846,6 +1049,9 @@ function atualizarPerfilUsuario_2 ()
   conteudoPerfilUsuario(2);
 }
 
+/**
+ * atualizarPerfilUsuario_3 - Funcao para exibir o cabecalho da terceira pagina da tela de perfil do usuario
+ */
 function atualizarPerfilUsuario_3 ()
 {
 //Definir dados locais
@@ -863,15 +1069,17 @@ function atualizarPerfilUsuario_3 ()
   conteudoPerfilUsuario(3);
 }
 
-let testeUsuario = { nome: "Lucas Carneiro Nassau Malta", email: "lucascarneiromalta@outlook.com", senha: "123456789", cpf: "169.494.196-51", data_de_nascimento: "06/09/2005", telefone: "(31) 99756-0386", tags: { atencao: 4, passeio: 1, carinho: 2, extrovertido: 5, animacao: 3 } };
-
+/**
+ * conteudoPerfilUsuario - Funcao para inserir o conteudo da pagina de perfil do usuario
+ * @param pagina - Pagina atual da tela de perfil do usuario
+ */
 async function conteudoPerfilUsuario (pagina)
 {
 //Definir dados locais
   let container = document.querySelector('#perfil-usuario-content');
   let contentAtual = document.querySelector('.perfil-usuario-controle');
   let contentNovo;
-  let usuario = testeUsuario;
+  let usuario = await getUsuarioPerfil();
 //Recuperar novo conteudo
   contentNovo = await carregarHtml(`./perfil-usuario-${pagina}.html`);
 //Remover o conteudo atual
@@ -881,9 +1089,13 @@ async function conteudoPerfilUsuario (pagina)
 //Preencher novo conteudo com os dados do usuario
   inserirPerfilUsuario (usuario, pagina);
 //Definir eventos
-  perfilUsuarioNovosEventos(pagina);
+  await perfilUsuarioNovosEventos(pagina);
 }
 
+/**
+ * inserirPerfilUsuario - Funcao para inserir os dados do usuario na tela de perfil do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario
+ */
 function inserirPerfilUsuario (usuario, pagina)
 {
 //Testar pagina
@@ -895,6 +1107,10 @@ function inserirPerfilUsuario (usuario, pagina)
   }
 }
 
+/**
+ * inserirPerfilUsuario_1 - Funcao para inserir os dados da primeira pagina da tela de perfil do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario
+ */
 function inserirPerfilUsuario_1 (usuario)
 {
 //Definir dados locais
@@ -927,57 +1143,135 @@ function inserirPerfilUsuario_1 (usuario)
   tag5.checked = true;
 }
 
-function inserirPerfilUsuario_2 (usuario)
+/**
+ * inserirPerfilUsuario_2 - Funcao para inserir os dados da segunda pagina da tela de perfil do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario
+ */
+async function inserirPerfilUsuario_2 (usuario)
 {
-  let imagem1 = document.querySelector('#perfil-usuario-2-row-1 .perfil-usuario-2-status img');
-  let text1 = document.querySelector('#perfil-usuario-2-row-1 .perfil-usuario-2-status p');
-  let imagem2 = document.querySelector('#perfil-usuario-2-row-2 .perfil-usuario-2-status img');
-  let text2 = document.querySelector('#perfil-usuario-2-row-2 .perfil-usuario-2-status p');
-  let imagem3 = document.querySelector('#perfil-usuario-2-row-3 .perfil-usuario-2-status img');
-  let text3 = document.querySelector('#perfil-usuario-2-row-3 .perfil-usuario-2-status p');
-  imagem1.src = "../../assets/img/waiting.png";
-  text1.innerText = "Aguardando resposta";
-  imagem2.src = "../../assets/img/failure.png";
-  text2.innerText = "Pedido negado";
-  imagem3.src = "../../assets/img/success.png";
-  text3.innerText = "Pedido aceito!";
+//Definir dados locais
+  let container = document.querySelector('#perfil-usuario-content-2');
+  let adocao = usuario.form_adocao;
+  let str = ""
+//Definir preenchimento de dados
+  for (let i = 0; i < adocao.length; i++)
+  {
+  //Definir dados locais
+    let form = adocao[i];
+    let animal = await getAnimal(); // COMPLETAR <------------
+    let ong = await getOng( form.id_ong ); // COMPLETAR <------------
+    let status = form.status;
+    let imgStatus = "";
+    let msg = "";
+  //Testar status
+    if (status === 0)
+    { imgStatus = "../../assets/img/failure.png"; msg = "Pedido negado";  }
+    else if (status === 1)
+    { imgStatus = "../../assets/img/success.png"; msg = "Pedido aceito";  }
+    else if (status == 2)
+    { imgStatus = "../../assets/img/waiting.png"; msg = "Aguardando resposta";  }
+  //Definir nova linha
+    str += `
+      <div class="perfil-usuario-2-row" id="perfil-usuario-2-row-${form.id_form}">
+        <div class="perfil-usuario-2-imagem">
+          <img src="${animal.imagem[0]}" alt="imagem-animal">
+        </div>
+        <div class="perfil-usuario-2-informacoes">
+          <p>Animal desejado: <span id="perfil-usuario-2-informacoes-animal">${animal.nome}</span></p>
+          <p>Pedido realizado para: <span id="perfil-usuario-2-informacoes-instituicao">${ong.nome}</span></p>
+          <p>Data do pedido: <span id="perfil-usuario-2-informacoes-data">${form.data}</span></p>
+        </div>
+        <div class="perfil-usuario-2-status">
+          <img src="${imgStatus}" alt="imagem-status">
+          <p>${msg}</p>
+        </div>
+      </div>
+    `;
+  }
+//Atribuir novo conteudo
+  container.innerHTML = str;
 }
 
-function inserirPerfilUsuario_3 (usuario)
+/**
+ * inserirPerfilUsuario_3 - Funcao para inserir os dados da terceira pagina da tela de perfil do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario
+ */
+async function inserirPerfilUsuario_3 (usuario)
 {
-  let imagem1 = document.querySelector('#perfil-usuario-3-row-1 .perfil-usuario-3-status img');
-  let text1 = document.querySelector('#perfil-usuario-3-row-1 .perfil-usuario-3-status p');
-  let imagem2 = document.querySelector('#perfil-usuario-3-row-2 .perfil-usuario-3-status img');
-  let text2 = document.querySelector('#perfil-usuario-3-row-2 .perfil-usuario-3-status p');
-  let imagem3 = document.querySelector('#perfil-usuario-3-row-3 .perfil-usuario-3-status img');
-  let text3 = document.querySelector('#perfil-usuario-3-row-3 .perfil-usuario-3-status p');
-  imagem1.src = "../../assets/img/waiting.png";
-  text1.innerText = "Aguardando resposta";
-  imagem2.src = "../../assets/img/failure.png";
-  text2.innerText = "Pedido negado";
-  imagem3.src = "../../assets/img/success.png";
-  text3.innerText = "Pedido aceito!";
+
+//Definir dados locais
+let container = document.querySelector('#perfil-usuario-content-3');
+let abandonado = usuario.form_abandonado;
+let str = ""
+//Definir preenchimento de dados
+for (let i = 0; i < abandonado.length; i++)
+{
+//Definir dados locais
+  let form = abandonado[i];
+  let animal = await getAnimal(); // COMPLETAR <------------
+  let ong = await getOng( form.id_ong ); // COMPLETAR <------------
+  let status = form.status;
+  let imgStatus = "";
+  let msg = "";
+//Testar status
+  if (status === 0)
+  { imgStatus = "../../assets/img/failure.png"; msg = "Pedido negado";  }
+  else if (status === 1)
+  { imgStatus = "../../assets/img/success.png"; msg = "Pedido aceito";  }
+  else if (status == 2)
+  { imgStatus = "../../assets/img/waiting.png"; msg = "Aguardando resposta";  }
+//Definir nova linha
+  str += `
+    <div class="perfil-usuario-3-row"  id="perfil-usuario-3-row-1">
+      <div class="perfil-usuario-3-imagem">
+        <img src="${form.imagem[0]}" alt="imagem-animal">
+      </div>
+      <div class="perfil-usuario-3-informacoes">
+        <p>Animais encontrados: <span id="perfil-usuario-2-informacoes-animal">${form.quantidade}</span></p>
+        <p>Local encontrado: <span id="perfil-usuario-2-informacoes-local">${form.endereco.rua}</span></p>
+        <p>Data do pedido: <span id="perfil-usuario-2-informacoes-contato">${form.data}</span></p>
+      </div>
+      <div class="perfil-usuario-3-status">
+        <img src="${imgStatus}" alt="imagem-status">
+        <p>${msg}</p>
+      </div>
+    </div>
+  `;
+}
+//Atribuir novo conteudo
+container.innerHTML = str;
 }
 
-function perfilUsuarioNovosEventos (pagina)
+/**
+ * perfilUsuarioNovosEventos - Funcao para controlar a definicao de eventos de cada pagina da tela de perfil do usuario
+ * @param pagina - Pagina atual da tela de perfil do usuario
+ */
+async function perfilUsuarioNovosEventos (pagina)
 {
   switch (pagina)
   {
-    case 1: perfilUsuarioNovosEventos_1 (); break;
-    case 2: perfilUsuarioNovosEventos_2 (); break;
-    case 3: perfilUsuarioNovosEventos_3 (); break;
+    case 1: await perfilUsuarioNovosEventos_1 (); break;
+    // case 2: await perfilUsuarioNovosEventos_2 (); break;
+    // case 3: await perfilUsuarioNovosEventos_3 (); break;
   }
 }
 
-function perfilUsuarioNovosEventos_1 ()
+/**
+ * perfilUsuarioNovosEventos_1 - Funcao para definir os eventos da primeira pagina da tela de perfil do usuario
+ */
+async function perfilUsuarioNovosEventos_1 ()
 {
 //Definir dados locais
   let editar = document.querySelector('#perfil-editar');
-  let usuario  = testeUsuario;
+  let usuario  = await getUsuarioPerfil();
 //Definir eventos
   editar.addEventListener('click', () => editarUsuario(usuario));
 }
 
+/**
+ * editarUsuario - Funcao para controlar a acao de editar o usuario na tela de perfil
+ * @param usuario - Objeto contendo as informacoes do usuario a ser editado
+ */
 function editarUsuario (usuario)
 {
 //Atualizar campos da pagina de perfil
@@ -988,7 +1282,7 @@ function editarUsuario (usuario)
 //Definir eventos de edição
   botaoConfirmar.addEventListener('click', () => {
     let usuario = preencherPerfilUsuario();
-    testeUsuario = usuario;
+    postUsuario(usuario);
     perfilUsuarioResetarBotoes();
     conteudoPerfilUsuario(1);
   });
@@ -998,6 +1292,9 @@ function editarUsuario (usuario)
   });
 }
 
+/**
+ * substituirPerfilUsuario - Funcao para permitir a edicao/entrada de dados na tela de perfil do usuario
+ */
 function substituirPerfilUsuario (usuario)
 {
 //Definir dados locais
@@ -1039,6 +1336,10 @@ function substituirPerfilUsuario (usuario)
   divBotoes.insertAdjacentHTML('beforeend', botaoConfirmar);
 }
 
+/**
+ * preencherPerfilUsuario - Funcao para controlar o preenchimento do novo objeto Usuario apos a edicao
+ * @return usuario - Objeto contendo as informacoes resultantes do usuario editado
+ */
 function preencherPerfilUsuario ()
 {
 //Definir dados locais
@@ -1051,6 +1352,11 @@ function preencherPerfilUsuario ()
   return usuario;
 }
 
+/**
+ * preencherPerfilUsuarioDados - Funcao para preencher os dados pessoais do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario a ser editado
+ * @return usuario - Objeto resultante contendo as informações do usuario editado
+ */
 function preencherPerfilUsuarioDados (usuario)
 {
 //Definir dados locais
@@ -1071,6 +1377,11 @@ function preencherPerfilUsuarioDados (usuario)
   return usuario;
 }
 
+/**
+ * preencherPerfilUsuarioTags - Funcao para preencher os dados de preferencia/personalidade do usuario
+ * @param usuario - Objeto contendo as informacoes do usuario a ser editado
+ * @return usuario - Objeto resultante contendo as informacoes do usuario editado
+ */
 function preencherPerfilUsuarioTags (usuario)
 {
 //Definir dados locais
@@ -1100,6 +1411,9 @@ function preencherPerfilUsuarioTags (usuario)
   return usuario;
 }
 
+/**
+ * perfilUsuarioResetarBotoes - Funcao para retirar os botoes de edicao (confirmar/descartar) e recolocar o botao de edicao
+ */
 function perfilUsuarioResetarBotoes ()
 {
 //Definir dados locais
@@ -1116,6 +1430,61 @@ function perfilUsuarioResetarBotoes ()
 
 /* ---------------------- Definir comportamento para mostrar a tela de PERFIL de USUÁRIO (FIM) ----------------------------- */
 
+/* ------------------------------- Definir funcoes gerais para os cadastros (INICIO) ----------------------------------- */
+
+function getRadio(radioName) {
+  let x = document.getElementsByName(radioName);
+  let value;
+  x.forEach(element => {
+    if (element.checked == true) {
+      value = element.value;
+    }
+  });
+  return value;
+}
+function getBoolRadio(radioName) {
+  let x = document.getElementsByName(radioName);
+  let value;
+  x.forEach(element => {
+    if (element.checked == true) {
+      if (element.value === "true") {
+        value = true;
+      } else {
+        value = false;
+      }
+    }
+  });
+  return value;
+}
+function getRadioText(radioName, outrosOptionId, checkOption) {
+  let x = document.getElementsByName(radioName);
+  let outros = document.getElementById(outrosOptionId).value;
+  let value;
+
+  x.forEach(element => {
+    if (element.checked == true) {
+      if (element.value === checkOption) {
+        value = outros;
+      } else {
+        value = element.value;
+      }
+    }
+  });
+  return value;
+}
+
+
+function haveNullValue(data){
+  let resp = false;
+  for(var key in data){
+    if(data[key] === "" || data[key] === null){
+      console.log(key);
+      resp = true;
+    }
+  }
+  return resp;
+}
+/* ------------------------------- Definir funcoes gerais para os cadastros (FIM) ----------------------------------- */
 
 /* ------------------------------- Definir comportamento do CADASTRO DE ANIMAL (INICIO) ----------------------------------- */
 
@@ -1287,7 +1656,7 @@ expForm.forEach(element => {
   element.addEventListener("click", () => {
     let div = document.getElementById("sim_exp");
     if (element.checked) {
-      if (element.value == "S") {
+      if (element.value == "true") {
         div.style.display = "block"
       } else {
         div.style.display = "none"
@@ -1300,6 +1669,7 @@ expForm.forEach(element => {
 
 function saveFormularioData(data){
   console.log(data);
+  perfilUsuario();
 }
 function submitFormulario() {
   let residencia = getRadioText('f_residencia', 'outros_value_residencia',"outros");
@@ -1385,12 +1755,13 @@ function submitFormAB(){
   if(haveNullValue(data)){
     alert("erro");
   } else {
-    saveABdata(data);
+    saveAnimalAbandonadoData(data);
   }
 }
 
-function saveABdata(data){
+function saveAnimalAbandonadoData(data){
   console.log(data);
+  perfilUsuario();
 }
 
 
@@ -1425,7 +1796,7 @@ async function readJSONServer(url) {
 async function readJSONServerId(url, id) {
 //Definir dados locais
   let obj = {};
-  url += `/${id}`
+  url += `${id}`
   try {
 //Acesso aos dados da url
     const response = await fetch(url);
@@ -1438,6 +1809,40 @@ async function readJSONServerId(url, id) {
 //Retorno obj
   return obj;
 }
+ /**
+ * carregarFiltroCidades - Funcao para carregar os filtros de cidade do JSON Server e exibi-los na tela inicial.
+ */ 
+
+async function carregarFiltroCidades() {
+  let filtroCidadeEl = document.querySelector("#telaInicial-FiltroCidade");
+  let apiUrlJsonOngs = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/ongs";
+  let ongs = {}, cidades = [];
+  let strHTML = "", stringValueCidade = "";
+  let controle = true;
+  let nCidades = 0;
+
+  ongs = await readJSONServer(apiUrlJsonOngs);
+
+  strHTML = `<option value="U">Todas</option>`;
+  for(let x = 0; x < ongs.length; x++) {
+
+    controle = true;
+    for(let y = 0; y < cidades.length; y++) {
+      if(ongs[x].cidade == cidades[y]) {
+        controle = false;
+      }
+    }
+
+    if(controle) {
+      cidades[nCidades] = ongs[x].cidade;
+      strHTML += `<option value="${cidades[nCidades]}">${cidades[nCidades]}</option>`
+      nCidades++;
+    }
+
+  }
+
+  filtroCidadeEl.innerHTML = strHTML;
+}
 
  /**
  * carregarAnimais - Funcao para carregar os animais do JSON Server e exibi-los na tela inicial.
@@ -1446,36 +1851,61 @@ async function readJSONServerId(url, id) {
 async function carregarAnimais() {
 
 //Definir dados locais
-  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais";
+  let jsonUrl = "https://411e04ee-f1d3-4392-9194-c7d7df0f42a3-00-2pb2bewwebnm3.riker.replit.dev";
+  let apiUrlJsonAnimais = `${jsonUrl}/animais`;
+  let apiUrlJsonOngs = `${jsonUrl}/ongs`;
   let divConteudoAnimais = document.querySelector("#telaInicial-Conteudo");
-  let animais = {};
-  let strHTML = "";
-  let strSexoAnimal = "" 
+  let animais = {}, ongs = {};
+  let strHTML = "", strGeneroAnimal = "", strNomeOng = "", strCidadeOng = ""; 
+
+  let filtroCidadeEl = document.querySelector("#telaInicial-FiltroCidade");
+  let filtroGeneroEl = document.querySelector("#telaInicial-FiltroGenero");
+  let filtroPorteEl = document.querySelector("#telaInicial-FiltroPorte");
+  let filtroEspecieEl = document.querySelector("#telaInicial-FiltroEspecie");
+
+  let booleanFiltroGenero, booleanFiltroPorte, booleanFiltroEspecie, booleanFiltroCidade; 
 
 //Acesso aos dados do JSON Server
   animais = await readJSONServer(apiUrlJsonAnimais);
-
+  ongs = await readJSONServer(apiUrlJsonOngs);
 //Gravacao dos cards na String strHTML
   for(let x = 0; x < animais.length; x++) {
 
 //Controle icone do sexo do animal
-    if(animais[x].sexo == 'F') {
-      strSexoAnimal = "venus"; 
+    if(animais[x].genero == 'F') {
+      strGeneroAnimal = "venus"; 
     } else {
-      strSexoAnimal = "mars"; 
+      strGeneroAnimal = "mars"; 
     }
 
-    strHTML += `<div class="telaInicial-Card">
-                    <img src="${animais[x].imagem}" alt="">
-                    <p>ONG ASS SOCIAL PROTEÇÃO ANIMAIS ANJOS PATAS</p>
-                    <div class="telaInicial-Card-Informacoes">
-                        <div class="telaInicial-Card-InfPet">
-                        <i class="fa-solid fa-2xl fa-${strSexoAnimal}"></i>
-                        <h5>${animais[x].nome}</h5>
-                        </div>
-                        <button id="${animais[x].id}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
-                    </div>
-                </div>`
+    for(let y = 0; y < ongs.length; y++) {
+      if(animais[x].id_ong == ongs[y].id_ong) {
+          strNomeOng = ongs[y].nome;
+          strCidadeOng = ongs[y].cidade;
+      }
+    }
+
+//Controle filtro de exibicao animais
+    booleanFiltroCidade = filtroCidadeEl.value === 'U' || filtroCidadeEl.value === strCidadeOng;
+    booleanFiltroGenero = filtroGeneroEl.value === 'U' || filtroGeneroEl.value === animais[x].genero;
+    booleanFiltroPorte = filtroPorteEl.value === 'U' || filtroPorteEl.value === animais[x].porte;
+    booleanFiltroEspecie = filtroEspecieEl.value === 'U' || filtroEspecieEl.value === animais[x].especie;
+
+    if(booleanFiltroEspecie && booleanFiltroGenero && booleanFiltroPorte && booleanFiltroCidade) {
+      strHTML += `<div class="telaInicial-Card">
+                      <img src="${animais[x].imagem}" alt="">
+                      <p>${strNomeOng}</p>
+                      <p>${strCidadeOng}</p>
+                      <div class="telaInicial-Card-Informacoes">
+                          <div class="telaInicial-Card-InfPet">
+                          <i class="fa-solid fa-2xl fa-${strGeneroAnimal}"></i>
+                          <h5>${animais[x].nome}</h5>
+                          </div>
+                          <button id="${animais[x].id_animal}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
+                      </div>
+                  </div>`
+    }
+
   }
 
 //Insercao da String strHTML na tela inicial
@@ -1505,32 +1935,49 @@ function carregarDescricaoAnimalPopupEventos () {
 
 async function abrirDescricaoAnimalPopup(event) {
 //Definir dados locais
-  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais";
+  let jsonUrl = "https://411e04ee-f1d3-4392-9194-c7d7df0f42a3-00-2pb2bewwebnm3.riker.replit.dev";
+  let apiUrlJsonAnimais = `${jsonUrl}/animais?id_animal=`;
+  let apiUrlJsonVacinas = `${jsonUrl}/vacinas?id_animal=`;
   let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
 
   let idEvent = event.target.id;
-  let animal = {};
-  let strHTML = "";
-  let srcSexoAnimal = ""; 
-  let strSexoAnimal = ""; 
-  let strCastradoAnimal = "";
+  let animal = {}, vacinas = {}, animais = {};
+  let strHTML = "", srcGeneroAnimal = "", strGeneroAnimal = "", strCastradoAnimal = "", strPorteAnimal = "", strVacinasAnimal = "";
 
 //Acesso ao dado do id no JSON Server
-  animal = await readJSONServerId(apiUrlJsonAnimais, idEvent);
+  animais = await readJSONServerId(apiUrlJsonAnimais, idEvent);
+  vacinas = await readJSONServerId(apiUrlJsonVacinas, idEvent);
 
-//Controle icone do sexo do animal
-  if(animal.sexo == 'F') {
-    srcSexoAnimal = "venus"; 
-    strSexoAnimal = "Fêmea";
+  animal = animais[0];
+
+//Controle caracteristicas animal
+  if(animal.genero == 'F') {
+    srcGeneroAnimal = "venus"; 
+    strGeneroAnimal = "Fêmea";
   } else {
-    srcSexoAnimal = "mars"; 
-    strSexoAnimal = "Macho";
+    srcGeneroAnimal = "mars"; 
+    strGeneroAnimal = "Macho";
   }
 
   if(animal.castrado) {
     strCastradoAnimal = "Castrado"; 
   } else {
     strCastradoAnimal = "Não Castrado"; 
+  }
+
+  if(animal.porte == 'P') {
+    strPorteAnimal = "Pequeno";
+  } else {
+    if(animal.porte == 'M') {
+      strPorteAnimal = "Médio";
+    } else {
+      strPorteAnimal = "Grande";
+    }
+  }
+
+  strVacinasAnimal = "";
+  for(let y = 0; y < vacinas.length; y++) {
+      strVacinasAnimal += `<li>${vacinas[y].nome}</li>`;
   }
 
 //Mudanca strHTML 
@@ -1541,15 +1988,15 @@ async function abrirDescricaoAnimalPopup(event) {
                         <div class="telaInicial-PopUp-ModalFechar">
                             <div class="telaInicial-PopUpInformacoesPrincipais-Titulo">
                                 <h3>${animal.nome}</h3>
-                                <i class="fa-solid fa-1xl fa-${srcSexoAnimal}"></i>
+                                <i class="fa-solid fa-1xl fa-${srcGeneroAnimal}"></i>
                             </div>
                             <i class="fa-solid fa-x telaInicial-fecharModalBtn"></i>
                         </div>
                         <div class="telaInicial-PopUpInformacoesPrincipais-Subtitulo">
                             <p>${animal.especie}</p>
                             <p>${animal.raca}</p>
-                            <p>${strSexoAnimal}</p>
-                            <p>${animal.porte}</p>
+                            <p>${strGeneroAnimal}</p>
+                            <p>${strPorteAnimal}</p>
                             <p>${animal.idade}</p>
                             <p>${strCastradoAnimal}</p>
                         </div>
@@ -1561,17 +2008,15 @@ async function abrirDescricaoAnimalPopup(event) {
                     <div class="telaInicial-PopUpInformacoesVacinas">
                         <h5>Vacinas</h5>
                         <ul>
-                            <li>FIV</li>
-                            <li>FeLV</li>
-                            <li>V4</li>
-                            <li>V5</li>
+                            ${strVacinasAnimal};
                         </ul>
                     </div>
-                    <button>Adotar!</button>
+                    <button onclick="carregarPaginaAdocao(${animal.id_animal})">Adotar!</button>
                 </div>
             </div>`
 
 //Mudar o innerHTML da div descricao do animal de acordo com o id
+  console.log(strHTML);
   descricaoModalEl.innerHTML = strHTML;
 
 //Mudar o display para block
@@ -1582,15 +2027,315 @@ async function abrirDescricaoAnimalPopup(event) {
   btFecharModalEl.addEventListener('click', () => fecharDescricaoAnimalPopup())
 }
   
-  /**
-   * fecharDescricaoAnimalPopup - Funcao para definir a visibilidade do pop-up de descricao do animal para 'none'
-   */
+/**
+ * fecharDescricaoAnimalPopup - Funcao para definir a visibilidade do pop-up de descricao do animal para 'none'
+ */
+
+function fecharDescricaoAnimalPopup() {
+//Definir dados locais
+  let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
+//Mudar o display para none
+  descricaoModalEl.style.display = "none";
+}
+
+
+async function carregarPaginaAdocao(id){
+    if(!usuarioLogado()){
+      fecharDescricaoAnimalPopup();
+      loginUsuario();
+      testarLoginAcabou('crud-form',id);
+    } 
+}
+
+async function carregarFormularioAnimalAbandonado(){
+  if(!usuarioLogado()){
+    loginUsuario();
+    testarLoginAcabou('crud-animal-ab',0);
+  } 
+}
+
+async function carregarPaginaCompatibilidade(){
+  if(!usuarioLogado()){
+    loginUsuario();
+    testarLoginAcabou('compatibilidade',0);
+  } 
+}
+
+
+function testarLoginAcabou(pagina,animal_id){
+  const repeticao = setInterval(function () {testarLoginAcabou(pagina,animal_id)} ,1000);
+  if(usuarioLogado()){
+    clearInterval(repeticao);
+    switch (pagina) {
+      case 'crud-form':
+        window.location.href = `../cadastros/crud-form.html?id=${animal_id}`
+        break;
+      case 'crud-animal-ab':
+        window.location.href = "../cadastros/crud-animal-abd.html"
+        break;
+      case 'compatibilidade':
+        window.location.href = "../compatibilidade/compatibilidade.html"
+        break;
+      default:
+        break;
+    }
+  }
   
-  function fecharDescricaoAnimalPopup() {
-  //Definir dados locais
-    let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
-  //Mudar o display para none
-    descricaoModalEl.style.display = "none";
+    
+}
+/* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS TELA INICIAL (FIM) ------------------ */
+
+/* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (INICIO) ------------ */
+
+let contadorAnimalCompatibilidade = 0;
+let contadorImagemAnimalCompatibilidade = 0;
+
+async function carregarDadosCompatibilidade() {
+    await carregarAnimaisCompatibilidade();
+    contadorAnimalCompatibilidade++;
+    contadorImagemAnimalCompatibilidade = 0;
+}
+
+function testeContadorImagemAnimalCompatibilidade(tamanhoMax) {
+
+  if(contadorImagemAnimalCompatibilidade >= tamanhoMax) {
+    contadorImagemAnimalCompatibilidade = 0;
+  } else {
+    if(contadorImagemAnimalCompatibilidade < 0) {
+      contadorImagemAnimalCompatibilidade = tamanhoMax-1;
+    }
   }
 
-/* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS TELA INICIAL (FIM) ------------------ */
+}
+
+async function proximaImagemCompatibilidade(event) {
+  
+  let apiUrlJsonImagensAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal?id_animal=";
+  let imagensAnimal = {};
+
+  let btEvent = event.target.id;
+  let imgAnimalEl = document.querySelector(".compatibilidade-EscolhasImagemCarousel"); 
+  let animalId = imgAnimalEl.id; 
+
+  imagensAnimal = await readJSONServerId(apiUrlJsonImagensAnimal, animalId);
+
+  if(btEvent == "compatibilidade-EscolhasCarouselImagemBtnD") {
+    contadorImagemAnimalCompatibilidade++;
+    testeContadorImagemAnimalCompatibilidade(imagensAnimal.length);
+    imgAnimalEl.src = imagensAnimal[contadorImagemAnimalCompatibilidade].imagem;
+  } else {
+    if(btEvent == "compatibilidade-EscolhasCarouselImagemBtnE") {
+      contadorImagemAnimalCompatibilidade--;
+      testeContadorImagemAnimalCompatibilidade(imagensAnimal.length);
+      imgAnimalEl.src = imagensAnimal[contadorImagemAnimalCompatibilidade].imagem;
+    }
+  }
+}
+
+
+async function carregarAnimaisCompatibilidade() {
+
+
+  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais";
+  let apiUrlJsonImagensAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal";
+  let divContainerEscolhasEl = document.querySelector(".compatibilidade-ContainerEscolhas");
+  let animais = {}, imagensAnimal = {};
+  let strHTML = "", strImagemAnimal = "";
+  let resultado = false;
+  let y = 0;
+
+  animais = await readJSONServer(apiUrlJsonAnimais);
+  imagensAnimal = await readJSONServer(apiUrlJsonImagensAnimal);
+
+  if(contadorAnimalCompatibilidade == animais.length) {
+    contadorAnimalCompatibilidade = 0;
+  }
+
+  while(y < imagensAnimal.length && !resultado) {
+    if(animais[contadorAnimalCompatibilidade].id_animal == imagensAnimal[y].id_animal) {
+      resultado = true;
+      strImagemAnimal = imagensAnimal[y].imagem;
+    }
+    y++;
+  }
+
+  strHTML = `<h2>Encontre seu Parceiro Ideal!</h2>
+            <div id="compatibilidade-EscolhasCarouselImagemContainer">
+                <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnE" class="compatibilidade-EscolhasCarouselImagemBtn">&#8249;</button>
+                <img id="${animais[contadorAnimalCompatibilidade].id_animal}" class="compatibilidade-EscolhasImagemCarousel" onclick="abrirDescricaoAnimalPopup(event)" src="${strImagemAnimal}" alt="">
+                <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnD" class="compatibilidade-EscolhasCarouselImagemBtn">&#8250;</button>
+            </div>
+            <div id="compatibilidade-EscolhasInfAnimal">
+                <h2>${animais[contadorAnimalCompatibilidade].nome}</h2>
+                <p>${animais[contadorAnimalCompatibilidade].descricao}</p>
+            </div>
+            <div id="compatibilidade-EscolhasBotoes">
+                <button id="compatibilidade-EscolhasProximoBtn" onclick="carregarDadosCompatibilidade()">X</button>
+                <button id="compatibilidade-EscolhasAdotarBtn" onclick="confirmarCompatibilidade()">✔</button>
+            </div>`
+
+  divContainerEscolhasEl.innerHTML = strHTML;
+
+} 
+
+async function confirmarCompatibilidade() {
+
+  let apiUrlJsonTagsAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/etiquetas?id_animal=";
+  let apiUrlJsonTagsUsuario = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/etiquetas?id_usuario=";
+  let tagsAnimal = {}, tagsUsuario = {};
+  let distanciaPontos = 0.0, valorMaximo = 0.0, porcentagemCompatibilidade = 0.0;
+ 
+  let imgAnimalEl = document.querySelector(".compatibilidade-EscolhasImagemCarousel"); 
+  let animalId = imgAnimalEl.id; 
+
+  tagsAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, animalId);
+  tagsAnimal = tagsAnimal[0];
+  tagsUsuario = await readJSONServerId(apiUrlJsonTagsUsuario, 1);
+  tagsUsuario = tagsUsuario[0];
+
+  distanciaPontos = Math.sqrt( Math.pow((tagsAnimal.atencao - tagsUsuario.atencao), 2) + 
+  Math.pow((tagsAnimal.passeio - tagsUsuario.passeio), 2) + 
+  Math.pow((tagsAnimal.carinho - tagsUsuario.carinho), 2) +
+  Math.pow((tagsAnimal.extrovertido - tagsUsuario.extrovertido), 2) +
+  Math.pow((tagsAnimal.animacao - tagsUsuario.animacao), 2));         
+  
+  valorMaximo = Math.sqrt(80);
+
+  porcentagemCompatibilidade = ((distanciaPontos * 100)/valorMaximo);
+  porcentagemCompatibilidade = 100 - porcentagemCompatibilidade;
+
+  if(porcentagemCompatibilidade >= 70) {
+    await abrirModalMatch(animalId);
+  } else {
+    carregarDadosCompatibilidade();
+  }
+
+}
+
+async function abrirModalMatch(idAnimal) {
+
+  let divModalMatchEl = document.querySelector(".compatibilidade-PopUp-Modal");
+  let imgAnimalEl = document.querySelector(".compatibilidade-perfilAnimal");
+  let imgUsuarioEl = document.querySelector(".compatibilidade-perfilUsuario");
+
+  let apiUrlJsonTagsAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal?id_animal=";
+  let imagensAnimal = {};
+  let resultado = false;
+  let strImagemAnimal = "";
+  let y = 0;
+
+  imagensAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, idAnimal);
+
+  while(y < imagensAnimal.length && !resultado) {
+    if(idAnimal == imagensAnimal[y].id_animal) {
+      resultado = true;
+      strImagemAnimal = imagensAnimal[y].imagem;
+    }
+    y++;
+  }
+
+  divModalMatchEl.style.display = "block";
+  imgAnimalEl.src = strImagemAnimal;
+  imgAnimalEl.id = idAnimal;
+  imgUsuarioEl.src = "https://thumbs.dreamstime.com/b/%C3%ADcone-de-usu%C3%A1rio-m%C3%ADdia-social-vetor-imagem-perfil-do-avatar-padr%C3%A3o-retrato-182347582.jpg";
+
+}
+
+function fecharModalMatch() {
+  let divModalMatchEl = document.querySelector(".compatibilidade-PopUp-Modal");
+  divModalMatchEl.style.display = "none";
+}
+
+/* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */
+/*---------------------- Tela de Pefil ONG (Inicio) ------------------*/
+// Função que cria um objeto inicial da ONG no localStorage
+
+function AC_iniciarDados() {
+    const ong = {
+        nome: "Patinhas Felizes",
+        email: "contato@patinhasfelizes.org",
+        telefone: "(31) 98765-4321",
+        sobreNos: "Somos uma ONG dedicada ao resgate e cuidado de animais abandonados, buscando lares para eles.",
+        endereco: "Rua Fulano, Bairro Ciclano, Belo Horizonte, MG",
+        dataCriacao: "01/01/2020",
+        facebook: "https://www.facebook.com/ong-exemplo",
+        instagram: "https://www.instagram.com/ong-exemplo"
+    };
+
+    // Armazenando o objeto no localStorage
+    localStorage.setItem('ong', JSON.stringify(ong));
+}
+
+// Função que exibe os dados da ONG na página
+function AC_mostrarDados() {
+    const ong = JSON.parse(localStorage.getItem('ong'));
+
+    if (!ong) {
+        AC_iniciarDados();  // Inicializa os dados se não houver nenhum no localStorage
+        return AC_mostrarDados();
+    }
+
+    // Preenchendo os campos HTML com as informações da ONG
+    document.getElementById('ong-nome').innerText = ong.nome;
+    document.getElementById('ong-email').innerText = ong.email;
+    document.getElementById('ong-telefone').innerText = ong.telefone;
+    document.getElementById('ong-sobre-nos').innerText = ong.sobreNos;
+    document.getElementById('ong-endereco').innerText = ong.endereco;
+    document.getElementById('ong-data-criacao').innerText = ong.dataCriacao; // Exibindo data de criação
+}
+
+// Função que habilita a edição dos dados diretamente na página
+function AC_editarDados() {
+    const ong = JSON.parse(localStorage.getItem('ong'));
+
+    // Substituindo os elementos de exibição pelos campos de input
+    document.getElementById('ong-nome').innerHTML = `<input type="text" id="input-nome" value="${ong.nome}" />`;
+    document.getElementById('ong-email').innerHTML = `<input type="text" id="input-email" value="${ong.email}" />`;
+    document.getElementById('ong-telefone').innerHTML = `<input type="text" id="input-telefone" value="${ong.telefone}" />`;
+    document.getElementById('ong-sobre-nos').innerHTML = `<textarea id="input-sobre-nos">${ong.sobreNos}</textarea>`;
+    document.getElementById('ong-endereco').innerHTML = `<input type="text" id="input-endereco" value="${ong.endereco}" />`;
+    document.getElementById('ong-data-criacao').innerHTML = `<input type="text" id="input-data-criacao" value="${ong.dataCriacao}" />`;
+
+    // Adicionando o botão "OK" para salvar as alterações
+    document.getElementById('edit-ok-btn').style.display = 'block';
+}
+
+// Função que salva os dados editados e atualiza no localStorage
+function AC_salvarDados() {
+    const nome = document.getElementById('input-nome').value;
+    const email = document.getElementById('input-email').value;
+    const telefone = document.getElementById('input-telefone').value;
+    const sobreNos = document.getElementById('input-sobre-nos').value;
+    const endereco = document.getElementById('input-endereco').value;
+    const dataCriacao = document.getElementById('input-data-criacao').value;
+
+    // Atualizando o objeto ONG com os novos valores
+    const ongAtualizada = {
+        nome,
+        email,
+        telefone,
+        sobreNos,
+        endereco,
+        dataCriacao
+    };
+
+    // Salvando a nova versão no localStorage
+    localStorage.setItem('ong', JSON.stringify(ongAtualizada));
+
+    // Atualizando os campos na página
+    AC_mostrarDados();
+
+    // Ocultando o botão "OK"
+    document.getElementById('edit-ok-btn').style.display = 'none';
+}
+
+// Adicionando um listener ao botão de edição
+document.querySelector('.edit-icon-ong').addEventListener('click', AC_editarDados);
+
+// Adicionando listener ao botão "OK"
+document.getElementById('edit-ok-btn').addEventListener('click', AC_salvarDados);
+
+// Inicializando os dados ao carregar a página
+document.addEventListener('DOMContentLoaded', AC_mostrarDados);
+
+/*---------------------- Tela de Pefil ONG (Fim) ------------------*/
