@@ -1,6 +1,7 @@
 function postUsuario (objUsuario)
 {
   console.log(objUsuario);
+  localStorage.setItem("usuario_login", 1);
 }
 
 async function getAnimal ()
@@ -240,13 +241,13 @@ function inverterSenha (passwordImg, controle)
   if (controle === 1)
   {
     senhaInput.type = 'password';
-    passwordImg.src = "../../assets/img/hidden.png";
+    passwordImg.src = "../../../../codigo/assets/img/hidden.png";
     controle--;
   }
   else
   {
     senhaInput.type = 'text';
-    passwordImg.src = "../../assets/img/eye.png";
+    passwordImg.src = "../../../../codigo/assets/img/eye.png";
     controle++;
   }
 //Retornar
@@ -283,9 +284,9 @@ function limitarNome (inputField)
  * 
  * !!!! Funcao nao implementada !!!!
  */
-sessionStorage.setItem("usuario_login",-1); // caso -1, usuario nao logado
+//localStorage.setItem("usuario_login",-1); // caso -1, usuario nao logado
 async function testarCredenciais() {
-  sessionStorage.setItem("usuario_login",0);
+  localStorage.setItem("usuario_login",0);
   fecharPopup();
 }
 
@@ -295,12 +296,12 @@ async function testarCredenciais() {
  * 
  * !!!! Funcao nao implementada !!!!
  */
-sessionStorage.setItem("ong_login",-1); // caso -1, usuario nao logado
+//localStorage.setItem("ong_login",-1); // caso -1, usuario nao logado
  // caso -1, usuario nao logado
 async function testarCredenciaisOng() {
-  sessionStorage.setItem("ong_login",0);  
+  localStorage.setItem("ong_login",0);  
   fecharPopup();
-  window.location.href = '../atividadesONG/AtividadesONG.html'
+  window.location.href = '../../../../atividadesONG/AtividadesONG.html'
 }
 
 /**
@@ -308,7 +309,7 @@ async function testarCredenciaisOng() {
  * @returns True caso esteja, Falso caso nao
  */
 function usuarioLogado(){
-  let usuario_login_id = sessionStorage.getItem("usuario_login");
+  let usuario_login_id = localStorage.getItem("usuario_login");
   return usuario_login_id >= 0;
 }
 /**
@@ -316,7 +317,7 @@ function usuarioLogado(){
  * @returns True caso esteja, Falso caso nao
  */
 function ongLogado(){
-  let ong_login_id = sessionStorage.getItem("ong_login");
+  let ong_login_id = localStorage.getItem("ong_login");
   return ong_login_id >= 0;
 }
 
@@ -330,10 +331,7 @@ function ongLogado(){
 function loginOnload ()
 {
   let loginBtnMostrar = document.querySelector("#btnMostrarLogin");
-  let btnPerfil = document.querySelector('#btnPerfil');
-  console.log(loginBtnMostrar);
   loginBtnMostrar.addEventListener('click', () => loginUsuario());
-  btnPerfil.addEventListener('click', () => perfilUsuario());
 }
 
 /**
@@ -344,11 +342,20 @@ async function loginUsuario ()
 //Definir dados locais
   let main = document.querySelector('body');
   let container;
-//Recuperar html
-  container = await carregarHtml('../../../../pages/loginUsuario/login-template.html');
-  //console.log(container)
-//Adicionar html
-  adicionarPopup(container, main, loginUsuarioEventos);
+//Testar se ja esta logado
+  if ( usuarioLogado() )
+    window.location.href = '../../../../codigo/pages/perfilUsuario/perfil-usuario.html';
+  // else if ( ongLogado() )
+  // {
+  //   //perfilONG();
+  // }
+  else
+  {
+  //Recuperar html
+    container = await carregarHtml('../../../../codigo/pages/loginUsuario/login-template.html');
+  //Adicionar html
+    adicionarPopup(container, main, loginUsuarioEventos);
+  }
 }
 
 /**
@@ -386,9 +393,8 @@ async function cadastroUsuario ()
   let pagina = 1;
   let container;
 //Recuperar html
-  container = await carregarHtml(`../../../../pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`./pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
-  console.log(container);
   adicionarPopup(container, main, cadastroUsuarioEventos);
 }
 
@@ -399,7 +405,6 @@ function cadastroUsuarioEventos ()
 {
 //Definir dados locais
   let pagina = parseInt( document.querySelector('.lc-input').id );
-  console.log(pagina)
   let closeWindow = document.querySelector('.lc-close-window');
   let inputNome = document.querySelector('#cadastro-input-field-1');
   let loginUser = document.querySelector('#cadastro-btn-login');
@@ -458,7 +463,7 @@ async function cadastroUsuarioPagina(pagina)
 //Definir dados locais
   let main = document.querySelector('main');
 //Recuperar html
-  container = await carregarHtml(`../../../pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`../../../../codigo/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroUsuarioEventos);
 //Definir estilos e particularidades
@@ -676,7 +681,7 @@ async function loginInstituicao ()
   let main = document.querySelector('main');
   let container;
 //Recuperar container da pagina
-  container = await carregarHtml(`../../../../pages/loginInstituicao/login-template.html`);
+  container = await carregarHtml(`./pages/loginInstituicao/login-template.html`);
 //Atualizar o html da pagina
   adicionarPopup(container, main, loginInstituicaoEventos);
 }
@@ -720,7 +725,7 @@ async function cadastroInstituicao ()
   let pagina = 1;  
   let container;
 //Recuperar html
-  container = await carregarHtml(`../../../../pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`./pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Atualizar o html da pagina
   adicionarPopup(container, main, cadastroInstituicaoEventos); 
 }
@@ -791,7 +796,7 @@ async function cadastroInstituicaoPagina (pagina)
   let container;
   let lc_container = document.querySelector('.lc-container');
 //Recuperar html
-  container = await carregarHtml(`../../../../pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`../../../../codigo/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroInstituicaoEventos);
 //Definir estilos
@@ -960,7 +965,8 @@ function cadastroInstituicaoPreenchido_3 ()
 async function perfilUsuario ()
 {
 //Redirecionar pagina
-  window.location.href = '../perfilUsuario/perfil-usuario.html';
+  if (window.location.href != "http://127.0.0.1:5500/codigo/pages/perfilUsuario/perfil-usuario.html")
+    window.location.href = '../../../../codigo/pages/perfilUsuario/perfil-usuario.html';
 //Definir dados locais
   let pagina = 1;
 //Definir eventos da pagina de perfil
@@ -1081,7 +1087,7 @@ async function conteudoPerfilUsuario (pagina)
   let contentNovo;
   let usuario = await getUsuarioPerfil();
 //Recuperar novo conteudo
-  contentNovo = await carregarHtml(`./perfil-usuario-${pagina}.html`);
+  contentNovo = await carregarHtml(`../../../../codigo/pages/perfilUsuario/perfil-usuario-${pagina}.html`);
 //Remover o conteudo atual
   contentAtual.remove();
 //Adicionar novo conteudo
@@ -1165,11 +1171,11 @@ async function inserirPerfilUsuario_2 (usuario)
     let msg = "";
   //Testar status
     if (status === 0)
-    { imgStatus = "../../assets/img/failure.png"; msg = "Pedido negado";  }
+    { imgStatus = "../../../../codigo/assets/img/failure.png"; msg = "Pedido negado";  }
     else if (status === 1)
-    { imgStatus = "../../assets/img/success.png"; msg = "Pedido aceito";  }
+    { imgStatus = "../../../../codigo/assets/img/success.png"; msg = "Pedido aceito";  }
     else if (status == 2)
-    { imgStatus = "../../assets/img/waiting.png"; msg = "Aguardando resposta";  }
+    { imgStatus = "../../../../codigo/assets/img/waiting.png"; msg = "Aguardando resposta";  }
   //Definir nova linha
     str += `
       <div class="perfil-usuario-2-row" id="perfil-usuario-2-row-${form.id_form}">
@@ -1215,11 +1221,11 @@ for (let i = 0; i < abandonado.length; i++)
   let msg = "";
 //Testar status
   if (status === 0)
-  { imgStatus = "../../assets/img/failure.png"; msg = "Pedido negado";  }
+  { imgStatus = "../../../../codigo/assets/img/failure.png"; msg = "Pedido negado";  }
   else if (status === 1)
-  { imgStatus = "../../assets/img/success.png"; msg = "Pedido aceito";  }
+  { imgStatus = "../../../../codigo/assets/img/success.png"; msg = "Pedido aceito";  }
   else if (status == 2)
-  { imgStatus = "../../assets/img/waiting.png"; msg = "Aguardando resposta";  }
+  { imgStatus = "../../../../codigo/assets/img/waiting.png"; msg = "Aguardando resposta";  }
 //Definir nova linha
   str += `
     <div class="perfil-usuario-3-row"  id="perfil-usuario-3-row-1">
@@ -1330,8 +1336,8 @@ function substituirPerfilUsuario (usuario)
   }
 //Trocar botões
   botaoEditar.remove();
-  let botaoDescartar = `<img src="../../assets/img/discard.png" alt="botao-descartar" class="perfil-usuario-editar-btn" id="perfil-descartar">`;
-  let botaoConfirmar = `<img src="../../assets/img/confirm.png" alt="botao-confirmar" class="perfil-usuario-editar-btn" id="perfil-confirmar">`;
+  let botaoDescartar = `<img src="../../../../codigo/assets/img/discard.png" alt="botao-descartar" class="perfil-usuario-editar-btn" id="perfil-descartar">`;
+  let botaoConfirmar = `<img src="../../../../codigo/assets/img/confirm.png" alt="botao-confirmar" class="perfil-usuario-editar-btn" id="perfil-confirmar">`;
   divBotoes.insertAdjacentHTML('beforeend', botaoDescartar);
   divBotoes.insertAdjacentHTML('beforeend', botaoConfirmar);
 }
@@ -1424,7 +1430,7 @@ function perfilUsuarioResetarBotoes ()
   botaoConfirmar.remove();
   botaoDescartar.remove();
 //Adicionar novo botão
-  let botaoEditar = `<img src="../../assets/img/editar.png" alt="botao-editar" class="perfil-usuario-editar-btn" id="perfil-editar">`;
+  let botaoEditar = `<img src="../../../../codigo/assets/img/editar.png" alt="botao-editar" class="perfil-usuario-editar-btn" id="perfil-editar">`;
   divBotoes.insertAdjacentHTML('beforeend', botaoEditar);
 }
 
@@ -2264,6 +2270,9 @@ function AC_iniciarDados() {
 
     // Armazenando o objeto no localStorage
     localStorage.setItem('ong', JSON.stringify(ong));
+
+    // Alterando a localizacao da pagina
+      window.location.href = "../atividadesONG/AtividadeONG.html"; 
 }
 
 // Função que exibe os dados da ONG na página
