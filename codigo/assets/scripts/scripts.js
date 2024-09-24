@@ -284,9 +284,9 @@ function limitarNome (inputField)
  * 
  * !!!! Funcao nao implementada !!!!
  */
-//localStorage.setItem("usuario_login",-1); // caso -1, usuario nao logado
+sessionStorage.setItem("usuario_login",-1); // caso -1, usuario nao logado
 async function testarCredenciais() {
-  localStorage.setItem("usuario_login",0);
+  sessionStorage.setItem("usuario_login",0);
   fecharPopup();
 }
 
@@ -296,10 +296,10 @@ async function testarCredenciais() {
  * 
  * !!!! Funcao nao implementada !!!!
  */
-//localStorage.setItem("ong_login",-1); // caso -1, usuario nao logado
+//sessionStorage.setItem("ong_login",-1); // caso -1, usuario nao logado
  // caso -1, usuario nao logado
 async function testarCredenciaisOng() {
-  localStorage.setItem("ong_login",0);  
+  sessionStorage.setItem("ong_login",0);  
   fecharPopup();
   window.location.href = '../../../../atividadesONG/AtividadesONG.html'
 }
@@ -309,7 +309,7 @@ async function testarCredenciaisOng() {
  * @returns True caso esteja, Falso caso nao
  */
 function usuarioLogado(){
-  let usuario_login_id = localStorage.getItem("usuario_login");
+  let usuario_login_id = sessionStorage.getItem("usuario_login");
   return usuario_login_id >= 0;
 }
 /**
@@ -317,7 +317,7 @@ function usuarioLogado(){
  * @returns True caso esteja, Falso caso nao
  */
 function ongLogado(){
-  let ong_login_id = localStorage.getItem("ong_login");
+  let ong_login_id = sessionStorage.getItem("ong_login");
   return ong_login_id >= 0;
 }
 
