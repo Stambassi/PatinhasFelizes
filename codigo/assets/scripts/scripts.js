@@ -1910,6 +1910,14 @@ async function abrirDescricaoAnimalPopup(event) {
 //Mudar o display para block
   descricaoModalEl.style.display = "block";
 
+  descricaoModalEl.classList.add('compatibilidade-AnimacaoCrescimento');
+
+  setTimeout(() => {
+    descricaoModalEl.classList.add('show');
+  }, 700); 
+
+  descricaoModalEl.classList.remove('show');
+
 //Chamar funcao para fechar pop-up da descricao do animal
   let btFecharModalEl = document.querySelector(".telaInicial-fecharModalBtn");
   btFecharModalEl.addEventListener('click', () => fecharDescricaoAnimalPopup())
@@ -2013,7 +2021,7 @@ async function carregarAnimaisCompatibilidade() {
                 <p>${animais[contadorAnimalCompatibilidade].descricao}</p>
             </div>
             <div id="compatibilidade-EscolhasBotoes">
-                <button id="compatibilidade-EscolhasProximoBtn" onclick="carregarDadosCompatibilidade()">X</button>
+                <button id="compatibilidade-EscolhasProximoBtn" onclick="animacaoTrocaAnimalMatch()">X</button>
                 <button id="compatibilidade-EscolhasAdotarBtn" onclick="carregarProcessamentoCompatibilidade()">✔</button>
             </div>`
 
@@ -2034,6 +2042,15 @@ async function carregarProcessamentoCompatibilidade() {
   let animalId = imgAnimalEl.id; 
 
   modalProcessandoCompatibilidade.style.display = "block";
+
+  modalProcessandoCompatibilidade.classList.add('compatibilidade-AnimacaoSubida');
+
+  setTimeout(() => {
+    modalProcessandoCompatibilidade.classList.add('show');
+  }, 700); 
+
+  modalProcessandoCompatibilidade.classList.remove('show');
+
   porcentagemCarregandoEl.style.width = 0;
 
   let tempoTotal = 15000; 
@@ -2115,6 +2132,15 @@ async function confirmarCompatibilidade() {
 
 function abrirModalNaoMatch() {
   let divModalMatchEl = document.querySelector(".compatibilidade-PopUp-ModalNaoMatch");
+
+  divModalMatchEl.classList.add('compatibilidade-AnimacaoSubida');
+
+  setTimeout(() => {
+    divModalMatchEl.classList.add('show');
+  }, 700); 
+
+  divModalMatchEl.classList.remove('show');
+
   divModalMatchEl.style.display = "block";
 }
 
@@ -2141,6 +2167,15 @@ async function abrirModalMatch(idAnimal) {
   }
 
   divModalMatchEl.style.display = "block";
+
+  divModalMatchEl.classList.add('compatibilidade-AnimacaoSubida');
+
+  setTimeout(() => {
+    divModalMatchEl.classList.add('show');
+  }, 700); 
+
+  divModalMatchEl.classList.remove('show');
+
   imgAnimalEl.src = strImagemAnimal;
   imgAnimalEl.id = idAnimal;
   imgUsuarioEl.src = "https://thumbs.dreamstime.com/b/%C3%ADcone-de-usu%C3%A1rio-m%C3%ADdia-social-vetor-imagem-perfil-do-avatar-padr%C3%A3o-retrato-182347582.jpg";
@@ -2152,6 +2187,21 @@ function fecharModalMatch() {
   let divModalNaoMatchEl = document.querySelector(".compatibilidade-PopUp-ModalNaoMatch");
   divModalMatchEl.style.display = "none";
   divModalNaoMatchEl.style.display = "none";
+}
+
+function animacaoTrocaAnimalMatch() {
+
+  let divContainerEscolhasEl = document.querySelector(".compatibilidade-ContainerEscolhas");
+
+  divContainerEscolhasEl.classList.add('compatibilidade-AnimacaoDesaparecimento');
+
+  setTimeout(() => {
+    divContainerEscolhasEl.classList.add('show');
+  }, 700); 
+
+  divContainerEscolhasEl.classList.remove('show');
+  
+  carregarDadosCompatibilidade()
 }
 
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */

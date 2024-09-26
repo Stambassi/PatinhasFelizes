@@ -1997,6 +1997,7 @@ button#load_ab_photo:hover {
   width: 85%;
   height: 75%;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 #compatibilidade-EscolhasInfAnimal {
@@ -2051,6 +2052,7 @@ button#load_ab_photo:hover {
   height: 40%;
   border-radius: 50%;
   border: 5px solid #4CAF50;
+  cursor: pointer;
 }
 
 .compatibilidade-ContainerEscolhas h1 {
@@ -2150,4 +2152,30 @@ button#load_ab_photo:hover {
   transition: width 10s;
 }
 
-/* ----------------------- END Estilo Exibicao de Animais Compatibili ----------------------- */
+.compatibilidade-AnimacaoDesaparecimento {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.compatibilidade-AnimacaoDesaparecimento.show {  /* Alterado para incluir .show */
+  opacity: 1;
+}
+
+.compatibilidade-AnimacaoSubida {
+  transform: translateY(200%); /* ou translateX(-100%) para lateral */
+  transition: transform 0.5s ease;
+}
+.compatibilidade-AnimacaoSubida.show {
+  transform: translateY(0);
+}
+
+.compatibilidade-AnimacaoCrescimento {
+  transform: scale(0);
+  transition: transform 0.5s ease;
+}
+.compatibilidade-AnimacaoCrescimento.show {
+  transform: scale(1);
+}
+
+
+/* ----------------------- END Estilo Exibicao de Animais Compatibilidade ----------------------- */
