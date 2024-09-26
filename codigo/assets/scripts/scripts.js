@@ -2383,6 +2383,33 @@ function fecharModalMatch() {
 }
 
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */
+/*---------------------- Tela de Atividades ONG (Inicio) ------------------*/
+
+function loadAnimal(){
+  let animais = getAllAnimal();
+  let mainDiv = document.querySelector(".animal-grid");
+  let html = `<div class="animal-card">
+                    <a style="color:black" href = "../cadastros/crud-animal.html" class="img-add-animal"><span><i class="fa-2xl fa-solid fa-plus"></i></span></a>
+              </div>`;
+  let pesquisarAnimalOng = document.querySelector(".barra-pesquisa").value
+  animais.forEach(animal => {
+    if(animal.id_ong != null && animal.id_ong == getLoginOng() && animal.nome.includes(pesquisarAnimalOng)){
+      html += `<div class="animal-card">
+                <img class= "animal-image" src="${animal.foto_animal}" alt="Imagem do Animal">
+                <div class="animal-name">${animal.nome}</div>
+                <button class="edit-icon"><i class="fa-solid fa-pencil"></i></button>
+                <button class="delete-icon"><i class="fa-solid fa-x"></i></button>
+              </div>`;
+    }
+  })
+
+  mainDiv.innerHTML = html;
+}
+let pesquisarAnimalOng = document.querySelector(".barra-pesquisa").addEventListener('oninput',loadAnimal())
+
+/*---------------------- Tela de Atividades ONG (FIM) ------------------*/
+
+
 /*---------------------- Tela de Pefil ONG (Inicio) ------------------*/
 // Função que cria um objeto inicial da ONG no localStorage
 
