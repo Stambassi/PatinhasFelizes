@@ -2014,12 +2014,74 @@ async function carregarAnimaisCompatibilidade() {
             </div>
             <div id="compatibilidade-EscolhasBotoes">
                 <button id="compatibilidade-EscolhasProximoBtn" onclick="carregarDadosCompatibilidade()">X</button>
-                <button id="compatibilidade-EscolhasAdotarBtn" onclick="confirmarCompatibilidade()">✔</button>
+                <button id="compatibilidade-EscolhasAdotarBtn" onclick="carregarProcessamentoCompatibilidade()">✔</button>
             </div>`
 
   divContainerEscolhasEl.innerHTML = strHTML;
 
 } 
+
+async function carregarProcessamentoCompatibilidade() {
+
+  let porcentagemCompatibilidade = await confirmarCompatibilidade();
+  porcentagemCompatibilidade = parseInt(porcentagemCompatibilidade); 
+
+  let modalProcessandoCompatibilidade = document.querySelector(".compatibilidade-PopUpProcessandoCompatibilidade");  
+  let porcentagemCarregandoEl = document.querySelector(".compatibilidade-PorcentagemCarregando");
+  let imgAnimalEl = document.querySelector(".compatibilidade-EscolhasImagemCarousel"); 
+  let spanContadorPorcentagemEl = document.querySelector("#compatibilidade-ContadorPorcentagem"); 
+
+  let animalId = imgAnimalEl.id; 
+
+  modalProcessandoCompatibilidade.style.display = "block";
+  porcentagemCarregandoEl.style.width = 0;
+
+  let tempoTotal = 15000; 
+  let tempoProporcional = (porcentagemCompatibilidade / 100) * tempoTotal;
+
+  let progressoAtual = 0, progressoAtualContadorPorcentagem = 0;
+
+  let intervalo = setInterval(() => {
+    if (progressoAtual < porcentagemCompatibilidade) {
+      progressoAtual++;
+      spanContadorPorcentagemEl.innerHTML = progressoAtual;
+      porcentagemCarregandoEl.style.width = progressoAtual + '%';
+    } else {
+        clearInterval(intervalo);
+    }
+  }, tempoTotal / tempoProporcional);
+
+  let intervaloContadorPorcentagem = setInterval(() => {
+    if (progressoAtualContadorPorcentagem < porcentagemCompatibilidade) {
+      progressoAtualContadorPorcentagem++;
+      spanContadorPorcentagemEl.innerHTML = progressoAtualContadorPorcentagem;
+    } else {
+        clearInterval(intervaloContadorPorcentagem);
+    }
+  }, tempoTotal / 100);
+  
+  await exibicaoTelaCarregarCompatibilidade();
+
+  if (porcentagemCompatibilidade >= 70) {
+    await abrirModalMatch(animalId);
+  } else {
+    abrirModalNaoMatch();
+  }
+}
+
+async function exibicaoTelaCarregarCompatibilidade() {
+  let tempo = 15000;
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      let modalProcessandoCompatibilidade = document.querySelector(".compatibilidade-PopUpProcessandoCompatibilidade");  
+      modalProcessandoCompatibilidade.style.display = 'none';
+      resolve();
+    }, tempo);
+  });
+}
+
+
 
 async function confirmarCompatibilidade() {
 
@@ -2047,12 +2109,13 @@ async function confirmarCompatibilidade() {
   porcentagemCompatibilidade = ((distanciaPontos * 100)/valorMaximo);
   porcentagemCompatibilidade = 100 - porcentagemCompatibilidade;
 
-  if(porcentagemCompatibilidade >= 70) {
-    await abrirModalMatch(animalId);
-  } else {
-    carregarDadosCompatibilidade();
-  }
+  return porcentagemCompatibilidade;
 
+}
+
+function abrirModalNaoMatch() {
+  let divModalMatchEl = document.querySelector(".compatibilidade-PopUp-ModalNaoMatch");
+  divModalMatchEl.style.display = "block";
 }
 
 async function abrirModalMatch(idAnimal) {
@@ -2086,7 +2149,9 @@ async function abrirModalMatch(idAnimal) {
 
 function fecharModalMatch() {
   let divModalMatchEl = document.querySelector(".compatibilidade-PopUp-Modal");
+  let divModalNaoMatchEl = document.querySelector(".compatibilidade-PopUp-ModalNaoMatch");
   divModalMatchEl.style.display = "none";
+  divModalNaoMatchEl.style.display = "none";
 }
 
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */
