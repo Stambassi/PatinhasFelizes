@@ -4,28 +4,45 @@ function postUsuario (objUsuario)
   localStorage.setItem("usuario_login", 1);
 }
 
-async function getAnimal ()
+function getAllAnimal(){
+  const data = JSON.parse(localStorage.getItem("Animal") || "[]");
+  console.log(data);
+  return data;
+}
+function getAnimal (id)
 {
-//Definir dados locais
-  let animal = {
-    id_ong: 0,
-    id_animal: 0, 
-    nome: "Thor",
-    especie: "Cachorro",
-    raca: "Vira-lata",
-    genero: 'M',
-    castrado: true,
-    foto_animal: ["", "", ""],
-    dt_nascimento: "10/02/2022",
-    historia: "História blablablabla",
-    vacina: {
-      v8: true,
-      antirrábica: false, 
-      leishmaniose: false 
+  let animais = getAllAnimal();
+  let resp = null;
+  animais.forEach(animal => {
+    if(animal.id_animal == id){
+      // console.log(animal);
+      resp = animal;
     }
-  };
+  });
+//Definir dados locais
+  if (resp == null){
+    let animal = {
+      id_ong: 0,
+      id_animal: 0, 
+      nome: "Thor",
+      especie: "Cachorro",
+      raca: "Vira-lata",
+      genero: 'M',
+      castrado: true,
+      foto_animal: ["", "", ""],
+      dt_nascimento: "10/02/2022",
+      historia: "História blablablabla",
+      vacina: {
+        v8: true,
+        antirrábica: false, 
+        leishmaniose: false 
+      }
+    }
+    resp = animal;
+    saveAnimalData(animal);
+  }
 //Retornar
-  return animal;
+  return resp;
 }
 
 async function getOng ()
@@ -290,6 +307,10 @@ async function testarCredenciais() {
   fecharPopup();
 }
 
+function getLoginUsuario(){
+  return sessionStorage.getItem("usuario_login");
+}
+
 /**
  * testarCredenciaisOng - Pegar os dados na base da dados e testar se o login é valido
  * Depois disso,colocar o id da ong logado na sessionStorage 
@@ -302,6 +323,10 @@ async function testarCredenciaisOng() {
   sessionStorage.setItem("ong_login",0);  
   fecharPopup();
   window.location.href = '../../../../atividadesONG/AtividadesONG.html'
+}
+
+function getLoginOng(){
+  return sessionStorage.getItem("ong_login");
 }
 
 /**
@@ -1164,7 +1189,7 @@ async function inserirPerfilUsuario_2 (usuario)
   {
   //Definir dados locais
     let form = adocao[i];
-    let animal = await getAnimal(); // COMPLETAR <------------
+    let animal = await getAnimal(-1); // COMPLETAR <------------
     let ong = await getOng( form.id_ong ); // COMPLETAR <------------
     let status = form.status;
     let imgStatus = "";
@@ -1214,7 +1239,7 @@ for (let i = 0; i < abandonado.length; i++)
 {
 //Definir dados locais
   let form = abandonado[i];
-  let animal = await getAnimal(); // COMPLETAR <------------
+  let animal = await getAnimal(-1); // COMPLETAR <------------
   let ong = await getOng( form.id_ong ); // COMPLETAR <------------
   let status = form.status;
   let imgStatus = "";
@@ -1558,7 +1583,7 @@ function changePageAnimal(page) {
         }
       }
 
-      console.log(data_nascimento);
+      //console.log(data_nascimento);
       if (name === "" || data_nascimento === "" || especie_value === "") { // condicao para mudar de pagina
         alert("erro");
       } else { // mensagem de erro
@@ -1584,8 +1609,16 @@ function changePageAnimal(page) {
         let genero_value = getRadio('a_genero');
         let isCastrado = getBoolRadio('a_castrado');
         let vacina_value = getAnimalVacina();
-
+        let animais = getAllAnimal();
+        let nextId;
+        if(animais.length > 0){
+          nextId = (animais[animais.length - 1].id_animal)+1;
+        } else {
+          nextId = 1;
+        }
         let animal_data = {
+          id_animal: nextId,
+          id_ong: getLoginOng(),
           nome: name,
           genero: genero_value,
           especie: especie_value,
@@ -1604,7 +1637,9 @@ function changePageAnimal(page) {
 }
 
 function saveAnimalData(data) {
-  console.log(data);
+  const old  = getAllAnimal();
+  old.push(data);
+  localStorage.setItem("Animal", JSON.stringify(old));
 }
 
 /* Definir comportamento ao clicar em outros no cadastro do animal */
@@ -1673,9 +1708,26 @@ expForm.forEach(element => {
 
 
 
+function getAllForms(){
+  const data = JSON.parse(localStorage.getItem("Form") || "[]");
+  // console.log(data);
+  return data;
+}
+function getForm(id){
+  let forms = getAllForms();
+  let resp;
+  forms.forEach(element => {
+    if(element.id_form == id){
+      resp = element;
+    }
+  });
+  return resp;
+}
 function saveFormularioData(data){
-  console.log(data);
-  perfilUsuario();
+  const old  = getAllForms();
+  old.push(data);
+  localStorage.setItem("Form", JSON.stringify(old));
+  //perfilUsuario();
 }
 function submitFormulario() {
   let residencia = getRadioText('f_residencia', 'outros_value_residencia',"outros");
@@ -1685,14 +1737,23 @@ function submitFormulario() {
   let tempo = getRadio('f_tempo');
   let viagem = getRadioText('f_viagem','outros_value_viagem','outros');
   let comentarios = document.getElementById('f_comentarios').value
+  let formularios = getAllForms();
+  let nextId;
+  if(formularios.length > 1){
+    nextId = (formularios[formularios.length-1].id_form) + 1;
+  } else {
+    nextId = 1;
+  }
   let data = {
-    Residencia: residencia,
-    Exp: exp,
-    Visita_ong: visita_ong,
-    Consentimento: consentimento,
-    Tempo: tempo,
-    Viagem: viagem,
-    Comentario: comentarios
+    id_form: nextId,
+    id_usuario: getLoginUsuario(),
+    residencia: residencia,
+    exp: exp,
+    visita_ong: visita_ong,
+    consentimento: consentimento,
+    tempo: tempo,
+    viagem: viagem,
+    comentario: comentarios
   }
 
   if(haveNullValue(data)){
@@ -1750,25 +1811,25 @@ function submitFormAB(){
   let condicao = document.getElementById("ab_condicoes").value;
   let lar = getRadioText('ab_lar','ab_tempo',"true");
   let local = document.getElementById("ab_local").value; 
-
+  let nextId;
+  let animais = getAllAnimal();
+  nextId = (animais.length > 1) ? (animais[animais.length-1].id_animal+1) : 1;
   let data = {
-    Especie: especie,
-    Quantidade: qnt,
-    Condicao: condicao,
-    Lar: lar,
-    Local: local
+    id_animal: nextId,
+    id_usuario: getLoginUsuario(),
+    especie: especie,
+    quantidade: qnt,
+    condicao: condicao,
+    lar: lar,
+    local: local
   }
   if(haveNullValue(data)){
     alert("erro");
   } else {
-    saveAnimalAbandonadoData(data);
+    saveAnimalData(data);
   }
 }
 
-function saveAnimalAbandonadoData(data){
-  console.log(data);
-  perfilUsuario();
-}
 
 
 /* --------------------- Definir comportamento do CADASTRO DE ANIMAL ABANDONADO (FIM) ------------------------ */
