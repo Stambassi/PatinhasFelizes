@@ -21,10 +21,34 @@ function postUsuario (objUsuario)
   const old  = getAllUsuario();
   old.push(objUsuario);
   localStorage.setItem("Usuario", JSON.stringify(old));
-  localStorage.setItem("usuario_login", 1);
+  localStorage.setItem("usuario_login", objUsuario.id_usuario);
 }
 
+function getAllONG(){
+  const data = JSON.parse(localStorage.getItem("ONG") || "[]");
+  console.log(data);
+  return data;
+}
+function getONG (id)
+{
+  let ONGs = getAllONG();
+  let resp = null;
+  ONGs.forEach(ong => {
+    if(ong.id_ong == id){
+      // console.log(ong);
+      resp = ong;
+    }
+  });
+  return resp;
+}
 
+function postONG(objOng){
+  const old  = getAllONG();
+  old.push(objOng);
+  localStorage.setItem("ONG", JSON.stringify(old));
+  localStorage.setItem("ong_login", objOng.id_ong);
+
+}
 
 function getAllAnimal(){
   const data = JSON.parse(localStorage.getItem("Animal") || "[]");
@@ -318,21 +342,18 @@ function limitarNome (inputField)
 }
 /**
  * testarCredenciais - Pegar os dados na base da dados e testar se o login é valido
- * Depois disso, colocar o id do usuario logado na sessionStorage 
- * (ao inves de usar session Storage, pode implementar no localStorage)
- * 
- * !!!! Funcao nao implementada !!!!
+ * Depois disso, colocar o id do usuario logado na localStorage 
  */
 async function testarCredenciais() {
-  sessionStorage.setItem("usuario_login",-1); // caso -1, usuario nao logado
+  localStorage.setItem("usuario_login",-1); // caso -1, usuario nao logado
   let email = document.querySelector('[type=text]').value;
   let senha = document.querySelector('[type=password]').value;
   let usuarios = getAllUsuario();
-  let login = sessionStorage.getItem("usuario_login");
+  let login = localStorage.getItem("usuario_login");
   usuarios.forEach(usuario =>{
     if(usuario.email == email && usuario.senha == senha){
       login = usuario.id_usuario;
-      sessionStorage.setItem("usuario_login",login);
+      localStorage.setItem("usuario_login",login);
     }
   });
   if(login >= 0){
@@ -343,25 +364,35 @@ async function testarCredenciais() {
 }
 
 function getLoginUsuario(){
-  return sessionStorage.getItem("usuario_login");
+  return localStorage.getItem("usuario_login");
 }
 
 /**
  * testarCredenciaisOng - Pegar os dados na base da dados e testar se o login é valido
- * Depois disso,colocar o id da ong logado na sessionStorage 
- * 
- * !!!! Funcao nao implementada !!!!
+ * Depois disso,colocar o id da ong logado na localStorage 
  */
-//sessionStorage.setItem("ong_login",-1); // caso -1, usuario nao logado
- // caso -1, usuario nao logado
 async function testarCredenciaisOng() {
-  sessionStorage.setItem("ong_login",0);  
-  fecharPopup();
-  window.location.href = '../../../../atividadesONG/AtividadesONG.html'
+  localStorage.setItem("ong_login",-1); // caso -1, usuario nao logado
+  let cnpj = document.querySelector('[type=text]').value;
+  let senha = document.querySelector('[type=password]').value;
+  let ONGs = getAllONG();
+  let login = localStorage.getItem("ong_login");
+  ONGs.forEach(ong =>{
+    if(ong.cnpj == cnpj && ong.senha == senha){
+      login = ong.id_ong;
+      localStorage.setItem("ong_login",login);
+    }
+  });
+  if(login >= 0){
+    fecharPopup();
+    window.location.href = '../../../../atividadesONG/AtividadesONG.html'
+  } else {
+    alert("senha ou cnpj incorreto(s)"); // Mensagem de erro
+  }
 }
 
 function getLoginOng(){
-  return sessionStorage.getItem("ong_login");
+  return localStorage.getItem("ong_login");
 }
 
 /**
