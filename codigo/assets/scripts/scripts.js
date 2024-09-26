@@ -400,7 +400,7 @@ function getLoginOng(){
  * @returns True caso esteja, Falso caso nao
  */
 function usuarioLogado(){
-  let usuario_login_id = sessionStorage.getItem("usuario_login");
+  let usuario_login_id = localStorage.getItem("usuario_login");
   return usuario_login_id >= 0;
 }
 /**
@@ -408,7 +408,7 @@ function usuarioLogado(){
  * @returns True caso esteja, Falso caso nao
  */
 function ongLogado(){
-  let ong_login_id = sessionStorage.getItem("ong_login");
+  let ong_login_id = localStorage.getItem("ong_login");
   return ong_login_id >= 0;
 }
 
