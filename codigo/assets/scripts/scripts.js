@@ -1,8 +1,30 @@
+function getAllUsuario(){
+  const data = JSON.parse(localStorage.getItem("Usuario") || "[]");
+  console.log(data);
+  return data;
+}
+function getUsuario (id)
+{
+  let usuarios = getAllUsuario();
+  let resp = null;
+  usuarios.forEach(usuario => {
+    if(usuario.id_usuario == id){
+      // console.log(usuario);
+      resp = usuario;
+    }
+  });
+  return resp;
+}
+
 function postUsuario (objUsuario)
 {
-  console.log(objUsuario);
+  const old  = getAllUsuario();
+  old.push(objUsuario);
+  localStorage.setItem("Usuario", JSON.stringify(old));
   localStorage.setItem("usuario_login", 1);
 }
+
+
 
 function getAllAnimal(){
   const data = JSON.parse(localStorage.getItem("Animal") || "[]");
@@ -405,8 +427,11 @@ function loginUsuarioEventos ()
 /* ------------------------ Definir comportamento para mostrar o pop-up de LOGIN de USUÁRIO (FIM) ------------------------ */
 
 /* --------------------- Definir comportamento para mostrar o pop-up de CADASTRO de USUÁRIO (INICIO) ------------------------ */
-
-let objUsuario = { nome: "", email: "", senha: "", cpf: "", data_de_nascimento: "", telefone: "", tags: { atencao: 0, passeio: 0, carinho: 0, extrovertido: 0, animacao: 0 } };
+function usuarioNextID(){
+  let usuarios = getAllUsuario();
+  return (usuarios.length > 1) ? (usuarios[usuarios.length-1].id_usuario+1) : 1;
+}
+let objUsuario = { id_usuario: usuarioNextID(), nome: "", email: "", senha: "", cpf: "", data_de_nascimento: "", telefone: "", tags: { atencao: 0, passeio: 0, carinho: 0, extrovertido: 0, animacao: 0 } };
 
 /**
  * cadastroUsuario - Função para recuperar o HTML do cadastro de usuário e adicioná-lo à tela
