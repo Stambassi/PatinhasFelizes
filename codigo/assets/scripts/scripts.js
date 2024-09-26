@@ -323,10 +323,23 @@ function limitarNome (inputField)
  * 
  * !!!! Funcao nao implementada !!!!
  */
-sessionStorage.setItem("usuario_login",-1); // caso -1, usuario nao logado
 async function testarCredenciais() {
-  sessionStorage.setItem("usuario_login",0);
-  fecharPopup();
+  sessionStorage.setItem("usuario_login",-1); // caso -1, usuario nao logado
+  let email = document.querySelector('[type=text]').value;
+  let senha = document.querySelector('[type=password]').value;
+  let usuarios = getAllUsuario();
+  let login = sessionStorage.getItem("usuario_login");
+  usuarios.forEach(usuario =>{
+    if(usuario.email == email && usuario.senha == senha){
+      login = usuario.id_usuario;
+      sessionStorage.setItem("usuario_login",login);
+    }
+  });
+  if(login >= 0){
+    fecharPopup();
+  } else {
+    alert("senha ou email incorreto(s)"); // Mensagem de erro
+  }
 }
 
 function getLoginUsuario(){
