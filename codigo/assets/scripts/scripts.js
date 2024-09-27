@@ -65,10 +65,32 @@ function getAnimal (id)
   return resp;
 }
 
+function getLoginUsuario()
+{   
+  return localStorage.getItem("usuario_login");   
+}
+
+function getLoginOng()
+{
+  return localStorage.getItem("ong_login");
+}
+
+function logoutUsuario()
+{
+  localStorage.removeItem("usuario_login");
+  window.location.href = "../../../../codigo/index.html";
+}
+
+function logoutOng()
+{
+  localStorage.removeItem("ong_login");
+  window.location.href = "../../../../codigo/index.html";
+}
+
 function getUsuarioLogged ()
 {
 //Definir dados locais
-  let id = localStorage.getItem("usuario_login");
+  let id = getLoginUsuario();
   let usuarios = getAllUsuario();
   let resp = null;
 //Percorrer todos os usuarios
@@ -83,7 +105,7 @@ function getUsuarioLogged ()
 function getOngLogged ()
 {
 //Definir dados locais
-  let id = localStorage.getItem("ong_login");
+  let id = getLoginOng();
   let ongs = getAllONG();
   let resp = null;
 //Percorrer todas as ongs
@@ -144,6 +166,10 @@ function updateONG (objOng)
   else
     localStorage.setItem("ONG", JSON.stringify(objOng));
 }
+
+/* ------------------------------ Funções de interacao com o LOCAL STORAGE (FIM) ------------------------------------ */
+
+/* ------------------------------ Funções de criacao de DADOS FAKES (INICIO) ------------------------------------ */
 
 async function getAnimalTemp (animalId)
 {
@@ -281,6 +307,7 @@ async function getUsuarioPerfilTemp ()
   return usuario;
 }
 
+/* ------------------------------ Funções de criacao de DADOS FAKES (INICIO) ------------------------------------ */
 
 /* ------------------------------ Funções de auxílio para LOGIN/CADASTRO (INICIO) ------------------------------------ */
 
@@ -421,15 +448,16 @@ function limitarNome (inputField)
     }
   }
 }
+
 /**
- * testarCredenciais - Pegar os dados na base da dados e testar se o login é valido
+ * testarLoginUsuario - Pegar os dados na base da dados e testar se o login é valido
  * Depois disso, colocar o id do usuario logado na localStorage 
  */
-async function testarCredenciais() {
-  //localStorage.setItem("usuario_login",-1); // caso -1, usuario nao logado
+async function testarLoginUsuario() 
+{
 //Definir dados locais
-  let email = document.querySelector('.lc-input input[type=text]').value;
-  let senha = document.querySelector('.lc-input input[type=password]').value;
+  let email = document.querySelector('.lc-input-field[placeholder="Email"]').value;
+  let senha = document.querySelector('.lc-input-field[placeholder="Senha"]').value;
 //Testar se estao preenchidos
   if (email != "" && senha != "")
   {
@@ -453,62 +481,60 @@ async function testarCredenciais() {
   }
 }
 
-function getLoginUsuario(){
-  return localStorage.getItem("usuario_login");
-}
-
-function logoutUsuario()
-{
-  localStorage.removeItem("usuario_login");
-  window.location.href = "../../../../codigo/index.html";
-}
-
 /**
- * testarCredenciaisOng - Pegar os dados na base da dados e testar se o login é valido
+ * testarLoginOng - Pegar os dados na base da dados e testar se o login é valido
  * Depois disso,colocar o id da ong logado na localStorage 
  */
-async function testarCredenciaisOng() {
-  localStorage.setItem("ong_login",-1); // caso -1, usuario nao logado
+async function testarLoginOng() {
+//Definir dados locais
   let cnpj = document.querySelector('.lc-input-field[placeholder="CNPJ"]').value;
   let senha = document.querySelector('.lc-input-field[placeholder="Senha"]').value;
-  let ONGs = getAllONG();
-  let login;
-  ONGs.forEach(ong =>{
-    if(ong.cnpj == cnpj && ong.senha == senha)
+//Testar se estao preenchidos
+  if (cnpj != "" && senha != "")
+  {
+  //Definir dados locais
+    let ONGs = getAllONG();
+    let login;
+  //Testar base de dados
+    ONGs.forEach(ong => {
+      if(ong.cnpj == cnpj && ong.senha == senha)
+      {
+        login = ong.id_ong;
+        localStorage.setItem("ong_login",login);
+      }
+    });
+  //Testar se login foi encontrado ou nao
+    if(login >= 0 && login != null)
     {
-      login = ong.id_ong;
-      localStorage.setItem("ong_login",login);
+      fecharPopup();
+      window.location.href = '../../../../codigo/pages/atividadesONG/AtividadesONG.html'
     }
-  });
-  if(login >= 0 && login != null)
-  {
-    fecharPopup();
-    window.location.href = '../../../../codigo/pages/atividadesONG/AtividadesONG.html'
+    else 
+      alert("senha ou cnpj incorreto(s)"); // Mensagem de erro
   }
-  else 
-  {
-    alert("senha ou cnpj incorreto(s)"); // Mensagem de erro
-  }
-}
-
-function getLoginOng(){
-  return localStorage.getItem("ong_login");
 }
 
 /**
  * usuarioLogado - Funcao para testar se o usuario esta logado ou nao
- * @returns True caso esteja, Falso caso nao
+ * @return True caso esteja, Falso caso nao
  */
-function usuarioLogado(){
+function usuarioLogado()
+{
+//Definir dados locais
   let usuario_login_id = localStorage.getItem("usuario_login");
+//Retornar
   return usuario_login_id >= 0 && usuario_login_id != null;
 }
+
 /**
  * ongLogado - Funcao para testar se a ong esta logado ou nao
- * @returns True caso esteja, Falso caso nao
+ * @return True caso esteja, Falso caso nao
  */
-function ongLogado(){
+function ongLogado()
+{
+//Definir dados locais
   let ong_login_id = localStorage.getItem("ong_login");
+//Retornar
   return ong_login_id >= 0;
 }
 
@@ -560,7 +586,7 @@ function loginUsuarioEventos ()
   controlarSenha();
   cadastroUser.addEventListener('click', async () => await cadastroUsuario());
   loginONG.addEventListener('click', async () => await loginInstituicao()); 
-  login.addEventListener('click', async() => await testarCredenciais());
+  login.addEventListener('click', async() => await testarLoginUsuario());
 }
 
 /* ------------------------ Definir comportamento para mostrar o pop-up de LOGIN de USUÁRIO (FIM) ------------------------ */
@@ -898,7 +924,7 @@ async function loginInstituicaoEventos ()
   controlarSenha();
   cadastroONG.addEventListener('click', async () => await cadastroInstituicao());
   loginUser.addEventListener('click', async () => await loginUsuario());  
-  login.addEventListener('click', async() => await testarCredenciaisOng());
+  login.addEventListener('click', async() => await testarLoginOng());
 
 }
 
