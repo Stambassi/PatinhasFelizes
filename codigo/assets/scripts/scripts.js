@@ -1,3 +1,7 @@
+/* ----------------------------- Inicialização variável global JSON Server (INICIO) ----------------------------------- */
+
+let urlJsonServer = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev";
+
 /* ------------------------------ Funções de interacao com o LOCAL STORAGE (INICIO) ------------------------------------ */
 
 function getAllUsuario()
@@ -2122,7 +2126,7 @@ async function readJSONServerId(url, id) {
 
 async function carregarFiltroCidades() {
   let filtroCidadeEl = document.querySelector("#telaInicial-FiltroCidade");
-  let apiUrlJsonOngs = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/ongs";
+  let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
   let ongs = {}, cidades = [];
   let strHTML = "", stringValueCidade = "";
   let controle = true;
@@ -2158,8 +2162,8 @@ async function carregarFiltroCidades() {
 async function carregarAnimais() {
 
 //Definir dados locais
-  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais";
-  let apiUrlJsonOngs = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/ongs";
+  let apiUrlJsonAnimais = `${urlJsonServer}/animais`;
+  let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
   let divConteudoAnimais = document.querySelector("#telaInicial-Conteudo");
   let animais = {}, ongs = {};
   let strHTML = "", strGeneroAnimal = "", strNomeOng = "", strCidadeOng = ""; 
@@ -2243,8 +2247,8 @@ function carregarDescricaoAnimalPopupEventos () {
 
 async function abrirDescricaoAnimalPopup(event) {
 //Definir dados locais
-  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais?id_animal=";
-  let apiUrlJsonVacinas = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/vacinas?id_animal=";
+  let apiUrlJsonAnimais = `${urlJsonServer}/animais?id_animal=`;
+  let apiUrlJsonVacinas = `${urlJsonServer}/vacinas?id_animal=`;
   let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
 
   let idEvent = event.target.id;
@@ -2428,7 +2432,7 @@ function testeContadorImagemAnimalCompatibilidade(tamanhoMax) {
 
 async function proximaImagemCompatibilidade(event) {
   
-  let apiUrlJsonImagensAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal?id_animal=";
+  let apiUrlJsonImagensAnimal = `${urlJsonServer}/imagensAnimal?id_animal=`;
   let imagensAnimal = {};
 
   let btEvent = event.target.id;
@@ -2454,8 +2458,8 @@ async function proximaImagemCompatibilidade(event) {
 async function carregarAnimaisCompatibilidade() {
 
 
-  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais";
-  let apiUrlJsonImagensAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal";
+  let apiUrlJsonAnimais =  `${urlJsonServer}/imagensAnimal?id_animal=`;
+  let apiUrlJsonImagensAnimal = `${urlJsonServer}/imagensAnimal`;
   let divContainerEscolhasEl = document.querySelector(".compatibilidade-ContainerEscolhas");
   let animais = {}, imagensAnimal = {};
   let strHTML = "", strImagemAnimal = "";
@@ -2569,8 +2573,8 @@ async function exibicaoTelaCarregarCompatibilidade() {
 
 async function confirmarCompatibilidade() {
 
-  let apiUrlJsonTagsAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/etiquetas?id_animal=";
-  let apiUrlJsonTagsUsuario = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/etiquetas?id_usuario=";
+  let apiUrlJsonTagsAnimal = `${urlJsonServer}/etiquetas?id_animal=`;
+  let apiUrlJsonTagsUsuario = `${urlJsonServer}/etiquetas?id_usuario=`;
   let tagsAnimal = {}, tagsUsuario = {};
   let distanciaPontos = 0.0, valorMaximo = 0.0, porcentagemCompatibilidade = 0.0;
  
@@ -2618,7 +2622,7 @@ async function abrirModalMatch(idAnimal) {
   let imgUsuarioEl = document.querySelector(".compatibilidade-perfilUsuario");
   let botaoAdocaoEl = document.querySelector(".compatibilidade-SolicitarAdocao");
 
-  let apiUrlJsonTagsAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal?id_animal=";
+  let apiUrlJsonTagsAnimal = `${urlJsonServer}/imagensAnimal?id_animal=`;
   let imagensAnimal = {};
   let resultado = false;
   let strImagemAnimal = "";
