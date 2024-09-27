@@ -2616,15 +2616,17 @@ async function abrirModalMatch(idAnimal) {
   let divModalMatchEl = document.querySelector(".compatibilidade-PopUp-Modal");
   let imgAnimalEl = document.querySelector(".compatibilidade-perfilAnimal");
   let imgUsuarioEl = document.querySelector(".compatibilidade-perfilUsuario");
-  let botaoAdocaoEl = document.querySelector("#compatibilidade-EscolhasAdotarBtn");
-
-  botaoAdocaoEl.addEventListener('click', carregarPaginaAdocao(idAnimal));
+  let botaoAdocaoEl = document.querySelector(".compatibilidade-SolicitarAdocao");
 
   let apiUrlJsonTagsAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal?id_animal=";
   let imagensAnimal = {};
   let resultado = false;
   let strImagemAnimal = "";
   let y = 0;
+
+  botaoAdocaoEl.addEventListener("click", function() {
+    carregarPaginaAdocao(idAnimal);
+  });
 
   imagensAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, idAnimal);
 
@@ -2637,6 +2639,7 @@ async function abrirModalMatch(idAnimal) {
   }
 
   divModalMatchEl.style.display = "block";
+
 
   divModalMatchEl.classList.add('compatibilidade-AnimacaoSubida');
 
