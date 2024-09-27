@@ -50,6 +50,27 @@
             </div>
         </div>
 
+        <div class="compatibilidade-PopUpProcessandoCompatibilidade">
+            <div class="compatibilidade-ContainerEscolhas">
+              <div class="compatibilidade-TextoCarregando">
+                <h2 style="--i:1;">C</h2><h2 style="--i:2;">a</h2><h2 style="--i:3;">l</h2><h2 style="--i:4;">c</h2>
+                <h2 style="--i:5;">u</h2><h2 style="--i:6;">l</h2><h2 style="--i:7;">a</h2><h2 style="--i:8;">n</h2>
+                <h2 style="--i:9;">d</h2><h2 style="--i:10;">o</h2><h2 style="--i:11;">.</h2><h2 style="--i:12;">.</h2>
+                <h2 style="--i:13;">.</h2>
+              </div>
+              <div id="compatibilidade-EscolhasCarouselImagemContainer">
+                <img class="compatibilidade-EscolhasImagemCarousel" src="../../assets/img/gifRedeNeural.gif" alt="">
+              </div>
+              <div id="compatibilidade-GraficoCompatibilidade">
+                <h3>A compatibilidade é de <span id="compatibilidade-ContadorPorcentagem"></span>%</h3>
+                <div class="compatibilidade-ContainerPorcentagemCarregando">
+                    <div class="compatibilidade-PorcentagemCarregando"></div>
+                </div>
+              </div>
+            </div>
+        </div>
+          
+
         <div class="compatibilidade-PopUp-Modal">
             <div class="compatibilidade-ContainerEscolhas">
                 <h1>Deu Match!</h1>
@@ -59,7 +80,16 @@
                 </div>
                 <div id="compatibilidade-MatchBotoes">
                     <button id="compatibilidade-EscolhasAdotarBtn">Adotar!</button>
-                    <button id="compatibilidade-EscolhasProximoBtn" onclick="fecharModalMatch()">Continuar Proucurando</button>
+                    <button id="compatibilidade-EscolhasProximoBtn" onclick="fecharModalMatch(), animacaoTrocaAnimalMatch()">Continuar Proucurando</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="compatibilidade-PopUp-ModalNaoMatch">
+            <div class="compatibilidade-ContainerEscolhas">
+                <h1>Não deu Match :(</h1>
+                <div id="compatibilidade-MatchBotoes">
+                    <button id="compatibilidade-EscolhasProximoBtn" onclick="fecharModalMatch(), animacaoTrocaAnimalMatch()">Continuar Proucurando</button>
                 </div>
             </div>
         </div>

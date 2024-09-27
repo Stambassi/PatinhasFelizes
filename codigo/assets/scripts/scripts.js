@@ -2073,6 +2073,8 @@ function submitFormAB(){
 
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS TELA INICIAL (INICIO) ------------------ */
 
+let jsonUrl = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev";
+
 /**
  * readJSONServer - Funcao para ler um objeto do JSON Server de acordo com a url passada.
  */
@@ -2113,6 +2115,7 @@ async function readJSONServerId(url, id) {
 //Retorno obj
   return obj;
 }
+
  /**
  * carregarFiltroCidades - Funcao para carregar os filtros de cidade do JSON Server e exibi-los na tela inicial.
  */ 
@@ -2155,9 +2158,8 @@ async function carregarFiltroCidades() {
 async function carregarAnimais() {
 
 //Definir dados locais
-  let jsonUrl = "https://411e04ee-f1d3-4392-9194-c7d7df0f42a3-00-2pb2bewwebnm3.riker.replit.dev";
-  let apiUrlJsonAnimais = `${jsonUrl}/animais`;
-  let apiUrlJsonOngs = `${jsonUrl}/ongs`;
+  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais";
+  let apiUrlJsonOngs = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/ongs";
   let divConteudoAnimais = document.querySelector("#telaInicial-Conteudo");
   let animais = {}, ongs = {};
   let strHTML = "", strGeneroAnimal = "", strNomeOng = "", strCidadeOng = ""; 
@@ -2172,6 +2174,7 @@ async function carregarAnimais() {
 //Acesso aos dados do JSON Server
   animais = await readJSONServer(apiUrlJsonAnimais);
   ongs = await readJSONServer(apiUrlJsonOngs);
+
 //Gravacao dos cards na String strHTML
   for(let x = 0; x < animais.length; x++) {
 
@@ -2196,6 +2199,7 @@ async function carregarAnimais() {
     booleanFiltroEspecie = filtroEspecieEl.value === 'U' || filtroEspecieEl.value === animais[x].especie;
 
     if(booleanFiltroEspecie && booleanFiltroGenero && booleanFiltroPorte && booleanFiltroCidade) {
+ 
       strHTML += `<div class="telaInicial-Card">
                       <img src="${animais[x].imagem}" alt="">
                       <p>${strNomeOng}</p>
@@ -2239,9 +2243,8 @@ function carregarDescricaoAnimalPopupEventos () {
 
 async function abrirDescricaoAnimalPopup(event) {
 //Definir dados locais
-  let jsonUrl = "https://411e04ee-f1d3-4392-9194-c7d7df0f42a3-00-2pb2bewwebnm3.riker.replit.dev";
-  let apiUrlJsonAnimais = `${jsonUrl}/animais?id_animal=`;
-  let apiUrlJsonVacinas = `${jsonUrl}/vacinas?id_animal=`;
+  let apiUrlJsonAnimais = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/animais?id_animal=";
+  let apiUrlJsonVacinas = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/vacinas?id_animal=";
   let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
 
   let idEvent = event.target.id;
@@ -2320,11 +2323,18 @@ async function abrirDescricaoAnimalPopup(event) {
             </div>`
 
 //Mudar o innerHTML da div descricao do animal de acordo com o id
-  console.log(strHTML);
   descricaoModalEl.innerHTML = strHTML;
 
 //Mudar o display para block
   descricaoModalEl.style.display = "block";
+
+  descricaoModalEl.classList.add('compatibilidade-AnimacaoCrescimento');
+
+  setTimeout(() => {
+    descricaoModalEl.classList.add('show');
+  }, 700); 
+
+  descricaoModalEl.classList.remove('show');
 
 //Chamar funcao para fechar pop-up da descricao do animal
   let btFecharModalEl = document.querySelector(".telaInicial-fecharModalBtn");
@@ -2348,7 +2358,9 @@ async function carregarPaginaAdocao(id){
       fecharDescricaoAnimalPopup();
       loginUsuario();
       testarLoginAcabou('crud-form',id);
-    } 
+    } else {
+      testarLoginAcabou('crud-form',id);
+    }
 }
 
 async function carregarFormularioAnimalAbandonado(){
@@ -2362,7 +2374,9 @@ async function carregarPaginaCompatibilidade(){
   if(!usuarioLogado()){
     loginUsuario();
     testarLoginAcabou('compatibilidade',0);
-  } 
+  } else {
+    testarLoginAcabou('compatibilidade',0);
+  }
 }
 
 
@@ -2474,13 +2488,84 @@ async function carregarAnimaisCompatibilidade() {
                 <p>${animais[contadorAnimalCompatibilidade].descricao}</p>
             </div>
             <div id="compatibilidade-EscolhasBotoes">
-                <button id="compatibilidade-EscolhasProximoBtn" onclick="carregarDadosCompatibilidade()">X</button>
-                <button id="compatibilidade-EscolhasAdotarBtn" onclick="confirmarCompatibilidade()">✔</button>
+                <button id="compatibilidade-EscolhasProximoBtn" onclick="animacaoTrocaAnimalMatch()">X</button>
+                <button id="compatibilidade-EscolhasAdotarBtn" onclick="carregarProcessamentoCompatibilidade()">✔</button>
             </div>`
 
   divContainerEscolhasEl.innerHTML = strHTML;
 
 } 
+
+async function carregarProcessamentoCompatibilidade() {
+
+  let porcentagemCompatibilidade = await confirmarCompatibilidade();
+  porcentagemCompatibilidade = parseInt(porcentagemCompatibilidade); 
+
+  let modalProcessandoCompatibilidade = document.querySelector(".compatibilidade-PopUpProcessandoCompatibilidade");  
+  let porcentagemCarregandoEl = document.querySelector(".compatibilidade-PorcentagemCarregando");
+  let imgAnimalEl = document.querySelector(".compatibilidade-EscolhasImagemCarousel"); 
+  let spanContadorPorcentagemEl = document.querySelector("#compatibilidade-ContadorPorcentagem"); 
+
+  let animalId = imgAnimalEl.id; 
+
+  modalProcessandoCompatibilidade.style.display = "block";
+
+  modalProcessandoCompatibilidade.classList.add('compatibilidade-AnimacaoSubida');
+
+  setTimeout(() => {
+    modalProcessandoCompatibilidade.classList.add('show');
+  }, 700); 
+
+  modalProcessandoCompatibilidade.classList.remove('show');
+
+  porcentagemCarregandoEl.style.width = 0;
+
+  let tempoTotal = 15000; 
+  let tempoProporcional = (porcentagemCompatibilidade / 100) * tempoTotal;
+
+  let progressoAtual = 0, progressoAtualContadorPorcentagem = 0;
+
+  let intervalo = setInterval(() => {
+    if (progressoAtual < porcentagemCompatibilidade) {
+      progressoAtual++;
+      spanContadorPorcentagemEl.innerHTML = progressoAtual;
+      porcentagemCarregandoEl.style.width = progressoAtual + '%';
+    } else {
+        clearInterval(intervalo);
+    }
+  }, tempoTotal / tempoProporcional);
+
+  let intervaloContadorPorcentagem = setInterval(() => {
+    if (progressoAtualContadorPorcentagem < porcentagemCompatibilidade) {
+      progressoAtualContadorPorcentagem++;
+      spanContadorPorcentagemEl.innerHTML = progressoAtualContadorPorcentagem;
+    } else {
+        clearInterval(intervaloContadorPorcentagem);
+    }
+  }, tempoTotal / 100);
+  
+  await exibicaoTelaCarregarCompatibilidade();
+
+  if (porcentagemCompatibilidade >= 70) {
+    await abrirModalMatch(animalId);
+  } else {
+    abrirModalNaoMatch();
+  }
+}
+
+async function exibicaoTelaCarregarCompatibilidade() {
+  let tempo = 15000;
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      let modalProcessandoCompatibilidade = document.querySelector(".compatibilidade-PopUpProcessandoCompatibilidade");  
+      modalProcessandoCompatibilidade.style.display = 'none';
+      resolve();
+    }, tempo);
+  });
+}
+
+
 
 async function confirmarCompatibilidade() {
 
@@ -2508,12 +2593,22 @@ async function confirmarCompatibilidade() {
   porcentagemCompatibilidade = ((distanciaPontos * 100)/valorMaximo);
   porcentagemCompatibilidade = 100 - porcentagemCompatibilidade;
 
-  if(porcentagemCompatibilidade >= 70) {
-    await abrirModalMatch(animalId);
-  } else {
-    carregarDadosCompatibilidade();
-  }
+  return porcentagemCompatibilidade;
 
+}
+
+function abrirModalNaoMatch() {
+  let divModalMatchEl = document.querySelector(".compatibilidade-PopUp-ModalNaoMatch");
+
+  divModalMatchEl.classList.add('compatibilidade-AnimacaoSubida');
+
+  setTimeout(() => {
+    divModalMatchEl.classList.add('show');
+  }, 700); 
+
+  divModalMatchEl.classList.remove('show');
+
+  divModalMatchEl.style.display = "block";
 }
 
 async function abrirModalMatch(idAnimal) {
@@ -2521,6 +2616,9 @@ async function abrirModalMatch(idAnimal) {
   let divModalMatchEl = document.querySelector(".compatibilidade-PopUp-Modal");
   let imgAnimalEl = document.querySelector(".compatibilidade-perfilAnimal");
   let imgUsuarioEl = document.querySelector(".compatibilidade-perfilUsuario");
+  let botaoAdocaoEl = document.querySelector("#compatibilidade-EscolhasAdotarBtn");
+
+  botaoAdocaoEl.addEventListener('click', carregarPaginaAdocao(idAnimal));
 
   let apiUrlJsonTagsAnimal = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev/imagensAnimal?id_animal=";
   let imagensAnimal = {};
@@ -2539,6 +2637,15 @@ async function abrirModalMatch(idAnimal) {
   }
 
   divModalMatchEl.style.display = "block";
+
+  divModalMatchEl.classList.add('compatibilidade-AnimacaoSubida');
+
+  setTimeout(() => {
+    divModalMatchEl.classList.add('show');
+  }, 700); 
+
+  divModalMatchEl.classList.remove('show');
+
   imgAnimalEl.src = strImagemAnimal;
   imgAnimalEl.id = idAnimal;
   imgUsuarioEl.src = "https://thumbs.dreamstime.com/b/%C3%ADcone-de-usu%C3%A1rio-m%C3%ADdia-social-vetor-imagem-perfil-do-avatar-padr%C3%A3o-retrato-182347582.jpg";
@@ -2547,7 +2654,24 @@ async function abrirModalMatch(idAnimal) {
 
 function fecharModalMatch() {
   let divModalMatchEl = document.querySelector(".compatibilidade-PopUp-Modal");
+  let divModalNaoMatchEl = document.querySelector(".compatibilidade-PopUp-ModalNaoMatch");
   divModalMatchEl.style.display = "none";
+  divModalNaoMatchEl.style.display = "none";
+}
+
+function animacaoTrocaAnimalMatch() {
+
+  let divContainerEscolhasEl = document.querySelector(".compatibilidade-ContainerEscolhas");
+
+  divContainerEscolhasEl.classList.add('compatibilidade-AnimacaoDesaparecimento');
+
+  setTimeout(() => {
+    divContainerEscolhasEl.classList.add('show');
+  }, 700); 
+
+  divContainerEscolhasEl.classList.remove('show');
+  
+  carregarDadosCompatibilidade()
 }
 
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */
