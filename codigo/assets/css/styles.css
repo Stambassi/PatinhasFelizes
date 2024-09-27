@@ -1704,7 +1704,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus {
     outline: none;     
 }
 
-#input-sobre-nos {
+.input-sobre-nos {
     width: 90%;     
     height: 90px;       
     padding: 10px;        
@@ -1718,30 +1718,28 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus {
     transition: border-color 0.3s ease-in-out; 
 }
 
-#input-sobre-nos:focus {
+.input-sobre-nos:focus {
     border-color: #007BFF;  
     outline: none;        
 }
 
 
-#edit-ok-btn {
+.OK-button {
     background-color:#39633f; 
     color: white;
     border: none;
+    display: flex;
+    justify-content: center;
     padding: 10px 20px; 
-    text-align: center; 
-    margin-left: 80%;
-    text-decoration: none; 
-    display:flex; 
-    font-size: 16px; 
+    text-align: center;
+    right: 3%;
+    font-size: 16px;
     cursor: pointer; 
     border-radius: 300px; 
-    transition: background-color 0.3s; 
-    right: 10px;             
-    top: 0%;        
+    transition: background-color 0.3s;   
 }
 
-#edit-ok-btn:hover {
+.OK-buttonn:hover {
     background-color: #45a049; 
 }
 /* ----------------------- Estilo Tela Inicial ----------------------- */
