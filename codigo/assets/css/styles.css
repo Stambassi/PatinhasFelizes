@@ -1686,8 +1686,7 @@ button#load_ab_photo:hover {
     color: #ffffff;
 }
 
-/* Estilo para os inputs de texto */
-input[type="text"], input[type="email"], input[type="tel"] {
+.input-text-ong {
     width: 50%;   
     padding: 3px;        
     font-size: 15px;      
@@ -1699,7 +1698,7 @@ input[type="text"], input[type="email"], input[type="tel"] {
     transition: border-color 0.3s ease-in-out; 
 }
 
-input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus {
+.input-text-ong:focus {
     border-color: #007BFF;  
     outline: none;     
 }
