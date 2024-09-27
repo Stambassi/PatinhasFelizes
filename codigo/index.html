@@ -15,33 +15,36 @@
     
     <!-- Plugin do Mask -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script> 
+
+    <script src="./assets/scripts/fakedata.js"></script>
+    <script src="./assets/scripts/scripts.js"></script>
     
     <title>Patinhas Felizes</title>
     
 </head>
 
-<body onload="carregarAnimais(),loginOnload(),carregarFiltrosCidades();">
-    <header class="container-fluid">
-        <div class="home-btn">
-            <img src="./assets/img/logo.jpg" alt="Logo Patinhas Felizes">
-            <a><i class="fa-solid fa-2x fa-house"></i></a>
-        </div>
+<body onload="gerarDadosFalsos(), loginOnload(), carregarAnimais(), carregarFiltrosCidades();">
+  <header class="container-fluid">
+    <div class="home-btn">
+      <img src="../../../../codigo/assets/img/logo.jpg" alt="Logo Patinhas Felizes">
+      <a href="../../../../codigo/index.html"><i class="fa-solid fa-2x fa-house"></i></a>
+    </div>
 
-        <div class="pages">
-            <a class="active-page" href="pages/telaInicial/telaInicial.html">Adotar</a>
-            <span class="divider">|</span>
-            <a class="inactive-page" onclick="carregarFormularioAnimalAbandonado()">Encontrei um animal abandonado</a>
-            <span class="divider">|</span>
-            <a class="inactive-page" onclick="carregarPaginaCompatibilidade()">Match</a>
-        </div>
+    <div class="pages">
+        <a class="active-page" href="../../../../codigo/index.html">Adotar</a>
+        <span class="divider">|</span>
+        <a class="inactive-page" href="../../../../codigo/pages/cadastros/crud-animal-abd.html">Encontrei um animal abandonado</a>
+        <span class="divider">|</span>
+        <a class="inactive-page" href="#">Match</a>
+    </div>
 
-        <div class="user-profile">
-            <button id="btnMostrarLogin">
-                <i class="fa-solid fa-3x fa-circle-user"></i>
-            </button>
-        </div>
+    <div class="user-profile">
+        <button class="mostrar btnMostrar" id="btnMostrarLogin">
+            <i class="fa-solid fa-2xl fa-circle-user"></i>
+        </button>
+    </div>
+  </header>
 
-    </header> 
     <main>
         <div id="telaInicial-Introducao">
             <h3 class="inline">Encontre o seu parceiro conosco! Escolha um pet disponível abaixo ou encontre uma patinha compatível com você! </h3>
@@ -229,7 +232,6 @@
         </div>
         <p id="footer-cp">&copy Patinhas felizes 2024 | Termos de serviço | Política de privacidade</p>
     </footer>
-    <script src="./assets/scripts/scripts.js"></script>
 </body>
 
 </html>

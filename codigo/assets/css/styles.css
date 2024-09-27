@@ -840,7 +840,7 @@ button#load_ab_photo:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 90%;
   min-height: 80vh;
   padding: 60px 60px;
 }

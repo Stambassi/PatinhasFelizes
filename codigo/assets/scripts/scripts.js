@@ -1,4 +1,33 @@
+/*---------------------- Criacao de dados FAKE (INICIO) ------------------*/
+
+function gerarDadosFalsos()
+{
+//Definir pessoas (com formularios)
+  let pessoas = gerarPessoasFalsas();
+//Definir ongs
+  let ongs = gerarOngsFalsas();
+//Definir animais
+  let animais = gerarAnimaisFalsos();
+//Guardar dados no LocalStorage
+  if ( localStorage.getItem("Usuario") === null)
+    localStorage.setItem("Usuario", JSON.stringify(pessoas));
+  if ( localStorage.getItem("ONG") === null )
+    localStorage.setItem("ONG", JSON.stringify(ongs));
+  if ( localStorage.getItem("Animal") === null )
+    localStorage.setItem("Animal", JSON.stringify(animais));
+}
+
+/*---------------------- Criacao de dados FAKE (FIM) ------------------*/
+
 /* ------------------------------ Funções de interacao com o LOCAL STORAGE (INICIO) ------------------------------------ */
+
+function limparLocalStorage()
+{
+  localStorage.removeItem("Usuario");
+  localStorage.removeItem("usuario_login");
+  localStorage.removeItem("ONG");
+  localStorage.removeItem("ong_login");
+}
 
 function getAllUsuario()
 {
@@ -199,11 +228,11 @@ async function getOngTemp ()
 {
 //Definir dados locais
   let ong = {
-    id: 1,
+    id_ong: 1,
     nome: "Nome da ONG",
     email: "",
     senha: "",
-    telefones: ["telefone 1", "telefone 2"],
+    telefones: ["(telefone 1)", "(telefone 2)"],
     foto_perfil: "",
     cnpj: "",
     descricao: "",
@@ -212,7 +241,8 @@ async function getOngTemp ()
         numero: 1,
         bairro: "",
         cidade: "",
-        estado: ""
+        estado: "",
+        cep: ""
     }, {} ],  
   };
 //Retornar
@@ -234,25 +264,24 @@ async function getUsuarioPerfilTemp ()
     tags: { atencao: 4, passeio: 1, carinho: 2, extrovertido: 5, animacao: 3 } ,
     form_adocao: [
       {
+        id_formulario: 1,
+        id_pessoa: 1,
+        id_animal: 2,
+        status: "pendente"      
+        data: "16/08/2024",
         moradia: "Apartamento",
         experiencia: true,
         viagem: "Familiares",
-        disponibilidade: "2 horas ou mais",
+        disponibilidade: "2 dias ou mais",
         visitas_ong: true,
         consentimento: true,
-        adotante: 1,
         comentarios: "Gostei muito desse animal",
-        data: "16/08/2024",
-        id_form: 1,
-        id_animal: 2,
-        id_ong: 3,
-        status: 0      
       },
       {
         moradia: "Apartamento",
         experiencia: true,
         viagem: "Familiares",
-        disponibilidade: "2 horas ou mais",
+        disponibilidade: "2 dias ou mais",
         visitas_ong: true,
         consentimento: true,
         adotante: 1,
@@ -266,22 +295,21 @@ async function getUsuarioPerfilTemp ()
     ],
     form_abandonado: [
       {
-        imagem: "",
+        id_form: 1,
+        data: "26/09/2024",
         especie: "Cachorro",
         quantidade: 3,
+        condicao: "Eles estavam em uma caixa de papelão",
         endereco: {
           rua: "Rua Stella Hanriot",
           numero: 515,
           bairro: "Buritis",
           cidade: "Belo Horizonte",
           estado: "MG"
-        },
-        data: "26/09/2024",
-        condicao: "Eles estavam em uma caixa de papelão",
-        lar_temporario: 0,
-        foto_abandonado: "",
-        id_form: 1,
-        status: 0
+          },
+        lar_temporario: "Sim, por 3 dias",
+        imagem: "",
+        status: "pendente"
       },
       {
         imagem: "",
@@ -937,13 +965,10 @@ async function loginInstituicaoEventos ()
 function ongNextID()
 {
   let ongs = getAllONG();
-  console.log(ongs);
   return (ongs.length > 0) ? (parseInt(ongs[ongs.length-1].id_ong) + 1) : 1;
 }
 
 let objONG = { id_ong: ongNextID(), nome: "", email: "", senha: "", telefone: "", foto_perfil: "", cnpj: "", descricao: "", endereco: { rua: "", numero: "", bairro: "", cidade: "", estado: "", cep: "" } };
-
-console.log(ongNextID());
 
 /**
  * cadastroInstituicao - Função para recuperar o HTML do cadastro de instituição e adicioná-lo à tela
@@ -1399,17 +1424,17 @@ async function inserirPerfilUsuario_2 (usuario)
     {
     //Definir dados locais
       let form = adocao[i];
-      let animal = await getAnimalTemp(adocao.id_animal); // COMPLETAR <------------
-      let ong = await getOngTemp( form.id_ong ); // COMPLETAR <------------
+      let animal = getAnimal(form.id_animal);
+      let ong = getONG( animal.id_ong );
       let status = form.status;
       let imgStatus = "";
       let msg = "";
     //Testar status
-      if (status === 0)
+      if (status == "recusado")
       { imgStatus = "../../../../codigo/assets/img/failure.png"; msg = "Pedido negado";  }
-      else if (status === 1)
+      else if (status == "aceito")
       { imgStatus = "../../../../codigo/assets/img/success.png"; msg = "Pedido aceito";  }
-      else if (status == 2)
+      else if (status == "pendente")
       { imgStatus = "../../../../codigo/assets/img/waiting.png"; msg = "Aguardando resposta";  }
     //Definir nova linha
       str += `
@@ -1456,17 +1481,17 @@ async function inserirPerfilUsuario_3 (usuario)
     {
     //Definir dados locais
       let form = abandonado[i];
-      let animal = await getAnimalTemp(-1); // COMPLETAR <------------
-      let ong = await getOngTemp( form.id_ong ); // COMPLETAR <------------
+      console.log(form);
+      let ong = getONG( form.id_ong );
       let status = form.status;
       let imgStatus = "";
       let msg = "";
     //Testar status
-      if (status === 0)
+      if (status == "recusado")
       { imgStatus = "../../../../codigo/assets/img/failure.png"; msg = "Pedido negado";  }
-      else if (status === 1)
+      else if (status == "aceito")
       { imgStatus = "../../../../codigo/assets/img/success.png"; msg = "Pedido aceito";  }
-      else if (status == 2)
+      else if (status == "pendente")
       { imgStatus = "../../../../codigo/assets/img/waiting.png"; msg = "Aguardando resposta";  }
     //Definir nova linha
       str += `
@@ -1475,8 +1500,8 @@ async function inserirPerfilUsuario_3 (usuario)
             <img src="${form.imagem[0]}" alt="imagem-animal">
           </div>
           <div class="perfil-usuario-3-informacoes">
-            <p>Animais encontrados: <span id="perfil-usuario-2-informacoes-animal">${form.quantidade}</span></p>
-            <p>Local encontrado: <span id="perfil-usuario-2-informacoes-local">${form.endereco.rua}</span></p>
+            <p>Local encontrado: <span id="perfil-usuario-2-informacoes-local">${form.endereco.rua}, ${form.endereco.numero}</span></p>
+            <p>Enviado para: <span id="perfil-usuario-2-informacoes-animal">${ong.nome}</span></p>
             <p>Data do pedido: <span id="perfil-usuario-2-informacoes-contato">${form.data}</span></p>
           </div>
           <div class="perfil-usuario-3-status">
