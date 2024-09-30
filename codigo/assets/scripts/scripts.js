@@ -528,13 +528,13 @@ function inverterSenha (passwordImg, controle)
   if (controle === 1)
   {
     senhaInput.type = 'password';
-    passwordImg.src = "../../../../codigo/assets/img/hidden.png";
+    passwordImg.src = "/assets/img/hidden.png";
     controle--;
   }
   else
   {
     senhaInput.type = 'text';
-    passwordImg.src = "../../../../codigo/assets/img/eye.png";
+    passwordImg.src = "/assets/img/eye.png";
     controle++;
   }
 //Retornar
@@ -1683,7 +1683,7 @@ function substituirPerfilUsuario (usuario)
   nome.innerHTML = `<input type="text" class="perfil-usuario-input" value="${usuario.nome}">`;
   email.innerHTML = `<input type="text" class="perfil-usuario-input" value="${usuario.email}">`;
   senha.innerHTML = `<input type="password" class="perfil-usuario-input password" value="${usuario.senha}">
-  <img src="../../assets/img/hidden.png" class="password-controle">`;
+  <img src="/assets/img/hidden.png" class="password-controle">`;
   cpf.innerHTML = `<input type="text" class="perfil-usuario-input" value="${usuario.cpf}">`;
   dt_nascimento.innerHTML = `<input type="text" class="perfil-usuario-input" value="${usuario.data_de_nascimento}">`;
   telefone.innerHTML = `<input type="text" class="perfil-usuario-input" value="${usuario.telefone}">`;
@@ -1703,8 +1703,8 @@ function substituirPerfilUsuario (usuario)
   }
 //Trocar botões
   botaoEditar.remove();
-  let botaoDescartar = `<img src="../../../../codigo/assets/img/discard.png" alt="botao-descartar" class="perfil-usuario-editar-btn" id="perfil-descartar">`;
-  let botaoConfirmar = `<img src="../../../../codigo/assets/img/confirm.png" alt="botao-confirmar" class="perfil-usuario-editar-btn" id="perfil-confirmar">`;
+  let botaoDescartar = `<img src="/assets/img/discard.png" alt="botao-descartar" class="perfil-usuario-editar-btn" id="perfil-descartar">`;
+  let botaoConfirmar = `<img src="/assets/img/confirm.png" alt="botao-confirmar" class="perfil-usuario-editar-btn" id="perfil-confirmar">`;
   divBotoes.insertAdjacentHTML('beforeend', botaoDescartar);
   divBotoes.insertAdjacentHTML('beforeend', botaoConfirmar);
 }
@@ -1798,7 +1798,7 @@ function perfilUsuarioResetar ()
   botaoConfirmar.remove();
   botaoDescartar.remove();
 //Adicionar novo botão
-  let botaoEditar = `<img src="../../../../codigo/assets/img/editar.png" alt="botao-editar" class="perfil-usuario-editar-btn" id="perfil-editar">`;
+  let botaoEditar = `<img src="/assets/img/editar.png" alt="botao-editar" class="perfil-usuario-editar-btn" id="perfil-editar">`;
   divBotoes.insertAdjacentHTML('beforeend', botaoEditar);
 //Definir dados locais
   let nome = document.querySelector('#usuario-nome');
