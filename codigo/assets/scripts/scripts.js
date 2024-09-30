@@ -2744,6 +2744,22 @@ function animacaoTrocaAnimalMatch() {
   carregarDadosCompatibilidade()
 }
 
+function calcularIdade(dataPassada) {
+  const hoje = new Date();
+  const [dia, mes, ano] = dataPassada.split('/').map(Number);
+  const nascimento = new Date(ano, mes - 1, dia); // mês - 1 porque os meses em JS começam em 0
+
+  let anos = hoje.getFullYear() - nascimento.getFullYear();
+  let meses = hoje.getMonth() - nascimento.getMonth();
+
+  if (meses < 0) {
+    anos--;
+    meses += 12;
+  }
+
+  return `${anos} anos e ${meses} meses`;
+}
+
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */
 /*---------------------- Tela de Atividades ONG (Inicio) ------------------*/
 
@@ -2867,19 +2883,3 @@ document.getElementById('edit-ok-btn').addEventListener('click', AC_salvarDados)
 document.addEventListener('DOMContentLoaded', AC_mostrarDados);
 
 /*---------------------- Tela de Pefil ONG (Fim) ------------------*/
-
-function calcularIdade(dataPassada) {
-  const hoje = new Date();
-  const [dia, mes, ano] = dataPassada.split('/').map(Number);
-  const nascimento = new Date(ano, mes - 1, dia); // mês - 1 porque os meses em JS começam em 0
-
-  let anos = hoje.getFullYear() - nascimento.getFullYear();
-  let meses = hoje.getMonth() - nascimento.getMonth();
-
-  if (meses < 0) {
-    anos--;
-    meses += 12;
-  }
-
-  return `${anos} anos e ${meses} meses`;
-}

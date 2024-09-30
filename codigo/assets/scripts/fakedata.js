@@ -641,6 +641,7 @@ function gerarAnimaisFalsos ()
       "nome": "Max",
       "raca": "Vira-Lata",
       "genero": "M",
+      "porte": "G",
       "data_de_nascimento": "01/01/2020",
       "descricao": "Max é um vira-lata forte e leal, que busca uma nova chance para ser o companheiro amoroso de alguém especial.",
       "historia": "Max já teve um lar, mas foi abandonado sem explicação. Por semanas, ele vagou pelas ruas," +
@@ -686,6 +687,7 @@ function gerarAnimaisFalsos ()
       "nome": "Luna",
       "raca": "Siamês",
       "genero": "F",
+      "porte": "P",
       "data_de_nascimento": "15/05/2019",
       "descricao": "Luna é uma gata corajosa e doce, que superou as dificuldades da vida nas ruas e agora busca um lar cheio de amor e carinho.",
       "historia": "Luna é uma gata que, desde filhote, enfrentou a vida nas ruas com coragem e determinação." +
@@ -734,6 +736,7 @@ function gerarAnimaisFalsos ()
       "nome": "Bunny",
       "raca": "Angorá",
       "genero": "M",
+      "porte": "P",
       "data_de_nascimento": "20/03/2021",
       "descricao": "Banny é um coelho resgatado que busca um lar amoroso, onde possa ser livre e compartilhar suas travessuras com uma nova família.",
       "historia": "Banny é um coelho que foi resgatado de um mercado de animais, onde estava prestes a ser vendido como comida." +
@@ -780,6 +783,7 @@ function gerarAnimaisFalsos ()
       "nome": "Theo",
       "raca": "Vira-Lata",
       "genero": "M",
+      "porte": "M",
       "data_de_nascimento": "10/10/2018",
       "descricao": "Theo é um cachorro amoroso e gentil, que busca uma nova família para compartilhar sua alegria e lealdade.",
       "historia": "Theo é um cachorro que foi encontrado perambulando pelas ruas, abandonado e sozinho." +
@@ -828,6 +832,7 @@ function gerarAnimaisFalsos ()
       "nome": "Miau",
       "raca": "Persa",
       "genero": "F",
+      "porte": "P",
       "data_de_nascimento": "12/07/2020",
       "descricao": "Miau é uma gata curiosa e brincalhona que busca um lar amoroso onde possa ser mimada e se sentir segura.",
       "historia": "Miau é uma gata que foi encontrada abandonada em um beco, lutando para sobreviver." +
@@ -874,6 +879,7 @@ function gerarAnimaisFalsos ()
       "nome": "Flopsy",
       "raca": "Mini Lop",
       "genero": "F",
+      "porte": "P",
       "data_de_nascimento": "05/11/2021",
       "descricao": "Flopsy é uma coelha adorável e brincalhona, que busca um lar amoroso onde possa explorar e receber todo o carinho que merece.",
       "historia": "Flopsy é uma coelha que foi resgatada de um pet shop, onde estava em condições inadequadas." +
@@ -920,6 +926,7 @@ function gerarAnimaisFalsos ()
       "nome": "Bella",
       "raca": "Poodle",
       "genero": "F",
+      "porte": "G",
       "data_de_nascimento": "22/09/2019",
       "descricao": "Bella é uma cadela amorosa e cheia de energia, que busca um lar acolhedor onde possa ser feliz e fazer novos amigos.",
       "historia": "Bella é uma cadela que foi resgatada das ruas, onde viveu sozinha e enfrentou muitos desafios." +
@@ -968,6 +975,7 @@ function gerarAnimaisFalsos ()
       "nome": "Oliver",
       "raca": "Maine Coon",
       "genero": "M",
+      "porte": "P",
       "data_de_nascimento": "30/06/2018",
       "descricao": "Oliver é um gato curioso e gentil, que busca um lar amoroso onde possa explorar e receber carinho.",
       "historia": "Oliver é um gato que foi resgatado de uma colônia de gatos, onde vivia em condições difíceis." +
