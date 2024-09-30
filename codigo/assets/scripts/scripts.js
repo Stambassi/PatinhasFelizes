@@ -1354,8 +1354,8 @@ async function perfilUsuario ()
 {
 //Redirecionar pagina
 //https://patinhas-felizes-nu.vercel.app/codigo/pages/perfilUsuario/perfil-usuario.html
-  if (window.location.href != "http://127.0.0.1:5500/codigo/pages/perfilUsuario/perfil-usuario.html")
-    window.location.href = '/pages/perfilUsuario/perfil-usuario.html';
+  // if (window.location.href != "http://127.0.0.1:5500/codigo/pages/perfilUsuario/perfil-usuario.html")
+  //   window.location.href = '/pages/perfilUsuario/perfil-usuario.html';
 //Definir dados locais
   let pagina = 1;
 //Definir eventos da pagina de perfil
@@ -1565,11 +1565,11 @@ async function inserirPerfilUsuario_2 (usuario)
       let msg = "";
     //Testar status
       if (status == "recusado")
-      { imgStatus = "../../../../codigo/assets/img/failure.png"; msg = "Pedido negado";  }
+      { imgStatus = "/assets/img/failure.png"; msg = "Pedido negado";  }
       else if (status == "aceito")
-      { imgStatus = "../../../../codigo/assets/img/success.png"; msg = "Pedido aceito";  }
+      { imgStatus = "/assets/img/success.png"; msg = "Pedido aceito";  }
       else if (status == "pendente")
-      { imgStatus = "../../../../codigo/assets/img/waiting.png"; msg = "Aguardando resposta";  }
+      { imgStatus = "/assets/img/waiting.png"; msg = "Aguardando resposta";  }
     //Definir nova linha
       str += `
         <div class="perfil-usuario-2-row" id="perfil-usuario-2-row-${form.id_form}">
