@@ -302,10 +302,10 @@ function updateUsuario (objUsuario)
   old[objUsuario.id_usuario - 1] = objUsuario;
 //Atualizar o LocalStorage
   localStorage.removeItem("Usuario");
-  if (objUsuario.length == 1)
-    localStorage.setItem("Usuario", "[" + JSON.stringify(objUsuario) + "]");
+  if (old.length == 1)
+    localStorage.setItem("Usuario", "[" + JSON.stringify(old) + "]");
   else
-    localStorage.setItem("Usuario", JSON.stringify(objUsuario));
+    localStorage.setItem("Usuario", JSON.stringify(old));
 }
 
 function updateONG (objOng)
@@ -2911,28 +2911,118 @@ function readFormularios ()
 function formulariosOngEventos()
 {
 //Definir dados locais
-  let botoesFormulario = document.getElementsByClassName('adocao-form');
+  let containers = document.getElementsByClassName('container-conteudo');
 //Adicionar eventos
-  for (let i = 0; i < botoesFormulario.length; i++)
+  for (let i = 0; i < containers.length; i++)
   {
-    botoesFormulario[i].addEventListener('click', (e) => mostrarPopupFormularioAdocao(e.target.id));
+  //Definir dados locais
+    let container = containers[i];
+    let id_formulario = parseInt( container.querySelector('.fa-solid').id);
+    let botaoFormulario = container.querySelector('.adocao-form');
+    let botaoAceitar = container.querySelector('.Aceitar-button');
+    let botaoRecusar = container.querySelector('.Recusar-button');
+  //Definir eventos
+    botaoFormulario.addEventListener('click', (e) => mostrarPopupFormularioAdocao(e.target.id));
+    botaoAceitar.addEventListener('click', () => mudarStatusFormularioAdocao("aceito", id_formulario));
+    botaoRecusar.addEventListener('click', () => mudarStatusFormularioAdocao("recusado", id_formulario));
   }
+}
+
+function mudarStatusFormularioAdocao (status, id_formulario)
+{
+//Definir dados locais
+  let formulario = getFormularioAdocao(id_formulario);
+  let pessoa = getUsuario(formulario.id_pessoa);
+  let formulariosPessoa = pessoa.form_adocao;
+//Mudar status
+  formulario.status = status;
+//Identificar formulario da pessoa
+  let i = 0;
+  let controle = true;
+  while (i < formulariosPessoa.length && controle)
+  {
+    controle = formulariosPessoa[i].id_formulario != formulario.id_formulario;
+    i++;  
+  }
+//Atualizar objeto
+  if (i > 0 && !controle)
+    pessoa.form_adocao[i - 1] = formulario;
+//Atualizar
+  updateUsuario(pessoa);
+//Recarregar pagina
+  readFormularios();
 }
 
 async function mostrarPopupFormularioAdocao(id_formulario)
 {
 //Definir dados locais
+  let main = document.querySelector('main');
+//Adicionar popup
+  let modal = await carregarHtml('/pages/atividadesONG/pop-up-formulario.html');
+  main.insertAdjacentHTML('beforeend', modal);
+  popUpFormularioOngEventos();
+  preencherPopupFormulario(id_formulario);
+}
+
+function preencherPopupFormulario (id_formulario)
+{
+//Definir dados locais
   let formulario = getFormularioAdocao(id_formulario);
   let pessoa = getUsuario(formulario.id_pessoa);
   let animal = getAnimal(formulario.id_animal);
-  let main = document.querySelector('main');
-//Adicionar popup
-  let modal = await carregarHtml('../../../../codigo/pages/atividadesONG/pop-up-formulario.html');
-  main.insertAdjacentHTML('beforeend', modal);
-  popUpFormularioOngEventos();
+//Definir elemntos html de pessoa
+  let element = document.querySelector('.formulario-ong-informacoes-pessoa');
+  let nomePessoa = element.querySelector('.formulario-ong-nome');
+  let dataPessoa = element.querySelector('.formulario-ong-idade');
+  let emailPessoa = element.querySelector('.formulario-ong-email');
+  let telefonePessoa = element.querySelector('.formulario-ong-telefone');
+//Atribuir dados html de pessoa
+  nomePessoa.innerHTML = pessoa.nome;
+  dataPessoa.innerHTML = pessoa.data_de_nascimento;
+  emailPessoa.innerHTML = pessoa.email;
+  telefonePessoa.innerHTML = pessoa.telefone;
+//Definir elementos html de animal
+  element = document.querySelector('.formulario-ong-informacoes-animal');
+  let nomeAnimal = element.querySelector('.formulario-ong-nome');
+  let especieAnimal = element.querySelector('.formulario-ong-especie');
+  let sexoAnimal = element.querySelector('.formulario-ong-sexo');
+  let idadeAnimal = element.querySelector('.formulario-ong-idade');
+//Atribuir dados html de pessoa
+  nomeAnimal.innerHTML = animal.nome;
+  especieAnimal.innerHTML = animal.especie;
+  sexoAnimal.innerHTML = (animal.sexo == 'M') ? "Masculino" : "Feminino" ;
+  idadeAnimal.innerHTML = animal.data_de_nascimento;
+//Definir elementos html de formulario
+  element = document.querySelector('.formulario-ong-informacoes-form');
+  let dataForm = element.querySelector('.formulario-ong-data');
+  let moradiaForm = element.querySelector('.formulario-ong-moradia');
+  let experienciaForm = element.querySelector('.formulario-ong-experiencia');
+  let viagemForm = element.querySelector('.formulario-ong-viagem');
+  let disponibilidadeForm = element.querySelector('.formulario-ong-disponibilidade');
+  let visitasForm = element.querySelector('.formulario-ong-visitas');
+  let consentimentoForm = element.querySelector('.formulario-ong-consentimento');
+  let comentarioForm = element.querySelector('.formulario-ong-comentarios');
+//Atribuir dados html de formulario
+  dataForm.innerHTML = formulario.data;
+  moradiaForm.innerHTML = formulario.moradia;
+  experienciaForm.innerHTML = (formulario.experiencia) ? "Sim" : "Nao";
+  viagemForm.innerHTML = formulario.viagem;
+  disponibilidadeForm.innerHTML = formulario.disponibilidade;
+  visitasForm.innerHTML = (formulario.visitas) ? "Sim" : "Nao";
+  consentimentoForm.innerHTML = (formulario.consentimento) ? "Sim" : "Nao";
+  comentarioForm.innerHTML = formulario.comentario;
 }
 
-
+function popUpFormularioOngEventos ()
+{
+//Definir dados locais
+  let closeWindow = document.querySelector('.formulario-ong-close');
+//Definir evento
+  closeWindow.addEventListener('click', () => {
+    let modal = document.querySelector('.formulario-ong-modal');
+    modal.remove();
+  });
+}
 
 function inserirFormulariosAdocao (formularios)
 {
@@ -2941,45 +3031,39 @@ function inserirFormulariosAdocao (formularios)
   let str = "";
   container.innerHTML = str;
 //Testar se ha' formularios
-  if ( !(formularios.length > 0) )
-  {
     str = `<p>Ainda não há formulários de adoção recebidos!</p>`;
-  } 
-  else
+//Criar string com os formularios
+  for (let i = 0; i < formularios.length; i++)
   {
-  //Criar string com os formularios
-    for (let i = 0; i < formularios.length; i++)
+  //Definir dados locais
+    let formulario = formularios[i];
+    let pessoa = getUsuario(formulario.id_pessoa);
+    let animal = getAnimal(formulario.id_animal);
+  //Testar se o animal esta correto
+    if (animal.nome != null && formulario.status == "pendente")
     {
-    //Definir dados locais
-      let formulario = formularios[i];
-      let pessoa = getUsuario(formulario.id_pessoa);
-      let animal = getAnimal(formulario.id_animal);
-    //Testar se o animal esta correto
-      if (animal.nome != null && formulario.status == "pendente")
-      {
-      //Adicionar 'a string
-        str += `
-          <div class="container-conteudo">
-            <div class="Image-Solic">
-              <img src="${animal.imagem[0]}" alt="imagem-animal">
-              <h6>${animal.nome}</h6>
-            </div>
-            <div class="text-solic">
-              <p><strong>Pedido realizado por:</strong><span class="form-adocao-nome-pessoa">   ${pessoa.nome}</span></p>
-              <p><strong>Comentarios:</strong><span class="form-adocao-comentarios">   ${formulario.comentarios}</span></p>
-              <p><strong>Data do pedido:</strong><span class="form-adocao-data">   ${formulario.data}</span></p>
-            </div>
-            <div class="Formulario-content">
-              <button class="adocao-form"><i class="fa-solid fa-file-pen fa-4x" id="${formulario.id_formulario}"></i></button><br>
-              <h5 class="formulario-text">Informações</h5>
-            </div>
-            <div class="button-solic">
-              <button class="Aceitar-button"><strong>ACEITAR</strong></button>
-              <button class="Recusar-button"><strong>RECUSAR</strong></bu>
-            </div>
+    //Adicionar 'a string
+      str += `
+        <div class="container-conteudo">
+          <div class="Image-Solic">
+            <img src="${animal.imagem[0]}" alt="imagem-animal">
+            <h6>${animal.nome}</h6>
           </div>
-        `;
-      }
+          <div class="text-solic">
+            <p><strong>Pedido realizado por:</strong><span class="form-adocao-nome-pessoa">   ${pessoa.nome}</span></p>
+            <p><strong>Comentarios:</strong><span class="form-adocao-comentarios">   ${formulario.comentarios}</span></p>
+            <p><strong>Data do pedido:</strong><span class="form-adocao-data">   ${formulario.data}</span></p>
+          </div>
+          <div class="Formulario-content">
+            <button class="adocao-form"><i class="fa-solid fa-file-pen fa-4x" id="${formulario.id_formulario}"></i></button><br>
+            <h5 class="formulario-text">Informações</h5>
+          </div>
+          <div class="button-solic">
+            <button class="Aceitar-button"><strong>ACEITAR</strong></button>
+            <button class="Recusar-button"><strong>RECUSAR</strong></bu>
+          </div>
+        </div>
+      `;
     }
   }
 //Adicionar string ao html

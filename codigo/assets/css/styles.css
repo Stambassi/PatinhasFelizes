@@ -1671,6 +1671,11 @@ button#load_ab_photo:hover {
   height: 35px;
 }
 
+.formulario-ong-close:hover
+{
+  cursor: pointer;
+}
+
 .formulario-ong-close img
 {
   width: 35px;
