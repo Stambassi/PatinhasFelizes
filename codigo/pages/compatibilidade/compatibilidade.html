@@ -20,11 +20,11 @@
         </div>
 
         <div class="pages">
-            <a class="active-page" href="#">Titulo1</a>
+            <a class="active-page" href="../telaInicial/telaInicial.html">Adotar</a>
             <span class="divider">|</span>
-            <a class="inactive-page" href="#">Titulo2</a>
+            <a class="inactive-page" onclick="carregarFormularioAnimalAbandonado()">Encontrei um animal abandonado</a>
             <span class="divider">|</span>
-            <a class="inactive-page" href="#">Titulo3</a>
+            <a class="inactive-page" onclick="carregarPaginaCompatibilidade()">Match</a>
         </div>
 
         <div class="user-profile">
@@ -79,7 +79,7 @@
                     <img class="compatiilidade-imagemPerfilMatch compatibilidade-perfilUsuario" src="https://s3.amazonaws.com/petz-cdm-stg/d79afafb-6071-4c53-a2da-328b6155aa9a.jpeg" alt="">
                 </div>
                 <div id="compatibilidade-MatchBotoes">
-                    <button id="compatibilidade-EscolhasAdotarBtn">Adotar!</button>
+                    <button id="compatibilidade-EscolhasAdotarBtn" class="compatibilidade-SolicitarAdocao">Adotar!</button>
                     <button id="compatibilidade-EscolhasProximoBtn" onclick="fecharModalMatch(), animacaoTrocaAnimalMatch()">Continuar Proucurando</button>
                 </div>
             </div>
@@ -89,6 +89,7 @@
             <div class="compatibilidade-ContainerEscolhas">
                 <h1>Não deu Match :(</h1>
                 <div id="compatibilidade-MatchBotoes">
+                    <button id="compatibilidade-EscolhasAdotarBtn" class="compatibilidade-SolicitarAdocao">Adotar mesmo assim!</button>
                     <button id="compatibilidade-EscolhasProximoBtn" onclick="fecharModalMatch(), animacaoTrocaAnimalMatch()">Continuar Proucurando</button>
                 </div>
             </div>

@@ -12,26 +12,28 @@
     <script src="../../assets/scripts/scripts.js" defer></script>
     <title>Patinhas Felizes</title>
 
-<body>
+<body onload="loginOnload();">
     <header class="container-fluid">
-        <div class="home-btn">
-            <img src="../../assets/img/logo.jpg" alt="Logo Patinhas Felizes">
-            <a><i class="fa-solid fa-2xl fa-house"></i></a>
-        </div>
+      <div class="home-btn">
+        <img src="../../../../codigo/assets/img/logo.jpg" alt="Logo Patinhas Felizes">
+        <a href="../../../../codigo/index.html"><i class="fa-solid fa-2x fa-house"></i></a>
+      </div>
 
-        <div class="pages">
-            <a class="active-page" href="#">Titulo1</a>
-            <span class="divider">|</span>
-            <a class="inactive-page" href="#">Titulo2</a>
-            <span class="divider">|</span>
-            <a class="inactive-page" href="#">Titulo3</a>
-        </div>
+      <div class="pages">
+          <a class="inactive-page" href="../../../../codigo/index.html">Adotar</a>
+          <span class="divider">|</span>
+          <a class="active-page" href="../../../../codigo/pages/cadastros/crud-animal-abd.html">Encontrei um animal abandonado</a>
+          <span class="divider">|</span>
+          <a class="inactive-page" href="#">Match</a>
+      </div>
 
-        <div class="user-profile">
-            <a><i class="fa-solid fa-2xl fa-circle-user"></i></a>
-        </div>
-
+      <div class="user-profile">
+          <button class="mostrar btnMostrar" id="btnMostrarLogin">
+              <i class="fa-solid fa-2xl fa-circle-user"></i>
+          </button>
+      </div>
     </header>
+
     <main>
         <div id="crud-form-ab">
             <div id="ab-titulo">
