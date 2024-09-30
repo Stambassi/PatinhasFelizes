@@ -1642,6 +1642,154 @@ button#load_ab_photo:hover {
     align-items: center;
 }
 
+/* -------------------- POPUP DE FORMULARIO ------------------------*/
+
+.formulario-ong-modal
+{
+  position: fixed; 
+  top: 0;
+  left: 0;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;  
+}
+
+.formulario-ong-container
+{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 60%;
+  min-width: 700px;
+  height: fit-content;
+  padding: 70px 50px 20px;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;;
+  border-color: var(--grey);
+  border-radius: 30px;
+  box-shadow: 0px 0px 1px 1px var(--grey);
+  z-index: 2;
+}
+
+.formulario-ong-close
+{
+  position: absolute;
+  top: 2%;
+  left: 94%;
+  width: 35px;
+  height: 35px;
+}
+
+.formulario-ong-close:hover
+{
+  cursor: pointer;
+}
+
+.formulario-ong-close img
+{
+  width: 35px;
+  height: 35px;
+}
+
+.formulario-ong-titulo
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.formulario-ong-titulo h1
+{
+  font-weight: 500;
+}
+
+.formulario-ong-informacoes
+{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  padding: 0px;
+}
+
+.formulario-ong-informacoes-pessoa
+{
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* padding: 0px 10px 10px 10px; */
+}
+
+.formulario-ong-informacoes-animal
+{
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* padding: 0px 10px 10px 10px; */
+}
+
+.formulario-ong-informacoes-form
+{
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* padding: 0px 10px 10px 10px; */
+}
+
+
+.formulario-ong-informacoes-titulo
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.formulario-ong-informacoes-titulo h1
+{
+  font-weight: 400;
+}
+
+.formulario-ong-informacoes-dados
+{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.formulario-ong-informacoes-dados p
+{
+  margin: 10px 0px;
+}
+
+.formulario-ong-informacoes-dados div
+{
+  margin: 0 50px;
+}
+
+.formulario-ong-informacoes-form .formulario-ong-informacoes-dados
+{
+  flex-direction: row;
+}
+
 /* ------------------- Perfil ONG ------------------- */
 
 .container-Perfil-ONG {
