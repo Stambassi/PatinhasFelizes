@@ -194,13 +194,13 @@ function getLoginOng()
 function logoutUsuario()
 {
   localStorage.removeItem("usuario_login");
-  window.location.href = "../../../../codigo/index.html";
+  window.location.href = "/index.html";
 }
 
 function logoutOng()
 {
   localStorage.removeItem("ong_login");
-  window.location.href = "../../../../codigo/index.html";
+  window.location.href = "/index.html";
 }
 
 function getUsuarioLogged ()
@@ -622,7 +622,7 @@ async function testarLoginOng() {
     if(login >= 0 && login != null)
     {
       fecharPopup();
-      window.location.href = '../../../../codigo/pages/atividadesONG/AtividadesONG.html'
+      window.location.href = '/pages/atividadesONG/AtividadesONG.html'
     }
     else 
       alert("senha ou cnpj incorreto(s)"); // Mensagem de erro
@@ -676,11 +676,11 @@ async function loginUsuario ()
   let container;
 //Testar se ja esta logado
   if ( usuarioLogado() )
-    window.location.href = '../../../../codigo/pages/perfilUsuario/perfil-usuario.html';
+    window.location.href = '/pages/perfilUsuario/perfil-usuario.html';
   else
   {
   //Recuperar html
-    container = await carregarHtml('../../../../codigo/pages/loginUsuario/login-template.html');
+    container = await carregarHtml('/pages/loginUsuario/login-template.html');
   //Adicionar html
     adicionarPopup(container, main, loginUsuarioEventos);
   }
@@ -728,7 +728,7 @@ async function cadastroUsuario ()
   let pagina = 1;
   let container;
 //Recuperar html
-  container = await carregarHtml(`../../../../codigo/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroUsuarioEventos);
 }
@@ -799,7 +799,7 @@ async function cadastroUsuarioPagina(pagina)
 //Definir dados locais
   let main = document.querySelector('main');
 //Recuperar html
-  container = await carregarHtml(`../../../../../codigo/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroUsuarioEventos);
 //Definir estilos e particularidades
@@ -1016,14 +1016,14 @@ async function loginInstituicao ()
 //Testar se esta logado
   let ong = getOngLogged();
   if (ong != null)
-    window.location.href = "../../../../codigo/pages/atividadesONG/AtividadesONG.html";
+    window.location.href = "/pages/atividadesONG/AtividadesONG.html";
   else
   {
   //Definir dados locais
     let main = document.querySelector('main');
     let container;
   //Recuperar container da pagina
-    container = await carregarHtml(`./pages/loginInstituicao/login-template.html`);
+    container = await carregarHtml(`/pages/loginInstituicao/login-template.html`);
   //Atualizar o html da pagina
     adicionarPopup(container, main, loginInstituicaoEventos);
   }
@@ -1074,7 +1074,7 @@ async function cadastroInstituicao ()
   let pagina = 1;  
   let container;
 //Recuperar html
-  container = await carregarHtml(`./pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Atualizar o html da pagina
   adicionarPopup(container, main, cadastroInstituicaoEventos); 
 }
@@ -1145,7 +1145,7 @@ async function cadastroInstituicaoPagina (pagina)
   let container;
   let lc_container = document.querySelector('.lc-container');
 //Recuperar html
-  container = await carregarHtml(`../../../../codigo/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroInstituicaoEventos);
 //Definir estilos
@@ -1314,8 +1314,9 @@ function cadastroInstituicaoPreenchido_3 ()
 async function perfilUsuario ()
 {
 //Redirecionar pagina
+//https://patinhas-felizes-nu.vercel.app/codigo/pages/perfilUsuario/perfil-usuario.html
   if (window.location.href != "http://127.0.0.1:5500/codigo/pages/perfilUsuario/perfil-usuario.html")
-    window.location.href = '../../../../codigo/pages/perfilUsuario/perfil-usuario.html';
+    window.location.href = '/pages/perfilUsuario/perfil-usuario.html';
 //Definir dados locais
   let pagina = 1;
 //Definir eventos da pagina de perfil
@@ -1438,7 +1439,7 @@ async function conteudoPerfilUsuario (pagina)
   //let usuario = await getUsuarioPerfilTemp();
   let usuario = getUsuarioLogged();
 //Recuperar novo conteudo
-  contentNovo = await carregarHtml(`../../../../codigo/pages/perfilUsuario/perfil-usuario-${pagina}.html`);
+  contentNovo = await carregarHtml(`/pages/perfilUsuario/perfil-usuario-${pagina}.html`);
 //Remover o conteudo atual
   contentAtual.remove();
 //Adicionar novo conteudo
@@ -2505,13 +2506,13 @@ function testarLoginAcabou(pagina,animal_id){
     clearInterval(repeticao);
     switch (pagina) {
       case 'crud-form':
-        window.location.href = `../cadastros/crud-form.html?id=${animal_id}`
+        window.location.href = `/pages/cadastros/crud-form.html?id=${animal_id}`
         break;
       case 'crud-animal-ab':
-        window.location.href = "../cadastros/crud-animal-abd.html"
+        window.location.href = "/pages/cadastros/crud-animal-abd.html"
         break;
       case 'compatibilidade':
-        window.location.href = "../compatibilidade/compatibilidade.html"
+        window.location.href = "/pages/compatibilidade/compatibilidade.html"
         break;
       default:
         break;
@@ -2938,7 +2939,7 @@ function loadAnimal(){
   let animais = getAllAnimal();
   let mainDiv = document.querySelector(".animal-grid");
   let html = `<div class="animal-card">
-                    <a style="color:black" href = "../cadastros/crud-animal.html" class="img-add-animal"><span><i class="fa-2xl fa-solid fa-plus"></i></span></a>
+                    <a style="color:black" href = "/pages/cadastros/crud-animal.html" class="img-add-animal"><span><i class="fa-2xl fa-solid fa-plus"></i></span></a>
               </div>`;
   let pesquisarAnimalOng = document.querySelector(".barra-pesquisa").value
   animais.forEach(animal => {
@@ -2978,7 +2979,7 @@ function AC_iniciarDados() {
     localStorage.setItem('ong', JSON.stringify(ong));
 
     // Alterando a localizacao da pagina
-      window.location.href = "../../../../codigo/pages/atividadesONG/AtividadeONG.html"; 
+      window.location.href = "/pages/atividadesONG/AtividadeONG.html"; 
 }
 
 // Função que exibe os dados da ONG na página
