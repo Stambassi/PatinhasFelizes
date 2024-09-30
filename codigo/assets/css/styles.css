@@ -1958,7 +1958,7 @@ button#load_ab_photo:hover {
   background-color: var(--cor_primaria);
   color: white;
   margin: 10px 0 0 15px;
-  width: 8%;
+  width: 10%;
   padding: 10px 15px;
   border: none;
   border-radius: 20px;
@@ -2317,6 +2317,12 @@ button#load_ab_photo:hover {
   justify-content: center;
 }
 
+#compatibilidade-ContainerImagemPefilMatch img {
+  width: 200px;
+  height: 200px;
+}
+
+
 #compatibilidade-MatchBotoes {
   display: flex;
   flex-direction: column;
@@ -2475,6 +2481,7 @@ button#load_ab_photo:hover {
   width: 85%;
   height: 75%;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 #compatibilidade-EscolhasInfAnimal {
@@ -2529,6 +2536,7 @@ button#load_ab_photo:hover {
   height: 40%;
   border-radius: 50%;
   border: 5px solid #4CAF50;
+  cursor: pointer;
 }
 
 .compatibilidade-ContainerEscolhas h1 {
