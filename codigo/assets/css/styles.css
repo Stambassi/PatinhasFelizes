@@ -1771,7 +1771,7 @@ button#load_ab_photo:hover {
   background-color: var(--cor_primaria);
   color: white;
   margin: 10px 0 0 15px;
-  width: 8%;
+  width: 10%;
   padding: 10px 15px;
   border: none;
   border-radius: 20px;
@@ -2129,6 +2129,12 @@ button#load_ab_photo:hover {
   gap: 30px;
   justify-content: center;
 }
+
+#compatibilidade-ContainerImagemPefilMatch img {
+  width: 200px;
+  height: 200px;
+}
+
 
 #compatibilidade-MatchBotoes {
   display: flex;

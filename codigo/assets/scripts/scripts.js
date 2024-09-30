@@ -1,9 +1,10 @@
 /* ----------------------------- Inicialização variável global JSON Server (INICIO) ----------------------------------- */
 
-let urlJsonServer = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev";
+//let urlJsonServer = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev";
+
+/* ----------------------------- Inicialização variável global JSON Server (FIM) ----------------------------------- */
 
 /*---------------------- Criacao de dados FAKE (INICIO) ------------------*/
-
 function gerarDadosFalsos()
 {
 //Definir pessoas (com formularios)
@@ -2151,26 +2152,27 @@ async function readJSONServerId(url, id) {
 
 async function carregarFiltroCidades() {
   let filtroCidadeEl = document.querySelector("#telaInicial-FiltroCidade");
-  let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
+  //let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
   let ongs = {}, cidades = [];
   let strHTML = "", stringValueCidade = "";
   let controle = true;
   let nCidades = 0;
 
-  ongs = await readJSONServer(apiUrlJsonOngs);
+  //ongs = await readJSONServer(apiUrlJsonOngs);
+  ongs = getAllONG();
 
   strHTML = `<option value="U">Todas</option>`;
   for(let x = 0; x < ongs.length; x++) {
 
     controle = true;
     for(let y = 0; y < cidades.length; y++) {
-      if(ongs[x].cidade == cidades[y]) {
+      if(ongs[x].endereco[0].cidade == cidades[y]) {
         controle = false;
       }
     }
 
     if(controle) {
-      cidades[nCidades] = ongs[x].cidade;
+      cidades[nCidades] = ongs[x].endereco[0].cidade;
       strHTML += `<option value="${cidades[nCidades]}">${cidades[nCidades]}</option>`
       nCidades++;
     }
@@ -2187,8 +2189,8 @@ async function carregarFiltroCidades() {
 async function carregarAnimais() {
 
 //Definir dados locais
-  let apiUrlJsonAnimais = `${urlJsonServer}/animais`;
-  let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
+  //let apiUrlJsonAnimais = `${urlJsonServer}/animais`;
+  //let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
   let divConteudoAnimais = document.querySelector("#telaInicial-Conteudo");
   let animais = {}, ongs = {};
   let strHTML = "", strGeneroAnimal = "", strNomeOng = "", strCidadeOng = ""; 
@@ -2201,55 +2203,62 @@ async function carregarAnimais() {
   let booleanFiltroGenero, booleanFiltroPorte, booleanFiltroEspecie, booleanFiltroCidade; 
 
 //Acesso aos dados do JSON Server
-  animais = await readJSONServer(apiUrlJsonAnimais);
-  ongs = await readJSONServer(apiUrlJsonOngs);
+  //animais = await readJSONServer(apiUrlJsonAnimais);
+  //ongs = await readJSONServer(apiUrlJsonOngs);
+
+  animais = getAllAnimal();
+  ongs = getAllONG();
 
 //Gravacao dos cards na String strHTML
   for(let x = 0; x < animais.length; x++) {
 
-//Controle icone do sexo do animal
-    if(animais[x].genero == 'F') {
-      strGeneroAnimal = "venus"; 
-    } else {
-      strGeneroAnimal = "mars"; 
-    }
+    if(!(animais[x].condicao)) {
 
-    for(let y = 0; y < ongs.length; y++) {
-      if(animais[x].id_ong == ongs[y].id_ong) {
-          strNomeOng = ongs[y].nome;
-          strCidadeOng = ongs[y].cidade;
+//Controle icone do sexo do animal
+      if(animais[x].genero == 'F') {
+        strGeneroAnimal = "venus"; 
+      } else {
+        strGeneroAnimal = "mars"; 
       }
-    }
+
+      for(let y = 0; y < ongs.length; y++) {
+        if(animais[x].id_ong == ongs[y].id_ong) {
+            strNomeOng = ongs[y].nome;
+            strCidadeOng = ongs[y].endereco[0].cidade;
+        }
+      }
 
 //Controle filtro de exibicao animais
-    booleanFiltroCidade = filtroCidadeEl.value === 'U' || filtroCidadeEl.value === strCidadeOng;
-    booleanFiltroGenero = filtroGeneroEl.value === 'U' || filtroGeneroEl.value === animais[x].genero;
-    booleanFiltroPorte = filtroPorteEl.value === 'U' || filtroPorteEl.value === animais[x].porte;
-    booleanFiltroEspecie = filtroEspecieEl.value === 'U' || filtroEspecieEl.value === animais[x].especie;
+      booleanFiltroCidade = filtroCidadeEl.value === 'U' || filtroCidadeEl.value === strCidadeOng;
+      booleanFiltroGenero = filtroGeneroEl.value === 'U' || filtroGeneroEl.value === animais[x].genero;
+      booleanFiltroPorte = filtroPorteEl.value === 'U' || filtroPorteEl.value === animais[x].porte;
+      booleanFiltroEspecie = filtroEspecieEl.value === 'U' || filtroEspecieEl.value === animais[x].especie;
 
-    if(booleanFiltroEspecie && booleanFiltroGenero && booleanFiltroPorte && booleanFiltroCidade) {
- 
-      strHTML += `<div class="telaInicial-Card">
-                      <img src="${animais[x].imagem}" alt="">
-                      <p>${strNomeOng}</p>
-                      <p>${strCidadeOng}</p>
-                      <div class="telaInicial-Card-Informacoes">
-                          <div class="telaInicial-Card-InfPet">
-                          <i class="fa-solid fa-2xl fa-${strGeneroAnimal}"></i>
-                          <h5>${animais[x].nome}</h5>
-                          </div>
-                          <button id="${animais[x].id_animal}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
-                      </div>
-                  </div>`
+      if(booleanFiltroEspecie && booleanFiltroGenero && booleanFiltroPorte && booleanFiltroCidade) {
+  
+        strHTML += `<div class="telaInicial-Card">
+                        <img src="${animais[x].imagem[0]}" alt="">
+                        <p>${strNomeOng}</p>
+                        <p>${strCidadeOng}</p>
+                        <div class="telaInicial-Card-Informacoes">
+                            <div class="telaInicial-Card-InfPet">
+                            <i class="fa-solid fa-2xl fa-${strGeneroAnimal}"></i>
+                            <h5>${animais[x].nome}</h5>
+                            </div>
+                            <button id="${animais[x].id_animal}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
+                        </div>
+                    </div>`
+      }
+
     }
 
-  }
-
 //Insercao da String strHTML na tela inicial
-  divConteudoAnimais.innerHTML = strHTML;
+    divConteudoAnimais.innerHTML = strHTML;
 
 //Carrega a descricao do animal
-  carregarDescricaoAnimalPopupEventos()
+    carregarDescricaoAnimalPopupEventos();
+
+  }
 }
 
 
@@ -2272,19 +2281,21 @@ function carregarDescricaoAnimalPopupEventos () {
 
 async function abrirDescricaoAnimalPopup(event) {
 //Definir dados locais
-  let apiUrlJsonAnimais = `${urlJsonServer}/animais?id_animal=`;
-  let apiUrlJsonVacinas = `${urlJsonServer}/vacinas?id_animal=`;
+  //let apiUrlJsonAnimais = `${urlJsonServer}/animais?id_animal=`;
+  //let apiUrlJsonVacinas = `${urlJsonServer}/vacinas?id_animal=`;
   let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
 
   let idEvent = event.target.id;
   let animal = {}, vacinas = {}, animais = {};
-  let strHTML = "", srcGeneroAnimal = "", strGeneroAnimal = "", strCastradoAnimal = "", strPorteAnimal = "", strVacinasAnimal = "";
+  let strHTML = "", srcGeneroAnimal = "", strGeneroAnimal = "", strCastradoAnimal = "", strPorteAnimal = "", strVacinasAnimal = "", strIdadeAnimal = "";
 
 //Acesso ao dado do id no JSON Server
-  animais = await readJSONServerId(apiUrlJsonAnimais, idEvent);
-  vacinas = await readJSONServerId(apiUrlJsonVacinas, idEvent);
+  //animais = await readJSONServerId(apiUrlJsonAnimais, idEvent);
+  //vacinas = await readJSONServerId(apiUrlJsonVacinas, idEvent);
 
-  animal = animais[0];
+  //animal = animais[0];
+
+  animal = getAnimal(idEvent);
 
 //Controle caracteristicas animal
   if(animal.genero == 'F') {
@@ -2311,14 +2322,25 @@ async function abrirDescricaoAnimalPopup(event) {
     }
   }
 
+  strIdadeAnimal = calcularIdade(animal.data_de_nascimento);
   strVacinasAnimal = "";
-  for(let y = 0; y < vacinas.length; y++) {
-      strVacinasAnimal += `<li>${vacinas[y].nome}</li>`;
+
+  console.log(animal);
+  let chavesVacinas = Object.keys(animal.vacina);
+  console.log(chavesVacinas);
+
+  for (let y = 0; y < chavesVacinas.length; y++) {
+    let vacina = chavesVacinas[y];
+    
+    if (animal.vacina[vacina]) {
+      strVacinasAnimal += `<li>${vacina}</li>`;
+    }
   }
+
 
 //Mudanca strHTML 
   strHTML = `<div class="telaInicial-PopUpDescricao">
-                <img src="${animal.imagem}" alt="">
+                <img src="${animal.imagem[0]}" alt="">
                 <div class="telaInicial-PopUpInformacoes">
                     <div class="telaInicial-PopUpInformacoesPrincipais">
                         <div class="telaInicial-PopUp-ModalFechar">
@@ -2333,7 +2355,7 @@ async function abrirDescricaoAnimalPopup(event) {
                             <p>${animal.raca}</p>
                             <p>${strGeneroAnimal}</p>
                             <p>${strPorteAnimal}</p>
-                            <p>${animal.idade}</p>
+                            <p>${strIdadeAnimal}</p>
                             <p>${strCastradoAnimal}</p>
                         </div>
                     </div>
@@ -2457,24 +2479,27 @@ function testeContadorImagemAnimalCompatibilidade(tamanhoMax) {
 
 async function proximaImagemCompatibilidade(event) {
   
-  let apiUrlJsonImagensAnimal = `${urlJsonServer}/imagensAnimal?id_animal=`;
-  let imagensAnimal = {};
+  //let apiUrlJsonImagensAnimal = `${urlJsonServer}/imagensAnimal?id_animal=`;
+  //imagensAnimal = await readJSONServerId(apiUrlJsonImagensAnimal, animalId);
+
+  let animal = {};
 
   let btEvent = event.target.id;
   let imgAnimalEl = document.querySelector(".compatibilidade-EscolhasImagemCarousel"); 
   let animalId = imgAnimalEl.id; 
 
-  imagensAnimal = await readJSONServerId(apiUrlJsonImagensAnimal, animalId);
+  animal = getAnimal(animalId);
+  console.log(animal);
 
   if(btEvent == "compatibilidade-EscolhasCarouselImagemBtnD") {
     contadorImagemAnimalCompatibilidade++;
-    testeContadorImagemAnimalCompatibilidade(imagensAnimal.length);
-    imgAnimalEl.src = imagensAnimal[contadorImagemAnimalCompatibilidade].imagem;
+    testeContadorImagemAnimalCompatibilidade(animal.imagem.length);
+    imgAnimalEl.src = animal.imagem[contadorImagemAnimalCompatibilidade];
   } else {
     if(btEvent == "compatibilidade-EscolhasCarouselImagemBtnE") {
       contadorImagemAnimalCompatibilidade--;
-      testeContadorImagemAnimalCompatibilidade(imagensAnimal.length);
-      imgAnimalEl.src = imagensAnimal[contadorImagemAnimalCompatibilidade].imagem;
+      testeContadorImagemAnimalCompatibilidade(animal.imagem.length);
+      imgAnimalEl.src = animal.imagem[contadorImagemAnimalCompatibilidade];
     }
   }
 }
@@ -2483,33 +2508,42 @@ async function proximaImagemCompatibilidade(event) {
 async function carregarAnimaisCompatibilidade() {
 
 
-  let apiUrlJsonAnimais =  `${urlJsonServer}/imagensAnimal?id_animal=`;
-  let apiUrlJsonImagensAnimal = `${urlJsonServer}/imagensAnimal`;
+  //let apiUrlJsonAnimais =  `${urlJsonServer}/animais`;
+  //let apiUrlJsonImagensAnimal = `${urlJsonServer}/imagensAnimal`;
+
   let divContainerEscolhasEl = document.querySelector(".compatibilidade-ContainerEscolhas");
   let animais = {}, imagensAnimal = {};
   let strHTML = "", strImagemAnimal = "";
   let resultado = false;
-  let y = 0;
+  let y = 0, contadorAnimaisValidosAdocao = 0;
 
-  animais = await readJSONServer(apiUrlJsonAnimais);
-  imagensAnimal = await readJSONServer(apiUrlJsonImagensAnimal);
+  //animais = await readJSONServer(apiUrlJsonAnimais);
+  //imagensAnimal = await readJSONServer(apiUrlJsonImagensAnimal);
 
-  if(contadorAnimalCompatibilidade == animais.length) {
+  animais = getAllAnimal();
+
+  for(y = 0; y < animais.length; y++) {
+    if(!(animais[y].condicao)) {
+      contadorAnimaisValidosAdocao++;
+    }
+  }
+
+  if(contadorAnimalCompatibilidade == contadorAnimaisValidosAdocao) {
     contadorAnimalCompatibilidade = 0;
   }
 
-  while(y < imagensAnimal.length && !resultado) {
+  /*while(y < imagensAnimal.length && !resultado) {
     if(animais[contadorAnimalCompatibilidade].id_animal == imagensAnimal[y].id_animal) {
       resultado = true;
       strImagemAnimal = imagensAnimal[y].imagem;
     }
     y++;
-  }
+  }*/
 
   strHTML = `<h2>Encontre seu Parceiro Ideal!</h2>
             <div id="compatibilidade-EscolhasCarouselImagemContainer">
                 <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnE" class="compatibilidade-EscolhasCarouselImagemBtn">&#8249;</button>
-                <img id="${animais[contadorAnimalCompatibilidade].id_animal}" class="compatibilidade-EscolhasImagemCarousel" onclick="abrirDescricaoAnimalPopup(event)" src="${strImagemAnimal}" alt="">
+                <img id="${animais[contadorAnimalCompatibilidade].id_animal}" class="compatibilidade-EscolhasImagemCarousel" onclick="abrirDescricaoAnimalPopup(event)" src="${animais[contadorAnimalCompatibilidade].imagem[0]}" alt="">
                 <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnD" class="compatibilidade-EscolhasCarouselImagemBtn">&#8250;</button>
             </div>
             <div id="compatibilidade-EscolhasInfAnimal">
@@ -2598,24 +2632,27 @@ async function exibicaoTelaCarregarCompatibilidade() {
 
 async function confirmarCompatibilidade() {
 
-  let apiUrlJsonTagsAnimal = `${urlJsonServer}/etiquetas?id_animal=`;
-  let apiUrlJsonTagsUsuario = `${urlJsonServer}/etiquetas?id_usuario=`;
-  let tagsAnimal = {}, tagsUsuario = {};
+  //let apiUrlJsonTagsAnimal = `${urlJsonServer}/etiquetas?id_animal=`;
+  //let apiUrlJsonTagsUsuario = `${urlJsonServer}/etiquetas?id_usuario=`;
+  let animal = {}, url_foto_acao_animalsuario = {};
   let distanciaPontos = 0.0, valorMaximo = 0.0, porcentagemCompatibilidade = 0.0;
  
   let imgAnimalEl = document.querySelector(".compatibilidade-EscolhasImagemCarousel"); 
   let animalId = imgAnimalEl.id; 
 
-  tagsAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, animalId);
-  tagsAnimal = tagsAnimal[0];
-  tagsUsuario = await readJSONServerId(apiUrlJsonTagsUsuario, 1);
-  tagsUsuario = tagsUsuario[0];
+  //tagsAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, animalId);
+  //tagsAnimal = tagsAnimal[0];
+  //tagsUsuario = await readJSONServerId(apiUrlJsonTagsUsuario, 1);
+  //tagsUsuario = tagsUsuario[0];
 
-  distanciaPontos = Math.sqrt( Math.pow((tagsAnimal.atencao - tagsUsuario.atencao), 2) + 
-  Math.pow((tagsAnimal.passeio - tagsUsuario.passeio), 2) + 
-  Math.pow((tagsAnimal.carinho - tagsUsuario.carinho), 2) +
-  Math.pow((tagsAnimal.extrovertido - tagsUsuario.extrovertido), 2) +
-  Math.pow((tagsAnimal.animacao - tagsUsuario.animacao), 2));         
+  animal = getAnimal(animalId);
+  usuario = getUsuario(getLoginUsuario());
+
+  distanciaPontos = Math.sqrt( Math.pow((animal.tags.atencao - usuario.tags.atencao), 2) + 
+  Math.pow((animal.tags.passeio - usuario.tags.passeio), 2) + 
+  Math.pow((animal.tags.carinho - usuario.tags.carinho), 2) +
+  Math.pow((animal.tags.extrovertido - usuario.tags.extrovertido), 2) +
+  Math.pow((animal.tags.animacao - usuario.tags.animacao), 2));         
   
   valorMaximo = Math.sqrt(80);
 
@@ -2647,8 +2684,8 @@ async function abrirModalMatch(idAnimal) {
   let imgUsuarioEl = document.querySelector(".compatibilidade-perfilUsuario");
   let botaoAdocaoEl = document.querySelector(".compatibilidade-SolicitarAdocao");
 
-  let apiUrlJsonTagsAnimal = `${urlJsonServer}/imagensAnimal?id_animal=`;
-  let imagensAnimal = {};
+  //let apiUrlJsonTagsAnimal = `${urlJsonServer}/imagensAnimal?id_animal=`;
+  let animal = {};
   let resultado = false;
   let strImagemAnimal = "";
   let y = 0;
@@ -2657,15 +2694,16 @@ async function abrirModalMatch(idAnimal) {
     carregarPaginaAdocao(idAnimal);
   });
 
-  imagensAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, idAnimal);
+  //imagensAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, idAnimal);
+  animal = getAnimal(idAnimal);
 
-  while(y < imagensAnimal.length && !resultado) {
+  /*while(y < imagensAnimal.length && !resultado) {
     if(idAnimal == imagensAnimal[y].id_animal) {
       resultado = true;
       strImagemAnimal = imagensAnimal[y].imagem;
     }
     y++;
-  }
+  }*/
 
   divModalMatchEl.style.display = "block";
 
@@ -2678,7 +2716,7 @@ async function abrirModalMatch(idAnimal) {
 
   divModalMatchEl.classList.remove('show');
 
-  imgAnimalEl.src = strImagemAnimal;
+  imgAnimalEl.src = animal.imagem[0];
   imgAnimalEl.id = idAnimal;
   imgUsuarioEl.src = "https://thumbs.dreamstime.com/b/%C3%ADcone-de-usu%C3%A1rio-m%C3%ADdia-social-vetor-imagem-perfil-do-avatar-padr%C3%A3o-retrato-182347582.jpg";
 
@@ -2829,3 +2867,19 @@ document.getElementById('edit-ok-btn').addEventListener('click', AC_salvarDados)
 document.addEventListener('DOMContentLoaded', AC_mostrarDados);
 
 /*---------------------- Tela de Pefil ONG (Fim) ------------------*/
+
+function calcularIdade(dataPassada) {
+  const hoje = new Date();
+  const [dia, mes, ano] = dataPassada.split('/').map(Number);
+  const nascimento = new Date(ano, mes - 1, dia); // mês - 1 porque os meses em JS começam em 0
+
+  let anos = hoje.getFullYear() - nascimento.getFullYear();
+  let meses = hoje.getMonth() - nascimento.getMonth();
+
+  if (meses < 0) {
+    anos--;
+    meses += 12;
+  }
+
+  return `${anos} anos e ${meses} meses`;
+}
