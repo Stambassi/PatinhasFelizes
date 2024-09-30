@@ -1409,7 +1409,8 @@ button#load_ab_photo:hover {
 .container-Solic{
     padding: 10px;
     text-align: center;
-    width: 90%;
+    width: fit-content;
+    min-width: 60%;
     margin-top:40px;
     margin: auto;
     background-color:rgb(255, 255, 255);
@@ -1422,13 +1423,21 @@ button#load_ab_photo:hover {
 }
 
 .container-conteudo{
-    padding: 60px;
+    padding: 30px 60px;
     margin:20px;
     background-color: #f6f6f6;
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
     gap: 80px;
+}
+
+.Image-Solic{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 15px;
 }
 
 .Image-Solic img{
@@ -1439,7 +1448,11 @@ button#load_ab_photo:hover {
     display:flex;
 }
 
-.text-solic {
+.text-solic { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     text-align:left;
     position: flex;
 }
@@ -1464,8 +1477,24 @@ button#load_ab_photo:hover {
     width: 100%;
 }
 
+.Formulario-content{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.button-solic{   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .Aceitar-button{
     background-color: #53815A;
+    color: white;
+    font-weight: 300;
     padding: 10px;
     margin-bottom: 30px;
     width: 300px;
@@ -1480,6 +1509,8 @@ button#load_ab_photo:hover {
 
 .Recusar-button{
     background-color: #ff3d3d;
+    color: white;
+    font-weight: 300;
     width: 300px;
     padding: 10px;
     border-radius: 20px;
@@ -1499,25 +1530,34 @@ button#load_ab_photo:hover {
 }
 
 .second-container-solicitacao{
-    padding: 10px;
+    padding: 30px;
     text-align: center;
-    width: 90%;
+    width: fit-content;
+    min-width: 60%;
     margin-top:40px;
-    margin-bottom: 10%;
+    margin: auto;
     background-color:rgb(255, 255, 255);
     border: 1px rgb(255, 255, 255) solid;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
-
 }
 
 .doacoes-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
+}
+
+.second-container-solicitacao {
+  justify-items: start; /* Default alignment */
+}
+
+.second-container-solicitacao:has(.doacoes-grid:nth-child(odd):last-child) {
+  grid-column: 1 / -1; /* Center last item */
+  justify-self: center; /* Center the last item */
 }
 
 .adocoes-card{
@@ -1553,6 +1593,8 @@ button#load_ab_photo:hover {
 
 .Aceitar-button-doacao{
     background-color: #307b3f;
+    color: white;
+    font-weight: 300;
     width: 45%;
     border-radius: 20px;
     border: none;
@@ -1566,6 +1608,8 @@ button#load_ab_photo:hover {
 
 .Recusar-button-doacao{
     background-color: #ff3d3d;
+    color: white;
+    font-weight: 300;
     width: 45%;
     border-radius: 20px;
     border: none;

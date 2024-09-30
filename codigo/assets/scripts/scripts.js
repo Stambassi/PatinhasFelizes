@@ -56,6 +56,50 @@ function getAllAnimal(){
   return data;
 }
 
+function getAllFormularioAdocao ()
+{
+//Definir dados locais
+  let formularios = [];
+  let allUsuario = getAllUsuario();
+  let x = 0;
+//Percorrer todos os usuarios
+  for (let i = 0; i < allUsuario.length; i++)
+  {
+  //Definir dados locais
+    let usuario = allUsuario[i];
+    let usuarioFormulariosAdocao = usuario.form_adocao;
+  //Percorrer todos os formularios
+    for (let j = 0; j < usuarioFormulariosAdocao.length; j++)
+    {
+      formularios[x++] = usuarioFormulariosAdocao[j];
+    }
+  }
+//Retornar
+  return formularios;
+}
+
+function getAllFormularioAbandonado ()
+{
+//Definir dados locais
+  let formularios = [];
+  let allUsuario = getAllUsuario();
+  let x = 0;
+//Percorrer todos os usuarios
+  for (let i = 0; i < allUsuario.length; i++)
+  {
+  //Definir dados locais
+    let usuario = allUsuario[i];
+    let usuarioFormulariosAbandonado = usuario.form_abandonado;
+  //Percorrer todos os formularios
+    for (let j = 0; j < usuarioFormulariosAbandonado.length; j++)
+    {
+      formularios[x++] = usuarioFormulariosAbandonado[j];
+    }
+  }
+//Retornar
+  return formularios;
+}
+
 function getUsuario (id)
 {
 //Definir dados locais
@@ -88,7 +132,7 @@ function getAnimal (id)
 {
 //Definir dados locais
   let animais = getAllAnimal();
-  let resp = null;
+  let resp = {};
 //Percorrer todos os animais
   animais.forEach(animal => {
     if(animal.id_animal == id)
@@ -96,6 +140,45 @@ function getAnimal (id)
   });
 //Retornar
   return resp;
+}
+
+function getFormularioAdocao (id_ong)
+{
+//Definir dados locais
+  let formularios = getAllFormularioAdocao();
+  let formulariosOng = [];
+  let x = 0;
+//Percorrer formularios
+  for (let i = 0; i < formularios.length; i++)
+  {
+  //Definir dados locais
+    let formulario = formularios[i];
+    let animal = getAnimal(formulario.id_animal);
+  //Testar e atribuir
+    if (animal.id_ong == id_ong)
+      formulariosOng[x++] = formulario;
+  }
+//Retornar
+  return formulariosOng;
+}
+
+function getFormularioAbandonado (id_ong)
+{
+//Definir dados locais
+  let formularios = getAllFormularioAbandonado();
+  let formulariosOng = [];
+  let x = 0;
+//Percorrer formularios
+  for (let i = 0; i < formularios.length; i++)
+  {
+  //Definir dados locais
+    let formulario = formularios[i];
+  //Testar e atribuir
+    if (formulario.id_ong == id_ong)
+      formulariosOng[x++] = formulario;
+  }
+//Retornar
+  return formulariosOng;
 }
 
 function getLoginUsuario()
@@ -930,13 +1013,20 @@ function cadastroUsuarioPreenchido_3 ()
  */
 async function loginInstituicao ()
 {
-//Definir dados locais
-  let main = document.querySelector('main');
-  let container;
-//Recuperar container da pagina
-  container = await carregarHtml(`./pages/loginInstituicao/login-template.html`);
-//Atualizar o html da pagina
-  adicionarPopup(container, main, loginInstituicaoEventos);
+//Testar se esta logado
+  let ong = getOngLogged();
+  if (ong != null)
+    window.location.href = "../../../../codigo/pages/atividadesONG/AtividadesONG.html";
+  else
+  {
+  //Definir dados locais
+    let main = document.querySelector('main');
+    let container;
+  //Recuperar container da pagina
+    container = await carregarHtml(`./pages/loginInstituicao/login-template.html`);
+  //Atualizar o html da pagina
+    adicionarPopup(container, main, loginInstituicaoEventos);
+  }
 }
 
 /**
@@ -2709,7 +2799,142 @@ function animacaoTrocaAnimalMatch() {
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */
 /*---------------------- Tela de Atividades ONG (Inicio) ------------------*/
 
+function readFormularios ()
+{
+//Definir dados locais
+  let id_ong = getOngLogged().id_ong;
+//Ler todos os formularios de adocao
+  let formulariosAdocao = getFormularioAdocao(id_ong);
+//Ler todos os formularios de animal abandonado
+  let formulariosAbandonado = getFormularioAbandonado(id_ong);
+//Inserir formularios de adocao
+  inserirFormulariosAdocao (formulariosAdocao);
+//Inserir formularios de animal abandonado
+  inserirFormulariosAbandonado (formulariosAbandonado);
+}
+
+function inserirFormulariosAdocao (formularios)
+{
+//Definir dados locais
+  let container = document.querySelector('.container-Solic');
+  let str = "";
+  container.innerHTML = str;
+//Testar se ha' formularios
+  if ( !(formularios.length > 0) )
+  {
+    str = `<p>Ainda não há formulários de adoção recebidos!</p>`;
+  } 
+  else
+  {
+  //Criar string com os formularios
+    for (let i = 0; i < formularios.length; i++)
+    {
+    //Definir dados locais
+      let formulario = formularios[i];
+      let pessoa = getUsuario(formulario.id_pessoa);
+      let animal = getAnimal(formulario.id_animal);
+    //Testar se o animal esta correto
+      if (animal.nome != null && formulario.status == "pendente")
+      {
+      //Adicionar 'a string
+        str += `
+          <div class="container-conteudo" id="${formulario.id_formulario}">
+            <div class="Image-Solic">
+              <img src="${animal.imagem[0]}" alt="imagem-animal">
+              <h6>${animal.nome}</h6>
+            </div>
+            <div class="text-solic">
+              <p><strong>Pedido realizado por:</strong><span class="form-adocao-nome-pessoa">   ${pessoa.nome}</span></p>
+              <p><strong>Comentarios:</strong><span class="form-adocao-comentarios">   ${formulario.comentarios}</span></p>
+              <p><strong>Data do pedido:</strong><span class="form-adocao-data">   ${formulario.data}</span></p>
+            </div>
+            <div class="Formulario-content">
+              <button class="teste-form"><i class="fa-solid fa-file-pen fa-4x"></i></button><br>
+              <h5 class="formulario-text">Informações</h5>
+            </div>
+            <div class="button-solic">
+              <button class="Aceitar-button"><strong>ACEITAR</strong></button>
+              <button class="Recusar-button"><strong>RECUSAR</strong></bu>
+            </div>
+          </div>
+        `;
+      }
+    }
+  }
+//Adicionar string ao html
+  container.innerHTML = str;
+}
+
+function inserirFormulariosAbandonado (formularios)
+{
+
+//Definir dados locais
+  let container = document.querySelector('.doacoes-grid');
+  let str = "";
+  container.innerHTML = str;
+//Testar se ha' formularios
+  if ( !(formularios.length > 0) )
+  {
+    str = `<p>Ainda não há formulários de animais abandonados recebidos!</p>`;
+  } 
+  else
+  {
+  //Criar string com os formularios
+    for (let i = 0; i < formularios.length; i++)
+    {
+    //Definir dados locais
+      let formulario = formularios[i];
+      let pessoa = getUsuario(formulario.id_pessoa);
+    //Testar se o formulario esta pendente
+      if (formulario.status == "pendente")
+      {
+      //Adicionar 'a string
+        str += `
+          <div class="adocoes-card" id="${formulario.id_form}">
+            <div class="top-container-adocao">
+              <div>
+                <img src="${formulario.imagem}" alt="Imagem do Animal" class="foto-nome-doacoes-container">
+                <h5>Nome</h5>
+              </div>
+              <div class="Formulário-container">
+                <button class="teste-form"><i class="fa-solid fa-file-pen fa-4x"></i></button><br>
+                <h5>Informações</h5>
+              </div>
+            </div>
+            <div class="botoes-doacao">
+              <button class="Aceitar-button-doacao"><strong>ACEITAR</strong></button>
+              <button class="Recusar-button-doacao"><strong>RECUSAR</strong></button>
+            </div>
+          </div>
+        `;
+      }
+    }
+  }
+//Adicionar string ao html
+  container.innerHTML = str;
+}
+
+/*
+<div class="adocoes-card" id="${formulario.id_form}">
+  <div class="top-container-adocao">
+    <div>
+      <img src="${formulario.imagem}" alt="Imagem do Animal" class="foto-nome-doacoes-container">
+      <h5>Nome</h5>
+    </div>
+    <div class="Formulário-container">
+      <button class="teste-form"><i class="fa-solid fa-file-pen fa-4x"></i></button><br>
+      <h5>Informações</h5>
+    </div>
+  </div>
+  <div class="botoes-doacao">
+    <button class="Aceitar-button-doacao"><strong>ACEITAR</strong></button>
+    <button class="Recusar-button-doacao"><strong>RECUSAR</strong></button>
+  </div>
+</div>
+*/
+
 function loadAnimal(){
+  console.log("loadAnimal");
   let animais = getAllAnimal();
   let mainDiv = document.querySelector(".animal-grid");
   let html = `<div class="animal-card">

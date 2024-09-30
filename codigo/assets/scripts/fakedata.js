@@ -21,7 +21,7 @@ function gerarPessoasFalsas ()
           "id_formulario": 1,
           "id_pessoa": 1,
           "id_animal": 1,
-          "status": "aceito",
+          "status": "pendente",
           "data": "15/09/2024",
           "moradia": "Casa",
           "experiencia": true,
@@ -35,6 +35,7 @@ function gerarPessoasFalsas ()
       "form_abandonado": [
         {
           "id_form": 1,
+          "id_pessoa": 1,
           "data": "15/09/2024",
           "especie": "Cachorro",
           "quantidade": 1,
@@ -70,7 +71,7 @@ function gerarPessoasFalsas ()
       },
       "form_adocao": [
         {
-          "id_formulario": 1,
+          "id_formulario": 2,
           "id_pessoa": 2,
           "id_animal": 2,
           "status": "recusado",
@@ -103,7 +104,7 @@ function gerarPessoasFalsas ()
       },
       "form_adocao": [
         {
-          "id_formulario": 1,
+          "id_formulario": 3,
           "id_pessoa": 3,
           "id_animal": 3,
           "status": "pendente",
@@ -117,7 +118,7 @@ function gerarPessoasFalsas ()
           "comentarios": "Estou pronto para adotar."
         },
         {
-          "id_formulario": 2,
+          "id_formulario": 4,
           "id_pessoa": 3,
           "id_animal": 4,
           "status": "aceito",
@@ -150,7 +151,7 @@ function gerarPessoasFalsas ()
       },
       "form_adocao": [
         {
-          "id_formulario": 1,
+          "id_formulario": 5,
           "id_pessoa": 4,
           "id_animal": 5,
           "status": "pendente",
@@ -164,7 +165,7 @@ function gerarPessoasFalsas ()
           "comentarios": "Adoção é um sonho."
         },
         {
-          "id_formulario": 2,
+          "id_formulario": 6,
           "id_pessoa": 4,
           "id_animal": 6,
           "status": "recusado",
@@ -197,10 +198,10 @@ function gerarPessoasFalsas ()
       },
       "form_adocao": [
         {
-          "id_formulario": 1,
+          "id_formulario": 7,
           "id_pessoa": 5,
           "id_animal": 7,
-          "status": "aceito",
+          "status": "pendente",
           "data": "01/12/2024",
           "moradia": "Casa",
           "experiencia": true,
@@ -211,7 +212,7 @@ function gerarPessoasFalsas ()
           "comentarios": "Adotar é um sonho."
         },
         {
-          "id_formulario": 2,
+          "id_formulario": 8,
           "id_pessoa": 5,
           "id_animal": 8,
           "status": "pendente",
@@ -246,6 +247,7 @@ function gerarPessoasFalsas ()
       "form_abandonado": [
         {
           "id_form": 2,
+          "id_pessoa": 6,
           "data": "10/09/2024",
           "especie": "Gato",
           "quantidade": 1,
@@ -281,7 +283,7 @@ function gerarPessoasFalsas ()
       },
       "form_adocao": [
         {
-          "id_formulario": 1,
+          "id_formulario": 9,
           "id_pessoa": 7,
           "id_animal": 9,
           "status": "recusado",
@@ -298,6 +300,7 @@ function gerarPessoasFalsas ()
       "form_abandonado": [
         {
           "id_form": 3,
+          "id_pessoa": 7,
           "data": "12/09/2024",
           "especie": "Coelho",
           "quantidade": 1,
@@ -333,7 +336,7 @@ function gerarPessoasFalsas ()
       },
       "form_adocao": [
         {
-          "id_formulario": 1,
+          "id_formulario": 10,
           "id_pessoa": 8,
           "id_animal": 10,
           "status": "pendente",
@@ -347,7 +350,7 @@ function gerarPessoasFalsas ()
           "comentarios": "Estou interessada."
         },
         {
-          "id_formulario": 2,
+          "id_formulario": 11,
           "id_pessoa": 8,
           "id_animal": 11,
           "status": "aceito",
@@ -364,6 +367,7 @@ function gerarPessoasFalsas ()
       "form_abandonado": [
         {
           "id_form": 4,
+          "id_pessoa": 8,
           "data": "14/09/2024",
           "especie": "Gato",
           "quantidade": 2,
