@@ -21,6 +21,10 @@ body {
   min-height: 200vh;
 }
 
+body.paginaPequena{
+  min-height: 120vh;
+}
+
 /* Estilo da navbar */
 
 header {
@@ -70,12 +74,17 @@ a.active-page {
   color: var(--cor_secundaria);
 }
 
+a.active-page:hover {
+  cursor:default;
+}
+
 a.inactive-page {
   color: var(--grey);
 }
 
 a.inactive-page:hover {
   color: var(--cor_secundaria);
+  cursor: pointer;
 }
 
 span.divider {
@@ -109,11 +118,13 @@ div.contatos {
 
 div.contatos>p {
   margin-bottom: 1%;
+  color:lightgray
 }
 
 div.sobre-nos {
   width: 50%;
   margin-right: 6%;
+  color:lightgray;
 }
 
 div.acesso-rapido {
@@ -125,17 +136,20 @@ div.acesso-rapido>a {
   margin-bottom: 1%;
   display: block;
   text-decoration: none;
-  color: black;
+  color: lightgray;
   font-size: medium;
 }
 
 div#footer-itens>* h5 {
   font-size: x-large;
   font-weight: bold;
+  color: white;
+
 }
 
 div.acesso-rapido>a:hover {
   text-decoration: none;
+  cursor:pointer;
   color: var(--grey);
 }
 
@@ -145,6 +159,7 @@ p#footer-cp {
   display: block;
   text-align: center;
   font-weight: bold;
+  color:white;
 }
 
 .footerPaginaGrande {

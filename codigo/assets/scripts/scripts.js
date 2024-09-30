@@ -2996,8 +2996,10 @@ function loadAnimal(){
                     <a style="color:black" href = "/pages/cadastros/crud-animal.html" class="img-add-animal"><span><i class="fa-2xl fa-solid fa-plus"></i></span></a>
               </div>`;
   let pesquisarAnimalOng = document.querySelector(".barra-pesquisa").value
+  console.log(animais);
   animais.forEach(animal => {
-    if(animal.id_ong != null && animal.id_ong == getLoginOng() && animal.nome.includes(pesquisarAnimalOng)){
+    if(animal.id_ong != null && animal.id_ong == getLoginOng() && animal.nome.includes(pesquisarAnimalOng) && !animal.condicao){
+      console.log(animal.nome)
       html += `<div class="animal-card">
                 <img class= "animal-image" src="${animal.foto_animal}" alt="Imagem do Animal">
                 <div class="animal-name">${animal.nome}</div>
