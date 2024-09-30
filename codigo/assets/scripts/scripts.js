@@ -142,7 +142,45 @@ function getAnimal (id)
   return resp;
 }
 
-function getFormularioAdocao (id_ong)
+function getFormularioAdocao (id_formulario)
+{
+//Definir dados locais
+  let formularios = getAllFormularioAdocao();
+  let form;
+  let x = 0;
+//Percorrer formularios
+  for (let i = 0; i < formularios.length; i++)
+  {
+  //Definir dados locais
+    let formulario = formularios[i];
+  //Testar e atribuir
+    if (formulario.id_formulario == id_formulario)
+      form = formulario;
+  }
+//Retornar
+  return form;
+}
+
+function getFormularioAbandonado (id_formulario)
+{
+//Definir dados locais
+  let formularios = getAllFormularioAbandonado();
+  let form;
+  let x = 0;
+//Percorrer formularios
+  for (let i = 0; i < formularios.length; i++)
+  {
+  //Definir dados locais
+    let formulario = formularios[i];
+  //Testar e atribuir
+    if (formulario.id_form == id_formulario)
+      form = formulario;
+  }
+//Retornar
+  return form;
+}
+
+function getFormularioAdocaoONG (id_ong)
 {
 //Definir dados locais
   let formularios = getAllFormularioAdocao();
@@ -162,7 +200,7 @@ function getFormularioAdocao (id_ong)
   return formulariosOng;
 }
 
-function getFormularioAbandonado (id_ong)
+function getFormularioAbandonadoONG (id_ong)
 {
 //Definir dados locais
   let formularios = getAllFormularioAbandonado();
@@ -2804,14 +2842,42 @@ function readFormularios ()
 //Definir dados locais
   let id_ong = getOngLogged().id_ong;
 //Ler todos os formularios de adocao
-  let formulariosAdocao = getFormularioAdocao(id_ong);
+  let formulariosAdocao = getFormularioAdocaoONG(id_ong);
 //Ler todos os formularios de animal abandonado
-  let formulariosAbandonado = getFormularioAbandonado(id_ong);
+  let formulariosAbandonado = getFormularioAbandonadoONG(id_ong);
 //Inserir formularios de adocao
   inserirFormulariosAdocao (formulariosAdocao);
 //Inserir formularios de animal abandonado
   inserirFormulariosAbandonado (formulariosAbandonado);
+//Definir eventos
+  formulariosOngEventos();
 }
+
+function formulariosOngEventos()
+{
+//Definir dados locais
+  let botoesFormulario = document.getElementsByClassName('adocao-form');
+//Adicionar eventos
+  for (let i = 0; i < botoesFormulario.length; i++)
+  {
+    botoesFormulario[i].addEventListener('click', (e) => mostrarPopupFormularioAdocao(e.target.id));
+  }
+}
+
+async function mostrarPopupFormularioAdocao(id_formulario)
+{
+//Definir dados locais
+  let formulario = getFormularioAdocao(id_formulario);
+  let pessoa = getUsuario(formulario.id_pessoa);
+  let animal = getAnimal(formulario.id_animal);
+  let main = document.querySelector('main');
+//Adicionar popup
+  let modal = await carregarHtml('../../../../codigo/pages/atividadesONG/pop-up-formulario.html');
+  main.insertAdjacentHTML('beforeend', modal);
+  popUpFormularioOngEventos();
+}
+
+
 
 function inserirFormulariosAdocao (formularios)
 {
@@ -2838,7 +2904,7 @@ function inserirFormulariosAdocao (formularios)
       {
       //Adicionar 'a string
         str += `
-          <div class="container-conteudo" id="${formulario.id_formulario}">
+          <div class="container-conteudo">
             <div class="Image-Solic">
               <img src="${animal.imagem[0]}" alt="imagem-animal">
               <h6>${animal.nome}</h6>
@@ -2849,7 +2915,7 @@ function inserirFormulariosAdocao (formularios)
               <p><strong>Data do pedido:</strong><span class="form-adocao-data">   ${formulario.data}</span></p>
             </div>
             <div class="Formulario-content">
-              <button class="teste-form"><i class="fa-solid fa-file-pen fa-4x"></i></button><br>
+              <button class="adocao-form"><i class="fa-solid fa-file-pen fa-4x" id="${formulario.id_formulario}"></i></button><br>
               <h5 class="formulario-text">Informações</h5>
             </div>
             <div class="button-solic">
@@ -2897,7 +2963,7 @@ function inserirFormulariosAbandonado (formularios)
                 <h5>Nome</h5>
               </div>
               <div class="Formulário-container">
-                <button class="teste-form"><i class="fa-solid fa-file-pen fa-4x"></i></button><br>
+                <button class="abandonado-form"><i class="fa-solid fa-file-pen fa-4x"></i></button><br>
                 <h5>Informações</h5>
               </div>
             </div>
