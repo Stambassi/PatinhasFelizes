@@ -715,7 +715,10 @@ async function loginUsuario ()
   let container;
 //Testar se ja esta logado
   if ( usuarioLogado() )
+  {
+    console.log("entrou");
     window.location.href = '/pages/perfilUsuario/perfil-usuario.html';
+  }
   else
   {
   //Recuperar html
@@ -1622,11 +1625,11 @@ async function inserirPerfilUsuario_3 (usuario)
       let msg = "";
     //Testar status
       if (status == "recusado")
-      { imgStatus = "../../../../codigo/assets/img/failure.png"; msg = "Pedido negado";  }
+      { imgStatus = "/assets/img/failure.png"; msg = "Pedido negado";  }
       else if (status == "aceito")
-      { imgStatus = "../../../../codigo/assets/img/success.png"; msg = "Pedido aceito";  }
+      { imgStatus = "/assets/img/success.png"; msg = "Pedido aceito";  }
       else if (status == "pendente")
-      { imgStatus = "../../../../codigo/assets/img/waiting.png"; msg = "Aguardando resposta";  }
+      { imgStatus = "/assets/img/waiting.png"; msg = "Aguardando resposta";  }
     //Definir nova linha
       str += `
         <div class="perfil-usuario-3-row"  id="perfil-usuario-3-row-1">
@@ -3030,41 +3033,52 @@ function inserirFormulariosAdocao (formularios)
   let container = document.querySelector('.container-Solic');
   let str = "";
   container.innerHTML = str;
-//Testar se ha' formularios
-    str = `<p>Ainda não há formulários de adoção recebidos!</p>`;
-//Criar string com os formularios
+  let formulariosPendentes = [];
+//Identificar formularios pendentes
   for (let i = 0; i < formularios.length; i++)
   {
-  //Definir dados locais
-    let formulario = formularios[i];
-    let pessoa = getUsuario(formulario.id_pessoa);
-    let animal = getAnimal(formulario.id_animal);
-  //Testar se o animal esta correto
-    if (animal.nome != null && formulario.status == "pendente")
+    if (formularios[i].status == "pendente")
+      formulariosPendentes.push(formularios[i]);
+  }
+//Testar se nao há formularios pendentes
+  if (formulariosPendentes.length == 0)
+    str = `<p>Ainda não há formulários de adoção recebidos!</p>`;
+  else
+  {
+  //Criar string com os formularios
+    for (let i = 0; i < formularios.length; i++)
     {
-    //Adicionar 'a string
-      str += `
-        <div class="container-conteudo">
-          <div class="Image-Solic">
-            <img src="${animal.imagem[0]}" alt="imagem-animal">
-            <h6>${animal.nome}</h6>
+    //Definir dados locais
+      let formulario = formularios[i];
+      let pessoa = getUsuario(formulario.id_pessoa);
+      let animal = getAnimal(formulario.id_animal);
+    //Testar se o animal esta correto
+      if (formulario.status == "pendente")
+      {
+      //Adicionar 'a string
+        str += `
+          <div class="container-conteudo">
+            <div class="Image-Solic">
+              <img src="${animal.imagem[0]}" alt="imagem-animal">
+              <h6>${animal.nome}</h6>
+            </div>
+            <div class="text-solic">
+              <p><strong>Pedido realizado por:</strong><span class="form-adocao-nome-pessoa">   ${pessoa.nome}</span></p>
+              <p><strong>Comentarios:</strong><span class="form-adocao-comentarios">   ${formulario.comentarios}</span></p>
+              <p><strong>Data do pedido:</strong><span class="form-adocao-data">   ${formulario.data}</span></p>
+            </div>
+            <div class="Formulario-content">
+              <button class="adocao-form"><i class="fa-solid fa-file-pen fa-4x" id="${formulario.id_formulario}"></i></button><br>
+              <h5 class="formulario-text">Informações</h5>
+            </div>
+            <div class="button-solic">
+              <button class="Aceitar-button"><strong>ACEITAR</strong></button>
+              <button class="Recusar-button"><strong>RECUSAR</strong></bu>
+            </div>
           </div>
-          <div class="text-solic">
-            <p><strong>Pedido realizado por:</strong><span class="form-adocao-nome-pessoa">   ${pessoa.nome}</span></p>
-            <p><strong>Comentarios:</strong><span class="form-adocao-comentarios">   ${formulario.comentarios}</span></p>
-            <p><strong>Data do pedido:</strong><span class="form-adocao-data">   ${formulario.data}</span></p>
-          </div>
-          <div class="Formulario-content">
-            <button class="adocao-form"><i class="fa-solid fa-file-pen fa-4x" id="${formulario.id_formulario}"></i></button><br>
-            <h5 class="formulario-text">Informações</h5>
-          </div>
-          <div class="button-solic">
-            <button class="Aceitar-button"><strong>ACEITAR</strong></button>
-            <button class="Recusar-button"><strong>RECUSAR</strong></bu>
-          </div>
-        </div>
-      `;
-    }
+        `;
+      }
+    }  
   }
 //Adicionar string ao html
   container.innerHTML = str;
@@ -3166,7 +3180,7 @@ let pesquisarAnimalOng = document.querySelector(".barra-pesquisa").addEventListe
 /*---------------------- Tela de Atividades ONG (FIM) ------------------*/
 
 
-/*---------------------- Tela de Pefil ONG (Inicio) ------------------*/
+/*---------------------- Tela de Perfil ONG (Inicio) ------------------*/
 // Função que cria um objeto inicial da ONG no localStorage
 
 function AC_iniciarDados() {
