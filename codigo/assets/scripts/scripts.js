@@ -3146,19 +3146,19 @@ function loadAnimal(){
                     <a style="color:black" href = "/pages/cadastros/crud-animal.html" class="img-add-animal"><span><i class="fa-2xl fa-solid fa-plus"></i></span></a>
               </div>`;
   let pesquisarAnimalOng = document.querySelector(".barra-pesquisa").value
-  console.log(animais);
-  animais.forEach(animal => {
-    if(animal.id_ong != null && animal.id_ong == getLoginOng() && animal.nome.includes(pesquisarAnimalOng) && !animal.condicao){
-      console.log(animal.nome)
-      html += `<div class="animal-card">
-                <img class= "animal-image" src="${animal.foto_animal}" alt="Imagem do Animal">
-                <div class="animal-name">${animal.nome}</div>
-                <button class="edit-icon"><i class="fa-solid fa-pencil"></i></button>
-                <button class="delete-icon"><i class="fa-solid fa-x"></i></button>
-              </div>`;
+  for(let i =0; i<animais.length; i++){
+    if(animais[i].id_ong != null && animais[i].id_ong == getLoginOng() && !animais[i].condicao){
+      if(animais[i].nome.includes(pesquisarAnimalOng)){
+        html += `<div class="animal-card">
+        <img class= "animal-image" src="${animais[i].imagem[0]}" alt="Imagem do Animal">
+        <div class="animal-name">${animais[i].nome}</div>
+        <button class="edit-icon"><i class="fa-solid fa-pencil"></i></button>
+        <button class="delete-icon"><i class="fa-solid fa-x"></i></button>
+      </div>`;
+      }
     }
-  })
-
+     
+  }
   mainDiv.innerHTML = html;
 }
 let pesquisarAnimalOng = document.querySelector(".barra-pesquisa").addEventListener('oninput',loadAnimal())

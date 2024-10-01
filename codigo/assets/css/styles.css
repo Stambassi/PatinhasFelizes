@@ -2602,3 +2602,6 @@ button#load_ab_photo:hover {
 }
 
 /* ----------------------- END Estilo Exibicao de Animais Compatibili ----------------------- */
+i.telaInicial-fecharModalBtn:hover{
+  cursor: pointer;
+}
