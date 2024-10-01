@@ -18,7 +18,11 @@
 
 body {
   position: relative;
-  min-height: 200vh;
+  min-height: 100vh;
+}
+
+body.paginaPequena{
+  min-height: 120vh;
 }
 
 /* Estilo da navbar */
@@ -70,12 +74,17 @@ a.active-page {
   color: var(--cor_secundaria);
 }
 
+a.active-page:hover {
+  cursor:default;
+}
+
 a.inactive-page {
   color: var(--grey);
 }
 
 a.inactive-page:hover {
   color: var(--cor_secundaria);
+  cursor: pointer;
 }
 
 span.divider {
@@ -109,11 +118,13 @@ div.contatos {
 
 div.contatos>p {
   margin-bottom: 1%;
+  color:lightgray
 }
 
 div.sobre-nos {
   width: 50%;
   margin-right: 6%;
+  color:lightgray;
 }
 
 div.acesso-rapido {
@@ -125,23 +136,24 @@ div.acesso-rapido {
   margin-bottom: 1%;
   display: block;
   text-decoration: none;
-  color: black;
+  color: lightgray;
   font-size: medium;
 }
 
 .acesso-rapido-a:hover {
   cursor: pointer;
-  color: rgb(66, 66, 66);
 }
 
 div#footer-itens>* h5 {
+  margin: 30px 0;
   font-size: x-large;
   font-weight: bold;
-  margin: 20px 0;
+  color: white;
 }
 
 div.acesso-rapido>a:hover {
   text-decoration: none;
+  cursor:pointer;
   color: var(--grey);
 }
 
@@ -151,6 +163,7 @@ p#footer-cp {
   display: block;
   text-align: center;
   font-weight: bold;
+  color:white;
 }
 
 .footerPaginaGrande {
@@ -865,7 +878,11 @@ button#load_ab_photo:hover {
   grid-template-rows: 1fr 7fr;
   grid-template-columns: 1fr 1fr 1fr;
 }
-
+.perfil-usuario-2-imagem img{
+  width:90%;
+  height: 90%;
+  border-radius: 20px;
+}
 #perfil-usuario-perfil
 {  
   grid-row-start: 1;
@@ -993,17 +1010,17 @@ button#load_ab_photo:hover {
 
 #usuario-nome input
 {
-  width: 79%;
+  width: 71%;
 }
 
 #usuario-email input
 {
-  width: 80%;
+  width: 73%;
 }
 
 #usuario-senha input
 {
-  width: 79%;
+  width: 71%;
 }
 
 #usuario-senha 
@@ -1026,17 +1043,17 @@ button#load_ab_photo:hover {
 
 #usuario-cpf input
 {
-  width: 85%;
+  width: 77%;
 }
 
 #usuario-data-de-nascimento input
 {
-  width: 45%;
+  width: 37%;
 }
 
 #usuario-telefone input
 {
-  width: 73%;
+  width: 65%;
 }
 
 .perfil-usuario-1-titulo
@@ -1244,6 +1261,8 @@ button#load_ab_photo:hover {
 .perfil-usuario-3-informacoes
 {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -1658,7 +1677,7 @@ button#load_ab_photo:hover {
   width: 60%;
   min-width: 700px;
   height: fit-content;
-  padding: 70px 50px 20px;
+  padding: 30px 50px 50px;
   background-color: white;
   border-style: solid;
   border-width: 1px;;
@@ -1698,7 +1717,8 @@ button#load_ab_photo:hover {
 
 .formulario-ong-titulo h1
 {
-  font-weight: 500;
+  font-weight: 450;
+  font-size: 30px;
 }
 
 .formulario-ong-informacoes
@@ -1751,12 +1771,14 @@ button#load_ab_photo:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0px;
+  margin: 0px 0px 30px 0;
 }
 
 .formulario-ong-informacoes-titulo h1
 {
   font-weight: 400;
+  font-size:30px;
+  margin: 05px 0px;
 }
 
 .formulario-ong-informacoes-dados
@@ -1768,7 +1790,7 @@ button#load_ab_photo:hover {
 
 .formulario-ong-informacoes-dados p
 {
-  margin: 10px 0px;
+  margin: 1px 0px;
 }
 
 .formulario-ong-informacoes-dados div
@@ -2595,3 +2617,6 @@ button#load_ab_photo:hover {
 }
 
 /* ----------------------- END Estilo Exibicao de Animais Compatibili ----------------------- */
+i.telaInicial-fecharModalBtn:hover{
+  cursor: pointer;
+}

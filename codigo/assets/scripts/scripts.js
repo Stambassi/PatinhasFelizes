@@ -566,13 +566,13 @@ function inverterSenha (passwordImg, controle)
   if (controle === 1)
   {
     senhaInput.type = 'password';
-    passwordImg.src = "../../../../codigo/assets/img/hidden.png";
+    passwordImg.src = "/assets/img/hidden.png";
     controle--;
   }
   else
   {
     senhaInput.type = 'text';
-    passwordImg.src = "../../../../codigo/assets/img/eye.png";
+    passwordImg.src = "/assets/img/eye.png";
     controle++;
   }
 //Retornar
@@ -1744,8 +1744,8 @@ function substituirPerfilUsuario (usuario)
   }
 //Trocar botões
   botaoEditar.remove();
-  let botaoDescartar = `<img src="../../../../codigo/assets/img/discard.png" alt="botao-descartar" class="perfil-usuario-editar-btn" id="perfil-descartar">`;
-  let botaoConfirmar = `<img src="../../../../codigo/assets/img/confirm.png" alt="botao-confirmar" class="perfil-usuario-editar-btn" id="perfil-confirmar">`;
+  let botaoDescartar = `<img src="/assets/img/discard.png" alt="botao-descartar" class="perfil-usuario-editar-btn" id="perfil-descartar">`;
+  let botaoConfirmar = `<img src="/assets/img/confirm.png" alt="botao-confirmar" class="perfil-usuario-editar-btn" id="perfil-confirmar">`;
   divBotoes.insertAdjacentHTML('beforeend', botaoDescartar);
   divBotoes.insertAdjacentHTML('beforeend', botaoConfirmar);
 }
@@ -1839,7 +1839,7 @@ function perfilUsuarioResetar ()
   botaoConfirmar.remove();
   botaoDescartar.remove();
 //Adicionar novo botão
-  let botaoEditar = `<img src="../../../../codigo/assets/img/editar.png" alt="botao-editar" class="perfil-usuario-editar-btn" id="perfil-editar">`;
+  let botaoEditar = `<img src="/assets/img/editar.png" alt="botao-editar" class="perfil-usuario-editar-btn" id="perfil-editar">`;
   divBotoes.insertAdjacentHTML('beforeend', botaoEditar);
 //Definir dados locais
   let nome = document.querySelector('#usuario-nome');
@@ -2547,10 +2547,15 @@ async function carregarPaginaAdocao(id){
 }
 
 async function carregarFormularioAnimalAbandonado(){
+
   if(!usuarioLogado()){
     loginUsuario();
     testarLoginAcabou('crud-animal-ab',0);
   } 
+  else
+  {
+    window.location.href = "/pages/cadastros/crud-animal-abd.html"
+  }
 }
 
 async function carregarPaginaCompatibilidade(){
@@ -2569,13 +2574,13 @@ function testarLoginAcabou(pagina,animal_id){
     clearInterval(repeticao);
     switch (pagina) {
       case 'crud-form':
-        window.location.href = `/pages/cadastros/crud-form.html?id=${animal_id}`
+        window.location.href = `/pages/cadastros/crud-form.html?id=${animal_id}`;
         break;
-      case 'crud-animal-ab':
-        window.location.href = "/pages/cadastros/crud-animal-abd.html"
+      case 'crud-animal-ab': 
+        window.location.href = "/pages/cadastros/crud-animal-abd.html";
         break;
       case 'compatibilidade':
-        window.location.href = "/pages/compatibilidade/compatibilidade.html"
+        window.location.href = "/pages/compatibilidade/compatibilidade.html";
         break;
       default:
         break;
@@ -3013,7 +3018,7 @@ function preencherPopupFormulario (id_formulario)
   disponibilidadeForm.innerHTML = formulario.disponibilidade;
   visitasForm.innerHTML = (formulario.visitas) ? "Sim" : "Nao";
   consentimentoForm.innerHTML = (formulario.consentimento) ? "Sim" : "Nao";
-  comentarioForm.innerHTML = formulario.comentario;
+  comentarioForm.innerHTML = (formulario.comentario != undefined) ? formulario.comentario : "Não há comentários disponíveis";
 }
 
 function popUpFormularioOngEventos ()
@@ -3034,6 +3039,7 @@ function inserirFormulariosAdocao (formularios)
   let str = "";
   container.innerHTML = str;
   let formulariosPendentes = [];
+  console.log(formularios);
 //Identificar formularios pendentes
   for (let i = 0; i < formularios.length; i++)
   {
@@ -3132,25 +3138,6 @@ function inserirFormulariosAbandonado (formularios)
 //Adicionar string ao html
   container.innerHTML = str;
 }
-
-/*
-<div class="adocoes-card" id="${formulario.id_form}">
-  <div class="top-container-adocao">
-    <div>
-      <img src="${formulario.imagem}" alt="Imagem do Animal" class="foto-nome-doacoes-container">
-      <h5>Nome</h5>
-    </div>
-    <div class="Formulário-container">
-      <button class="teste-form"><i class="fa-solid fa-file-pen fa-4x"></i></button><br>
-      <h5>Informações</h5>
-    </div>
-  </div>
-  <div class="botoes-doacao">
-    <button class="Aceitar-button-doacao"><strong>ACEITAR</strong></button>
-    <button class="Recusar-button-doacao"><strong>RECUSAR</strong></button>
-  </div>
-</div>
-*/
 
 function loadAnimal(){
   console.log("loadAnimal");
