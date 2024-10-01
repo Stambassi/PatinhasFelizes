@@ -1,9 +1,10 @@
 /* ----------------------------- Inicialização variável global JSON Server (INICIO) ----------------------------------- */
 
-let urlJsonServer = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev";
+//let urlJsonServer = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev";
+
+/* ----------------------------- Inicialização variável global JSON Server (FIM) ----------------------------------- */
 
 /*---------------------- Criacao de dados FAKE (INICIO) ------------------*/
-
 function gerarDadosFalsos()
 {
 //Definir pessoas (com formularios)
@@ -232,13 +233,13 @@ function getLoginOng()
 function logoutUsuario()
 {
   localStorage.removeItem("usuario_login");
-  window.location.href = "../../../../codigo/index.html";
+  window.location.href = "/index.html";
 }
 
 function logoutOng()
 {
   localStorage.removeItem("ong_login");
-  window.location.href = "../../../../codigo/index.html";
+  window.location.href = "/index.html";
 }
 
 function getUsuarioLogged ()
@@ -301,10 +302,10 @@ function updateUsuario (objUsuario)
   old[objUsuario.id_usuario - 1] = objUsuario;
 //Atualizar o LocalStorage
   localStorage.removeItem("Usuario");
-  if (objUsuario.length == 1)
-    localStorage.setItem("Usuario", "[" + JSON.stringify(objUsuario) + "]");
+  if (old.length == 1)
+    localStorage.setItem("Usuario", "[" + JSON.stringify(old) + "]");
   else
-    localStorage.setItem("Usuario", JSON.stringify(objUsuario));
+    localStorage.setItem("Usuario", JSON.stringify(old));
 }
 
 function updateONG (objOng)
@@ -660,7 +661,7 @@ async function testarLoginOng() {
     if(login >= 0 && login != null)
     {
       fecharPopup();
-      window.location.href = '../../../../codigo/pages/atividadesONG/AtividadesONG.html'
+      window.location.href = '/pages/atividadesONG/AtividadesONG.html'
     }
     else 
       alert("senha ou cnpj incorreto(s)"); // Mensagem de erro
@@ -714,11 +715,14 @@ async function loginUsuario ()
   let container;
 //Testar se ja esta logado
   if ( usuarioLogado() )
-    window.location.href = '../../../../codigo/pages/perfilUsuario/perfil-usuario.html';
+  {
+    console.log("entrou");
+    window.location.href = '/pages/perfilUsuario/perfil-usuario.html';
+  }
   else
   {
   //Recuperar html
-    container = await carregarHtml('../../../../codigo/pages/loginUsuario/login-template.html');
+    container = await carregarHtml('/pages/loginUsuario/login-template.html');
   //Adicionar html
     adicionarPopup(container, main, loginUsuarioEventos);
   }
@@ -766,7 +770,7 @@ async function cadastroUsuario ()
   let pagina = 1;
   let container;
 //Recuperar html
-  container = await carregarHtml(`../../../../codigo/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroUsuarioEventos);
 }
@@ -837,7 +841,7 @@ async function cadastroUsuarioPagina(pagina)
 //Definir dados locais
   let main = document.querySelector('main');
 //Recuperar html
-  container = await carregarHtml(`../../../../../codigo/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
+  container = await carregarHtml(`/pages/cadastroUsuario/cadastro-usuario-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroUsuarioEventos);
 //Definir estilos e particularidades
@@ -1054,14 +1058,14 @@ async function loginInstituicao ()
 //Testar se esta logado
   let ong = getOngLogged();
   if (ong != null)
-    window.location.href = "../../../../codigo/pages/atividadesONG/AtividadesONG.html";
+    window.location.href = "/pages/atividadesONG/AtividadesONG.html";
   else
   {
   //Definir dados locais
     let main = document.querySelector('main');
     let container;
   //Recuperar container da pagina
-    container = await carregarHtml(`./pages/loginInstituicao/login-template.html`);
+    container = await carregarHtml(`/pages/loginInstituicao/login-template.html`);
   //Atualizar o html da pagina
     adicionarPopup(container, main, loginInstituicaoEventos);
   }
@@ -1112,7 +1116,7 @@ async function cadastroInstituicao ()
   let pagina = 1;  
   let container;
 //Recuperar html
-  container = await carregarHtml(`./pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Atualizar o html da pagina
   adicionarPopup(container, main, cadastroInstituicaoEventos); 
 }
@@ -1183,7 +1187,7 @@ async function cadastroInstituicaoPagina (pagina)
   let container;
   let lc_container = document.querySelector('.lc-container');
 //Recuperar html
-  container = await carregarHtml(`../../../../codigo/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
+  container = await carregarHtml(`/pages/cadastroInstituicao/cadastro-instituicao-${pagina}.html`);
 //Adicionar html
   adicionarPopup(container, main, cadastroInstituicaoEventos);
 //Definir estilos
@@ -1352,8 +1356,9 @@ function cadastroInstituicaoPreenchido_3 ()
 async function perfilUsuario ()
 {
 //Redirecionar pagina
-  if (window.location.href != "http://127.0.0.1:5500/codigo/pages/perfilUsuario/perfil-usuario.html")
-    window.location.href = '../../../../codigo/pages/perfilUsuario/perfil-usuario.html';
+//https://patinhas-felizes-nu.vercel.app/codigo/pages/perfilUsuario/perfil-usuario.html
+  // if (window.location.href != "http://127.0.0.1:5500/codigo/pages/perfilUsuario/perfil-usuario.html")
+  //   window.location.href = '/pages/perfilUsuario/perfil-usuario.html';
 //Definir dados locais
   let pagina = 1;
 //Definir eventos da pagina de perfil
@@ -1476,7 +1481,7 @@ async function conteudoPerfilUsuario (pagina)
   //let usuario = await getUsuarioPerfilTemp();
   let usuario = getUsuarioLogged();
 //Recuperar novo conteudo
-  contentNovo = await carregarHtml(`../../../../codigo/pages/perfilUsuario/perfil-usuario-${pagina}.html`);
+  contentNovo = await carregarHtml(`/pages/perfilUsuario/perfil-usuario-${pagina}.html`);
 //Remover o conteudo atual
   contentAtual.remove();
 //Adicionar novo conteudo
@@ -1563,11 +1568,11 @@ async function inserirPerfilUsuario_2 (usuario)
       let msg = "";
     //Testar status
       if (status == "recusado")
-      { imgStatus = "../../../../codigo/assets/img/failure.png"; msg = "Pedido negado";  }
+      { imgStatus = "/assets/img/failure.png"; msg = "Pedido negado";  }
       else if (status == "aceito")
-      { imgStatus = "../../../../codigo/assets/img/success.png"; msg = "Pedido aceito";  }
+      { imgStatus = "/assets/img/success.png"; msg = "Pedido aceito";  }
       else if (status == "pendente")
-      { imgStatus = "../../../../codigo/assets/img/waiting.png"; msg = "Aguardando resposta";  }
+      { imgStatus = "/assets/img/waiting.png"; msg = "Aguardando resposta";  }
     //Definir nova linha
       str += `
         <div class="perfil-usuario-2-row" id="perfil-usuario-2-row-${form.id_form}">
@@ -1620,11 +1625,11 @@ async function inserirPerfilUsuario_3 (usuario)
       let msg = "";
     //Testar status
       if (status == "recusado")
-      { imgStatus = "../../../../codigo/assets/img/failure.png"; msg = "Pedido negado";  }
+      { imgStatus = "/assets/img/failure.png"; msg = "Pedido negado";  }
       else if (status == "aceito")
-      { imgStatus = "../../../../codigo/assets/img/success.png"; msg = "Pedido aceito";  }
+      { imgStatus = "/assets/img/success.png"; msg = "Pedido aceito";  }
       else if (status == "pendente")
-      { imgStatus = "../../../../codigo/assets/img/waiting.png"; msg = "Aguardando resposta";  }
+      { imgStatus = "/assets/img/waiting.png"; msg = "Aguardando resposta";  }
     //Definir nova linha
       str += `
         <div class="perfil-usuario-3-row"  id="perfil-usuario-3-row-1">
@@ -2279,26 +2284,27 @@ async function readJSONServerId(url, id) {
 
 async function carregarFiltroCidades() {
   let filtroCidadeEl = document.querySelector("#telaInicial-FiltroCidade");
-  let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
+  //let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
   let ongs = {}, cidades = [];
   let strHTML = "", stringValueCidade = "";
   let controle = true;
   let nCidades = 0;
 
-  ongs = await readJSONServer(apiUrlJsonOngs);
+  //ongs = await readJSONServer(apiUrlJsonOngs);
+  ongs = getAllONG();
 
   strHTML = `<option value="U">Todas</option>`;
   for(let x = 0; x < ongs.length; x++) {
 
     controle = true;
     for(let y = 0; y < cidades.length; y++) {
-      if(ongs[x].cidade == cidades[y]) {
+      if(ongs[x].endereco[0].cidade == cidades[y]) {
         controle = false;
       }
     }
 
     if(controle) {
-      cidades[nCidades] = ongs[x].cidade;
+      cidades[nCidades] = ongs[x].endereco[0].cidade;
       strHTML += `<option value="${cidades[nCidades]}">${cidades[nCidades]}</option>`
       nCidades++;
     }
@@ -2315,8 +2321,8 @@ async function carregarFiltroCidades() {
 async function carregarAnimais() {
 
 //Definir dados locais
-  let apiUrlJsonAnimais = `${urlJsonServer}/animais`;
-  let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
+  //let apiUrlJsonAnimais = `${urlJsonServer}/animais`;
+  //let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
   let divConteudoAnimais = document.querySelector("#telaInicial-Conteudo");
   let animais = {}, ongs = {};
   let strHTML = "", strGeneroAnimal = "", strNomeOng = "", strCidadeOng = ""; 
@@ -2329,55 +2335,62 @@ async function carregarAnimais() {
   let booleanFiltroGenero, booleanFiltroPorte, booleanFiltroEspecie, booleanFiltroCidade; 
 
 //Acesso aos dados do JSON Server
-  animais = await readJSONServer(apiUrlJsonAnimais);
-  ongs = await readJSONServer(apiUrlJsonOngs);
+  //animais = await readJSONServer(apiUrlJsonAnimais);
+  //ongs = await readJSONServer(apiUrlJsonOngs);
+
+  animais = getAllAnimal();
+  ongs = getAllONG();
 
 //Gravacao dos cards na String strHTML
   for(let x = 0; x < animais.length; x++) {
 
-//Controle icone do sexo do animal
-    if(animais[x].genero == 'F') {
-      strGeneroAnimal = "venus"; 
-    } else {
-      strGeneroAnimal = "mars"; 
-    }
+    if(!(animais[x].condicao)) {
 
-    for(let y = 0; y < ongs.length; y++) {
-      if(animais[x].id_ong == ongs[y].id_ong) {
-          strNomeOng = ongs[y].nome;
-          strCidadeOng = ongs[y].cidade;
+//Controle icone do sexo do animal
+      if(animais[x].genero == 'F') {
+        strGeneroAnimal = "venus"; 
+      } else {
+        strGeneroAnimal = "mars"; 
       }
-    }
+
+      for(let y = 0; y < ongs.length; y++) {
+        if(animais[x].id_ong == ongs[y].id_ong) {
+            strNomeOng = ongs[y].nome;
+            strCidadeOng = ongs[y].endereco[0].cidade;
+        }
+      }
 
 //Controle filtro de exibicao animais
-    booleanFiltroCidade = filtroCidadeEl.value === 'U' || filtroCidadeEl.value === strCidadeOng;
-    booleanFiltroGenero = filtroGeneroEl.value === 'U' || filtroGeneroEl.value === animais[x].genero;
-    booleanFiltroPorte = filtroPorteEl.value === 'U' || filtroPorteEl.value === animais[x].porte;
-    booleanFiltroEspecie = filtroEspecieEl.value === 'U' || filtroEspecieEl.value === animais[x].especie;
+      booleanFiltroCidade = filtroCidadeEl.value === 'U' || filtroCidadeEl.value === strCidadeOng;
+      booleanFiltroGenero = filtroGeneroEl.value === 'U' || filtroGeneroEl.value === animais[x].genero;
+      booleanFiltroPorte = filtroPorteEl.value === 'U' || filtroPorteEl.value === animais[x].porte;
+      booleanFiltroEspecie = filtroEspecieEl.value === 'U' || filtroEspecieEl.value === animais[x].especie;
 
-    if(booleanFiltroEspecie && booleanFiltroGenero && booleanFiltroPorte && booleanFiltroCidade) {
- 
-      strHTML += `<div class="telaInicial-Card">
-                      <img src="${animais[x].imagem}" alt="">
-                      <p>${strNomeOng}</p>
-                      <p>${strCidadeOng}</p>
-                      <div class="telaInicial-Card-Informacoes">
-                          <div class="telaInicial-Card-InfPet">
-                          <i class="fa-solid fa-2xl fa-${strGeneroAnimal}"></i>
-                          <h5>${animais[x].nome}</h5>
-                          </div>
-                          <button id="${animais[x].id_animal}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
-                      </div>
-                  </div>`
+      if(booleanFiltroEspecie && booleanFiltroGenero && booleanFiltroPorte && booleanFiltroCidade) {
+  
+        strHTML += `<div class="telaInicial-Card">
+                        <img src="${animais[x].imagem[0]}" alt="">
+                        <p>${strNomeOng}</p>
+                        <p>${strCidadeOng}</p>
+                        <div class="telaInicial-Card-Informacoes">
+                            <div class="telaInicial-Card-InfPet">
+                            <i class="fa-solid fa-2xl fa-${strGeneroAnimal}"></i>
+                            <h5>${animais[x].nome}</h5>
+                            </div>
+                            <button id="${animais[x].id_animal}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
+                        </div>
+                    </div>`
+      }
+
     }
 
-  }
-
 //Insercao da String strHTML na tela inicial
-  divConteudoAnimais.innerHTML = strHTML;
+    divConteudoAnimais.innerHTML = strHTML;
 
 //Carrega a descricao do animal
-  carregarDescricaoAnimalPopupEventos()
+    carregarDescricaoAnimalPopupEventos();
+
+  }
 }
 
 
@@ -2400,19 +2413,21 @@ function carregarDescricaoAnimalPopupEventos () {
 
 async function abrirDescricaoAnimalPopup(event) {
 //Definir dados locais
-  let apiUrlJsonAnimais = `${urlJsonServer}/animais?id_animal=`;
-  let apiUrlJsonVacinas = `${urlJsonServer}/vacinas?id_animal=`;
+  //let apiUrlJsonAnimais = `${urlJsonServer}/animais?id_animal=`;
+  //let apiUrlJsonVacinas = `${urlJsonServer}/vacinas?id_animal=`;
   let descricaoModalEl = document.querySelector(".telaInicial-PopUp-Modal");
 
   let idEvent = event.target.id;
   let animal = {}, vacinas = {}, animais = {};
-  let strHTML = "", srcGeneroAnimal = "", strGeneroAnimal = "", strCastradoAnimal = "", strPorteAnimal = "", strVacinasAnimal = "";
+  let strHTML = "", srcGeneroAnimal = "", strGeneroAnimal = "", strCastradoAnimal = "", strPorteAnimal = "", strVacinasAnimal = "", strIdadeAnimal = "";
 
 //Acesso ao dado do id no JSON Server
-  animais = await readJSONServerId(apiUrlJsonAnimais, idEvent);
-  vacinas = await readJSONServerId(apiUrlJsonVacinas, idEvent);
+  //animais = await readJSONServerId(apiUrlJsonAnimais, idEvent);
+  //vacinas = await readJSONServerId(apiUrlJsonVacinas, idEvent);
 
-  animal = animais[0];
+  //animal = animais[0];
+
+  animal = getAnimal(idEvent);
 
 //Controle caracteristicas animal
   if(animal.genero == 'F') {
@@ -2439,14 +2454,25 @@ async function abrirDescricaoAnimalPopup(event) {
     }
   }
 
+  strIdadeAnimal = calcularIdade(animal.data_de_nascimento);
   strVacinasAnimal = "";
-  for(let y = 0; y < vacinas.length; y++) {
-      strVacinasAnimal += `<li>${vacinas[y].nome}</li>`;
+
+  console.log(animal);
+  let chavesVacinas = Object.keys(animal.vacina);
+  console.log(chavesVacinas);
+
+  for (let y = 0; y < chavesVacinas.length; y++) {
+    let vacina = chavesVacinas[y];
+    
+    if (animal.vacina[vacina]) {
+      strVacinasAnimal += `<li>${vacina}</li>`;
+    }
   }
+
 
 //Mudanca strHTML 
   strHTML = `<div class="telaInicial-PopUpDescricao">
-                <img src="${animal.imagem}" alt="">
+                <img src="${animal.imagem[0]}" alt="">
                 <div class="telaInicial-PopUpInformacoes">
                     <div class="telaInicial-PopUpInformacoesPrincipais">
                         <div class="telaInicial-PopUp-ModalFechar">
@@ -2461,7 +2487,7 @@ async function abrirDescricaoAnimalPopup(event) {
                             <p>${animal.raca}</p>
                             <p>${strGeneroAnimal}</p>
                             <p>${strPorteAnimal}</p>
-                            <p>${animal.idade}</p>
+                            <p>${strIdadeAnimal}</p>
                             <p>${strCastradoAnimal}</p>
                         </div>
                     </div>
@@ -2543,13 +2569,13 @@ function testarLoginAcabou(pagina,animal_id){
     clearInterval(repeticao);
     switch (pagina) {
       case 'crud-form':
-        window.location.href = `../cadastros/crud-form.html?id=${animal_id}`
+        window.location.href = `/pages/cadastros/crud-form.html?id=${animal_id}`
         break;
       case 'crud-animal-ab':
-        window.location.href = "../cadastros/crud-animal-abd.html"
+        window.location.href = "/pages/cadastros/crud-animal-abd.html"
         break;
       case 'compatibilidade':
-        window.location.href = "../compatibilidade/compatibilidade.html"
+        window.location.href = "/pages/compatibilidade/compatibilidade.html"
         break;
       default:
         break;
@@ -2585,24 +2611,27 @@ function testeContadorImagemAnimalCompatibilidade(tamanhoMax) {
 
 async function proximaImagemCompatibilidade(event) {
   
-  let apiUrlJsonImagensAnimal = `${urlJsonServer}/imagensAnimal?id_animal=`;
-  let imagensAnimal = {};
+  //let apiUrlJsonImagensAnimal = `${urlJsonServer}/imagensAnimal?id_animal=`;
+  //imagensAnimal = await readJSONServerId(apiUrlJsonImagensAnimal, animalId);
+
+  let animal = {};
 
   let btEvent = event.target.id;
   let imgAnimalEl = document.querySelector(".compatibilidade-EscolhasImagemCarousel"); 
   let animalId = imgAnimalEl.id; 
 
-  imagensAnimal = await readJSONServerId(apiUrlJsonImagensAnimal, animalId);
+  animal = getAnimal(animalId);
+  console.log(animal);
 
   if(btEvent == "compatibilidade-EscolhasCarouselImagemBtnD") {
     contadorImagemAnimalCompatibilidade++;
-    testeContadorImagemAnimalCompatibilidade(imagensAnimal.length);
-    imgAnimalEl.src = imagensAnimal[contadorImagemAnimalCompatibilidade].imagem;
+    testeContadorImagemAnimalCompatibilidade(animal.imagem.length);
+    imgAnimalEl.src = animal.imagem[contadorImagemAnimalCompatibilidade];
   } else {
     if(btEvent == "compatibilidade-EscolhasCarouselImagemBtnE") {
       contadorImagemAnimalCompatibilidade--;
-      testeContadorImagemAnimalCompatibilidade(imagensAnimal.length);
-      imgAnimalEl.src = imagensAnimal[contadorImagemAnimalCompatibilidade].imagem;
+      testeContadorImagemAnimalCompatibilidade(animal.imagem.length);
+      imgAnimalEl.src = animal.imagem[contadorImagemAnimalCompatibilidade];
     }
   }
 }
@@ -2611,33 +2640,42 @@ async function proximaImagemCompatibilidade(event) {
 async function carregarAnimaisCompatibilidade() {
 
 
-  let apiUrlJsonAnimais =  `${urlJsonServer}/imagensAnimal?id_animal=`;
-  let apiUrlJsonImagensAnimal = `${urlJsonServer}/imagensAnimal`;
+  //let apiUrlJsonAnimais =  `${urlJsonServer}/animais`;
+  //let apiUrlJsonImagensAnimal = `${urlJsonServer}/imagensAnimal`;
+
   let divContainerEscolhasEl = document.querySelector(".compatibilidade-ContainerEscolhas");
   let animais = {}, imagensAnimal = {};
   let strHTML = "", strImagemAnimal = "";
   let resultado = false;
-  let y = 0;
+  let y = 0, contadorAnimaisValidosAdocao = 0;
 
-  animais = await readJSONServer(apiUrlJsonAnimais);
-  imagensAnimal = await readJSONServer(apiUrlJsonImagensAnimal);
+  //animais = await readJSONServer(apiUrlJsonAnimais);
+  //imagensAnimal = await readJSONServer(apiUrlJsonImagensAnimal);
 
-  if(contadorAnimalCompatibilidade == animais.length) {
+  animais = getAllAnimal();
+
+  for(y = 0; y < animais.length; y++) {
+    if(!(animais[y].condicao)) {
+      contadorAnimaisValidosAdocao++;
+    }
+  }
+
+  if(contadorAnimalCompatibilidade == contadorAnimaisValidosAdocao) {
     contadorAnimalCompatibilidade = 0;
   }
 
-  while(y < imagensAnimal.length && !resultado) {
+  /*while(y < imagensAnimal.length && !resultado) {
     if(animais[contadorAnimalCompatibilidade].id_animal == imagensAnimal[y].id_animal) {
       resultado = true;
       strImagemAnimal = imagensAnimal[y].imagem;
     }
     y++;
-  }
+  }*/
 
   strHTML = `<h2>Encontre seu Parceiro Ideal!</h2>
             <div id="compatibilidade-EscolhasCarouselImagemContainer">
                 <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnE" class="compatibilidade-EscolhasCarouselImagemBtn">&#8249;</button>
-                <img id="${animais[contadorAnimalCompatibilidade].id_animal}" class="compatibilidade-EscolhasImagemCarousel" onclick="abrirDescricaoAnimalPopup(event)" src="${strImagemAnimal}" alt="">
+                <img id="${animais[contadorAnimalCompatibilidade].id_animal}" class="compatibilidade-EscolhasImagemCarousel" onclick="abrirDescricaoAnimalPopup(event)" src="${animais[contadorAnimalCompatibilidade].imagem[0]}" alt="">
                 <button onclick="proximaImagemCompatibilidade(event)" id="compatibilidade-EscolhasCarouselImagemBtnD" class="compatibilidade-EscolhasCarouselImagemBtn">&#8250;</button>
             </div>
             <div id="compatibilidade-EscolhasInfAnimal">
@@ -2726,24 +2764,27 @@ async function exibicaoTelaCarregarCompatibilidade() {
 
 async function confirmarCompatibilidade() {
 
-  let apiUrlJsonTagsAnimal = `${urlJsonServer}/etiquetas?id_animal=`;
-  let apiUrlJsonTagsUsuario = `${urlJsonServer}/etiquetas?id_usuario=`;
-  let tagsAnimal = {}, tagsUsuario = {};
+  //let apiUrlJsonTagsAnimal = `${urlJsonServer}/etiquetas?id_animal=`;
+  //let apiUrlJsonTagsUsuario = `${urlJsonServer}/etiquetas?id_usuario=`;
+  let animal = {}, url_foto_acao_animalsuario = {};
   let distanciaPontos = 0.0, valorMaximo = 0.0, porcentagemCompatibilidade = 0.0;
  
   let imgAnimalEl = document.querySelector(".compatibilidade-EscolhasImagemCarousel"); 
   let animalId = imgAnimalEl.id; 
 
-  tagsAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, animalId);
-  tagsAnimal = tagsAnimal[0];
-  tagsUsuario = await readJSONServerId(apiUrlJsonTagsUsuario, 1);
-  tagsUsuario = tagsUsuario[0];
+  //tagsAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, animalId);
+  //tagsAnimal = tagsAnimal[0];
+  //tagsUsuario = await readJSONServerId(apiUrlJsonTagsUsuario, 1);
+  //tagsUsuario = tagsUsuario[0];
 
-  distanciaPontos = Math.sqrt( Math.pow((tagsAnimal.atencao - tagsUsuario.atencao), 2) + 
-  Math.pow((tagsAnimal.passeio - tagsUsuario.passeio), 2) + 
-  Math.pow((tagsAnimal.carinho - tagsUsuario.carinho), 2) +
-  Math.pow((tagsAnimal.extrovertido - tagsUsuario.extrovertido), 2) +
-  Math.pow((tagsAnimal.animacao - tagsUsuario.animacao), 2));         
+  animal = getAnimal(animalId);
+  usuario = getUsuario(getLoginUsuario());
+
+  distanciaPontos = Math.sqrt( Math.pow((animal.tags.atencao - usuario.tags.atencao), 2) + 
+  Math.pow((animal.tags.passeio - usuario.tags.passeio), 2) + 
+  Math.pow((animal.tags.carinho - usuario.tags.carinho), 2) +
+  Math.pow((animal.tags.extrovertido - usuario.tags.extrovertido), 2) +
+  Math.pow((animal.tags.animacao - usuario.tags.animacao), 2));         
   
   valorMaximo = Math.sqrt(80);
 
@@ -2775,8 +2816,8 @@ async function abrirModalMatch(idAnimal) {
   let imgUsuarioEl = document.querySelector(".compatibilidade-perfilUsuario");
   let botaoAdocaoEl = document.querySelector(".compatibilidade-SolicitarAdocao");
 
-  let apiUrlJsonTagsAnimal = `${urlJsonServer}/imagensAnimal?id_animal=`;
-  let imagensAnimal = {};
+  //let apiUrlJsonTagsAnimal = `${urlJsonServer}/imagensAnimal?id_animal=`;
+  let animal = {};
   let resultado = false;
   let strImagemAnimal = "";
   let y = 0;
@@ -2785,15 +2826,16 @@ async function abrirModalMatch(idAnimal) {
     carregarPaginaAdocao(idAnimal);
   });
 
-  imagensAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, idAnimal);
+  //imagensAnimal = await readJSONServerId(apiUrlJsonTagsAnimal, idAnimal);
+  animal = getAnimal(idAnimal);
 
-  while(y < imagensAnimal.length && !resultado) {
+  /*while(y < imagensAnimal.length && !resultado) {
     if(idAnimal == imagensAnimal[y].id_animal) {
       resultado = true;
       strImagemAnimal = imagensAnimal[y].imagem;
     }
     y++;
-  }
+  }*/
 
   divModalMatchEl.style.display = "block";
 
@@ -2806,7 +2848,7 @@ async function abrirModalMatch(idAnimal) {
 
   divModalMatchEl.classList.remove('show');
 
-  imgAnimalEl.src = strImagemAnimal;
+  imgAnimalEl.src = animal.imagem[0];
   imgAnimalEl.id = idAnimal;
   imgUsuarioEl.src = "https://thumbs.dreamstime.com/b/%C3%ADcone-de-usu%C3%A1rio-m%C3%ADdia-social-vetor-imagem-perfil-do-avatar-padr%C3%A3o-retrato-182347582.jpg";
 
@@ -2834,6 +2876,22 @@ function animacaoTrocaAnimalMatch() {
   carregarDadosCompatibilidade()
 }
 
+function calcularIdade(dataPassada) {
+  const hoje = new Date();
+  const [dia, mes, ano] = dataPassada.split('/').map(Number);
+  const nascimento = new Date(ano, mes - 1, dia); // mês - 1 porque os meses em JS começam em 0
+
+  let anos = hoje.getFullYear() - nascimento.getFullYear();
+  let meses = hoje.getMonth() - nascimento.getMonth();
+
+  if (meses < 0) {
+    anos--;
+    meses += 12;
+  }
+
+  return `${anos} anos e ${meses} meses`;
+}
+
 /* --------------------- Definir comportamento da EXIBIÇÃO DE ANIMAIS COMPATIBILIDADE (FIM) --------------- */
 /*---------------------- Tela de Atividades ONG (Inicio) ------------------*/
 
@@ -2856,28 +2914,118 @@ function readFormularios ()
 function formulariosOngEventos()
 {
 //Definir dados locais
-  let botoesFormulario = document.getElementsByClassName('adocao-form');
+  let containers = document.getElementsByClassName('container-conteudo');
 //Adicionar eventos
-  for (let i = 0; i < botoesFormulario.length; i++)
+  for (let i = 0; i < containers.length; i++)
   {
-    botoesFormulario[i].addEventListener('click', (e) => mostrarPopupFormularioAdocao(e.target.id));
+  //Definir dados locais
+    let container = containers[i];
+    let id_formulario = parseInt( container.querySelector('.fa-solid').id);
+    let botaoFormulario = container.querySelector('.adocao-form');
+    let botaoAceitar = container.querySelector('.Aceitar-button');
+    let botaoRecusar = container.querySelector('.Recusar-button');
+  //Definir eventos
+    botaoFormulario.addEventListener('click', (e) => mostrarPopupFormularioAdocao(e.target.id));
+    botaoAceitar.addEventListener('click', () => mudarStatusFormularioAdocao("aceito", id_formulario));
+    botaoRecusar.addEventListener('click', () => mudarStatusFormularioAdocao("recusado", id_formulario));
   }
+}
+
+function mudarStatusFormularioAdocao (status, id_formulario)
+{
+//Definir dados locais
+  let formulario = getFormularioAdocao(id_formulario);
+  let pessoa = getUsuario(formulario.id_pessoa);
+  let formulariosPessoa = pessoa.form_adocao;
+//Mudar status
+  formulario.status = status;
+//Identificar formulario da pessoa
+  let i = 0;
+  let controle = true;
+  while (i < formulariosPessoa.length && controle)
+  {
+    controle = formulariosPessoa[i].id_formulario != formulario.id_formulario;
+    i++;  
+  }
+//Atualizar objeto
+  if (i > 0 && !controle)
+    pessoa.form_adocao[i - 1] = formulario;
+//Atualizar
+  updateUsuario(pessoa);
+//Recarregar pagina
+  readFormularios();
 }
 
 async function mostrarPopupFormularioAdocao(id_formulario)
 {
 //Definir dados locais
+  let main = document.querySelector('main');
+//Adicionar popup
+  let modal = await carregarHtml('/pages/atividadesONG/pop-up-formulario.html');
+  main.insertAdjacentHTML('beforeend', modal);
+  popUpFormularioOngEventos();
+  preencherPopupFormulario(id_formulario);
+}
+
+function preencherPopupFormulario (id_formulario)
+{
+//Definir dados locais
   let formulario = getFormularioAdocao(id_formulario);
   let pessoa = getUsuario(formulario.id_pessoa);
   let animal = getAnimal(formulario.id_animal);
-  let main = document.querySelector('main');
-//Adicionar popup
-  let modal = await carregarHtml('../../../../codigo/pages/atividadesONG/pop-up-formulario.html');
-  main.insertAdjacentHTML('beforeend', modal);
-  popUpFormularioOngEventos();
+//Definir elemntos html de pessoa
+  let element = document.querySelector('.formulario-ong-informacoes-pessoa');
+  let nomePessoa = element.querySelector('.formulario-ong-nome');
+  let dataPessoa = element.querySelector('.formulario-ong-idade');
+  let emailPessoa = element.querySelector('.formulario-ong-email');
+  let telefonePessoa = element.querySelector('.formulario-ong-telefone');
+//Atribuir dados html de pessoa
+  nomePessoa.innerHTML = pessoa.nome;
+  dataPessoa.innerHTML = pessoa.data_de_nascimento;
+  emailPessoa.innerHTML = pessoa.email;
+  telefonePessoa.innerHTML = pessoa.telefone;
+//Definir elementos html de animal
+  element = document.querySelector('.formulario-ong-informacoes-animal');
+  let nomeAnimal = element.querySelector('.formulario-ong-nome');
+  let especieAnimal = element.querySelector('.formulario-ong-especie');
+  let sexoAnimal = element.querySelector('.formulario-ong-sexo');
+  let idadeAnimal = element.querySelector('.formulario-ong-idade');
+//Atribuir dados html de pessoa
+  nomeAnimal.innerHTML = animal.nome;
+  especieAnimal.innerHTML = animal.especie;
+  sexoAnimal.innerHTML = (animal.sexo == 'M') ? "Masculino" : "Feminino" ;
+  idadeAnimal.innerHTML = animal.data_de_nascimento;
+//Definir elementos html de formulario
+  element = document.querySelector('.formulario-ong-informacoes-form');
+  let dataForm = element.querySelector('.formulario-ong-data');
+  let moradiaForm = element.querySelector('.formulario-ong-moradia');
+  let experienciaForm = element.querySelector('.formulario-ong-experiencia');
+  let viagemForm = element.querySelector('.formulario-ong-viagem');
+  let disponibilidadeForm = element.querySelector('.formulario-ong-disponibilidade');
+  let visitasForm = element.querySelector('.formulario-ong-visitas');
+  let consentimentoForm = element.querySelector('.formulario-ong-consentimento');
+  let comentarioForm = element.querySelector('.formulario-ong-comentarios');
+//Atribuir dados html de formulario
+  dataForm.innerHTML = formulario.data;
+  moradiaForm.innerHTML = formulario.moradia;
+  experienciaForm.innerHTML = (formulario.experiencia) ? "Sim" : "Nao";
+  viagemForm.innerHTML = formulario.viagem;
+  disponibilidadeForm.innerHTML = formulario.disponibilidade;
+  visitasForm.innerHTML = (formulario.visitas) ? "Sim" : "Nao";
+  consentimentoForm.innerHTML = (formulario.consentimento) ? "Sim" : "Nao";
+  comentarioForm.innerHTML = formulario.comentario;
 }
 
-
+function popUpFormularioOngEventos ()
+{
+//Definir dados locais
+  let closeWindow = document.querySelector('.formulario-ong-close');
+//Definir evento
+  closeWindow.addEventListener('click', () => {
+    let modal = document.querySelector('.formulario-ong-modal');
+    modal.remove();
+  });
+}
 
 function inserirFormulariosAdocao (formularios)
 {
@@ -2885,11 +3033,16 @@ function inserirFormulariosAdocao (formularios)
   let container = document.querySelector('.container-Solic');
   let str = "";
   container.innerHTML = str;
-//Testar se ha' formularios
-  if ( !(formularios.length > 0) )
+  let formulariosPendentes = [];
+//Identificar formularios pendentes
+  for (let i = 0; i < formularios.length; i++)
   {
+    if (formularios[i].status == "pendente")
+      formulariosPendentes.push(formularios[i]);
+  }
+//Testar se nao há formularios pendentes
+  if (formulariosPendentes.length == 0)
     str = `<p>Ainda não há formulários de adoção recebidos!</p>`;
-  } 
   else
   {
   //Criar string com os formularios
@@ -2900,7 +3053,7 @@ function inserirFormulariosAdocao (formularios)
       let pessoa = getUsuario(formulario.id_pessoa);
       let animal = getAnimal(formulario.id_animal);
     //Testar se o animal esta correto
-      if (animal.nome != null && formulario.status == "pendente")
+      if (formulario.status == "pendente")
       {
       //Adicionar 'a string
         str += `
@@ -2925,7 +3078,7 @@ function inserirFormulariosAdocao (formularios)
           </div>
         `;
       }
-    }
+    }  
   }
 //Adicionar string ao html
   container.innerHTML = str;
@@ -3004,7 +3157,7 @@ function loadAnimal(){
   let animais = getAllAnimal();
   let mainDiv = document.querySelector(".animal-grid");
   let html = `<div class="animal-card">
-                    <a style="color:black" href = "../cadastros/crud-animal.html" class="img-add-animal"><span><i class="fa-2xl fa-solid fa-plus"></i></span></a>
+                    <a style="color:black" href = "/pages/cadastros/crud-animal.html" class="img-add-animal"><span><i class="fa-2xl fa-solid fa-plus"></i></span></a>
               </div>`;
   let pesquisarAnimalOng = document.querySelector(".barra-pesquisa").value
   animais.forEach(animal => {
@@ -3025,7 +3178,7 @@ let pesquisarAnimalOng = document.querySelector(".barra-pesquisa").addEventListe
 /*---------------------- Tela de Atividades ONG (FIM) ------------------*/
 
 
-/*---------------------- Tela de Pefil ONG (Inicio) ------------------*/
+/*---------------------- Tela de Perfil ONG (Inicio) ------------------*/
 // Função que cria um objeto inicial da ONG no localStorage
 
 function AC_iniciarDados() {
@@ -3044,7 +3197,7 @@ function AC_iniciarDados() {
     localStorage.setItem('ong', JSON.stringify(ong));
 
     // Alterando a localizacao da pagina
-      window.location.href = "../../../../codigo/pages/atividadesONG/AtividadeONG.html"; 
+      window.location.href = "/pages/atividadesONG/AtividadeONG.html"; 
 }
 
 // Função que exibe os dados da ONG na página

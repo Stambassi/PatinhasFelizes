@@ -473,12 +473,12 @@ function gerarOngsFalsas ()
     {
       "id_ong": 3,
       "nome": "Gato Feliz",
-      "email": "gatofeliz@gmail.com",
+      "email": "Gatofeliz@gmail.com",
       "senha": "senhaONG3",
       "telefones": ["(21) 97777-0003"],
-      "foto_perfil": "url_foto_gato_feliz.jpg",
+      "foto_perfil": "url_foto_Gato_feliz.jpg",
       "cnpj": "34.567.890/0001-12",
-      "descricao": "Uma ONG dedicada ao resgate e cuidado de gatos abandonados.",
+      "descricao": "Uma ONG dedicada ao resgate e cuidado de Gatos abandonados.",
       "endereco": [
         {
           "rua": "Rua dos Felinos",
@@ -533,12 +533,12 @@ function gerarOngsFalsas ()
     {
       "id_ong": 6,
       "nome": "Cão e Gato",
-      "email": "caeegato@gmail.com",
+      "email": "caeeGato@gmail.com",
       "senha": "senhaONG6",
       "telefones": ["(31) 99999-0006", "(31) 88888-0006"],
-      "foto_perfil": "url_foto_cao_e_gato.jpg",
+      "foto_perfil": "url_foto_cao_e_Gato.jpg",
       "cnpj": "67.890.123/0001-45",
-      "descricao": "Trabalhamos com a adoção e cuidado de cães e gatos abandonados.",
+      "descricao": "Trabalhamos com a adoção e cuidado de cães e Gatos abandonados.",
       "endereco": [
         {
           "rua": "Rua dos Animais",
@@ -640,14 +640,32 @@ function gerarAnimaisFalsos ()
   let animais = [
     {
       "id_animal": 1,
-      "especie": "cachorro",
+      "especie": "Cachorro",
       "id_ong": 1,
       "nome": "Max",
-      "raca": "Labrador",
+      "raca": "Vira-Lata",
       "genero": "M",
+      "porte": "G",
       "data_de_nascimento": "01/01/2020",
-      "historia": "Resgatado de uma rua movimentada, agora espera um lar amoroso.",
+      "descricao": "Max é um vira-lata forte e leal, que busca uma nova chance para ser o companheiro amoroso de alguém especial.",
+      "historia": "Max já teve um lar, mas foi abandonado sem explicação. Por semanas, ele vagou pelas ruas," +
+      "enfrentando a fome e o frio, mas nunca perdeu sua doçura. Mesmo em meio ao abandono, Max continuava a" +
+      "oferecer amor, esperando que alguém o notasse. Agora resgatado, Max ainda é o mesmo cão leal e carinhoso." +
+      "Ele só quer uma segunda chance de mostrar o quanto pode ser um companheiro fiel e amoroso. Ao adotar Max," +
+      "você não só dá a ele um lar, mas também salva um coração que nunca desistiu.",
       "castrado": true,
+      "vacina": {
+        "v8": true,
+        "antirrabica": false,
+        "leishmaniose": false,
+        "v10": true,
+        "hepatite": false,
+        "parvovirose": true,
+        "cinomose": false,
+        "adenovirose": true,
+        "coronavirus": false,
+        "gripe": true
+      },
       "tags": {
         "atencao": 4,
         "passeio": 5,
@@ -662,19 +680,41 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        ""
+        "https://www.amigonaosecompra.com.br/unsafe/1200x0/8a6be99b-6466-4082-9258-15f9d9d7224d/a894c87c-09f5-494f-8f31-c05a29b2d866/77ce481b-1dfd-4983-b949-ad8a3d141926.jpeg?v=63894876522",
+        "https://www.amigonaosecompra.com.br/unsafe/1200x0/8a6be99b-6466-4082-9258-15f9d9d7224d/a894c87c-09f5-494f-8f31-c05a29b2d866/33f42e20-e625-4f87-bae9-43014db26e1d.jpeg?v=63894876522"
       ]
     },
     {
       "id_animal": 2,
-      "especie": "gato",
+      "especie": "Gato",
       "id_ong": 2,
       "nome": "Luna",
       "raca": "Siamês",
       "genero": "F",
+      "porte": "P",
       "data_de_nascimento": "15/05/2019",
-      "historia": "Abandonada em uma caixa de papelão, está procurando um novo lar.",
+      "descricao": "Luna é uma gata corajosa e doce, que superou as dificuldades da vida nas ruas e agora busca um lar cheio de amor e carinho.",
+      "historia": "Luna é uma gata que, desde filhote, enfrentou a vida nas ruas com coragem e determinação." +
+            " Abandonada por sua antiga família, ela aprendeu a se esquivar dos perigos enquanto buscava abrigo e alimento." +
+            " Apesar das dificuldades, Luna nunca perdeu sua doçura e curiosidade." +
+            " Com seus olhos grandes e brilhantes, ela observa tudo ao seu redor, sempre pronta para explorar." +
+            " Quando encontra um lugar seguro, ela se transforma, ronronando suavemente enquanto se aninha em um colo." +
+            " Agora, Luna sonha em encontrar um lar onde possa viver tranquila e rodeada de amor." +
+            " Ela é uma gata que traz alegria e calor para a vida de quem a acolher." +
+            " Adotar Luna é oferecer uma segunda chance a uma alma corajosa que merece ser feliz.",
       "castrado": false,
+      "vacina": {
+        "v8": true,
+        "antirrabica": false,
+        "leishmaniose": false,
+        "v10": true,
+        "hepatite": false,
+        "parvovirose": true,
+        "cinomose": false,
+        "adenovirose": true,
+        "coronavirus": false,
+        "gripe": true
+      },
       "tags": {
         "atencao": 5,
         "passeio": 2,
@@ -689,19 +729,40 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        ""
+        "https://www.amigonaosecompra.com.br/unsafe/1176x0/ef79cc77-5089-4652-a29b-071a383872fa/faa8635a-40a5-4579-8e7f-cd0c954bd6dd/faa8635a-40a5-4579-8e7f-cd0c954bd6dd.png?v=63894056120",
+        "https://www.amigonaosecompra.com.br/unsafe/1200x0/ef79cc77-5089-4652-a29b-071a383872fa/faa8635a-40a5-4579-8e7f-cd0c954bd6dd/3212968b-7166-46e1-82a5-e50c4d5166c8.png?v=63894056129"
       ]
     },
     {
       "id_animal": 3,
-      "especie": "coelho",
+      "especie": "Coelho",
       "id_ong": 3,
       "nome": "Bunny",
       "raca": "Angorá",
       "genero": "M",
+      "porte": "P",
       "data_de_nascimento": "20/03/2021",
-      "historia": "Foi resgatado de um parque onde estava perdido.",
+      "descricao": "Banny é um coelho resgatado que busca um lar amoroso, onde possa ser livre e compartilhar suas travessuras com uma nova família.",
+      "historia": "Banny é um coelho que foi resgatado de um mercado de animais, onde estava prestes a ser vendido como comida." +
+            " Antes de ser levado para um abrigo, ele já tinha passado por momentos difíceis, mas seu espírito brincalhão permaneceu intacto." +
+            " Agora, no abrigo, ele espera ansiosamente por uma nova família que o ame e cuide dele." +
+            " Com sua pelagem macia e seus olhos grandes e curiosos, Banny encanta a todos que o conhecem." +
+            " Ele adora correr e brincar, explorando cada cantinho do seu espaço, sempre em busca de novas aventuras." +
+            " Banny sonha em encontrar um lar onde possa ser livre, amado e ter um companheiro para compartilhar suas travessuras." +
+            " Adotar Banny é dar a ele uma nova chance de viver plenamente e espalhar alegria ao redor.",
       "castrado": true,
+      "vacina": {
+        "v8": true,
+        "antirrabica": false,
+        "leishmaniose": false,
+        "v10": true,
+        "hepatite": false,
+        "parvovirose": true,
+        "cinomose": false,
+        "adenovirose": true,
+        "coronavirus": false,
+        "gripe": true
+      },
       "tags": {
         "atencao": 3,
         "passeio": 1,
@@ -716,19 +777,39 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        ""
+        "https://i.pinimg.com/736x/8f/6d/94/8f6d94c919d5920b08bc974fbd3b5d81.jpg"
       ]
     },
     {
       "id_animal": 4,
-      "especie": "cachorro",
+      "especie": "Cachorro",
       "id_ong": 1,
-      "nome": "Rex",
-      "raca": "Bulldog",
+      "nome": "Theo",
+      "raca": "Vira-Lata",
       "genero": "M",
+      "porte": "M",
       "data_de_nascimento": "10/10/2018",
-      "historia": "Foi encontrado vagando nas ruas, muito sociável.",
+      "descricao": "Theo é um cachorro amoroso e gentil, que busca uma nova família para compartilhar sua alegria e lealdade.",
+      "historia": "Theo é um cachorro que foi encontrado perambulando pelas ruas, abandonado e sozinho." +
+            " Apesar das dificuldades que enfrentou, ele sempre manteve sua natureza gentil e amorosa." +
+            " Com seu olhar esperançoso, Theo seguia as pessoas, ansiando por carinho e atenção." +
+            " Um dia, ele foi resgatado por um grupo de voluntários que imediatamente perceberam o quanto ele era especial." +
+            " Agora, no abrigo, Theo aguarda ansiosamente por uma nova família que possa lhe oferecer um lar." +
+            " Ele adora passear, brincar e se aninhar ao lado de quem ama, sempre pronto para dar e receber afeto." +
+            " Adotar Theo é não apenas dar a ele um lar, mas também receber um amigo leal e amoroso para a vida toda.",
       "castrado": true,
+      "vacina": {
+        "v8": true,
+        "antirrabica": false,
+        "leishmaniose": false,
+        "v10": true,
+        "hepatite": false,
+        "parvovirose": true,
+        "cinomose": false,
+        "adenovirose": true,
+        "coronavirus": false,
+        "gripe": true
+      },
       "tags": {
         "atencao": 2,
         "passeio": 4,
@@ -743,19 +824,41 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        ""
+        "https://www.amigonaosecompra.com.br/unsafe/1200x0/86f45627-25db-49a8-8119-7bd68511e3f3/9356f580-0464-44af-91a6-a09fdf8e81f0/f8fa0680-ac92-44d1-91fc-e8cecfc40a81.jpg?v=63894767639",
+        "https://www.amigonaosecompra.com.br/unsafe/1200x0/86f45627-25db-49a8-8119-7bd68511e3f3/9356f580-0464-44af-91a6-a09fdf8e81f0/59e8d0e3-9dc5-4d67-8e5a-2f36ebc124ea.jpg?v=63894767640",
+        "https://www.amigonaosecompra.com.br/unsafe/1200x0/86f45627-25db-49a8-8119-7bd68511e3f3/9356f580-0464-44af-91a6-a09fdf8e81f0/fde61b74-74f9-42f0-be84-5aef398350a0.jpg?v=63894767639"
       ]
     },
     {
       "id_animal": 5,
-      "especie": "gato",
+      "especie": "Gato",
       "id_ong": 2,
       "nome": "Miau",
       "raca": "Persa",
       "genero": "F",
+      "porte": "P",
       "data_de_nascimento": "12/07/2020",
-      "historia": "Foi resgatada de um canteiro de obras.",
+      "descricao": "Miau é uma gata curiosa e brincalhona que busca um lar amoroso onde possa ser mimada e se sentir segura.",
+      "historia": "Miau é uma gata que foi encontrada abandonada em um beco, lutando para sobreviver." +
+            " Apesar das dificuldades, sua personalidade curiosa e brincalhona sempre se destacou." +
+            " Com seus olhos grandes e expressivos, Miau observa o mundo ao seu redor com um misto de curiosidade e esperança." +
+            " Resgatada por um abrigo, ela agora aguarda ansiosamente por uma nova família que a acolha." +
+            " Miau adora se aninhar em lugares quentinhos e brincar com qualquer coisa que se mova." +
+            " Ela traz alegria e diversão, pronta para ser uma companheira fiel." +
+            " Adotar Miau é dar a ela a chance de viver em um lar amoroso, onde poderá mostrar todo o seu carinho.",
       "castrado": false,
+      "vacina": {
+        "v8": true,
+        "antirrabica": false,
+        "leishmaniose": false,
+        "v10": true,
+        "hepatite": false,
+        "parvovirose": true,
+        "cinomose": false,
+        "adenovirose": true,
+        "coronavirus": false,
+        "gripe": true
+      },
       "tags": {
         "atencao": 5,
         "passeio": 1,
@@ -770,19 +873,39 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        ""
+        "https://www.amigonaosecompra.com.br/unsafe/1176x0/0cfe2f0b-aa3d-45fe-9664-383f3a3174f0/2675b1d3-4f59-452f-9b6e-35ff981e3097/2675b1d3-4f59-452f-9b6e-35ff981e3097.jpg?v=63894239235"
       ]
     },
     {
       "id_animal": 6,
-      "especie": "coelho",
+      "especie": "Coelho",
       "id_ong": 3,
       "nome": "Flopsy",
       "raca": "Mini Lop",
       "genero": "F",
+      "porte": "P",
       "data_de_nascimento": "05/11/2021",
-      "historia": "Foi encontrado em um parque, muito dócil.",
+      "descricao": "Flopsy é uma coelha adorável e brincalhona, que busca um lar amoroso onde possa explorar e receber todo o carinho que merece.",
+      "historia": "Flopsy é uma coelha que foi resgatada de um pet shop, onde estava em condições inadequadas." +
+            " Apesar de seu passado difícil, ela sempre foi cheia de vida e adorável." +
+            " Com seus grandes olhos brilhantes, Flopsy encanta a todos ao seu redor com seu jeito brincalhão." +
+            " Agora, em um abrigo, ela sonha em encontrar um lar onde possa correr livre e ser amada." +
+            " Flopsy adora explorar, saltar e brincar com qualquer brinquedo que encontrar." +
+            " Ela é uma coelha que traz alegria e fofura para a vida de quem a acolher." +
+            " Adotar Flopsy é oferecer a ela uma nova chance de viver feliz e cheia de amor.",
       "castrado": true,
+      "vacina": {
+        "v8": true,
+        "antirrabica": false,
+        "leishmaniose": false,
+        "v10": true,
+        "hepatite": false,
+        "parvovirose": true,
+        "cinomose": false,
+        "adenovirose": true,
+        "coronavirus": false,
+        "gripe": true
+      },
       "tags": {
         "atencao": 3,
         "passeio": 2,
@@ -797,19 +920,39 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        ""
+        "https://upload.wikimedia.org/wikipedia/commons/c/c6/Domestic_mini_lop_rabbit.jpg"
       ]
     },
     {
       "id_animal": 7,
-      "especie": "cachorro",
+      "especie": "Cachorro",
       "id_ong": 1,
       "nome": "Bella",
       "raca": "Poodle",
       "genero": "F",
+      "porte": "G",
       "data_de_nascimento": "22/09/2019",
-      "historia": "Abandonada por sua antiga família, procura um novo lar.",
+      "descricao": "Bella é uma cadela amorosa e cheia de energia, que busca um lar acolhedor onde possa ser feliz e fazer novos amigos.",
+      "historia": "Bella é uma cadela que foi resgatada das ruas, onde viveu sozinha e enfrentou muitos desafios." +
+            " Mesmo após tudo o que passou, ela mantém um coração gentil e amoroso." +
+            " Bella adora se aproximar das pessoas, abanando o rabo e pedindo carinho com seus olhos brilhantes." +
+            " No abrigo, ela aguarda ansiosamente por uma nova família que a acolha e a ame." +
+            " Bella é cheia de energia, adora passear e brincar, sempre pronta para se divertir." +
+            " Ela traz alegria e calor para qualquer lar, sendo uma companheira leal e carinhosa." +
+            " Adotar Bella é dar a ela a chance de ter um lar cheio de amor e aventura.",
       "castrado": true,
+      "vacina": {
+        "v8": true,
+        "antirrabica": false,
+        "leishmaniose": false,
+        "v10": true,
+        "hepatite": false,
+        "parvovirose": true,
+        "cinomose": false,
+        "adenovirose": true,
+        "coronavirus": false,
+        "gripe": true
+      },
       "tags": {
         "atencao": 4,
         "passeio": 5,
@@ -824,19 +967,41 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        ""
+        "https://www.amigonaosecompra.com.br/unsafe/1176x0/9d1dfcf1-f0fd-454a-a427-2aa472d6fdb4/d6701f89-59b7-4e91-9521-950b6a4ef864/d6701f89-59b7-4e91-9521-950b6a4ef864.jpg?v=63894859636",
+        "https://www.amigonaosecompra.com.br/unsafe/1200x0/9d1dfcf1-f0fd-454a-a427-2aa472d6fdb4/d6701f89-59b7-4e91-9521-950b6a4ef864/2d89fefc-944b-41c5-9240-37c79c0b43ab.jpg?v=63894859682",
+        "https://www.amigonaosecompra.com.br/unsafe/1200x0/9d1dfcf1-f0fd-454a-a427-2aa472d6fdb4/d6701f89-59b7-4e91-9521-950b6a4ef864/9c38554c-1040-440b-9b2d-0ed1fdcf6a08.jpg?v=63894859681"
       ]
     },
     {
       "id_animal": 8,
-      "especie": "gato",
+      "especie": "Gato",
       "id_ong": 2,
       "nome": "Oliver",
       "raca": "Maine Coon",
       "genero": "M",
+      "porte": "P",
       "data_de_nascimento": "30/06/2018",
-      "historia": "Foi resgatado de um abrigo lotado.",
+      "descricao": "Oliver é um gato curioso e gentil, que busca um lar amoroso onde possa explorar e receber carinho.",
+      "historia": "Oliver é um gato que foi resgatado de uma colônia de gatos, onde vivia em condições difíceis." +
+            " Apesar de seu passado, ele é gentil e cheio de personalidade." +
+            " Com seu pelo macio e olhos curiosos, Oliver adora explorar cada canto ao seu redor." +
+            " Ele é um verdadeiro aventureiro, sempre em busca de novas descobertas." +
+            " Agora, no abrigo, Oliver espera ansiosamente por uma nova família que o aceite." +
+            " Ele é um gato que aprecia momentos de carinho, ronronando feliz ao ser acariciado." +
+            " Adotar Oliver é dar a ele a chance de encontrar um lar onde possa ser amado e se sentir seguro.",
       "castrado": true,
+      "vacina": {
+        "v8": true,
+        "antirrabica": false,
+        "leishmaniose": false,
+        "v10": true,
+        "hepatite": false,
+        "parvovirose": true,
+        "cinomose": false,
+        "adenovirose": true,
+        "coronavirus": false,
+        "gripe": true
+      },
       "tags": {
         "atencao": 3,
         "passeio": 1,
@@ -851,12 +1016,13 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        ""
+        "https://www.amigonaosecompra.com.br/unsafe/1200x0/4165d04d-491f-4e65-bb7e-73204a68768d/9a5211c0-f874-495e-8fd6-a836f7c7f187/0856690e-e504-41a8-91cd-780a5503d9c3.jpeg?v=63894567436",
+        "https://www.amigonaosecompra.com.br/unsafe/1200x0/4165d04d-491f-4e65-bb7e-73204a68768d/9a5211c0-f874-495e-8fd6-a836f7c7f187/caf19380-2435-48e3-84b7-4b27ec735b65.jpeg?v=63894567436"
       ]
     },
     {
       "id_animal": 9,
-      "especie": "coelho",
+      "especie": "Coelho",
       "id_ong": 3,
       "nome": null,
       "raca": null,
@@ -877,7 +1043,7 @@ function gerarAnimaisFalsos ()
     },
     {
       "id_animal": 10,
-      "especie": "cachorro",
+      "especie": "Cachorro",
       "id_ong": 1,
       "nome": null,
       "raca": null,

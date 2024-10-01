@@ -121,7 +121,7 @@ div.acesso-rapido {
   margin-right: 6%;
 }
 
-div.acesso-rapido>a {
+.acesso-rapido-a {
   margin-bottom: 1%;
   display: block;
   text-decoration: none;
@@ -129,9 +129,15 @@ div.acesso-rapido>a {
   font-size: medium;
 }
 
+.acesso-rapido-a:hover {
+  cursor: pointer;
+  color: rgb(66, 66, 66);
+}
+
 div#footer-itens>* h5 {
   font-size: x-large;
   font-weight: bold;
+  margin: 20px 0;
 }
 
 div.acesso-rapido>a:hover {
@@ -1671,6 +1677,11 @@ button#load_ab_photo:hover {
   height: 35px;
 }
 
+.formulario-ong-close:hover
+{
+  cursor: pointer;
+}
+
 .formulario-ong-close img
 {
   width: 35px;
@@ -1947,18 +1958,23 @@ button#load_ab_photo:hover {
 
 #telaInicial-Introducao {
   border: none;
+  width: fit-content;
+  width: 70%;
   max-width: 80%;
   margin: 5% auto;
   padding: 30px 30px;
   border-radius: 30px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #telaInicial-Introducao button {
   background-color: var(--cor_primaria);
   color: white;
-  margin: 10px 0 0 15px;
-  width: 8%;
+  margin: auto 40px;
+  width: 10%;
   padding: 10px 15px;
   border: none;
   border-radius: 20px;
@@ -1971,6 +1987,9 @@ button#load_ab_photo:hover {
 }
 
 #telaInicial-Introducao h3 {
+  margin: auto 0; 
+  font-size: 25px;
+  font-weight: 400;
   display: inline;
 }
 
@@ -2317,6 +2336,12 @@ button#load_ab_photo:hover {
   justify-content: center;
 }
 
+#compatibilidade-ContainerImagemPefilMatch img {
+  width: 200px;
+  height: 200px;
+}
+
+
 #compatibilidade-MatchBotoes {
   display: flex;
   flex-direction: column;
@@ -2475,6 +2500,7 @@ button#load_ab_photo:hover {
   width: 85%;
   height: 75%;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 #compatibilidade-EscolhasInfAnimal {
@@ -2529,6 +2555,7 @@ button#load_ab_photo:hover {
   height: 40%;
   border-radius: 50%;
   border: 5px solid #4CAF50;
+  cursor: pointer;
 }
 
 .compatibilidade-ContainerEscolhas h1 {

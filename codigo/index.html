@@ -26,16 +26,16 @@
 <body onload="gerarDadosFalsos(), loginOnload(), carregarAnimais(), carregarFiltrosCidades();">
   <header class="container-fluid">
     <div class="home-btn">
-      <img src="../../../../codigo/assets/img/logo.jpg" alt="Logo Patinhas Felizes">
-      <a href="../../../../codigo/index.html"><i class="fa-solid fa-2x fa-house"></i></a>
+      <img src="./assets/img/logo.jpg" alt="Logo Patinhas Felizes">
+      <a href="./index.html"><i class="fa-solid fa-2x fa-house"></i></a>
     </div>
 
     <div class="pages">
-        <a class="active-page" href="../../../../codigo/index.html">Adotar</a>
+        <a class="active-page" href="./index.html">Adotar</a>
         <span class="divider">|</span>
-        <a class="inactive-page" href="../../../../codigo/pages/cadastros/crud-animal-abd.html">Encontrei um animal abandonado</a>
+        <a class="inactive-page" href="./pages/cadastros/crud-animal-abd.html">Encontrei um animal abandonado</a>
         <span class="divider">|</span>
-        <a class="inactive-page" href="#">Match</a>
+        <a class="inactive-page" href="./pages/compatibilidade/compatibilidade.html">Match</a>
     </div>
 
     <div class="user-profile">
@@ -47,8 +47,8 @@
 
     <main>
         <div id="telaInicial-Introducao">
-            <h3 class="inline">Encontre o seu parceiro conosco! Escolha um pet disponível abaixo ou encontre uma patinha compatível com você! </h3>
-            <button >Vamos lá!</button>
+            <h3 class="inline">Encontre uma patinha compatível com você! </h3>
+            <button onclick="carregarPaginaCompatibilidade()">Vamos lá!</button>
         </div>
 
         <div id="telaInicial-BarraFiltros">
@@ -216,10 +216,10 @@
             </div>
             <div class="acesso-rapido">
                 <h5>Acesso rápido</h5>
-                <a href="">Achei um animal abandonado</a> <!-- Colocar LINKS -->
-                <a href="">Cadastro de usuário</a> <!-- Colocar LINKS -->
-                <a href="">Adote um animal</a> <!-- Colocar LINKS -->
-                <a href="">Cadastro de instituições</a> <!-- Colocar LINKS -->
+                <a class="acesso-rapido-a" onclick="carregarFormularioAnimalAbandonado()">Encontrei um animal abandonado</a> <!-- Colocar LINKS -->
+                <a class="acesso-rapido-a" href="">Cadastro de usuário</a> <!-- Colocar LINKS -->
+                <a class="acesso-rapido-a" href="">Adote um animal</a> <!-- Colocar LINKS -->
+                <a class="acesso-rapido-a" href="">Cadastro de instituições</a> <!-- Colocar LINKS -->
             </div>
             <div class="contatos">
                 <h5>Contatos</h5>
