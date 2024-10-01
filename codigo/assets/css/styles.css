@@ -18,7 +18,11 @@
 
 body {
   position: relative;
-  min-height: 200vh;
+  min-height: 100vh;
+}
+
+body.paginaPequena{
+  min-height: 120vh;
 }
 
 body.paginaPequena{
@@ -133,9 +137,11 @@ div.acesso-rapido {
 }
 
 .acesso-rapido-a {
+.acesso-rapido-a {
   margin-bottom: 1%;
   display: block;
   text-decoration: none;
+  color: lightgray;
   color: lightgray;
   font-size: medium;
 }
@@ -146,14 +152,10 @@ div.acesso-rapido {
 }
 
 div#footer-itens>* h5 {
+  margin: 30px 0;
   font-size: x-large;
   font-weight: bold;
-<<<<<<< Updated upstream
   color: white;
-
-=======
-  margin: 20px 0;
->>>>>>> Stashed changes
 }
 
 div.acesso-rapido>a:hover {
@@ -1015,17 +1017,17 @@ button#load_ab_photo:hover {
 
 #usuario-nome input
 {
-  width: 79%;
+  width: 71%;
 }
 
 #usuario-email input
 {
-  width: 80%;
+  width: 73%;
 }
 
 #usuario-senha input
 {
-  width: 79%;
+  width: 71%;
 }
 
 #usuario-senha 
@@ -1048,17 +1050,17 @@ button#load_ab_photo:hover {
 
 #usuario-cpf input
 {
-  width: 85%;
+  width: 77%;
 }
 
 #usuario-data-de-nascimento input
 {
-  width: 45%;
+  width: 37%;
 }
 
 #usuario-telefone input
 {
-  width: 73%;
+  width: 65%;
 }
 
 .perfil-usuario-1-titulo
@@ -1266,6 +1268,8 @@ button#load_ab_photo:hover {
 .perfil-usuario-3-informacoes
 {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -1720,7 +1724,8 @@ button#load_ab_photo:hover {
 
 .formulario-ong-titulo h1
 {
-  font-weight: 500;
+  font-weight: 450;
+  font-size: 30px;
 }
 
 .formulario-ong-informacoes
@@ -1773,6 +1778,7 @@ button#load_ab_photo:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0px 0px 30px 0;
   margin: 5px 0px;
 }
 

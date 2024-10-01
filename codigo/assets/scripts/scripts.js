@@ -1,6 +1,7 @@
 /* ----------------------------- Inicialização variável global JSON Server (INICIO) ----------------------------------- */
 
 //let urlJsonServer = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev";
+//let urlJsonServer = "https://a050aadc-b2a9-48cd-9a69-a5566f985adf-00-1q7wk422qq9m2.riker.replit.dev";
 
 /* ----------------------------- Inicialização variável global JSON Server (FIM) ----------------------------------- */
 
@@ -2547,10 +2548,15 @@ async function carregarPaginaAdocao(id){
 }
 
 async function carregarFormularioAnimalAbandonado(){
+
   if(!usuarioLogado()){
     loginUsuario();
     testarLoginAcabou('crud-animal-ab',0);
   } 
+  else
+  {
+    window.location.href = "/pages/cadastros/crud-animal-abd.html"
+  }
 }
 
 async function carregarPaginaCompatibilidade(){
@@ -3013,7 +3019,7 @@ function preencherPopupFormulario (id_formulario)
   disponibilidadeForm.innerHTML = formulario.disponibilidade;
   visitasForm.innerHTML = (formulario.visitas) ? "Sim" : "Nao";
   consentimentoForm.innerHTML = (formulario.consentimento) ? "Sim" : "Nao";
-  comentarioForm.innerHTML = formulario.comentario;
+  comentarioForm.innerHTML = (formulario.comentario != undefined) ? formulario.comentario : "Não há comentários disponíveis";
 }
 
 function popUpFormularioOngEventos ()
@@ -3033,6 +3039,17 @@ function inserirFormulariosAdocao (formularios)
   let container = document.querySelector('.container-Solic');
   let str = "";
   container.innerHTML = str;
+  let formulariosPendentes = [];
+  console.log(formularios);
+//Identificar formularios pendentes
+  for (let i = 0; i < formularios.length; i++)
+  {
+    if (formularios[i].status == "pendente")
+      formulariosPendentes.push(formularios[i]);
+  }
+//Testar se nao há formularios pendentes
+  if (formulariosPendentes.length == 0)
+    str = `<p>Ainda não há formulários de adoção recebidos!</p>`;
   let formulariosPendentes = [];
 //Identificar formularios pendentes
   for (let i = 0; i < formularios.length; i++)
@@ -3132,25 +3149,6 @@ function inserirFormulariosAbandonado (formularios)
 //Adicionar string ao html
   container.innerHTML = str;
 }
-
-/*
-<div class="adocoes-card" id="${formulario.id_form}">
-  <div class="top-container-adocao">
-    <div>
-      <img src="${formulario.imagem}" alt="Imagem do Animal" class="foto-nome-doacoes-container">
-      <h5>Nome</h5>
-    </div>
-    <div class="Formulário-container">
-      <button class="teste-form"><i class="fa-solid fa-file-pen fa-4x"></i></button><br>
-      <h5>Informações</h5>
-    </div>
-  </div>
-  <div class="botoes-doacao">
-    <button class="Aceitar-button-doacao"><strong>ACEITAR</strong></button>
-    <button class="Recusar-button-doacao"><strong>RECUSAR</strong></button>
-  </div>
-</div>
-*/
 
 function loadAnimal(){
   console.log("loadAnimal");
