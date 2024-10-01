@@ -3041,7 +3041,13 @@ function inserirFormulariosAdocao (formularios)
   container.innerHTML = str;
   let formulariosPendentes = [];
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   console.log(formularios);
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 //Identificar formularios pendentes
@@ -3054,6 +3060,8 @@ function inserirFormulariosAdocao (formularios)
   if (formulariosPendentes.length == 0)
     str = `<p>Ainda não há formulários de adoção recebidos!</p>`;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   let formulariosPendentes = [];
 //Identificar formularios pendentes
   for (let i = 0; i < formularios.length; i++)
@@ -3064,6 +3072,10 @@ function inserirFormulariosAdocao (formularios)
 //Testar se nao há formularios pendentes
   if (formulariosPendentes.length == 0)
     str = `<p>Ainda não há formulários de adoção recebidos!</p>`;
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   else
