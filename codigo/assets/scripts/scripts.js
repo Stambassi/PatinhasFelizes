@@ -109,7 +109,7 @@ function getUsuario (id)
   let resp = null;
 //Percorrer todos os usuarios
   usuarios.forEach(usuario => {
-    if (usuario.id_usuario == id)
+    if (usuario.id_pessoa == id)
       resp = usuario;
   });
 //Retornar
@@ -251,7 +251,7 @@ function getUsuarioLogged ()
   let resp = null;
 //Percorrer todos os usuarios
   usuarios.forEach(usuario => {
-    if (usuario.id_usuario == id)
+    if (usuario.id_pessoa == id)
       resp = usuario;
   });
 //Retornar
@@ -283,7 +283,7 @@ function postUsuario (objUsuario)
   console.log(old);
 //Atualizar LocalStorage
   localStorage.setItem("Usuario", JSON.stringify(old));
-  localStorage.setItem("usuario_login", objUsuario.id_usuario);
+  localStorage.setItem("usuario_login", objUsuario.id_pessoa);
 }
 
 function postONG (objOng)
@@ -297,6 +297,29 @@ function postONG (objOng)
   localStorage.setItem("ong_login", parseInt(objOng.id_ong));
 }
 
+function postFormularioAdocao (formulario)
+{
+//Definir dados locais
+  let pessoa = getUsuario(formulario.id_pessoa);
+//Atualizar formularios do usuario
+  let formularios = pessoa.form_adocao;
+  formularios.push(formulario);
+  pessoa.form_adocao = formularios;
+//Atualizar usuario
+  updateUsuario(pessoa);
+}
+
+
+function postFormularioAbandonado (formulario)
+{
+//Definir dados locais
+  let pessoa = getUsuario(formulario.id_pessoa);
+//Atualizar formularios do usuario
+  pessoa.form_abandonado.push(formulario);
+//Atualizar usuario
+  updateUsuario(pessoa);
+}
+
 function updateUsuario (objUsuario)
 {
 //Definir dados locais
@@ -306,9 +329,9 @@ function updateUsuario (objUsuario)
   let i = 0;
   while (i < old.length && controle)
   {
-    if (old[i].id_usuario == objUsuario.id_usuario)
+    if (old[i].id_pessoa == objUsuario.id_pessoa)
     {   
-      old[i].nome = objUsuario.nome; 
+      old[i] = objUsuario; 
       controle = false;    
     }
     i++;
@@ -636,7 +659,7 @@ async function testarLoginUsuario()
     {
       if(usuario.email == email && usuario.senha == senha)
       {
-        login = usuario.id_usuario;
+        login = usuario.id_pessoa;
         localStorage.setItem("usuario_login",login);
       }
     });
@@ -766,13 +789,12 @@ function loginUsuarioEventos ()
 function usuarioNextID()
 {
   let usuarios = getAllUsuario();
-  // console.log(parseInt(usuarios[usuarios.length - 1].id_usuario));
-  return (usuarios.length > 0) ? (parseInt(usuarios[usuarios.length - 1].id_usuario) + 1) : 1;
+  return (usuarios.length > 0) ? (parseInt(usuarios[usuarios.length - 1].id_pessoa) + 1) : 1;
 }
 
-let objUsuario = { id_usuario: 0, nome: "", email: "", senha: "", cpf: "", data_de_nascimento: "", telefone: "", tags: { atencao: 0, passeio: 0, carinho: 0, extrovertido: 0, animacao: 0 }, form_adocao: [], form_abandonado: [] };
+let objUsuario = { id_pessoa: 0, nome: "", email: "", senha: "", cpf: "", data_de_nascimento: "", telefone: "", tags: { atencao: 0, passeio: 0, carinho: 0, extrovertido: 0, animacao: 0 }, form_adocao: [], form_abandonado: [] };
 
-objUsuario.id_usuario = usuarioNextID();
+objUsuario.id_pessoa = usuarioNextID();
 
 /**
  * cadastroUsuario - Função para recuperar o HTML do cadastro de usuário e adicioná-lo à tela
@@ -1706,6 +1728,9 @@ function editarUsuario (usuario)
 //Definir eventos de edição
   botaoConfirmar.addEventListener('click', () => {
     let usuario = preencherPerfilUsuario();
+    let usuarioAntigo = getUsuarioLogged();
+    usuario.form_adocao = usuarioAntigo.form_adocao;
+    usuario.form_abandonado = usuarioAntigo.form_abandonado;
     updateUsuario(usuario);
     perfilUsuarioResetar();
     conteudoPerfilUsuario(1);
@@ -1768,7 +1793,7 @@ function preencherPerfilUsuario ()
 {
 //Definir dados locais
   let old = getUsuarioLogged();
-  let usuario = { id_usuario: old.id_usuario, nome: "", email: "", senha: "", cpf: "", data_de_nascimento: "", telefone: "", tags: { atencao: 0, passeio: 0, carinho: 0, extrovertido: 0, animacao: 0 }, form_adocao: old.form_adocao, form_abandonado: old.form_abandonado };
+  let usuario = { id_pessoa: old.id_pessoa, nome: "", email: "", senha: "", cpf: "", data_de_nascimento: "", telefone: "", tags: { atencao: 0, passeio: 0, carinho: 0, extrovertido: 0, animacao: 0 }, form_adocao: old.form_adocao, form_abandonado: old.form_abandonado };
 //Encontrar novos dados de usuario
   usuario = preencherPerfilUsuarioDados(usuario);
 //Encontrar novas tags de usuario
@@ -2132,21 +2157,17 @@ function getForm(id){
   });
   return resp;
 }
-function saveFormularioData(data){
-  const old  = getAllForms();
-  old.push(data);
-  localStorage.setItem("Form", JSON.stringify(old));
-  //perfilUsuario();
-}
 function submitFormulario() {
   let residencia = getRadioText('f_residencia', 'outros_value_residencia',"outros");
-  let exp = getRadioText('f_exp','sim_exp','S');
+  let experiencia = getRadioText('f_exp','sim_exp','S');
   let visita_ong = getBoolRadio('f_visita_ong');
   let consentimento = getBoolRadio('f_consentimento');
-  let tempo = getRadio('f_tempo');
+  let disponibilidade = getRadio('f_tempo');
   let viagem = getRadioText('f_viagem','outros_value_viagem','outros');
   let comentarios = document.getElementById('f_comentarios').value
   let formularios = getAllForms();
+  let params = new URLSearchParams(window.location.search);
+  let id_animal = parseInt( params.get("id") );
   let nextId;
   if(formularios.length > 1){
     nextId = (formularios[formularios.length-1].id_form) + 1;
@@ -2154,23 +2175,26 @@ function submitFormulario() {
     nextId = 1;
   }
   let data = {
-    id_form: nextId,
-    id_usuario: getLoginUsuario(),
-    residencia: residencia,
-    exp: exp,
+    id_formulario: nextId,
+    id_pessoa: parseInt( getLoginUsuario() ),
+    id_animal: (id_animal != null) ? id_animal : 0,
+    status: "pendente",
+    data: new Date().toLocaleDateString("pt-BR"),
+    moradia: residencia,
+    experiencia: experiencia,
+    viagem: viagem,
+    disponibilidade: disponibilidade,
     visita_ong: visita_ong,
     consentimento: consentimento,
-    tempo: tempo,
-    viagem: viagem,
     comentario: comentarios
   }
 
   if(haveNullValue(data)){
     alert("erro");
   } else {
-    saveFormularioData(data);
+    postFormularioAdocao(data);
+    console.log(getUsuario(data.id_pessoa));
   }
-  console.log(data);
 }
 /* --------------------- Definir comportamento do CADASTRO DE FORMULARIO (FIM) ------------------------ */
 
@@ -2225,7 +2249,7 @@ function submitFormAB(){
   nextId = (animais.length > 1) ? (animais[animais.length-1].id_animal+1) : 1;
   let data = {
     id_animal: nextId,
-    id_usuario: getLoginUsuario(),
+    id_pessoa: getLoginUsuario(),
     especie: especie,
     quantidade: qnt,
     condicao: condicao,
@@ -2780,7 +2804,7 @@ async function exibicaoTelaCarregarCompatibilidade() {
 async function confirmarCompatibilidade() {
 
   //let apiUrlJsonTagsAnimal = `${urlJsonServer}/etiquetas?id_animal=`;
-  //let apiUrlJsonTagsUsuario = `${urlJsonServer}/etiquetas?id_usuario=`;
+  //let apiUrlJsonTagsUsuario = `${urlJsonServer}/etiquetas?id_pessoa=`;
   let animal = {}, url_foto_acao_animalsuario = {};
   let distanciaPontos = 0.0, valorMaximo = 0.0, porcentagemCompatibilidade = 0.0;
  
