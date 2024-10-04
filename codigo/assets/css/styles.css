@@ -1017,17 +1017,17 @@ button#load_ab_photo:hover {
 
 #usuario-nome input
 {
-  width: 60%;
+  width: 71%;
 }
 
 #usuario-email input
 {
-  width: 60%;
+  width: 73%;
 }
 
 #usuario-senha input
 {
-  width: 60%;
+  width: 71%;
 }
 
 #usuario-senha 
@@ -1050,17 +1050,17 @@ button#load_ab_photo:hover {
 
 #usuario-cpf input
 {
-  width: 65%;
+  width: 77%;
 }
 
 #usuario-data-de-nascimento input
 {
-  width: 30%;
+  width: 37%;
 }
 
 #usuario-telefone input
 {
-  width: 60%;
+  width: 65%;
 }
 
 .perfil-usuario-1-titulo

@@ -1711,7 +1711,7 @@ function editarUsuario (usuario)
     conteudoPerfilUsuario(1);
   });
   botaoDescartar.addEventListener('click', () => {
-    perfilUsuarioResetarBotoes();    
+    perfilUsuarioResetar();    
     conteudoPerfilUsuario(1);
   });
 }
