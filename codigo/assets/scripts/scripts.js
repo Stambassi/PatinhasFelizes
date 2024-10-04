@@ -279,6 +279,8 @@ function postUsuario (objUsuario)
   const old  = getAllUsuario();
 //Adicionar à lista
   old.push(objUsuario);
+  console.log(objUsuario);
+  console.log(old);
 //Atualizar LocalStorage
   localStorage.setItem("Usuario", JSON.stringify(old));
   localStorage.setItem("usuario_login", objUsuario.id_usuario);
@@ -300,13 +302,23 @@ function updateUsuario (objUsuario)
 //Definir dados locais
   const old = getAllUsuario();
 //Atualizar a lista
-  old[objUsuario.id_usuario - 1] = objUsuario;
+  let controle = true;
+  let i = 0;
+  while (i < old.length && controle)
+  {
+    if (old[i].id_usuario == objUsuario.id_usuario)
+    {   
+      old[i].nome = objUsuario.nome; 
+      controle = false;    
+    }
+    i++;
+  }
 //Atualizar o LocalStorage
-  localStorage.removeItem("Usuario");
-  if (old.length == 1)
-    localStorage.setItem("Usuario", "[" + JSON.stringify(old) + "]");
-  else
+  if (!controle)
+  {
+    localStorage.removeItem("Usuario");
     localStorage.setItem("Usuario", JSON.stringify(old));
+  }
 }
 
 function updateONG (objOng)
@@ -754,12 +766,13 @@ function loginUsuarioEventos ()
 function usuarioNextID()
 {
   let usuarios = getAllUsuario();
-  return (usuarios.length > 0) ? (parseInt(usuarios[usuarios.length-1].id_usuario) + 1) : 1;
+  // console.log(parseInt(usuarios[usuarios.length - 1].id_usuario));
+  return (usuarios.length > 0) ? (parseInt(usuarios[usuarios.length - 1].id_usuario) + 1) : 1;
 }
 
-let objUsuario = { id_usuario: usuarioNextID(), nome: "", email: "", senha: "", cpf: "", data_de_nascimento: "", telefone: "", tags: { atencao: 0, passeio: 0, carinho: 0, extrovertido: 0, animacao: 0 }, form_adocao: [], form_abandonado: [] };
+let objUsuario = { id_usuario: 0, nome: "", email: "", senha: "", cpf: "", data_de_nascimento: "", telefone: "", tags: { atencao: 0, passeio: 0, carinho: 0, extrovertido: 0, animacao: 0 }, form_adocao: [], form_abandonado: [] };
 
-//console.log(usuarioNextID());
+objUsuario.id_usuario = usuarioNextID();
 
 /**
  * cadastroUsuario - Função para recuperar o HTML do cadastro de usuário e adicioná-lo à tela
@@ -1356,10 +1369,6 @@ function cadastroInstituicaoPreenchido_3 ()
  */
 async function perfilUsuario ()
 {
-//Redirecionar pagina
-//https://patinhas-felizes-nu.vercel.app/codigo/pages/perfilUsuario/perfil-usuario.html
-  // if (window.location.href != "http://127.0.0.1:5500/codigo/pages/perfilUsuario/perfil-usuario.html")
-  //   window.location.href = '/pages/perfilUsuario/perfil-usuario.html';
 //Definir dados locais
   let pagina = 1;
 //Definir eventos da pagina de perfil

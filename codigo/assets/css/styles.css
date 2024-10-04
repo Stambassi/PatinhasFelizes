@@ -560,7 +560,7 @@ button#load_ab_photo:hover {
   justify-content: center;
   flex-direction: column;
   width: 35%;
-  max-width: 500px;
+  max-width: 540px;
   height: fit-content;
   padding: 40px 50px 20px;
   background-color: white;
@@ -1017,17 +1017,17 @@ button#load_ab_photo:hover {
 
 #usuario-nome input
 {
-  width: 71%;
+  width: 60%;
 }
 
 #usuario-email input
 {
-  width: 73%;
+  width: 60%;
 }
 
 #usuario-senha input
 {
-  width: 71%;
+  width: 60%;
 }
 
 #usuario-senha 
@@ -1050,17 +1050,17 @@ button#load_ab_photo:hover {
 
 #usuario-cpf input
 {
-  width: 77%;
+  width: 65%;
 }
 
 #usuario-data-de-nascimento input
 {
-  width: 37%;
+  width: 30%;
 }
 
 #usuario-telefone input
 {
-  width: 65%;
+  width: 60%;
 }
 
 .perfil-usuario-1-titulo
@@ -2024,7 +2024,6 @@ button#load_ab_photo:hover {
 }
 
 #telaInicial-Introducao button:hover {
-  width: 9%;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }
 
