@@ -2275,6 +2275,83 @@ async function readJSONServerId(url, id) {
   return obj;
 }
 
+function aparecerFiltros(filtro){
+  let divCidade = document.querySelector(`#FiltroCidade`);
+  let changeCidade = document.querySelector("#telaInicial-FiltroCidade-div");
+  let buttonCidade = document.querySelector("#telaInicial-FiltroCidade");
+
+  let divEspecie = document.querySelector(`#FiltroEspecie`);
+  let changeEspecie = document.querySelector(`#telaInicial-FiltroEspecie-div`);
+  let buttonEspecie = document.querySelector(`#telaInicial-FiltroEspecie`);
+
+  let divPorte = document.querySelector(`#FiltroPorte`);
+  let changePorte = document.querySelector(`#telaInicial-FiltroPorte-div`);
+  let buttonPorte = document.querySelector(`#telaInicial-FiltroPorte`);
+
+  let divGenero = document.querySelector(`#FiltroGenero`);
+  let changeGenero = document.querySelector(`#telaInicial-FiltroGenero-div`);
+  let buttonGenero = document.querySelector(`#telaInicial-FiltroGenero`);
+
+  let wanted = document.querySelector(`#${filtro}`);
+  let wantedDiv = document.querySelector(`#telaInicial-${filtro}-div`);
+  let wantedButton = document.querySelector(`#telaInicial-${filtro}`)
+  // console.log(div.style.display);
+  if(wanted.style.display != "none"){
+    divCidade.style.display = "none";
+    divEspecie.style.display = "none";
+    divPorte.style.display = "none";
+    divGenero.style.display = "none";
+
+    changeCidade.style.background = "white";
+    buttonCidade.style.background = "white";
+
+    changeEspecie.style.background = "white";
+    buttonEspecie.style.background = "white";
+
+    changeGenero.style.background = "white";
+    buttonGenero.style.background = "white";
+
+    changePorte.style.background = "white";
+    buttonPorte.style.background = "white";
+  } else {
+    divCidade.style.display = "none";
+    divEspecie.style.display = "none";
+    divPorte.style.display = "none";
+    divGenero.style.display = "none";
+    wanted.style.display = "flex";
+
+    
+    changeCidade.style.background = "white";
+    buttonCidade.style.background = "white";
+
+    changeEspecie.style.background = "white";
+    buttonEspecie.style.background = "white";
+
+    changeGenero.style.background = "white";
+    buttonGenero.style.background = "white";
+
+    changePorte.style.background = "white";
+    buttonPorte.style.background = "white";
+
+    wantedButton.style.background = "lightgrey";
+    wantedDiv.style.background = "lightgrey";
+
+  }
+}
+
+function mostrarFiltros(){
+  let filtroCidadeEl = document.querySelector("#telaInicial-FiltroCidade");
+  filtroCidadeEl.addEventListener('click', () => aparecerFiltros('FiltroCidade')); 
+
+  let filtroEspecieEl = document.querySelector("#telaInicial-FiltroEspecie");
+  filtroEspecieEl.addEventListener('click', () => aparecerFiltros('FiltroEspecie')); 
+  
+  let filtroPorteEl = document.querySelector("#telaInicial-FiltroPorte");
+  filtroPorteEl.addEventListener('click', () => aparecerFiltros('FiltroPorte')); 
+
+  let filtroGeneroEl = document.querySelector("#telaInicial-FiltroGenero");
+  filtroGeneroEl.addEventListener('click', () => aparecerFiltros('FiltroGenero')); 
+}
  /**
  * carregarFiltroCidades - Funcao para carregar os filtros de cidade do JSON Server e exibi-los na tela inicial.
  */ 
@@ -2287,108 +2364,108 @@ async function carregarFiltroCidades() {
   let controle = true;
   let nCidades = 0;
 
-  //ongs = await readJSONServer(apiUrlJsonOngs);
-  ongs = getAllONG();
+  // //ongs = await readJSONServer(apiUrlJsonOngs);
+  // ongs = getAllONG();
 
-  strHTML = `<option value="U">Todas</option>`;
-  for(let x = 0; x < ongs.length; x++) {
+  // strHTML = `<option value="U">Todas</option>`;
+  // for(let x = 0; x < ongs.length; x++) {
 
-    controle = true;
-    for(let y = 0; y < cidades.length; y++) {
-      if(ongs[x].endereco[0].cidade == cidades[y]) {
-        controle = false;
-      }
-    }
+  //   controle = true;
+  //   for(let y = 0; y < cidades.length; y++) {
+  //     if(ongs[x].endereco[0].cidade == cidades[y]) {
+  //       controle = false;
+  //     }
+  //   }
 
-    if(controle) {
-      cidades[nCidades] = ongs[x].endereco[0].cidade;
-      strHTML += `<option value="${cidades[nCidades]}">${cidades[nCidades]}</option>`
-      nCidades++;
-    }
+  //   if(controle) {
+  //     cidades[nCidades] = ongs[x].endereco[0].cidade;
+  //     strHTML += `<option value="${cidades[nCidades]}">${cidades[nCidades]}</option>`
+  //     nCidades++;
+  //   }
 
-  }
+  // }
 
-  filtroCidadeEl.innerHTML = strHTML;
+  // filtroCidadeEl.innerHTML = strHTML;
 }
 
  /**
  * carregarAnimais - Funcao para carregar os animais do JSON Server e exibi-los na tela inicial.
  */ 
 
-async function carregarAnimais() {
+// async function carregarAnimais() {
 
-//Definir dados locais
-  //let apiUrlJsonAnimais = `${urlJsonServer}/animais`;
-  //let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
-  let divConteudoAnimais = document.querySelector("#telaInicial-Conteudo");
-  let animais = {}, ongs = {};
-  let strHTML = "", strGeneroAnimal = "", strNomeOng = "", strCidadeOng = ""; 
+// //Definir dados locais
+//   //let apiUrlJsonAnimais = `${urlJsonServer}/animais`;
+//   //let apiUrlJsonOngs = `${urlJsonServer}/ongs`;
+//   let divConteudoAnimais = document.querySelector("#telaInicial-Conteudo");
+//   let animais = {}, ongs = {};
+//   let strHTML = "", strGeneroAnimal = "", strNomeOng = "", strCidadeOng = ""; 
 
-  let filtroCidadeEl = document.querySelector("#telaInicial-FiltroCidade");
-  let filtroGeneroEl = document.querySelector("#telaInicial-FiltroGenero");
-  let filtroPorteEl = document.querySelector("#telaInicial-FiltroPorte");
-  let filtroEspecieEl = document.querySelector("#telaInicial-FiltroEspecie");
+//   let filtroCidadeEl = document.querySelector("#telaInicial-FiltroCidade");
+//   let filtroGeneroEl = document.querySelector("#telaInicial-FiltroGenero");
+//   let filtroPorteEl = document.querySelector("#telaInicial-FiltroPorte");
+//   let filtroEspecieEl = document.querySelector("#telaInicial-FiltroEspecie");
 
-  let booleanFiltroGenero, booleanFiltroPorte, booleanFiltroEspecie, booleanFiltroCidade; 
+//   let booleanFiltroGenero, booleanFiltroPorte, booleanFiltroEspecie, booleanFiltroCidade; 
 
-//Acesso aos dados do JSON Server
-  //animais = await readJSONServer(apiUrlJsonAnimais);
-  //ongs = await readJSONServer(apiUrlJsonOngs);
+// //Acesso aos dados do JSON Server
+//   //animais = await readJSONServer(apiUrlJsonAnimais);
+//   //ongs = await readJSONServer(apiUrlJsonOngs);
 
-  animais = getAllAnimal();
-  ongs = getAllONG();
+//   animais = getAllAnimal();
+//   ongs = getAllONG();
 
-//Gravacao dos cards na String strHTML
-  for(let x = 0; x < animais.length; x++) {
+// //Gravacao dos cards na String strHTML
+//   for(let x = 0; x < animais.length; x++) {
 
-    if(!(animais[x].condicao)) {
+//     if(!(animais[x].condicao)) {
 
-//Controle icone do sexo do animal
-      if(animais[x].genero == 'F') {
-        strGeneroAnimal = "venus"; 
-      } else {
-        strGeneroAnimal = "mars"; 
-      }
+// //Controle icone do sexo do animal
+//       if(animais[x].genero == 'F') {
+//         strGeneroAnimal = "venus"; 
+//       } else {
+//         strGeneroAnimal = "mars"; 
+//       }
 
-      for(let y = 0; y < ongs.length; y++) {
-        if(animais[x].id_ong == ongs[y].id_ong) {
-            strNomeOng = ongs[y].nome;
-            strCidadeOng = ongs[y].endereco[0].cidade;
-        }
-      }
+//       for(let y = 0; y < ongs.length; y++) {
+//         if(animais[x].id_ong == ongs[y].id_ong) {
+//             strNomeOng = ongs[y].nome;
+//             strCidadeOng = ongs[y].endereco[0].cidade;
+//         }
+//       }
 
-//Controle filtro de exibicao animais
-      booleanFiltroCidade = filtroCidadeEl.value === 'U' || filtroCidadeEl.value === strCidadeOng;
-      booleanFiltroGenero = filtroGeneroEl.value === 'U' || filtroGeneroEl.value === animais[x].genero;
-      booleanFiltroPorte = filtroPorteEl.value === 'U' || filtroPorteEl.value === animais[x].porte;
-      booleanFiltroEspecie = filtroEspecieEl.value === 'U' || filtroEspecieEl.value === animais[x].especie;
+// //Controle filtro de exibicao animais
+//       booleanFiltroCidade = filtroCidadeEl.value === 'U' || filtroCidadeEl.value === strCidadeOng;
+//       booleanFiltroGenero = filtroGeneroEl.value === 'U' || filtroGeneroEl.value === animais[x].genero;
+//       booleanFiltroPorte = filtroPorteEl.value === 'U' || filtroPorteEl.value === animais[x].porte;
+//       booleanFiltroEspecie = filtroEspecieEl.value === 'U' || filtroEspecieEl.value === animais[x].especie;
 
-      if(booleanFiltroEspecie && booleanFiltroGenero && booleanFiltroPorte && booleanFiltroCidade) {
+//       if(booleanFiltroEspecie && booleanFiltroGenero && booleanFiltroPorte && booleanFiltroCidade) {
   
-        strHTML += `<div class="telaInicial-Card">
-                        <img src="${animais[x].imagem[0]}" alt="">
-                        <p>${strNomeOng}</p>
-                        <p>${strCidadeOng}</p>
-                        <div class="telaInicial-Card-Informacoes">
-                            <div class="telaInicial-Card-InfPet">
-                            <i class="fa-solid fa-2xl fa-${strGeneroAnimal}"></i>
-                            <h5>${animais[x].nome}</h5>
-                            </div>
-                            <button id="${animais[x].id_animal}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
-                        </div>
-                    </div>`
-      }
+//         strHTML += `<div class="telaInicial-Card">
+//                         <img src="${animais[x].imagem[0]}" alt="">
+//                         <p>${strNomeOng}</p>
+//                         <p>${strCidadeOng}</p>
+//                         <div class="telaInicial-Card-Informacoes">
+//                             <div class="telaInicial-Card-InfPet">
+//                             <i class="fa-solid fa-2xl fa-${strGeneroAnimal}"></i>
+//                             <h5>${animais[x].nome}</h5>
+//                             </div>
+//                             <button id="${animais[x].id_animal}" class="telaInicial-abrirModalBtn">Saiba Mais</button>
+//                         </div>
+//                     </div>`
+//       }
 
-    }
+//     }
 
-//Insercao da String strHTML na tela inicial
-    divConteudoAnimais.innerHTML = strHTML;
+// //Insercao da String strHTML na tela inicial
+//     divConteudoAnimais.innerHTML = strHTML;
 
-//Carrega a descricao do animal
-    carregarDescricaoAnimalPopupEventos();
+// //Carrega a descricao do animal
+//     carregarDescricaoAnimalPopupEventos();
 
-  }
-}
+//   }
+// }
 
 
 /**

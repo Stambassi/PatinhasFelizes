@@ -19,8 +19,8 @@
     <title>Patinhas Felizes</title>
     
 </head>
-
-<body onload="gerarDadosFalsos(), carregarAnimais(), loginOnload(), carregarFiltroCidades();">
+<!-- carregarAnimais() -->
+<body onload="gerarDadosFalsos(), loginOnload(),mostrarFiltros(), carregarFiltroCidades();">
     <header class="container-fluid">
         <div class="home-btn">
             <img src="/assets/img/logo.jpg" alt="Logo Patinhas Felizes">
@@ -32,7 +32,7 @@
             <span class="divider">|</span>
             <a class="inactive-page" onclick="carregarFormularioAnimalAbandonado()">Encontrei um animal abandonado</a>
             <span class="divider">|</span>
-            <a class="inactive-page" onclick="carregarPaginaCompatibilidade()">Match</a>
+            <a class="inactive-page" onclick="carregarPaginaCompatibilidade()">Adote com IA✨</a>
         </div>
 
         <div class="user-profile">
@@ -44,48 +44,71 @@
     </header>
     <main>
         <!-- <div id="telaInicial-Introducao">
-            <h3 class="inline">Encontre o seu parceiro conosco! Escolha um pet disponível abaixo ou encontre uma patinha compatível com você! </h3>
+            <h3 class="text-center">Encontre uma patinha compatível com você com IA✨! </h3>
             <button onclick="carregarPaginaCompatibilidade()">Vamos lá!</button>
         </div> -->
-
         <div id="telaInicial-BarraFiltros">
-            <div class="telaInicial-Filtro">
-                <label for="telaInicial-FiltroCidade">Cidades</label>
-                <select id="telaInicial-FiltroCidade">
+            <div class="telaInicial-Filtro" id="telaInicial-FiltroCidade-div">
+                <button id="telaInicial-FiltroCidade" for="telaInicial-FiltroCidade">Cidades</button>
+                <p>Em quais cidades consegue adotar?</p>
+                <!-- <select id="telaInicial-FiltroCidade">
                     <option value="U">Todas</option>
                     <option value="Opção1">Opção 1</option>
                     <option value="Opção2">Opção 2</option>
                     <option value="Opção3">Opção 3</option>
-                </select>
+                </select> -->
             </div>
-            <div class="telaInicial-Filtro">
-                <label for="telaInicial-FiltroEspecie">Espécie</label>
+            <div class="telaInicial-divisaoFiltros" ></div>
+            <div class="telaInicial-Filtro" id="telaInicial-FiltroEspecie-div">
+                <button id="telaInicial-FiltroEspecie" for="telaInicial-FiltroEspecie">Espécie</button>
+                <p>Quais espécies você busca?</p>
+                <!-- <label for="telaInicial-FiltroEspecie">Espécie</label>
                 <select id="telaInicial-FiltroEspecie">
                     <option value="U">Todas</option>
                     <option value="Cachorro">Cachorro</option>
                     <option value="Gato">Gato</option>
                     <option value="Coelho">Coelho</option>
                     <option value="Roedor">Roedor</option>
-                </select>
+                </select> -->
             </div>
-            <div class="telaInicial-Filtro">
-                <label for="telaInicial-FiltroPorte">Porte</label>
+            <div class="telaInicial-divisaoFiltros"></div>
+            <div class="telaInicial-Filtro" id="telaInicial-FiltroPorte-div">
+                <button id="telaInicial-FiltroPorte" for="telaInicial-FiltroPorte">Porte</button>
+                <p>E qual o seu tamanho?</p>
+                <!-- <label for="telaInicial-FiltroPorte">Porte</label>
                 <select id="telaInicial-FiltroPorte">
                     <option value="U">Todos</option>
                     <option value="P">Pequeno</option>
                     <option value="M">Médio</option>
                     <option value="G">Grande</option>
-                </select>
+                </select> -->
             </div>
-            <div class="telaInicial-Filtro">
-                <label for="telaInicial-FiltroGenero">Gênero</label>
+            <div class="telaInicial-divisaoFiltros"></div>
+            <div class="telaInicial-Filtro" id="telaInicial-FiltroGenero-div">
+                <button id="telaInicial-FiltroGenero" for="telaInicial-FiltroGenero">Gênero</button>
+                <p>Prefência de gênero?</p>
+                <!-- <label for="telaInicial-FiltroGenero">Gênero</label>
                 <select id="telaInicial-FiltroGenero">
                     <option value="U">Todos</option>
                     <option value="M">Macho</option>
                     <option value="F">Fêmea</option>
-                </select>
+                </select> -->
             </div>
-            <button id="telaInicial-BuscarFiltros" onclick="carregarAnimais()">🔍</button>
+            <button id="telaInicial-BuscarFiltros" onclick="carregarAnimais()"><i class="fa-solid  fa-magnifying-glass"></i></button>
+        </div>
+        <div id="FiltroOpcoes">
+            <div class="options" id="FiltroCidade">
+                fodase1;
+            </div>
+            <div class="options" id="FiltroEspecie">
+                fodase2;
+            </div>
+            <div class="options" id="FiltroPorte">
+                fodase3;
+            </div>
+            <div class="options" id="FiltroGenero">
+                fodase4;
+            </div>
         </div>
 
         <div id="telaInicial-Container">

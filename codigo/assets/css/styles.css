@@ -1973,9 +1973,9 @@ button#load_ab_photo:hover {
 
 #telaInicial-Introducao {
   border: none;
-  max-width: 80%;
+  max-width: 65%;
   margin: 5% auto;
-  padding: 30px 30px;
+  padding: 20px 20px;
   border-radius: 30px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -1983,25 +1983,24 @@ button#load_ab_photo:hover {
 #telaInicial-Introducao button {
   background-color: var(--cor_primaria);
   color: white;
-  margin: 10px 0 0 15px;
-  width: 10%;
+  margin: 10px 0 0 10px;
+  width: 15%;
   padding: 10px 15px;
   border: none;
   border-radius: 20px;
   transition: background-color 0.3s ease, color 0.3s ease; 
+  display: block;
+  margin:10px auto;
 }
 
 #telaInicial-Introducao a {
   text-decoration: none;
+  margin:auto;
   color: white;
 }
 
-#telaInicial-Introducao h3 {
-  display: inline;
-}
-
 #telaInicial-Introducao button:hover {
-  width: 9%;
+  width: 16%;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -2083,22 +2082,46 @@ button#load_ab_photo:hover {
 #telaInicial-BarraFiltros {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border-radius: 30px;
-  padding: 25px 10px;
+  /* padding: 10px 10px; */
   max-width: 800px;
-  margin: 0 auto;
+  margin: 2% auto;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px;
+  height: 70px;
 }
 
+div.options{
+  display: none;
+  border-radius: 30px;
+  background-color: #21472f;
+  z-index: 10;
+  position: absolute;
+}
+div#FiltroCidade{
+  height: 100px;
+  width: 200px;
+}
+div#FiltroOpcoes{
+  position: relative;
+  background-color: #007BFF;
+  width: 80%;
+  height: 200px;
+  margin:0px auto;
+
+}
 .telaInicial-Filtro {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 0 10px;
+  /* margin: 0 10px; */
+  border-radius: 30px;
+  height: 100%;
 }
-
+div#telaInicial-FiltroCidade-div{
+  width: 30%;
+}
 .telaInicial-Filtro select {
   padding: 5px 7px;
   text-align: center;
@@ -2109,16 +2132,37 @@ button#load_ab_photo:hover {
 }
 
 .telaInicial-Filtro label {
-  font-size: 20;
+  font-size: 15px;
+  font-weight: bold;
   margin-bottom: 5px;
 }
 
+.telaInicial-Filtro button {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  background-color: var(--cor_secundaria);
+  border:none;
+}
+
+.telaInicial-Filtro p {
+  font-size: 12px;
+  margin: 1px 2px;
+}
+
 #telaInicial-BuscarFiltros {
-  background-color: #FFFFFF;
-  padding: 15px 20px;
+  background-color: var(--cor_primaria);
+  width: 55px;
+  height: 55px;
   font-size: 25px;
   border: none;
   border-radius: 50%;
+}
+
+.telaInicial-divisaoFiltros{
+  background-color:lightgray;
+  width: 1px;
+  height: 75%;
 }
 
 #telaInicial-BuscarFiltros:hover {
