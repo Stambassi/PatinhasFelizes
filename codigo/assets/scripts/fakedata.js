@@ -680,8 +680,7 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        "https://www.amigonaosecompra.com.br/unsafe/1200x0/8a6be99b-6466-4082-9258-15f9d9d7224d/a894c87c-09f5-494f-8f31-c05a29b2d866/77ce481b-1dfd-4983-b949-ad8a3d141926.jpeg?v=63894876522",
-        "https://www.amigonaosecompra.com.br/unsafe/1200x0/8a6be99b-6466-4082-9258-15f9d9d7224d/a894c87c-09f5-494f-8f31-c05a29b2d866/33f42e20-e625-4f87-bae9-43014db26e1d.jpeg?v=63894876522"
+        "https://images.amigonaosecompra.com.br/unsafe/1176x0/cef3b4cf-2e84-4e11-883c-ae72a8198408/342c3182-9a5d-426d-a726-fef96a5a475a/342c3182-9a5d-426d-a726-fef96a5a475a.jpeg?v=63896510430"
       ]
     },
     {
@@ -729,8 +728,7 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        "https://www.amigonaosecompra.com.br/unsafe/1176x0/ef79cc77-5089-4652-a29b-071a383872fa/faa8635a-40a5-4579-8e7f-cd0c954bd6dd/faa8635a-40a5-4579-8e7f-cd0c954bd6dd.png?v=63894056120",
-        "https://www.amigonaosecompra.com.br/unsafe/1200x0/ef79cc77-5089-4652-a29b-071a383872fa/faa8635a-40a5-4579-8e7f-cd0c954bd6dd/3212968b-7166-46e1-82a5-e50c4d5166c8.png?v=63894056129"
+        "https://images.amigonaosecompra.com.br/unsafe/1176x0/ce510c32-26d8-48f7-a86f-1b7650a6b8f4/dc02b567-dff6-4d2c-a121-1c7e86c75098/dc02b567-dff6-4d2c-a121-1c7e86c75098.jpg?v=63896507731"
       ]
     },
     {
@@ -824,9 +822,9 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        "https://www.amigonaosecompra.com.br/unsafe/1200x0/86f45627-25db-49a8-8119-7bd68511e3f3/9356f580-0464-44af-91a6-a09fdf8e81f0/f8fa0680-ac92-44d1-91fc-e8cecfc40a81.jpg?v=63894767639",
-        "https://www.amigonaosecompra.com.br/unsafe/1200x0/86f45627-25db-49a8-8119-7bd68511e3f3/9356f580-0464-44af-91a6-a09fdf8e81f0/59e8d0e3-9dc5-4d67-8e5a-2f36ebc124ea.jpg?v=63894767640",
-        "https://www.amigonaosecompra.com.br/unsafe/1200x0/86f45627-25db-49a8-8119-7bd68511e3f3/9356f580-0464-44af-91a6-a09fdf8e81f0/fde61b74-74f9-42f0-be84-5aef398350a0.jpg?v=63894767639"
+        "https://images.amigonaosecompra.com.br/unsafe/1200x0/86f45627-25db-49a8-8119-7bd68511e3f3/feec9747-091a-4050-b09f-53aed0ae58b9/6a51808c-d3cb-444b-8276-b407673b14bf.jpg?v=63896491994",
+        "https://images.amigonaosecompra.com.br/unsafe/1200x0/86f45627-25db-49a8-8119-7bd68511e3f3/feec9747-091a-4050-b09f-53aed0ae58b9/fdf69bfe-7d34-42b5-b488-e0444564da35.jpg?v=63896491994",
+        "https://images.amigonaosecompra.com.br/unsafe/1200x0/86f45627-25db-49a8-8119-7bd68511e3f3/feec9747-091a-4050-b09f-53aed0ae58b9/acf46de0-6c9c-417e-8044-0982edfee81f.jpg?v=63896491994"
       ]
     },
     {
@@ -873,7 +871,7 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        "https://www.amigonaosecompra.com.br/unsafe/1176x0/0cfe2f0b-aa3d-45fe-9664-383f3a3174f0/2675b1d3-4f59-452f-9b6e-35ff981e3097/2675b1d3-4f59-452f-9b6e-35ff981e3097.jpg?v=63894239235"
+        "https://img.freepik.com/fotos-gratis/close-vertical-de-um-lindo-gato-persa-sentado-no-chao-de-madeira_181624-23838.jpg"
       ]
     },
     {
@@ -967,9 +965,8 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        "https://www.amigonaosecompra.com.br/unsafe/1176x0/9d1dfcf1-f0fd-454a-a427-2aa472d6fdb4/d6701f89-59b7-4e91-9521-950b6a4ef864/d6701f89-59b7-4e91-9521-950b6a4ef864.jpg?v=63894859636",
-        "https://www.amigonaosecompra.com.br/unsafe/1200x0/9d1dfcf1-f0fd-454a-a427-2aa472d6fdb4/d6701f89-59b7-4e91-9521-950b6a4ef864/2d89fefc-944b-41c5-9240-37c79c0b43ab.jpg?v=63894859682",
-        "https://www.amigonaosecompra.com.br/unsafe/1200x0/9d1dfcf1-f0fd-454a-a427-2aa472d6fdb4/d6701f89-59b7-4e91-9521-950b6a4ef864/9c38554c-1040-440b-9b2d-0ed1fdcf6a08.jpg?v=63894859681"
+        "https://images.amigonaosecompra.com.br/unsafe/1176x0/86f45627-25db-49a8-8119-7bd68511e3f3/001b800b-0995-44d3-adb8-040da7724d7a/001b800b-0995-44d3-adb8-040da7724d7a.jpg?v=63896492134",
+        "https://images.amigonaosecompra.com.br/unsafe/1200x0/86f45627-25db-49a8-8119-7bd68511e3f3/001b800b-0995-44d3-adb8-040da7724d7a/b7a60dd0-bdbd-41ee-a433-47052fe7f569.jpg?v=63896492150"
       ]
     },
     {
@@ -1016,8 +1013,7 @@ function gerarAnimaisFalsos ()
       "lar_temporario": null,
       "estado": null,
       "imagem": [
-        "https://www.amigonaosecompra.com.br/unsafe/1200x0/4165d04d-491f-4e65-bb7e-73204a68768d/9a5211c0-f874-495e-8fd6-a836f7c7f187/0856690e-e504-41a8-91cd-780a5503d9c3.jpeg?v=63894567436",
-        "https://www.amigonaosecompra.com.br/unsafe/1200x0/4165d04d-491f-4e65-bb7e-73204a68768d/9a5211c0-f874-495e-8fd6-a836f7c7f187/caf19380-2435-48e3-84b7-4b27ec735b65.jpeg?v=63894567436"
+        "https://thumbs.dreamstime.com/b/cor-bonita-do-m%C3%A1rmore-de-maine-coon-gato-foto-vertical-close-up-144308982.jpg"
       ]
     },
     {
